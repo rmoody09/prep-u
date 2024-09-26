@@ -1,5 +1,7 @@
 
 <script setup>
+    import Tiptap from '~/components/Tiptap.vue'
+
     const problem_sources = [
         {id: 'bluebook', 'label': 'Bluebook'},
         {id: 'own', 'label': 'Own'}
@@ -61,6 +63,7 @@
     const getSelectedReadingWritingSectionLabel = () => {
         return reading_writing_sections.find(source => source.id === selected_reading_writing_section.value)?.label;
     }
+
 </script>
 
 <template>
@@ -90,6 +93,10 @@
                         <USelectMenu v-model="selected_reading_writing_section" :options="reading_writing_sections" placeholder="Reading Writing Section" value-attribute="id" option-attribute="label" />
                     </span>
                 </div>  
+                <div>
+                    <Tiptap 
+                    />
+                </div>
                 <div>
                     <UButton>Add Problem</UButton>
                 </div>
