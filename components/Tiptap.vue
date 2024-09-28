@@ -21,6 +21,20 @@
                 size="2xs"
             ></UButton>
             
+            <UButton 
+                icon="i-lucide-list"
+                @click="editor.chain().focus().toggleBulletList().run()"
+                :variant="editor.isActive('bulletList') ? 'solid' : 'outline'"
+                size="2xs"
+            ></UButton>
+            
+            <UButton 
+                icon="i-lucide-underline"
+                @click="editor.chain().focus().toggleUnderline().run()"
+                :variant="editor.isActive('underline') ? 'solid' : 'outline'"
+                size="2xs"
+            ></UButton>
+            
         </div>
         <editor-content :editor="editor" />
     </div>
@@ -34,13 +48,17 @@
     import StarterKit from '@tiptap/starter-kit'
     import { Mathematics } from '@tiptap-pro/extension-mathematics'
     import Image from '@tiptap/extension-image'
+    import Underline from '@tiptap/extension-underline'
+    import ImageResize from 'tiptap-extension-resize-image';
 
+
+    const { init_content } = defineProps(['init_content'])
 
 
   
     const editor = useEditor({
-      content: '<p>I’m running Tiptap with Vue.js. 🎉</p>',
-      extensions: [StarterKit, Mathematics, Image],
+      content: init_content,
+      extensions: [StarterKit, Mathematics, Image, ImageResize, Underline],
     })
 
     const addImage = () => {
@@ -54,9 +72,44 @@
         unref(editor).destroy();
     });
 
+    const testVal = "test";
+
+    defineExpose({
+        testVal, 
+        editor
+    });
+
   </script>
 
 <style scoped>
+
+
+.tiptap-container :deep(.tiptap) {
+    border: solid 1px gray;
+    border-radius: 5px;
+    padding: 1rem;
+
+    ul, ol {
+        padding: 0 1rem;
+        list-style-type: disc;
+
+        li p {
+        margin-top: 0.25em;
+        margin-bottom: 0.25em;
+        }
+
+    
+  }
+
+  ul ul {
+    list-style-type: circle;
+  }
+
+  ul ul ul {
+    list-style-type: square;
+  }
+}
+
 .tiptap-container :deep(.Tiptap-mathematics-editor) {
     background: #202020;
     color: #fff;
@@ -83,4 +136,3 @@
   }
 
 </style>
-  

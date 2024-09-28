@@ -1,4 +1,3 @@
-
 <script setup>
     import Tiptap from '~/components/Tiptap.vue'
 
@@ -64,28 +63,125 @@
         return reading_writing_sections.find(source => source.id === selected_reading_writing_section.value)?.label;
     }
 
+    const answer_types = [
+        {id: 'multiple_choice', 'label': 'Multiple Choice'},
+        {id: 'numeric_input', 'label': 'Numeric Input'}
+    ];
+    const selected_answer_type = ref(null);
+    const getSelectedAnswerTypeLabel = () => {
+        return answer_types.find(type => type.id === selected_answer_type.value)?.label;
+    }
+
+    const answer_choices = ref([
+        {content: "Answer 1"}, 
+        {content: "Answer 2"}, 
+        {content: "Answer 3"}, 
+        {content: "Answer 4"}
+    ]);
+
+    function getChar(num) {
+        // Check if the number is within the range of lowercase alphabet (1-26)
+        if (num >= 1 && num <= 26) {
+            // Use the ASCII code of 'a' (97) to calculate the character code
+            return String.fromCharCode(64 + num); 
+        } else {
+            // Return null or handle the case where the number is out of range
+            return null;
+        }
+    }
+
+    const section_header_classes = "font-semibold pb-2 text-base"
+
+    const numericAnswer = ref(null);
+
+    const questionEditorRef = useTemplateRef('questionEditor')
+
+    const saveProblemClicked = () => {
+        console.log('saveProblemClicked');
+        console.log(questionEditorRef.value.editor.getJSON())
+        console.log(questionEditorRef.value.editor.getHTML())
+    }
+
+    const collegeBoardQuestionId = ref('');
+
+    const math_skills = [
+        { id: 'systems_linear_equations', label: 'Systems of two linear equations in two variables' },
+        { id: 'linear_functions', label: 'Linear functions' },
+        { id: 'linear_equations_two_variables', label: 'Linear equations in two variables' },
+        { id: 'linear_equations_one_variable', label: 'Linear equations in one variable' },
+        { id: 'linear_inequalities', label: 'Linear inequalities in one or two variables' },
+        { id: 'nonlinear_equations', label: 'Nonlinear equations in one variable and systems of equations in two variables' },
+        { id: 'nonlinear_functions', label: 'Nonlinear functions' },
+        { id: 'equivalent_expressions', label: 'Equivalent expressions' },
+        { id: 'ratios_rates_proportions', label: 'Ratios, rates, proportional relationships, and units' },
+        { id: 'percentages', label: 'Percentages' },
+        { id: 'two_variable_data', label: 'Two-variable data: Models and scatterplots' },
+        { id: 'probability', label: 'Probability and conditional probability' },
+        { id: 'one_variable_data', label: 'One-variable data: Distributions and measures of center and spread' },
+        { id: 'inference_sample_statistics', label: 'Inference from sample statistics and margin of error' },
+        { id: 'lines_angles_triangles', label: 'Lines, angles, and triangles' },
+        { id: 'circles', label: 'Circles' },
+        { id: 'area_volume', label: 'Area and volume' },
+        { id: 'right_triangles_trigonometry', label: 'Right triangles and trigonometry' }
+    ];
+
+    const reading_writing_skills = [
+        { id: 'command_of_evidence', label: 'Command of Evidence' },
+        { id: 'inferences', label: 'Inferences' },
+        { id: 'central_ideas_details', label: 'Central Ideas and Details' },
+        { id: 'words_in_context', label: 'Words in Context' },
+        { id: 'text_structure_purpose', label: 'Text Structure and Purpose' },
+        { id: 'cross_text_connections', label: 'Cross-Text Connections' },
+        { id: 'rhetorical_synthesis', label: 'Rhetorical Synthesis' },
+        { id: 'transitions', label: 'Transitions' },
+        { id: 'boundaries', label: 'Boundaries' },
+        { id: 'form_structure_sense', label: 'Form, Structure, and Sense' }
+    ];
+
+    const selected_math_skill = ref(null);
+    const selected_reading_writing_skill = ref(null);
+
+    const getSelectedMathSkillLabel = () => {
+        return math_skills.find(skill => skill.id === selected_math_skill.value)?.label;
+    }
+
+    const getSelectedReadingWritingSkillLabel = () => {
+        return reading_writing_skills.find(skill => skill.id === selected_reading_writing_skill.value)?.label;
+    }
+
 </script>
 
 <template>
-    <div>
-        <h1>Add Problem</h1>
+    <div class="p-6">
+        <h1 class="text-xl font-extrabold pb-6">Add Problem</h1>
         <div class="max-w-md w-full">
-            <div class="flex flex-col gap-2">
-                <USelectMenu v-model="selected_problem_source" :options="problem_sources" placeholder="Problem Source" value-attribute="id" option-attribute="label" />
+            <div class="flex flex-col gap-6">
                 <div>
-                    <span v-if="selected_problem_source == 'bluebook'">
+                    <div :class='section_header_classes'>Source</div>
+                    <USelectMenu v-model="selected_problem_source" :options="problem_sources" placeholder="Problem Source" value-attribute="id" option-attribute="label" />
+                </div>
+                <div v-if="selected_problem_source == 'bluebook'">
+                    <div :class='section_header_classes'>Subsource</div>
+                    <span>
                         <USelectMenu v-model="selected_cb_subsource" :options="cb_subsources" placeholder="Subsource" value-attribute="id" option-attribute="label" />
                     </span>
                 </div> 
+                <div v-if="selected_problem_source == 'bluebook'">
+                    <div :class='section_header_classes'>CollegeBoard Question ID</div>
+                    <UInput v-model="collegeBoardQuestionId" placeholder="Enter CollegeBoard Question ID" />
+                </div>
                 <div v-if="selected_cb_subsource == 'practice_test'">
+                    <div :class='section_header_classes'>Practice Test #</div>
                     <USelectMenu v-model="selected_practice_test" :options="practice_tests" placeholder="Practice Test" value-attribute="id" option-attribute="label" />
                 </div>
-                <div>
+                <div v-if="selected_problem_source">
+                    <div :class='section_header_classes'>Test Section</div>
                     <span v-if="selected_problem_source">
                         <USelectMenu v-model="selected_section" :options="test_sections" placeholder="Test Section" value-attribute="id" option-attribute="label" />
                     </span>
                 </div> 
-                <div>
+                <div v-if="selected_section">
+                    <div :class='section_header_classes'>Subsection</div>
                     <span v-if="selected_section == 'math'">
                         <USelectMenu v-model="selected_math_section" :options="math_sections" placeholder="Math Section" value-attribute="id" option-attribute="label" />
                     </span>
@@ -93,12 +189,51 @@
                         <USelectMenu v-model="selected_reading_writing_section" :options="reading_writing_sections" placeholder="Reading Writing Section" value-attribute="id" option-attribute="label" />
                     </span>
                 </div>  
+                <div v-if="selected_section">
+                    <div :class='section_header_classes'>CollegeBoard Skill</div>
+                    <span v-if="selected_section == 'math'">
+                        <USelectMenu v-model="selected_math_skill" :options="math_skills" placeholder="Math Skill" value-attribute="id" option-attribute="label" />
+                    </span>
+                    <span v-else-if="selected_section == 'reading_writing'">
+                        <USelectMenu v-model="selected_reading_writing_skill" :options="reading_writing_skills" placeholder="Reading Writing Skill" value-attribute="id" option-attribute="label" />
+                    </span>
+                </div>
+                <div v-if="selected_problem_source">
+                    <div :class='section_header_classes'>Answer Type</div>
+                    <span>
+                        <USelectMenu v-model="selected_answer_type" :options="answer_types" placeholder="Answer Type" value-attribute="id" option-attribute="label" />
+                    </span>
+                </div>
+                
                 <div>
+                    <div :class='section_header_classes'>Question</div>
                     <Tiptap 
+                        ref="questionEditor"
                     />
                 </div>
+                <div v-if="selected_answer_type == 'multiple_choice'">
+                    <div :class='section_header_classes'>Answer Options</div>
+                    <div class="flex flex-col gap-4">
+                        <div v-for="(answer_choice, index) in answer_choices" class='answer_choice flex items-start gap-1'>
+                            <span class="grow-0 font-bold">
+                                {{ getChar(index+1) }}
+                            </span>
+                            <span class="grow">
+                                <Tiptap 
+                                    :init_content="answer_choice.content"
+                                />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="selected_answer_type == 'numeric_input'" class="flex flex-col gap-4">
+                    <div :class='section_header_classes'>Answer</div>
+                    <div class="border border-red-500 border-solid m-0">
+                        <UInput v-model="numericAnswer" type="number" placeholder="Enter numeric answer" />
+                    </div>
+                </div>
                 <div>
-                    <UButton>Add Problem</UButton>
+                    <UButton @click="saveProblemClicked">Add Problem</UButton>
                 </div>
             </div>
         </div>
