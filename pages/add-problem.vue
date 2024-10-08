@@ -1,5 +1,6 @@
 <script setup>
     import Tiptap from '~/components/Tiptap.vue'
+    import TagsInput from '~/components/TagsInput.vue'
 
     const problem_sources = [
         {id: 'bluebook', 'label': 'Bluebook'},
@@ -79,6 +80,8 @@
         {content: "Answer 4"}
     ]);
 
+    const mult_choice_answer_refs = ref([]);
+
     function getChar(num) {
         // Check if the number is within the range of lowercase alphabet (1-26)
         if (num >= 1 && num <= 26) {
@@ -100,6 +103,10 @@
         console.log('saveProblemClicked');
         console.log(questionEditorRef.value.editor.getJSON())
         console.log(questionEditorRef.value.editor.getHTML())
+        for (let answer_choice of mult_choice_answer_refs.value) {
+            console.log('answer choice')
+            console.log(answer_choice.editor.getHTML())
+        }
     }
 
     const collegeBoardQuestionId = ref('');
@@ -147,6 +154,17 @@
 
     const getSelectedReadingWritingSkillLabel = () => {
         return reading_writing_skills.find(skill => skill.id === selected_reading_writing_skill.value)?.label;
+    }
+
+    const selected_custom_skills = ref([]);
+
+    const custom_skills_options = [
+        {id: 'vertex-form', label: 'Vertex Form'}, 
+        {id: 'quadratic-equation', label: 'Quadratic Equation'}
+    ]
+
+    const getSelectedCustomSkills = () => {
+
     }
 
 </script>
@@ -220,6 +238,7 @@
                             </span>
                             <span class="grow">
                                 <Tiptap 
+                                    :ref="(el) => {mult_choice_answer_refs[index] = el}"
                                     :init_content="answer_choice.content"
                                 />
                             </span>
@@ -231,6 +250,10 @@
                     <div class="border border-red-500 border-solid m-0">
                         <UInput v-model="numericAnswer" type="number" placeholder="Enter numeric answer" />
                     </div>
+                </div>
+                <div>
+                    <div :class='section_header_classes'>Custom Skills</div>
+                    <TagsInput :options="custom_skills_options" />
                 </div>
                 <div>
                     <UButton @click="saveProblemClicked">Add Problem</UButton>
