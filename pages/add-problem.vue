@@ -99,14 +99,49 @@
 
     const questionEditorRef = useTemplateRef('questionEditor')
 
-    const saveProblemClicked = () => {
+    const saveProblemClicked = async () => {
         console.log('saveProblemClicked');
         console.log(questionEditorRef.value.editor.getJSON())
         console.log(questionEditorRef.value.editor.getHTML())
+        let answer_choices = [];
         for (let answer_choice of mult_choice_answer_refs.value) {
             console.log('answer choice')
             console.log(answer_choice.editor.getHTML())
+            console.log(answer_choice.editor.getJSON())
+            answer_choices.push({
+                html: answer_choice.editor.getHTML(),
+                json: answer_choice.editor.getJSON()
+            })
         }
+
+        let data = {
+            problem_source: selected_problem_source.value,
+            cb_subsource: selected_cb_subsource.value,
+            collegeboard_question_id: collegeBoardQuestionId.value,
+            practice_test: selected_practice_test.value,
+            section: selected_section.value,
+            math_section: selected_math_section.value,
+            reading_writing_section: selected_reading_writing_section.value,
+            math_skill: selected_math_skill.value,
+            reading_writing_skill: selected_reading_writing_skill.value,
+            answer_type: selected_answer_type.value,
+            numeric_answer: numericAnswer.value,
+            custom_skills: selected_custom_skills.value,
+            question: {
+                html: questionEditorRef.value.editor.getHTML(),
+                json: questionEditorRef.value.editor.getJSON()
+            },
+            answer_choices: answer_choices, 
+            mult_choice_correct_answer_index: mult_choice_correct_answer_index.value,
+            module: selected_module.value
+        }
+        console.log('data');
+        console.log(data);
+        const resp = await $fetch("/api/add-problem", {
+            method: "POST",
+            body: data
+        });
+        console.log(resp);
     }
 
     const collegeBoardQuestionId = ref('');
@@ -167,6 +202,22 @@
 
     }
 
+    const modules = [
+        {id: '1', 'label': 'Module 1'},
+        {id: '2E', 'label': 'Module 2 (easy)'},
+        {id: '2H', 'label': 'Module 2 (hard)'}
+    ];
+    const selected_module = ref(null);
+    const getSelectedModuleLabel = () => {
+        return modules.find(module => module.id === selected_module.value)?.label;
+    }
+
+    const mult_choice_correct_answer_index = ref(null);
+
+    const selectCorrectAnswerChoice = (index) => {
+        mult_choice_correct_answer_index.value = index;
+    }
+
 </script>
 
 <template>
@@ -191,6 +242,10 @@
                 <div v-if="selected_cb_subsource == 'practice_test'">
                     <div :class='section_header_classes'>Practice Test #</div>
                     <USelectMenu v-model="selected_practice_test" :options="practice_tests" placeholder="Practice Test" value-attribute="id" option-attribute="label" />
+                </div>
+                <div v-if="selected_cb_subsource == 'practice_test'">
+                    <div :class='section_header_classes'>Module</div>
+                    <USelectMenu v-model="selected_module" :options="modules" placeholder="Module" value-attribute="id" option-attribute="label" />
                 </div>
                 <div v-if="selected_problem_source">
                     <div :class='section_header_classes'>Test Section</div>
@@ -232,9 +287,17 @@
                 <div v-if="selected_answer_type == 'multiple_choice'">
                     <div :class='section_header_classes'>Answer Options</div>
                     <div class="flex flex-col gap-4">
-                        <div v-for="(answer_choice, index) in answer_choices" class='answer_choice flex items-start gap-1'>
-                            <span class="grow-0 font-bold">
-                                {{ getChar(index+1) }}
+                        <div v-for="(answer_choice, index) in answer_choices" class='answer_choice flex items-start gap-3'>
+                            <span class="grow-0 font-extrabold text-md">
+                                <button :index="index" 
+                                    class="answer-choice_option w-6 h-6 flex items-center justify-center border border-solid p-1 rounded-full"
+                                    :class="{
+                                        'text-slate-500 border-slate-500':  mult_choice_correct_answer_index != index, 
+                                        'bg-primary text-white border-primary':  mult_choice_correct_answer_index == index
+                                    }"
+                                    @click="selectCorrectAnswerChoice(index)">
+                                    {{ getChar(index+1) }}
+                                </button>
                             </span>
                             <span class="grow">
                                 <Tiptap 
