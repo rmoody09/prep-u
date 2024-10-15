@@ -3,7 +3,7 @@
     import TagsInput from '~/components/TagsInput.vue'
 
     const problem_sources = [
-        {id: 'bluebook', 'label': 'Bluebook'},
+        {id: 'collegeboard', 'label': 'CollegeBoard'},
         {id: 'own', 'label': 'Own'}
     ];
     const selected_problem_source = ref(null);
@@ -229,13 +229,13 @@
                     <div :class='section_header_classes'>Source</div>
                     <USelectMenu v-model="selected_problem_source" :options="problem_sources" placeholder="Problem Source" value-attribute="id" option-attribute="label" />
                 </div>
-                <div v-if="selected_problem_source == 'bluebook'">
+                <div v-if="selected_problem_source == 'collegeboard'">
                     <div :class='section_header_classes'>Subsource</div>
                     <span>
                         <USelectMenu v-model="selected_cb_subsource" :options="cb_subsources" placeholder="Subsource" value-attribute="id" option-attribute="label" />
                     </span>
                 </div> 
-                <div v-if="selected_problem_source == 'bluebook'">
+                <div v-if="selected_problem_source == 'collegeboard'">
                     <div :class='section_header_classes'>CollegeBoard Question ID</div>
                     <UInput v-model="collegeBoardQuestionId" placeholder="Enter CollegeBoard Question ID" />
                 </div>
