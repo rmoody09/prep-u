@@ -69,7 +69,14 @@ const cb_skills = {
 
 <template>
     <div class="p-4">
-        <h1 class="text-3xl font-black pb-6">SAT Problems</h1>
+        <div class="flex flex-row justify-between">
+            <h1 class="text-3xl font-black pb-6">SAT Problems</h1>
+            <span>
+                <UButton @click="navigateTo('/add-problem')">
+                    Add Problem
+                </UButton>
+            </span>
+        </div>
         <div class="problems-container flex flex-col gap-1 bg-slate-100 p-1">
             <div class="problems-headers problem-row flex flex-row">
                 <div class="problem-source problems-header">Source</div>
@@ -106,7 +113,7 @@ const cb_skills = {
                     <button class="option-button" @click="navigateTo(`/problem/${problem.id}`)">
                         <UIcon name="i-heroicons-eye" />
                     </button>
-                    <button class="option-button" @click="navigateTo(`/edit-problem?problem_id=${problem.id}`)">
+                    <button class="option-button" @click="navigateTo(`/edit-problem/${problem.id}`)">
                         <UIcon name="i-heroicons-pencil-square" />
                     </button>
                 </div>
