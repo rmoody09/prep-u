@@ -58,7 +58,9 @@
   
     const editor = useEditor({
       content: init_content,
-      extensions: [StarterKit, Mathematics, Image, ImageResize, Underline],
+      extensions: [StarterKit, 
+        Mathematics.configure({delimiters: 'bracket'}), 
+        Image, ImageResize, Underline],
     })
 
     const addImage = () => {
