@@ -152,18 +152,10 @@
     const questionEditorRef = useTemplateRef('questionEditor')
 
     const saveProblemClicked = async () => {
-        console.log('saveProblemClicked');
-        console.log('answer json')
-        console.log(JSON.stringify(questionEditorRef.value.editor.getJSON()));
-        console.log('answer html')
-        console.log(questionEditorRef.value.editor.getHTML())
         let answer_choices = [];
         for (let answer_choice of mult_choice_answer_refs.value) {
             if (!answer_choice) {continue;}
             if (!answer_choice.editor) {continue;}
-            console.log('answer choice')
-            console.log(answer_choice.editor.getHTML())
-            console.log(answer_choice.editor.getJSON())
             answer_choices.push({
                 html: answer_choice.editor.getHTML(),
                 json: answer_choice.editor.getJSON()
@@ -192,21 +184,28 @@
             module: selected_module.value,
             cb_difficulty: selected_difficulty.value
         }
-        console.log('data');
-        console.log(data);
+        
         if (props.problem) {
             data.id = props.problem.id;
             const resp = await $fetch("/api/edit/sat-problem/" + props.problem.id, {
                 method: "POST",
-                body: data
+                body: JSON.stringify(data), 
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
             console.log(resp);
         } else {
-            const resp = await $fetch("/api/add-problem", {
-            method: "POST",
-                body: data
+            const resp = await fetch("/api/add-problem", {
+                method: "POST",
+                body: JSON.stringify(data), 
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
             console.log(resp);
+            const resp_json = await resp.json();
+            console.log(resp_json);
         }
         
         

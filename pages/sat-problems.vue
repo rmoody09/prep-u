@@ -1,12 +1,8 @@
 <script setup>
+import renderMathInElement from "katex/dist/contrib/auto-render";
 
 const resp = await useFetch('/api/get/sat-problems')
-console.log('resp');
-console.log(resp.data.value.data);
-const problems = resp.data.value.data;
-for (const problem of problems) {
-    console.log(problem.source);
-}
+const problems = ref(resp.data.value.data);
 /*
 const getProblems = async () => {
     const resp = await $fetch('/api/get/sat-problems')
@@ -63,6 +59,26 @@ const cb_skills = {
     boundaries: "Boundaries",
     form_structure_sense: "Form, Structure, and Sense"
 }
+
+const deleteProblem = async (id) => {
+    const resp = await $fetch(`/api/delete/sat-problem/${id}`, {
+        method: 'DELETE'
+    });
+    problems.value = problems.value.filter(problem => problem.id != id);
+}
+
+const problemsEl = ref(null);
+
+onMounted(async () => {
+    renderMathInElement(problemsEl.value, 
+        {
+            delimiters: [
+                {left: "//latex_start", right: "//latex_end", display: true},
+                {left: "$latex_start", right: "$latex_end", display: false},
+            ],
+        }
+    );
+})
     
     
 </script>
@@ -77,14 +93,14 @@ const cb_skills = {
                 </UButton>
             </span>
         </div>
-        <div class="problems-container flex flex-col gap-1 bg-slate-100 p-1">
+        <div class="problems-container flex flex-col gap-1 bg-slate-100 p-1" ref="problemsEl">
             <div class="problems-headers problem-row flex flex-row">
                 <div class="problem-source problems-header">Source</div>
                 <div class="problem-type problems-header">Problem Type</div>
                 <div class="problem-question problems-header">Question</div>
                 <div class="problem-options problems-header">Options</div>
             </div>
-            <div v-for="problem in problems" :key="problem.id" class="problem-row flex flex-row">
+            <div v-for="problem in problems" :key="problem.id"  class="problem-row flex flex-row">
                 <div class="problem-source problem-cell">
                     <div>{{ problem_sources[problem.source] }}</div>
                     <div v-if="problem.subsource == 'practice_test' && problem.practice_test_id">
@@ -108,13 +124,16 @@ const cb_skills = {
                         {{ cb_skills[problem.cb_skill] }}
                     </div>
                 </div>
-                <div class="problem-question problem-cell">{{ problem.question_text }}</div>
+                <div class="problem-question problem-cell whitespace-pre"><span>{{ problem.question_text }}</span></div>
                 <div class="problem-options problem-cell">
                     <button class="option-button" @click="navigateTo(`/problem/${problem.id}`)">
                         <UIcon name="i-heroicons-eye" />
                     </button>
                     <button class="option-button" @click="navigateTo(`/edit-problem/${problem.id}`)">
                         <UIcon name="i-heroicons-pencil-square" />
+                    </button>
+                    <button class="option-button" @click="deleteProblem(problem.id)">
+                        <UIcon name="i-heroicons-trash" />
                     </button>
                 </div>
             </div>

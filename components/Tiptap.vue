@@ -34,6 +34,13 @@
                 :variant="editor.isActive('underline') ? 'solid' : 'outline'"
                 size="2xs"
             ></UButton>
+            <UButton 
+                icon="i-lucide-square-radical"
+                @click="addMath"
+                variant="outline"
+                size="2xs"
+            ></UButton>
+            
             
         </div>
         <editor-content :editor="editor" />
@@ -46,10 +53,11 @@
     import 'katex/dist/katex.min.css'
     import { useEditor, EditorContent } from '@tiptap/vue-3'
     import StarterKit from '@tiptap/starter-kit'
-    import { Mathematics } from '@tiptap-pro/extension-mathematics'
+    //import { Mathematics } from '@tiptap-pro/extension-mathematics'
     import Image from '@tiptap/extension-image'
     import Underline from '@tiptap/extension-underline'
     import ImageResize from 'tiptap-extension-resize-image';
+    import mathExtension from '~/assets/modules/tiptap-extensions/math/math-extension.js';
 
 
     const { init_content } = defineProps(['init_content'])
@@ -59,7 +67,7 @@
     const editor = useEditor({
       content: init_content,
       extensions: [StarterKit, 
-        Mathematics.configure({delimiters: 'bracket'}), 
+        mathExtension,
         Image, ImageResize, Underline],
     })
 
@@ -67,6 +75,13 @@
       const url = window.prompt('Enter the URL of the image:')
       if (url) {
         editor.value.chain().focus().setImage({ src: url }).run()
+      }
+    }
+
+    const addMath = () => {
+      const math = window.prompt('Enter the latex math:')
+      if (math) {
+        editor.value.chain().focus().addMathComponent({ latex: math }).run()
       }
     }
 
@@ -136,5 +151,6 @@
     border-radius: 0.25rem;
     display: inline-block;
   }
+
 
 </style>
