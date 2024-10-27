@@ -89,10 +89,8 @@
         unref(editor).destroy();
     });
 
-    const testVal = "test";
 
     defineExpose({
-        testVal, 
         editor
     });
 
@@ -126,31 +124,6 @@
     list-style-type: square;
   }
 }
-
-.tiptap-container :deep(.Tiptap-mathematics-editor) {
-    background: #202020;
-    color: #fff;
-    font-family: monospace;
-    padding: 0.2rem 0.5rem;
-}
-
-.tiptap-container :deep(.Tiptap-mathematics-render) {
-    padding: 0 0.25rem;
-
-    &--editable {
-        cursor: pointer;
-        transition: background 0.2s;
-
-        &:hover {
-            background: #eee;
-        }
-    }
-}
-
-.tiptap-container :deep(.Tiptap-mathematics-editor, .Tiptap-mathematics-render) {
-    border-radius: 0.25rem;
-    display: inline-block;
-  }
 
 
 </style>

@@ -115,6 +115,11 @@
         console.log(init_question_content);
     }
 
+    let init_source_solution_content = '';
+    if (props.problem && props.problem.source_solution && props.problem.source_solution['tiptap_html']) {
+        init_source_solution_content = props.problem.source_solution['tiptap_html'];
+    }
+
     const answer_choices = ref([
         {content: "Answer 1"}, 
         {content: "Answer 2"}, 
@@ -151,6 +156,8 @@
 
     const questionEditorRef = useTemplateRef('questionEditor')
 
+    const sourceSolutionEditorRef = useTemplateRef('sourceSolutionEditor')
+
     const saveProblemClicked = async () => {
         let answer_choices = [];
         for (let answer_choice of mult_choice_answer_refs.value) {
@@ -160,6 +167,13 @@
                 html: answer_choice.editor.getHTML(),
                 json: answer_choice.editor.getJSON()
             })
+        }
+        let source_solution = {};
+        if (selected_problem_source.value != 'own') {
+            source_solution = {
+                html: sourceSolutionEditorRef.value.editor.getHTML(),
+                json: sourceSolutionEditorRef.value.editor.getJSON()
+            }
         }
 
         let data = {
@@ -182,6 +196,7 @@
             answer_choices: answer_choices, 
             mult_choice_correct_answer_index: mult_choice_correct_answer_index.value,
             module: selected_module.value,
+            source_solution: source_solution,
             cb_difficulty: selected_difficulty.value
         }
         
@@ -441,6 +456,7 @@
                         :init_content="init_question_content"
                     />
                 </div>
+
                 <div v-if="selected_answer_type == 'multiple_choice'">
                     <div :class='section_header_classes'>Answer Options</div>
                     <div class="flex flex-col gap-4">
@@ -484,6 +500,14 @@
                 <div>
                     <div :class='section_header_classes'>Custom Skills</div>
                     <TagsInput :options="custom_skills_options" />
+                </div>
+
+                <div v-if="selected_problem_source != 'own'">
+                    <div :class='section_header_classes'>Source Solution</div>
+                    <Tiptap 
+                        ref="sourceSolutionEditor"
+                        :init_content="init_source_solution_content"
+                    />
                 </div>
                 
                 <div class="flex flex-row gap-4">

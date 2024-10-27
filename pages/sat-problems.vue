@@ -126,7 +126,7 @@ onMounted(async () => {
                 </div>
                 <div class="problem-question problem-cell whitespace-pre"><span>{{ problem.question_text }}</span></div>
                 <div class="problem-options problem-cell">
-                    <button class="option-button" @click="navigateTo(`/problem/${problem.id}`)">
+                    <button class="option-button" @click="navigateTo(`/sat-problem/${problem.id}`)">
                         <UIcon name="i-heroicons-eye" />
                     </button>
                     <button class="option-button" @click="navigateTo(`/edit-problem/${problem.id}`)">

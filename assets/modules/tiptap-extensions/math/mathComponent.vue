@@ -1,6 +1,11 @@
 <template>
     <node-view-wrapper ref="latex_el" v-html="renderMath" 
-        class="tiptap-latex inline-block bg-gray-100 rounded-md cursor-pointer hover:bg-primary-100" 
+        class="tiptap-latex inline-block rounded-md" 
+        :class="{
+            'bg-gray-100': props.editor.view.editable, 
+            'cursor-pointer': props.editor.view.editable,
+            'hover:bg-primary-100': props.editor.view.editable
+        }"
         @click="latexClick">
     </node-view-wrapper>
 </template>
@@ -10,9 +15,14 @@ import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-3'
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 const props = defineProps(nodeViewProps)
+console.log('math component');
+console.log(props.editor.view.editable);
+console.log(props.editor);
+
 const latex_el = ref(null);
 
 const latexClick = () => {
+    if (!props.editor.view.editable) {return;}
     const math = window.prompt('Enter the latex math:');
     if (math) {
         props.node.attrs.latex = math;
