@@ -39,10 +39,12 @@ const checkIfSelected = (index) => {
     return selected_answer_choice_index.value == index;
 }
 
+
 </script>
 
 <template>
     <div>
+       
         <div class='problem-question'><TiptapReader :init_content="problem.question_tiptap_html" /></div>
         <div class='problem-answer-choices flex flex-col gap-4'>
             <div v-for="(answer_choice, index) in problem.answer_choices" :key="index" 

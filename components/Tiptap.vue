@@ -35,6 +35,12 @@
                 size="2xs"
             ></UButton>
             <UButton 
+                icon="i-lucide-table"
+                @click="addTableClick"
+                variant="outline"
+                size="2xs"
+            ></UButton>
+            <UButton 
                 icon="i-lucide-square-radical"
                 @click="addMath"
                 variant="outline"
@@ -44,6 +50,9 @@
             
         </div>
         <editor-content :editor="editor" />
+        <UModal v-model="addTableOpen">
+            <AddTableModal @addTable="addTable" />
+        </UModal>
     </div>
 </template>
 
@@ -57,18 +66,26 @@
     import Image from '@tiptap/extension-image'
     import Underline from '@tiptap/extension-underline'
     import ImageResize from 'tiptap-extension-resize-image';
+    import Table from '@tiptap/extension-table'
+    import TableCell from '@tiptap/extension-table-cell'
+    import TableHeader from '@tiptap/extension-table-header'
+    import TableRow from '@tiptap/extension-table-row'
     import mathExtension from '~/assets/modules/tiptap-extensions/math/math-extension.js';
+    import AddTableModal from '~/components/AddTableModal.vue';
 
 
     const { init_content } = defineProps(['init_content'])
+
+    const addTableOpen = ref(false);
 
 
   
     const editor = useEditor({
       content: init_content,
       extensions: [StarterKit, 
-        mathExtension,
-        Image, ImageResize, Underline],
+        Image, ImageResize, Underline, Table.configure({
+          resizable: true
+        }), TableCell, TableHeader, TableRow, mathExtension],
     })
 
     const addImage = () => {
@@ -85,6 +102,19 @@
       }
     }
 
+    const addTableClick = () => {
+      addTableOpen.value = true;
+    }
+
+    const addTable = (table) => {
+      editor.value.chain().focus().insertTable({
+        rows: table.rows,
+        cols: table.columns,
+        withHeaderRow: table.includeHeader
+      }).run()
+      addTableOpen.value = false;
+    }
+    
     onBeforeUnmount(() => {
         unref(editor).destroy();
     });
@@ -123,6 +153,66 @@
   ul ul ul {
     list-style-type: square;
   }
+
+  table {
+    border-collapse: collapse;
+    margin: 0;
+    overflow: hidden;
+    table-layout: fixed;
+    width: 100%;
+
+    td,
+    th {
+      border: 1px solid;
+      @apply border-gray-300;
+      box-sizing: border-box;
+      min-width: 1em;
+      padding: 6px 8px;
+      position: relative;
+      vertical-align: top;
+
+      > * {
+        margin-bottom: 0;
+      }
+    }
+
+    th {
+      background-color: #e0e0e0;
+      @apply bg-gray-100;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .selectedCell:after {
+      @apply bg-gray-200;
+      content: "";
+      left: 0; right: 0; top: 0; bottom: 0;
+      pointer-events: none;
+      position: absolute;
+      z-index: 2;
+    }
+
+    .column-resize-handle {
+      background-color: purple;
+      bottom: -2px;
+      pointer-events: none;
+      position: absolute;
+      right: -2px;
+      top: 0;
+      width: 4px;
+    }
+  }
+
+  .tableWrapper {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  &.resize-cursor {
+    cursor: ew-resize;
+    cursor: col-resize;
+  }
+
 }
 
 

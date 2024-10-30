@@ -1,5 +1,5 @@
 import { serverSupabaseServiceRole } from '#supabase/server'
-import { prepareSATProblemForDB } from '~/assets/composables/prepareSATProblemforDB';
+import { prepareSATProblemForDB } from '~/assets/composables/prepareSATProblemForDB';
 
 function removeTags(str) {
     if ((str === null) || (str === ''))
