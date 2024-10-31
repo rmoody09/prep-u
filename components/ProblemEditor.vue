@@ -61,8 +61,11 @@
     ];
     const selected_practice_test = ref(null);
 
+    console.log('check for initial practice test');
     if (props.problem && props.problem.practice_test_id) {
-        selected_practice_test.value = props.problem.practice_test;
+        console.log('initial practice test found');
+        console.log(props.problem.practice_test_id);
+        selected_practice_test.value = props.problem.practice_test_id;
     }
     const getSelectedPracticeTestLabel = () => {
         return practice_tests.find(source => source.id === selected_practice_test.value)?.label;
@@ -129,7 +132,7 @@
     if (props.problem && props.problem.answer_choices) {
         let choices = [];
         for (let choice of props.problem.answer_choices) {
-            choices.push({content: choice.tiptap_html})
+            choices.push({content: choice.json})
         }
         answer_choices.value = [...choices];
     }
@@ -195,7 +198,8 @@
             },
             answer_choices: answer_choices, 
             mult_choice_correct_answer_index: mult_choice_correct_answer_index.value,
-            module: selected_module.value,
+            module: selected_module.value, 
+            problem_number: problem_number.value,
             source_solution: source_solution,
             cb_difficulty: selected_difficulty.value
         }
@@ -387,6 +391,20 @@
         return difficulty_levels.find(level => level.id === selected_difficulty.value)?.label;
     }
 
+    const problem_number = ref(null);
+    if (props.problem && props.problem.problem_number) {
+        problem_number.value = props.problem.problem_number;
+    }
+
+    const maxQuestionNumber = computed(() => {
+        if (selected_section.value === 'math') {
+            return 22;
+        } else if (selected_section.value === 'reading_writing') {
+            return 27;
+        }
+        return null;
+    });
+
     onMounted(() => {
         console.log('problem editor onMounted');
     })
@@ -414,16 +432,27 @@
                     <div :class='section_header_classes'>Practice Test #</div>
                     <USelectMenu v-model="selected_practice_test" :options="practice_tests" placeholder="Practice Test" value-attribute="id" option-attribute="label" />
                 </div>
-                <div v-if="selected_cb_subsource == 'practice_test'">
-                    <div :class='section_header_classes'>Module</div>
-                    <USelectMenu v-model="selected_module" :options="modules" placeholder="Module" value-attribute="id" option-attribute="label" />
-                </div>
+                
                 <div v-if="selected_problem_source">
                     <div :class='section_header_classes'>Test Section</div>
                     <span v-if="selected_problem_source">
                         <USelectMenu v-model="selected_section" :options="test_sections" placeholder="Test Section" value-attribute="id" option-attribute="label" />
                     </span>
                 </div> 
+                <div v-if="selected_cb_subsource == 'practice_test'">
+                    <div :class='section_header_classes'>Module</div>
+                    <USelectMenu v-model="selected_module" :options="modules" placeholder="Module" value-attribute="id" option-attribute="label" />
+                </div>
+                <div v-if="selected_cb_subsource == 'practice_test' && selected_section">
+                    <div :class='section_header_classes'>Question Number</div>
+                    <UInput
+                        v-model="problem_number"
+                        type="number"
+                        :min="1"
+                        :max="maxQuestionNumber"
+                        :placeholder="`Enter question number (1-${maxQuestionNumber})`"
+                    />
+                </div>
                 <div v-if="selected_section">
                     <div :class='section_header_classes'>Subsection</div>
                     <span v-if="selected_section == 'math'">
