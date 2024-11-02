@@ -119,8 +119,8 @@
     }
 
     let init_source_solution_content = '';
-    if (props.problem && props.problem.source_solution && props.problem.source_solution['tiptap_html']) {
-        init_source_solution_content = props.problem.source_solution['tiptap_html'];
+    if (props.problem && props.problem.source_solution && props.problem.source_solution.json) {
+        init_source_solution_content = props.problem.source_solution.json;
     }
 
     const answer_choices = ref([

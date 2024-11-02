@@ -14,7 +14,9 @@ const problem = resp.data.value.data;
             <h1 class="text-2xl font-bold">SAT Problem</h1>
         </div>
         <div>
-            <SATProblem :problem="problem" />
+            <ClientOnly>
+                <SATProblem :problem="problem" />
+            </ClientOnly>
         </div>
     </div>
 </template>

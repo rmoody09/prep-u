@@ -23,6 +23,7 @@
     "@tiptap/pm": "^2.7.4",
     "@tiptap/starter-kit": "^2.7.4",
     "@tiptap/vue-3": "^2.7.4",
+    "desmos": "^1.5.4",
     "katex": "^0.16.11",
     "nuxt": "^3.13.0",
     "nuxt-security": "^2.0.0",

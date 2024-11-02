@@ -47,6 +47,9 @@ importers:
       '@tiptap/vue-3':
         specifier: ^2.7.4
         version: 2.7.4(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))(@tiptap/pm@2.7.4)(vue@3.5.8)
+      desmos:
+        specifier: ^1.5.4
+        version: 1.5.4
       katex:
         specifier: ^0.16.11
         version: 0.16.11
@@ -2177,6 +2180,9 @@ packages:
   depd@2.0.0:
     resolution: {integrity: sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==}
     engines: {node: '>= 0.8'}
+
+  desmos@1.5.4:
+    resolution: {integrity: sha512-8BxQqU/7n6J9cxAiSDm6sNCqSu29z5VaYKcfOx0N4MY2oT75NE5oo6MRgtulVHibMBxCuH+6fpXr0WP4IoL0Dg==}
 
   destr@2.0.3:
     resolution: {integrity: sha512-2N3BOUU4gYMpTP24s5rF5iP7BDr7uNTCs4ozw3kf/eKfvWSIu93GEBi5m427YoyJoeOzQ5smuu4nNAPGb8idSQ==}
@@ -6534,6 +6540,8 @@ snapshots:
   depd@1.1.2: {}
 
   depd@2.0.0: {}
+
+  desmos@1.5.4: {}
 
   destr@2.0.3: {}
 
