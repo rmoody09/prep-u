@@ -29,14 +29,20 @@
         {id: 'practice_test', 'label': 'Practice Test'},
         {id: 'question_bank', 'label': 'Question Bank'}
     ];
-    const selected_cb_subsource = ref(null);
-    if (props.problem && props.problem.subsource) {
-        selected_cb_subsource.value = props.problem.subsource;
-    }
-    
 
-    const getSelectedSubSourceLabel = () => {
-        return cb_subsources.find(source => source.id === selected_cb_subsource.value)?.label;
+    const in_cb_question_bank = ref(false);
+    if (props.problem && props.problem.in_cb_question_bank) {
+        in_cb_question_bank.value = props.problem.in_cb_question_bank;
+    }
+
+    const is_practice_test = ref(false);
+    if (props.problem && props.problem.is_practice_test) {
+        is_practice_test.value = props.problem.is_practice_test;
+    }
+
+    const subsource = ref(null);
+    if (props.problem && props.problem.subsource) {
+        subsource.value = props.problem.subsource;
     }
 
     const test_sections = [
@@ -161,7 +167,11 @@
 
     const sourceSolutionEditorRef = useTemplateRef('sourceSolutionEditor')
 
+    const submitting = ref(false);
+    const submitted = ref(false);
+
     const saveProblemClicked = async () => {
+        submitting.value = true;
         let answer_choices = [];
         for (let answer_choice of mult_choice_answer_refs.value) {
             if (!answer_choice) {continue;}
@@ -181,7 +191,9 @@
 
         let data = {
             problem_source: selected_problem_source.value,
-            cb_subsource: selected_cb_subsource.value,
+            subsource: subsource.value, 
+            is_practice_test: is_practice_test.value,
+            in_cb_question_bank: in_cb_question_bank.value,
             collegeboard_question_id: collegeBoardQuestionId.value,
             practice_test: selected_practice_test.value,
             section: selected_section.value,
@@ -201,7 +213,7 @@
             module: selected_module.value, 
             problem_number: problem_number.value,
             source_solution: source_solution,
-            cb_difficulty: selected_difficulty.value
+            difficulty: selected_difficulty.value
         }
         
         if (props.problem) {
@@ -227,7 +239,8 @@
             console.log(resp_json);
         }
         
-        
+        submitting.value = false;
+        submitted.value = true;
     }
 
     const deleteProblemClicked = async () => {
@@ -384,8 +397,8 @@
         { id: 3, label: 'Hard' }
     ];
     const selected_difficulty = ref(null);
-    if (props.problem && props.problem.cb_difficulty) {
-        selected_difficulty.value = props.problem.cb_difficulty;
+    if (props.problem && props.problem.difficulty) {
+        selected_difficulty.value = props.problem.difficulty;
     }
     const getSelectedDifficultyLabel = () => {
         return difficulty_levels.find(level => level.id === selected_difficulty.value)?.label;
@@ -405,6 +418,37 @@
         return null;
     });
 
+    const addAnotherProblemClicked = () => {
+        submitted.value = false;
+        clearForm();
+    }
+
+    const clearForm = () => {
+        problem_id.value = null;
+        selected_problem_source.value = null;
+        subsource.value = null;
+        is_practice_test.value = false;
+        in_cb_question_bank.value = false;
+        collegeBoardQuestionId.value = '';
+        selected_practice_test.value = null;
+        selected_section.value = null;
+        selected_module.value = null;
+        problem_number.value = null;
+        selected_math_skill.value = null;
+        selected_reading_writing_skill.value = null;
+        selected_answer_type.value = null;
+        numericAnswer.value = null;
+        mult_choice_correct_answer_index.value = null;
+        selected_difficulty.value = null;
+        selected_custom_skills.value = [];
+        init_question_content.value = '';
+        init_source_solution_content.value = '';
+        answer_choices.value = [];
+        mult_choice_answer_refs.value = [];
+        questionEditorRef.value.editor.commands.setContent('');
+        sourceSolutionEditorRef.value.editor.commands.setContent('');
+    }
+
     onMounted(() => {
         console.log('problem editor onMounted');
     })
@@ -413,7 +457,16 @@
 <template>
     <div class="problem-editor">
         <div class="max-w-md w-full">
-            <div class="flex flex-col gap-6">
+            <div v-if="submitting">
+                <UProgress animation="carousel" />
+            </div>
+            <div v-if="submitted">
+                <div>Problem saved successfully</div>
+                <div>
+                    <UButton @click="addAnotherProblemClicked">Add another problem</UButton>
+                </div>
+            </div>
+            <div class="flex flex-col gap-6" v-if="!submitting && !submitted">
                 <div>
                     <div :class='section_header_classes'>Source</div>
                     <USelectMenu v-model="selected_problem_source" :options="problem_sources" placeholder="Problem Source" value-attribute="id" option-attribute="label" />
@@ -421,14 +474,20 @@
                 <div v-if="selected_problem_source == 'collegeboard'">
                     <div :class='section_header_classes'>Subsource</div>
                     <span>
-                        <USelectMenu v-model="selected_cb_subsource" :options="cb_subsources" placeholder="Subsource" value-attribute="id" option-attribute="label" />
+                        <USelectMenu v-model="subsource" :options="cb_subsources" placeholder="Subsource" value-attribute="id" option-attribute="label" />
                     </span>
                 </div> 
-                <div v-if="selected_problem_source == 'collegeboard'">
+                <div class="flex items-center gap-2">
+                    <UCheckbox v-model="is_practice_test" label="From practice test" />
+                </div>
+                <div v-if="selected_problem_source == 'collegeboard'" class="flex items-center gap-2">
+                    <UCheckbox v-model="in_cb_question_bank" label="In CollegeBoard Question Bank" />
+                </div>
+                <div v-if="in_cb_question_bank">
                     <div :class='section_header_classes'>CollegeBoard Question ID</div>
                     <UInput v-model="collegeBoardQuestionId" placeholder="Enter CollegeBoard Question ID" />
                 </div>
-                <div v-if="selected_cb_subsource == 'practice_test'">
+                <div v-if="is_practice_test">
                     <div :class='section_header_classes'>Practice Test #</div>
                     <USelectMenu v-model="selected_practice_test" :options="practice_tests" placeholder="Practice Test" value-attribute="id" option-attribute="label" />
                 </div>
@@ -439,11 +498,11 @@
                         <USelectMenu v-model="selected_section" :options="test_sections" placeholder="Test Section" value-attribute="id" option-attribute="label" />
                     </span>
                 </div> 
-                <div v-if="selected_cb_subsource == 'practice_test'">
+                <div v-if="is_practice_test">
                     <div :class='section_header_classes'>Module</div>
                     <USelectMenu v-model="selected_module" :options="modules" placeholder="Module" value-attribute="id" option-attribute="label" />
                 </div>
-                <div v-if="selected_cb_subsource == 'practice_test' && selected_section">
+                <div v-if="is_practice_test && selected_section">
                     <div :class='section_header_classes'>Question Number</div>
                     <UInput
                         v-model="problem_number"
