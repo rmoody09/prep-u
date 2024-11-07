@@ -20,9 +20,6 @@ importers:
       '@nuxtjs/supabase':
         specifier: ^1.4.1
         version: 1.4.1
-      '@tiptap-pro/extension-mathematics':
-        specifier: ^2.11.3
-        version: 2.11.3(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))(@tiptap/pm@2.7.4)(katex@0.16.11)
       '@tiptap/extension-image':
         specifier: ^2.7.4
         version: 2.7.4(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))
@@ -1302,13 +1299,6 @@ packages:
     resolution: {integrity: sha512-DB5QA8c/LfqOqIUCpSs3RdOTVroRRdqeHMqBkYrcashSZtOzIv8xbiqHgg7RYxDfkH5F3Y+e0MkuuyGNDVB0BQ==}
     peerDependencies:
       vue: ^2.7.0 || ^3.0.0
-
-  '@tiptap-pro/extension-mathematics@2.11.3':
-    resolution: {integrity: sha512-BNlEw3nn+UQPyMMN2n5COd2ZkHsWuGPSVQ6mFXKyi79uigaxC3dr7yQQh4aQJw/dVqdDQk/GAguw3Hxs8py37Q==}
-    peerDependencies:
-      '@tiptap/core': ^2.0.0
-      '@tiptap/pm': ^2.0.0
-      katex: ^0.16.4
 
   '@tiptap/core@2.7.4':
     resolution: {integrity: sha512-1VTQdNQChgxdVC8+b8QEW6cUxPSD9EDTzg9YRSLWtTtUDQ09sRSVs7eHIn1LcRHVs6PwcAsNgKE4FSjBw0sRlg==}
@@ -5667,12 +5657,6 @@ snapshots:
     dependencies:
       '@tanstack/virtual-core': 3.10.8
       vue: 3.5.8
-
-  '@tiptap-pro/extension-mathematics@2.11.3(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))(@tiptap/pm@2.7.4)(katex@0.16.11)':
-    dependencies:
-      '@tiptap/core': 2.7.4(@tiptap/pm@2.7.4)
-      '@tiptap/pm': 2.7.4
-      katex: 0.16.11
 
   '@tiptap/core@2.7.4(@tiptap/pm@2.7.4)':
     dependencies:
