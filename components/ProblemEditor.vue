@@ -269,72 +269,72 @@
     ];
 
     const math_skills_lookup = {
-        'systems_linear_equations': 'Systems of two linear equations in two variables',
+        'systems_of_two_linear_equations_in_two_variables': 'Systems of two linear equations in two variables',
         'linear_functions': 'Linear functions',
-        'linear_equations_two_variables': 'Linear equations in two variables',
-        'linear_equations_one_variable': 'Linear equations in one variable',
-        'linear_inequalities': 'Linear inequalities in one or two variables',
-        'nonlinear_equations': 'Nonlinear equations in one variable and systems of equations in two variables',
+        'linear_equations_in_two_variables': 'Linear equations in two variables',
+        'linear_equations_in_one_variable': 'Linear equations in one variable',
+        'linear_inequalities_in_one_or_two_variables': 'Linear inequalities in one or two variables',
+        'nonlinear_equations_in_one_variable_and_systems_of_equations_in_two_variables': 'Nonlinear equations in one variable and systems of equations in two variables',
         'nonlinear_functions': 'Nonlinear functions',
         'equivalent_expressions': 'Equivalent expressions',
-        'ratios_rates_proportions': 'Ratios, rates, proportional relationships, and units',
+        'ratios_rates_proportional_relationships_and_units': 'Ratios, rates, proportional relationships, and units',
         'percentages': 'Percentages',
-        'two_variable_data': 'Two-variable data: Models and scatterplots',
-        'probability': 'Probability and conditional probability',
-        'one_variable_data': 'One-variable data: Distributions and measures of center and spread',
-        'inference_sample_statistics': 'Inference from sample statistics and margin of error',
-        'lines_angles_triangles': 'Lines, angles, and triangles',
+        'two_variable_data_models_and_scatterplots': 'Two-variable data: Models and scatterplots',
+        'probability_and_conditional_probability': 'Probability and conditional probability',
+        'one_variable_data_distributions_and_measures_of_center_and_spread': 'One-variable data: Distributions and measures of center and spread',
+        'inference_from_sample_statistics_and_margin_of_error': 'Inference from sample statistics and margin of error',
+        'lines_angles_and_triangles': 'Lines, angles, and triangles',
         'circles': 'Circles',
-        'area_volume': 'Area and volume',
-        'right_triangles_trigonometry': 'Right triangles and trigonometry'
+        'area_and_volume': 'Area and volume',
+        'right_triangles_and_trigonometry': 'Right triangles and trigonometry'
     };
     
 
     const math_skills = [
-        { id: 'systems_linear_equations', label: 'Systems of two linear equations in two variables' },
+        { id: 'systems_of_two_linear_equations_in_two_variables', label: 'Systems of two linear equations in two variables' },
         { id: 'linear_functions', label: 'Linear functions' },
-        { id: 'linear_equations_two_variables', label: 'Linear equations in two variables' },
-        { id: 'linear_equations_one_variable', label: 'Linear equations in one variable' },
-        { id: 'linear_inequalities', label: 'Linear inequalities in one or two variables' },
-        { id: 'nonlinear_equations', label: 'Nonlinear equations in one variable and systems of equations in two variables' },
+        { id: 'linear_equations_in_two_variables', label: 'Linear equations in two variables' },
+        { id: 'linear_equations_in_one_variable', label: 'Linear equations in one variable' },
+        { id: 'linear_inequalities_in_one_or_two_variables', label: 'Linear inequalities in one or two variables' },
+        { id: 'nonlinear_equations_in_one_variable_and_systems_of_equations_in_two_variables', label: 'Nonlinear equations in one variable and systems of equations in two variables' },
         { id: 'nonlinear_functions', label: 'Nonlinear functions' },
         { id: 'equivalent_expressions', label: 'Equivalent expressions' },
-        { id: 'ratios_rates_proportions', label: 'Ratios, rates, proportional relationships, and units' },
+        { id: 'ratios_rates_proportional_relationships_and_units', label: 'Ratios, rates, proportional relationships, and units' },
         { id: 'percentages', label: 'Percentages' },
-        { id: 'two_variable_data', label: 'Two-variable data: Models and scatterplots' },
-        { id: 'probability', label: 'Probability and conditional probability' },
-        { id: 'one_variable_data', label: 'One-variable data: Distributions and measures of center and spread' },
-        { id: 'inference_sample_statistics', label: 'Inference from sample statistics and margin of error' },
-        { id: 'lines_angles_triangles', label: 'Lines, angles, and triangles' },
+        { id: 'two_variable_data_models_and_scatterplots', label: 'Two-variable data: Models and scatterplots' },
+        { id: 'probability_and_conditional_probability', label: 'Probability and conditional probability' },
+        { id: 'one_variable_data_distributions_and_measures_of_center_and_spread', label: 'One-variable data: Distributions and measures of center and spread' },
+        { id: 'inference_from_sample_statistics_and_margin_of_error', label: 'Inference from sample statistics and margin of error' },
+        { id: 'lines_angles_and_triangles', label: 'Lines, angles, and triangles' },
         { id: 'circles', label: 'Circles' },
-        { id: 'area_volume', label: 'Area and volume' },
-        { id: 'right_triangles_trigonometry', label: 'Right triangles and trigonometry' }
+        { id: 'area_and_volume', label: 'Area and volume' },
+        { id: 'right_triangles_and_trigonometry', label: 'Right triangles and trigonometry' }
     ];
 
     const reading_writing_skills_lookup = {
         'command_of_evidence': 'Command of Evidence',
         'inferences': 'Inferences',
-        'central_ideas_details': 'Central Ideas and Details',
+        'central_ideas_and_details': 'Central Ideas and Details',
         'words_in_context': 'Words in Context',
-        'text_structure_purpose': 'Text Structure and Purpose',
+        'text_structure_and_purpose': 'Text Structure and Purpose',
         'cross_text_connections': 'Cross-Text Connections',
         'rhetorical_synthesis': 'Rhetorical Synthesis',
         'transitions': 'Transitions',
         'boundaries': 'Boundaries',
-        'form_structure_sense': 'Form, Structure, and Sense'
+        'form_structure_and_sense': 'Form, Structure, and Sense'
     }
 
     const reading_writing_skills = [
         { id: 'command_of_evidence', label: 'Command of Evidence' },
         { id: 'inferences', label: 'Inferences' },
-        { id: 'central_ideas_details', label: 'Central Ideas and Details' },
+        { id: 'central_ideas_and_details', label: 'Central Ideas and Details' },
         { id: 'words_in_context', label: 'Words in Context' },
-        { id: 'text_structure_purpose', label: 'Text Structure and Purpose' },
+        { id: 'text_structure_and_purpose', label: 'Text Structure and Purpose' },
         { id: 'cross_text_connections', label: 'Cross-Text Connections' },
         { id: 'rhetorical_synthesis', label: 'Rhetorical Synthesis' },
         { id: 'transitions', label: 'Transitions' },
         { id: 'boundaries', label: 'Boundaries' },
-        { id: 'form_structure_sense', label: 'Form, Structure, and Sense' }
+        { id: 'form_structure_and_sense', label: 'Form, Structure, and Sense' }
     ];
 
     const selected_math_skill = ref(null);

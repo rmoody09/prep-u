@@ -3,6 +3,7 @@ import renderMathInElement from "katex/dist/contrib/auto-render";
 
 const resp = await useFetch('/api/get/sat-problems')
 const problems = ref(resp.data.value.data);
+console.log('num problems', problems.value.length);
 /*
 const getProblems = async () => {
     const resp = await $fetch('/api/get/sat-problems')

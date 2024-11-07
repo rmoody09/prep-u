@@ -1,6 +1,8 @@
 import { serverSupabaseServiceRole } from '#supabase/server'
 import { set_5 as problems } from '~/assets/problem-json-files/math/advanced-math/nonlinear-functions-test';
 
+//this is mostly obsolete, as I now have a page for having it directly take a pdf and process it and submit the problems to the database (add-problems-from-sb-pdf)
+
 function prepareProblemForDB(problem) {
     let difficulties = {easy: 1, medium: 2, hard: 3};
     let db_problem = {

@@ -12,6 +12,9 @@ const addProblems = () => {
     }
     )
 }
+
+//example file location: assets/problem-json-files/math/advanced-math/nonlinear-functions-test.js
+
 </script>
 
 <template>
