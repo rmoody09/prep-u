@@ -6,6 +6,8 @@
     import Tiptap from '~/components/Tiptap.vue'
     import TagsInput from '~/components/TagsInput.vue'
 
+    
+
     const problem_id = ref(null);
 
     if (props.problem) {
