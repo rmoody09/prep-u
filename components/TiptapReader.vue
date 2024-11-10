@@ -5,6 +5,7 @@
     //import { Mathematics } from '@tiptap-pro/extension-mathematics'
     import Image from '@tiptap/extension-image'
     import Underline from '@tiptap/extension-underline'
+    import Blockquote from '@tiptap/extension-blockquote'
     import ImageResize from 'tiptap-extension-resize-image';
     import Table from '@tiptap/extension-table'
     import TableCell from '@tiptap/extension-table-cell'
@@ -17,7 +18,7 @@
     const editor = useEditor({
       content: init_content,
       editable: false,
-      extensions: [StarterKit, 
+      extensions: [StarterKit, Blockquote, 
         Table, TableCell, TableHeader, TableRow, 
         Image, ImageResize, Underline, 
         mathExtension],
@@ -58,6 +59,13 @@
 
   ul ul ul {
     list-style-type: square;
+  }
+
+  blockquote {
+    border-left: 3px solid;
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    @apply border-l-gray-300;
   }
 
   table {

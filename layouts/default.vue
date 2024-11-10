@@ -22,7 +22,7 @@
 
 <template>
     <div class='flex flex-col min-h-screen align-stretch'>  
-        <div class='flex bg-white sticky top-0 justify-between items-center h-12 border-b border-gray-200 px-5'>
+        <div class='flex bg-white backdrop-filter backdrop-blur-sm bg-opacity-70 z-10 sticky top-0 justify-between items-center h-12 border-b border-gray-200 px-5'>
             <span>
                 <img src="/images/logos/moody-prep-logo-stacked.png" class="h-8" />
             </span>

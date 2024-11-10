@@ -20,6 +20,9 @@ importers:
       '@nuxtjs/supabase':
         specifier: ^1.4.1
         version: 1.4.1
+      '@tiptap/extension-blockquote':
+        specifier: ^2.9.1
+        version: 2.9.1(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))
       '@tiptap/extension-image':
         specifier: ^2.7.4
         version: 2.7.4(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))
@@ -1305,8 +1308,8 @@ packages:
     peerDependencies:
       '@tiptap/pm': ^2.7.0
 
-  '@tiptap/extension-blockquote@2.7.4':
-    resolution: {integrity: sha512-N6rhiwVRpsxRz4Qt8cvKgpqjBxdi8GTbU/v2MV/BTONWb7Ch9ajv9HO6koEDdOeb77JVhpWztzYysTjJo2KTyQ==}
+  '@tiptap/extension-blockquote@2.9.1':
+    resolution: {integrity: sha512-Y0jZxc/pdkvcsftmEZFyG+73um8xrx6/DMfgUcNg3JAM63CISedNcr+OEI11L0oFk1KFT7/aQ9996GM6Kubdqg==}
     peerDependencies:
       '@tiptap/core': ^2.7.0
 
@@ -5662,7 +5665,7 @@ snapshots:
     dependencies:
       '@tiptap/pm': 2.7.4
 
-  '@tiptap/extension-blockquote@2.7.4(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))':
+  '@tiptap/extension-blockquote@2.9.1(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))':
     dependencies:
       '@tiptap/core': 2.7.4(@tiptap/pm@2.7.4)
 
@@ -5800,7 +5803,7 @@ snapshots:
   '@tiptap/starter-kit@2.7.4':
     dependencies:
       '@tiptap/core': 2.7.4(@tiptap/pm@2.7.4)
-      '@tiptap/extension-blockquote': 2.7.4(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))
+      '@tiptap/extension-blockquote': 2.9.1(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))
       '@tiptap/extension-bold': 2.7.4(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))
       '@tiptap/extension-bullet-list': 2.7.4(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))
       '@tiptap/extension-code': 2.7.4(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))
