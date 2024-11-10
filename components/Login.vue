@@ -24,7 +24,7 @@ const signInWithOtp = async () => {
     console.log('base url', base_url);
     console.log(otp_email.value);
     const { error } = await supabase.auth.signInWithOtp({
-        email: email.value,
+        email: otp_email.value,
         options: {
             emailRedirectTo: `${base_url}/confirm`,
         }
