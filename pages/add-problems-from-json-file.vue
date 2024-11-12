@@ -14,7 +14,8 @@ const addProblems = () => {
 }
 
 //example file location: assets/problem-json-files/math/advanced-math/nonlinear-functions-test.js
-
+//this file name is a misnomer, actually using js files rather than json
+//also this page is mostly obsolete, as I now have a page for having it directly take a pdf and process it and submit the problems to the database
 </script>
 
 <template>
