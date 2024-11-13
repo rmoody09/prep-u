@@ -112,7 +112,7 @@
           <div class="flex flex-wrap justify-between">
             <div class="w-full md:w-1/4 mb-6 md:mb-0">
               <h5 class="text-xl font-semibold mb-4">PrepU</h5>
-              <p class="text-gray-400">Empowering students to achieve their best SAT scores.</p>
+              <p class="text-gray-400">Empowering students to achieve their best SAT scores</p>
             </div>
             <div class="w-full md:w-1/4 mb-6 md:mb-0">
               <h5 class="text-xl font-semibold mb-4">Quick Links</h5>
