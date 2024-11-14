@@ -15,18 +15,6 @@
     }
 
 
-    const selected_math_section = ref(null);
-    if (props.problem && props.problem.test_section == 'math' && props.problem.cb_domain) {
-        selected_math_section.value = props.problem.cb_domain;
-    }
-
-    const reading_writing_sections = [
-        {id: 'info_and_ideas', 'label': 'Information and Ideas'},
-        {id: 'craft_and_structure', 'label': 'Craft and Structure'}, 
-        {id: 'standard_english', 'label': 'Standard English'}, 
-        {id: 'expression_of_ideas', 'label': 'Expression of Ideas'}
-    ];
-
     const descriptionEditorRef = useTemplateRef('descriptionEditor');
     let init_description_content = '';
     if (props.skill && props.skill.description_html) {
@@ -48,9 +36,6 @@
     const selected_reading_writing_section = ref(null);
     if (props.problem && props.problem.test_section == 'reading_writing' && props.problem.cb_domain) {
         selected_reading_writing_section.value = props.problem.cb_domain;
-    }
-    const getSelectedReadingWritingSectionLabel = () => {
-        return reading_writing_sections.find(source => source.id === selected_reading_writing_section.value)?.label;
     }
 
     const skill_tag = ref('');
