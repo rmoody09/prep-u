@@ -25,7 +25,7 @@ function getNodeText(doc_node) {
 }
 
 export const prepareSATProblemForDB = (problem) => {
-    const { problem_source, subsource, is_practice_test, in_cb_question_bank, collegeboard_question_id, practice_test, section, module, math_section, reading_writing_section, math_skill, reading_writing_skill, answer_type, input_answer, mult_choice_correct_answer_index, difficulty, custom_skills, question, answer_choices } = problem;
+    const { problem_source, subsource, is_practice_test, in_cb_question_bank, collegeboard_question_id, practice_test, section, module, cb_domain, cb_skill, answer_type, input_answer, mult_choice_correct_answer_index, difficulty, custom_skills, question, answer_choices } = problem;
     console.log('prepareSATProblemForDB');
     console.log(subsource);
     console.log(is_practice_test);
@@ -58,8 +58,6 @@ export const prepareSATProblemForDB = (problem) => {
     //const question_text = removeTags(question_html);
     const question_text = getNodeText(question_json);
     const contains_graphic = question_text.includes('[img]');
-    const cb_domain = section == 'math' ? math_section : reading_writing_section;
-    const cb_skill = section == 'math' ? math_skill : reading_writing_skill;
     let db_input_answer = answer_type == 'numeric_input' ? input_answer : null;
     let db_mult_choice_answer = answer_type == 'multiple_choice' ? mult_choice_correct_answer_index : null;
     let db_difficulty = difficulty ? difficulty : null;

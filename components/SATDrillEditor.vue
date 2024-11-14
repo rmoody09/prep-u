@@ -5,7 +5,7 @@ const props = defineProps(['drill']);
     const submitting = ref(false);
     const submitted = ref(false);
     
-    const section_options = [
+    const test_sections = [
         {id: 'math', 'label': 'Math'},  
         {id: 'reading_writing', 'label': 'Reading and Writing'}
     ];
@@ -44,9 +44,9 @@ const props = defineProps(['drill']);
     }
 
    
-    const drill_section = ref(null);
+    const selected_section = ref(null);
     if (props.drill && props.drill.test_section) {
-        drill_section.value = props.drill.test_section;
+        selected_section.value = props.drill.test_section;
     }
     const cb_domain = ref('');
     if (props.drill && props.drill.cb_domain) {
@@ -55,8 +55,8 @@ const props = defineProps(['drill']);
 
     const select_cb_domain_options = ref([]);
     const updateSelectCbDomainOptions = () => {
-        if (drill_section.value) {
-            select_cb_domain_options.value = cb_domains.filter(domain => domain.section == drill_section.value);
+        if (selected_section.value) {
+            select_cb_domain_options.value = cb_domains.filter(domain => domain.section == selected_section.value);
         } else {
             select_cb_domain_options.value = cb_domains;
         }
@@ -74,8 +74,8 @@ const props = defineProps(['drill']);
     const updateSelectCbSkillOptions = () => {
         if (cb_domain.value) {
             select_cb_skill_options.value = cb_skills_by_domain[cb_domain.value];
-        } else if (drill_section.value) {
-            select_cb_skill_options.value = cb_skills.filter(skill => skill.section == drill_section.value);
+        } else if (selected_section.value) {
+            select_cb_skill_options.value = cb_skills.filter(skill => skill.section == selected_section.value);
         } else {
             select_cb_skill_options.value = cb_skills;
         }
@@ -86,18 +86,18 @@ const props = defineProps(['drill']);
         cb_skill.value = '';
     }
 
-    watch(drill_section, () => {
+    watch(selected_section, () => {
         console.log('skill section changed');
-        console.log(drill_section.value);
+        console.log(selected_section.value);
         updateSelectCbSkillOptions();
         updateSelectCbDomainOptions();
         if (cb_domain.value) {
-            if (drill_section.value != cb_domain_lookup[cb_domain.value].section) {
+            if (selected_section.value != cb_domain_lookup[cb_domain.value].section) {
                 cb_domain.value = null;
             }
         }
         if (cb_skill.value) {
-            if (drill_section.value != cb_skill_lookup[cb_skill.value].section) {
+            if (selected_section.value != cb_skill_lookup[cb_skill.value].section) {
                 cb_skill.value = null;
             }
         }
@@ -105,7 +105,7 @@ const props = defineProps(['drill']);
     watch(cb_domain, () => {
         updateSelectCbSkillOptions();
         if (cb_domain.value) {
-            drill_section.value = cb_domain_lookup[cb_domain.value].section;
+            selected_section.value = cb_domain_lookup[cb_domain.value].section;
             if (cb_skill.value) {
                 if (cb_skill_lookup[cb_skill.value].domain != cb_domain.value) {
                     cb_skill.value = null;
@@ -116,7 +116,7 @@ const props = defineProps(['drill']);
     watch(cb_skill, () => {
         if (cb_skill.value) {
             cb_domain.value = cb_skill_lookup[cb_skill.value].domain;
-            drill_section.value = cb_skill_lookup[cb_skill.value].section;
+            selected_section.value = cb_skill_lookup[cb_skill.value].section;
         }
     });
 
@@ -343,7 +343,7 @@ const props = defineProps(['drill']);
 
                 <div>
                     <div :class="select_option_header_classes">Test Section</div>
-                    <USelectMenu v-model="drill_section" :options="section_options" value-attribute="id" option-attribute="label" />
+                    <USelectMenu v-model="selected_section" :options="test_sections" value-attribute="id" option-attribute="label" />
                 </div>
                 <div>
                     <div :class="select_option_header_classes">College Board Domain</div>

@@ -70,6 +70,10 @@ const deleteProblem = async (id) => {
 
 const problemsEl = ref(null);
 
+const getTruncatedQuestionText = (question_text) => {
+    return question_text.length > 200 ? question_text.substring(0, 200) + '...' : question_text;
+}
+
 onMounted(async () => {
     renderMathInElement(problemsEl.value, 
         {
@@ -125,7 +129,7 @@ onMounted(async () => {
                         {{ cb_skills[problem.cb_skill] }}
                     </div>
                 </div>
-                <div class="problem-question problem-cell whitespace-pre"><span>{{ problem.question_text }}</span></div>
+                <div class="problem-question problem-cell whitespace-pre-wrap"><span>{{ getTruncatedQuestionText(problem.question_text) }}</span></div>
                 <div class="problem-options problem-cell">
                     <button class="option-button" @click="navigateTo(`/sat-problem/${problem.id}`)">
                         <UIcon name="i-heroicons-eye" />

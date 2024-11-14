@@ -4,10 +4,15 @@
     const submitting = ref(false);
     const submitted = ref(false);
     
-    const section_options = [
+    const test_sections = [
         {id: 'math', 'label': 'Math'},  
         {id: 'reading_writing', 'label': 'Reading and Writing'}
     ];
+
+    const selected_section = ref(null);
+    if (props.skill && props.skill.test_section) {
+        selected_section.value = props.skill.test_section;
+    }
 
 
     const selected_math_section = ref(null);
@@ -60,10 +65,7 @@
     if (props.skill && props.skill.description) {
         skill_description.value = props.skill.description;
     }
-    const skill_section = ref(null);
-    if (props.skill && props.skill.test_section) {
-        skill_section.value = props.skill.test_section;
-    }
+    
     const cb_domain = ref('');
     if (props.skill && props.skill.cb_domain) {
         cb_domain.value = props.skill.cb_domain;
@@ -71,8 +73,8 @@
 
     const select_cb_domain_options = ref([]);
     const updateSelectCbDomainOptions = () => {
-        if (skill_section.value) {
-            select_cb_domain_options.value = cb_domains.filter(domain => domain.section == skill_section.value);
+        if (selected_section.value) {
+            select_cb_domain_options.value = cb_domains.filter(domain => domain.section == selected_section.value);
         } else {
             select_cb_domain_options.value = cb_domains;
         }
@@ -90,8 +92,8 @@
     const updateSelectCbSkillOptions = () => {
         if (cb_domain.value) {
             select_cb_skill_options.value = cb_skills_by_domain[cb_domain.value];
-        } else if (skill_section.value) {
-            select_cb_skill_options.value = cb_skills.filter(skill => skill.section == skill_section.value);
+        } else if (selected_section.value) {
+            select_cb_skill_options.value = cb_skills.filter(skill => skill.section == selected_section.value);
         } else {
             select_cb_skill_options.value = cb_skills;
         }
@@ -106,18 +108,18 @@
         skill_description.value = '';
     }
 
-    watch(skill_section, () => {
+    watch(selected_section, () => {
         console.log('skill section changed');
-        console.log(skill_section.value);
+        console.log(selected_section.value);
         updateSelectCbSkillOptions();
         updateSelectCbDomainOptions();
         if (cb_domain.value) {
-            if (skill_section.value != cb_domain_lookup[cb_domain.value].section) {
+            if (selected_section.value != cb_domain_lookup[cb_domain.value].section) {
                 cb_domain.value = null;
             }
         }
         if (cb_skill.value) {
-            if (skill_section.value != cb_skill_lookup[cb_skill.value].section) {
+            if (selected_section.value != cb_skill_lookup[cb_skill.value].section) {
                 cb_skill.value = null;
             }
         }
@@ -125,7 +127,7 @@
     watch(cb_domain, () => {
         updateSelectCbSkillOptions();
         if (cb_domain.value) {
-            skill_section.value = cb_domain_lookup[cb_domain.value].section;
+            selected_section.value = cb_domain_lookup[cb_domain.value].section;
             if (cb_skill.value) {
                 if (cb_skill_lookup[cb_skill.value].domain != cb_domain.value) {
                     cb_skill.value = null;
@@ -136,7 +138,7 @@
     watch(cb_skill, () => {
         if (cb_skill.value) {
             cb_domain.value = cb_skill_lookup[cb_skill.value].domain;
-            skill_section.value = cb_skill_lookup[cb_skill.value].section;
+            selected_section.value = cb_skill_lookup[cb_skill.value].section;
         }
     });
 
@@ -152,7 +154,7 @@
             description_json: descriptionEditorRef.value.editor.getJSON(),
             detailed_description_html: detailedDescriptionEditorRef.value.editor.getHTML(),
             detailed_description_json: detailedDescriptionEditorRef.value.editor.getJSON(), 
-            test_section: skill_section.value, 
+            test_section: selected_section.value, 
             cb_domain: cb_domain.value,
             cb_skill: cb_skill.value
         }
@@ -227,7 +229,7 @@
 
                 <div>
                     <div :class="select_option_header_classes">Test Section</div>
-                    <USelectMenu v-model="skill_section" :options="section_options" value-attribute="id" option-attribute="label" />
+                    <USelectMenu v-model="selected_section" :options="test_sections" value-attribute="id" option-attribute="label" />
                 </div>
                 <div>
                     <div :class="select_option_header_classes">College Board Domain</div>

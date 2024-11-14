@@ -27,6 +27,7 @@
         return problem_sources.find(source => source.id === selected_problem_source.value)?.label;
     }
 
+
     const cb_subsources = [
         {id: 'practice_test', 'label': 'Practice Test'},
         {id: 'question_bank', 'label': 'Question Bank'}
@@ -47,6 +48,14 @@
         subsource.value = props.problem.subsource;
     }
 
+
+    import { cb_domains, cb_skills, getCbDomainLookup, getCbSkillLookup, getCbSkillsByDomain } from '~/assets/composables/SATProblemTypes';
+
+    const cb_domain_lookup = getCbDomainLookup();
+    const cb_skill_lookup = getCbSkillLookup();
+    const cb_skills_by_domain = getCbSkillsByDomain();
+
+
     const test_sections = [
         {id: 'reading_writing', 'label': 'Reading and Writing'},
         {id: 'math', 'label': 'Math'}
@@ -54,9 +63,6 @@
     const selected_section = ref(null);
     if (props.problem) {
         selected_section.value = props.problem.test_section;
-    }
-    const getSelectedSectionLabel = () => {
-        return test_sections.find(source => source.id === selected_section.value)?.label;
     }
 
     const practice_tests = [
@@ -79,33 +85,71 @@
         return practice_tests.find(source => source.id === selected_practice_test.value)?.label;
     }
 
-    const math_sections = [
-        {id: 'algebra', 'label': 'Algebra'},
-        {id: 'advanced_math', 'label': 'Advanced Math'}, 
-        {id: 'problem_solving_data', 'label': 'Problem Solving and Data Analysis'}, 
-        {id: 'geometry_trig', 'label': 'Geometry and Trigonometry'}
-    ];
-    const selected_math_section = ref(null);
-    if (props.problem && props.problem.test_section == 'math' && props.problem.cb_domain) {
-        selected_math_section.value = props.problem.cb_domain;
-    }
-    const getSelectedMathSectionLabel = () => {
-        return math_sections.find(source => source.id === selected_math_section.value)?.label;
+    const cb_domain = ref('');
+    if (props.skill && props.skill.cb_domain) {
+        cb_domain.value = props.skill.cb_domain;
     }
 
-    const reading_writing_sections = [
-        {id: 'info_and_ideas', 'label': 'Information and Ideas'},
-        {id: 'craft_and_structure', 'label': 'Craft and Structure'}, 
-        {id: 'standard_english', 'label': 'Standard English'}, 
-        {id: 'expression_of_ideas', 'label': 'Expression of Ideas'}
-    ];
-    const selected_reading_writing_section = ref(null);
-    if (props.problem && props.problem.test_section == 'reading_writing' && props.problem.cb_domain) {
-        selected_reading_writing_section.value = props.problem.cb_domain;
+    const select_cb_domain_options = ref([]);
+    const updateSelectCbDomainOptions = () => {
+        if (selected_section.value) {
+            select_cb_domain_options.value = cb_domains.filter(domain => domain.section == selected_section.value);
+        } else {
+            select_cb_domain_options.value = cb_domains;
+        }
     }
-    const getSelectedReadingWritingSectionLabel = () => {
-        return reading_writing_sections.find(source => source.id === selected_reading_writing_section.value)?.label;
+    updateSelectCbDomainOptions();
+    console.log('domain options');
+    console.log(select_cb_domain_options.value);
+
+    const cb_skill = ref('');
+    if (props.skill && props.skill.cb_skill) {
+        cb_skill.value = props.skill.cb_skill;
     }
+
+    const select_cb_skill_options = ref([...cb_skills]);
+    const updateSelectCbSkillOptions = () => {
+        if (cb_domain.value) {
+            select_cb_skill_options.value = cb_skills_by_domain[cb_domain.value];
+        } else if (selected_section.value) {
+            select_cb_skill_options.value = cb_skills.filter(skill => skill.section == selected_section.value);
+        } else {
+            select_cb_skill_options.value = cb_skills;
+        }
+    }
+    updateSelectCbSkillOptions();
+
+    watch(selected_section, () => {
+        updateSelectCbSkillOptions();
+        updateSelectCbDomainOptions();
+        if (cb_domain.value) {
+            if (selected_section.value != cb_domain_lookup[cb_domain.value].section) {
+                cb_domain.value = null;
+            }
+        }
+        if (cb_skill.value) {
+            if (selected_section.value != cb_skill_lookup[cb_skill.value].section) {
+                cb_skill.value = null;
+            }
+        }
+    });
+    watch(cb_domain, () => {
+        updateSelectCbSkillOptions();
+        if (cb_domain.value) {
+            selected_section.value = cb_domain_lookup[cb_domain.value].section;
+            if (cb_skill.value) {
+                if (cb_skill_lookup[cb_skill.value].domain != cb_domain.value) {
+                    cb_skill.value = null;
+                }
+            }
+        }
+    });
+    watch(cb_skill, () => {
+        if (cb_skill.value) {
+            cb_domain.value = cb_skill_lookup[cb_skill.value].domain;
+            selected_section.value = cb_skill_lookup[cb_skill.value].section;
+        }
+    });
 
     const answer_types = [
         {id: 'multiple_choice', 'label': 'Multiple Choice'},
@@ -199,10 +243,8 @@
             collegeboard_question_id: collegeBoardQuestionId.value,
             practice_test: selected_practice_test.value,
             section: selected_section.value,
-            math_section: selected_math_section.value,
-            reading_writing_section: selected_reading_writing_section.value,
-            math_skill: selected_math_skill.value,
-            reading_writing_skill: selected_reading_writing_skill.value,
+            cb_domain: cb_domain.value,
+            cb_skill: cb_skill.value,
             answer_type: selected_answer_type.value,
             input_answer: numericAnswer.value,
             custom_skills: selected_custom_skills.value,
@@ -229,7 +271,7 @@
             });
             console.log(resp);
         } else {
-            const resp = await fetch("/api/add-problem", {
+            const resp = await fetch("/api/add/sat-problem", {
                 method: "POST",
                 body: JSON.stringify(data), 
                 headers: {
@@ -436,8 +478,8 @@
         selected_section.value = null;
         selected_module.value = null;
         problem_number.value = null;
-        selected_math_skill.value = null;
-        selected_reading_writing_skill.value = null;
+        cb_domain.value = null;
+        cb_skill.value = null;
         selected_answer_type.value = null;
         numericAnswer.value = null;
         mult_choice_correct_answer_index.value = null;
@@ -494,9 +536,9 @@
                     <USelectMenu v-model="selected_practice_test" :options="practice_tests" placeholder="Practice Test" value-attribute="id" option-attribute="label" />
                 </div>
                 
-                <div v-if="selected_problem_source">
+                <div>
                     <div :class='section_header_classes'>Test Section</div>
-                    <span v-if="selected_problem_source">
+                    <span>
                         <USelectMenu v-model="selected_section" :options="test_sections" placeholder="Test Section" value-attribute="id" option-attribute="label" />
                     </span>
                 </div> 
@@ -514,23 +556,18 @@
                         :placeholder="`Enter question number (1-${maxQuestionNumber})`"
                     />
                 </div>
-                <div v-if="selected_section">
-                    <div :class='section_header_classes'>Subsection</div>
-                    <span v-if="selected_section == 'math'">
-                        <USelectMenu v-model="selected_math_section" :options="math_sections" placeholder="Math Section" value-attribute="id" option-attribute="label" />
-                    </span>
-                    <span v-else-if="selected_section == 'reading_writing'">
-                        <USelectMenu v-model="selected_reading_writing_section" :options="reading_writing_sections" placeholder="Reading Writing Section" value-attribute="id" option-attribute="label" />
+                <div>
+                    <div :class='section_header_classes'>College Board Domain</div>
+                    <span>
+                        <USelectMenu v-model="cb_domain" :options="select_cb_domain_options" placeholder="College Board Domain" value-attribute="id" option-attribute="label" />
                     </span>
                 </div>  
-                <div v-if="selected_section">
+                <div>
                     <div :class='section_header_classes'>CollegeBoard Skill</div>
-                    <span v-if="selected_section == 'math'">
-                        <USelectMenu v-model="selected_math_skill" :options="math_skills" placeholder="Math Skill" value-attribute="id" option-attribute="label" />
+                    <span>
+                        <USelectMenu v-model="cb_skill" :options="select_cb_skill_options" placeholder="College Board Skill" value-attribute="id" option-attribute="label" />
                     </span>
-                    <span v-else-if="selected_section == 'reading_writing'">
-                        <USelectMenu v-model="selected_reading_writing_skill" :options="reading_writing_skills" placeholder="Reading Writing Skill" value-attribute="id" option-attribute="label" />
-                    </span>
+                    
                 </div>
                 <div v-if="selected_problem_source">
                     <div :class='section_header_classes'>Answer Type</div>
