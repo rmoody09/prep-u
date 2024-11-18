@@ -4,6 +4,7 @@ const props = defineProps(['drill']);
     import Tiptap from '~/components/Tiptap.vue'
     const submitting = ref(false);
     const submitted = ref(false);
+    console.log('1');
     
     const test_sections = [
         {id: 'math', 'label': 'Math'},  
