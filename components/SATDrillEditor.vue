@@ -9,6 +9,7 @@ const props = defineProps(['drill']);
         {id: 'math', 'label': 'Math'},  
         {id: 'reading_writing', 'label': 'Reading and Writing'}
     ];
+    //comment
 
     const instructionsEditorRef = useTemplateRef('instructionsEditor');
     let init_instructions_content = '';
