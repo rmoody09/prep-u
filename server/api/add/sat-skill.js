@@ -14,6 +14,9 @@ export default eventHandler(async (event) => {
     
     console.log('sb_data', sb_data);
     const sb_resp = await client.from('sat_skills').insert(sb_data);
+
+    await updateSkillParentsAndChildren(client, sb_data.tag, sb_data.parent_skills, sb_data.subskills);
+
     return { data: sb_resp.data, error: sb_resp.error };
 
 

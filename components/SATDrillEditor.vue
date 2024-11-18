@@ -10,19 +10,12 @@ const props = defineProps(['drill']);
         {id: 'reading_writing', 'label': 'Reading and Writing'}
     ];
 
-
-    const selected_math_section = ref(null);
-    if (props.problem && props.problem.test_section == 'math' && props.problem.cb_domain) {
-        selected_math_section.value = props.problem.cb_domain;
+    const instructionsEditorRef = useTemplateRef('instructionsEditor');
+    let init_instructions_content = '';
+    if (props.drill && props.drill.instructions_html) {
+        init_instructions_content = props.drill.instructions_html;
     }
-
-    const reading_writing_sections = [
-        {id: 'info_and_ideas', 'label': 'Information and Ideas'},
-        {id: 'craft_and_structure', 'label': 'Craft and Structure'}, 
-        {id: 'standard_english', 'label': 'Standard English'}, 
-        {id: 'expression_of_ideas', 'label': 'Expression of Ideas'}
-    ];
-
+    
     const questionEditorRef = useTemplateRef('questionEditor');
     let init_question_content = '';
     if (props.drill && props.drill.question_html) {
@@ -34,14 +27,7 @@ const props = defineProps(['drill']);
     const cb_domain_lookup = getCbDomainLookup();
     const cb_skill_lookup = getCbSkillLookup();
     const cb_skills_by_domain = getCbSkillsByDomain();
-
-    const selected_reading_writing_section = ref(null);
-    if (props.problem && props.problem.test_section == 'reading_writing' && props.problem.cb_domain) {
-        selected_reading_writing_section.value = props.problem.cb_domain;
-    }
-    const getSelectedReadingWritingSectionLabel = () => {
-        return reading_writing_sections.find(source => source.id === selected_reading_writing_section.value)?.label;
-    }
+    
 
    
     const selected_section = ref(null);
@@ -62,9 +48,7 @@ const props = defineProps(['drill']);
         }
     }
     updateSelectCbDomainOptions();
-    console.log('domain options');
-    console.log(select_cb_domain_options.value);
-
+   
     const cb_skill = ref('');
     if (props.drill && props.drill.cb_skill) {
         cb_skill.value = props.drill.cb_skill;
@@ -82,13 +66,34 @@ const props = defineProps(['drill']);
     }
     updateSelectCbSkillOptions();
 
-    const addAnotherDrillClicked = () => {
+    const clearForm = () => {
+        instructionsEditorRef.value.editor.commands.setContent('');
+        questionEditorRef.value.editor.commands.setContent('');
+        selected_section.value = '';
+        cb_domain.value = '';
         cb_skill.value = '';
+        selected_answer_type.value = null;
+        numericAnswer.value = null;
+        textAnswerEditorRef.value.editor.commands.setContent('');
+        answer_is_exact.value = false;
+        mult_choice_correct_answer_index.value = null;
+        answer_choices.value = [
+            {content: ""}, 
+            {content: ""}, 
+            {content: ""}, 
+            {content: ""}
+        ]; 
+        explanationEditorRef.value.editor.commands.setContent('');
+
+    }
+
+    const addAnotherDrillClicked = () => {
+        clearForm();
+        submitted.value = false;
+
     }
 
     watch(selected_section, () => {
-        console.log('skill section changed');
-        console.log(selected_section.value);
         updateSelectCbSkillOptions();
         updateSelectCbDomainOptions();
         if (cb_domain.value) {
@@ -139,10 +144,10 @@ const props = defineProps(['drill']);
     }
 
     const answer_choices = ref([
-        {content: "Answer 1"}, 
-        {content: "Answer 2"}, 
-        {content: "Answer 3"}, 
-        {content: "Answer 4"}
+        {content: ""}, 
+        {content: ""}, 
+        {content: ""}, 
+        {content: ""}
     ]);
     if (props.drill && props.drill.answer_choices) {
         let choices = [];
@@ -153,7 +158,14 @@ const props = defineProps(['drill']);
     }
 
     const mult_choice_answer_refs = ref([]);
+    const mult_choice_correct_answer_index = ref(null);
+    if (props.drill && props.drill.mult_choice_answer) {
+        mult_choice_correct_answer_index.value = props.drill.mult_choice_answer;
+    }
 
+    const selectCorrectAnswerChoice = (index) => {
+        mult_choice_correct_answer_index.value = index;
+    }
 
     function getChar(num) {
         // Check if the number is within the range of lowercase alphabet (1-26)
@@ -193,17 +205,8 @@ const props = defineProps(['drill']);
 
 
     watch(numericAnswer, () => {
-        console.log('numericAnswer changed');
-        console.log(numericAnswer.value);
-        //numericAnswer.value = numericAnswer.value.replace(/[^0-9.//]/g, '');
-        //return;
-        //let stripped = numericAnswer.value.replace(/[^0-9.//]/g, '');
-        //const regex = /^(?!.*\/.*\/)(?!.*\..*\.)\d*\.?\d*\/?\.?\d*$/;
         let stripped = reformatString(numericAnswer.value);
-        console.log('stripped');
-        console.log(stripped);
         if (stripped != numericAnswer.value) {
-            console.log('stripped is different');
             nextTick(() => {
                 numericAnswer.value = stripped;
             });
@@ -226,13 +229,44 @@ const props = defineProps(['drill']);
         init_explanation_content = props.drill.explanation_text;
     }
 
+    const selected_custom_skills = ref([]);
+
 
 
     const saveDrillClicked = async () => {
         submitting.value = true;
-
-        let data = {
+        const custom_skills = selected_custom_skills.value.map(skill => skill.tag);
+        
+        let db_answer_choices = [];
+        if (selected_answer_type.value == 'multiple_choice') {
+            db_answer_choices = mult_choice_answer_refs.value.map(choice => {
+                return {
+                    json: choice.editor.getJSON(),
+                    html: choice.editor.getHTML()
+                }
+            });
         }
+        let data = {
+            instructions_html: instructionsEditorRef.value?.editor?.getHTML(),
+            instructions_json: instructionsEditorRef.value?.editor?.getJSON(),
+            question_html: questionEditorRef.value?.editor?.getHTML(),
+            question_json: questionEditorRef.value?.editor?.getJSON(),
+            text_answer_html: textAnswerEditorRef.value?.editor?.getHTML(),
+            text_answer_json: textAnswerEditorRef.value?.editor?.getJSON(),
+            custom_skills: custom_skills, 
+            test_section: selected_section.value, 
+            cb_domain: cb_domain.value, 
+            cb_skill: cb_skill.value,
+            answer_type: selected_answer_type.value,
+            numeric_answer: numericAnswer.value, 
+            text_answer_html: textAnswerEditorRef.value?.editor?.getHTML(), 
+            text_answer_json: textAnswerEditorRef.value?.editor?.getJSON(), 
+            answer_is_exact: answer_is_exact.value,
+            answer_choices: db_answer_choices,
+            mult_choice_correct_answer_index: mult_choice_correct_answer_index.value,
+            explanation_html: explanationEditorRef.value?.editor?.getHTML(), 
+            explanation_json: explanationEditorRef.value?.editor?.getJSON(),
+        };
         
         if (props.drill) {
             data.id = props.drill.id;
@@ -257,6 +291,8 @@ const props = defineProps(['drill']);
             console.log(resp_json);
         }
         
+        
+        
         submitting.value = false;
         submitted.value = true;
     }
@@ -272,14 +308,21 @@ const props = defineProps(['drill']);
             <div v-if="submitted">
                 <div>Skill saved successfully</div>
                 <div>
-                    <UButton @click="addAnotherSkillClicked">Add another skill</UButton>
+                    <UButton @click="addAnotherDrillClicked">Add another drill</UButton>
                 </div>
             </div>
             <div class="flex flex-col gap-6" v-if="!submitting && !submitted">
                 <div>
+                    <div :class='select_option_header_classes'>Instructions</div>
+                    <Tiptap 
+                        ref="instructionsEditor"
+                        :init_content="init_instructions_content"
+                    />
+                </div>
+                <div>
                     <div :class='select_option_header_classes'>Question</div>
                     <Tiptap 
-                        ref="questionEditorRef"
+                        ref="questionEditor"
                         :init_content="init_question_content"
                     />
                 </div>
@@ -323,7 +366,7 @@ const props = defineProps(['drill']);
                     <div :class='select_option_header_classes'>Answer</div>
                     <div>
                         <Tiptap 
-                            ref="textAnswerEditorRef"
+                            ref="textAnswerEditor"
                             :init_content="init_text_answer_content"
                         />
                     </div>
@@ -335,7 +378,7 @@ const props = defineProps(['drill']);
                     <div :class='select_option_header_classes'>Explanation</div>
                     <div>
                         <Tiptap 
-                            ref="explanationEditorRef"
+                            ref="explanationEditor"
                             :init_content="init_explanation_content"
                         />
                     </div>
@@ -353,6 +396,16 @@ const props = defineProps(['drill']);
                     <div :class="select_option_header_classes">College Board Skill</div>
                     <USelectMenu v-model="cb_skill" :options="select_cb_skill_options" value-attribute="id" option-attribute="label" />
                 </div>
+
+                <div>
+                    <div :class='select_option_header_classes'>Custom Skills</div>
+                    <!--<TagsInput :options="custom_skills_options" />-->
+                    <SATSkillsSelector v-model="selected_custom_skills" />
+                </div>
+                <div>
+                    <UButton @click="saveDrillClicked">Save</UButton>
+                </div>
+                <div class='h-20'></div>
             </div>
         </div>
     </div>

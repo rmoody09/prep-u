@@ -4,8 +4,6 @@ const skill_tag = route.params.tag;
 console.log('skill tag');
 console.log(skill_tag);
 const resp = await useFetch('/api/get/sat-skill/' + skill_tag)
-console.log('resp');
-console.log(resp.data.value.data);
 const skill = resp.data.value.data;
 </script>
 

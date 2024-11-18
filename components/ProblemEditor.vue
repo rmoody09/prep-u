@@ -159,9 +159,6 @@
     if (props.problem && props.problem.answer_type) {
         selected_answer_type.value = props.problem.answer_type;
     }
-    const getSelectedAnswerTypeLabel = () => {
-        return answer_types.find(type => type.id === selected_answer_type.value)?.label;
-    }
 
     let init_question_content = '';
     if (props.problem && props.problem.question_tiptap_html) {
@@ -176,10 +173,10 @@
     }
 
     const answer_choices = ref([
-        {content: "Answer 1"}, 
-        {content: "Answer 2"}, 
-        {content: "Answer 3"}, 
-        {content: "Answer 4"}
+        {content: ""}, 
+        {content: ""}, 
+        {content: ""}, 
+        {content: ""}
     ]);
     if (props.problem && props.problem.answer_choices) {
         let choices = [];
@@ -388,14 +385,6 @@
     }
     if (props.problem && props.problem.cb_skill && props.problem.cb_skill in reading_writing_skills_lookup) {
         selected_reading_writing_skill.value = props.problem.cb_skill;
-    }
-
-    const getSelectedMathSkillLabel = () => {
-        return math_skills.find(skill => skill.id === selected_math_skill.value)?.label;
-    }
-
-    const getSelectedReadingWritingSkillLabel = () => {
-        return reading_writing_skills.find(skill => skill.id === selected_reading_writing_skill.value)?.label;
     }
 
     const selected_custom_skills = ref([]);

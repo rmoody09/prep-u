@@ -33,11 +33,6 @@
     const cb_skill_lookup = getCbSkillLookup();
     const cb_skills_by_domain = getCbSkillsByDomain();
 
-    const selected_reading_writing_section = ref(null);
-    if (props.problem && props.problem.test_section == 'reading_writing' && props.problem.cb_domain) {
-        selected_reading_writing_section.value = props.problem.cb_domain;
-    }
-
     const skill_tag = ref('');
     if (props.skill && props.skill.tag) {   
         skill_tag.value = props.skill.tag;
@@ -86,12 +81,31 @@
     updateSelectCbSkillOptions();
 
     
-
-    const addAnotherSkillClicked = () => {
+    const clearForm = () => {
+        selected_section.value = '';
+        descriptionEditorRef.value.editor.commands.setContent('');
+        detailedDescriptionEditorRef.value.editor.commands.setContent('');
+        
         skill_tag.value = '';
         skill_name.value = '';
         skill_description.value = '';
+        cb_domain.value = '';
+        cb_skill.value = '';
+        updateSelectCbDomainOptions();
+        updateSelectCbSkillOptions();
+        selected_parent_skills.value = [];
+        selected_subskills.value = [];
+
     }
+
+    const addAnotherSkillClicked = () => {
+        clearForm();
+        submitted.value = false;
+    }
+
+    
+
+
 
     watch(selected_section, () => {
         console.log('skill section changed');
@@ -127,11 +141,23 @@
         }
     });
 
+    const selected_parent_skills = ref([]);
+    const selected_subskills = ref([]);
+    let init_parent_skills = [];
+    if (props.skill?.parent_skills) {
+        init_parent_skills = props.skill.parent_skills;
+    }
+    let init_subskills = [];
+    if (props.skill?.subskills) {
+        init_subskills = props.skill.subskills;
+    }
+
     const select_option_header_classes = "font-semibold pb-2 text-base";
 
     const saveSkillClicked = async () => {
         submitting.value = true;
-
+        const parent_skills = selected_parent_skills.value.map(skill => skill.tag);
+        const subskills = selected_subskills.value.map(skill => skill.tag);
         let data = {
             tag: skill_tag.value,
             name: skill_name.value,
@@ -141,7 +167,9 @@
             detailed_description_json: detailedDescriptionEditorRef.value.editor.getJSON(), 
             test_section: selected_section.value, 
             cb_domain: cb_domain.value,
-            cb_skill: cb_skill.value
+            cb_skill: cb_skill.value, 
+            parent_skills: parent_skills,
+            subskills: subskills
         }
         
         if (props.skill) {
@@ -181,9 +209,10 @@
                 <UProgress animation="carousel" />
             </div>
             <div v-if="submitted">
-                <div>Skill saved successfully</div>
-                <div>
+                <div class="pb-3">Skill saved successfully</div>
+                <div class="flex flex-row gap-3">
                     <UButton @click="addAnotherSkillClicked">Add another skill</UButton>
+                    <UButton variant="outline" to="/sat-skills" >All skills</UButton>
                 </div>
             </div>
             <div class="flex flex-col gap-6" v-if="!submitting && !submitted">
@@ -223,6 +252,15 @@
                 <div>
                     <div :class="select_option_header_classes">College Board Skill</div>
                     <USelectMenu v-model="cb_skill" :options="select_cb_skill_options" value-attribute="id" option-attribute="label" />
+                </div>
+
+                <div>
+                    <div :class='select_option_header_classes'>Parent Skills</div>
+                    <SATSkillsSelector v-model="selected_parent_skills" :init_skills="init_parent_skills" />
+                </div>
+                <div>
+                    <div :class='select_option_header_classes'>Subskills</div>
+                    <SATSkillsSelector v-model="selected_subskills"  :init_skills="init_subskills" />
                 </div>
                 <div class="pt-4">
                     <UButton @click="saveSkillClicked">Save Skill</UButton>
