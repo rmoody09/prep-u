@@ -138,6 +138,20 @@ const props = defineProps(['drill']);
     if (props.drill && props.drill.answer_type) {
         selected_answer_type.value = props.drill.answer_type;
     }
+    const has_numeric_input = ref(false);
+    if (props.drill && props.drill.has_numeric_input) {
+        has_numeric_input.value = props.drill.has_numeric_input;
+    }
+
+    const has_text_input = ref(false);
+    if (props.drill && props.drill.has_text_input) {
+        has_text_input.value = props.drill.has_text_input;
+    }
+
+    const has_multiple_choice = ref(false);
+    if (props.drill && props.drill.has_multiple_choice) {
+        has_multiple_choice.value = props.drill.has_multiple_choice;
+    }
 
     const answer_is_exact = ref(false);
     if (props.drill && props.drill.answer_is_exact) {
@@ -158,31 +172,17 @@ const props = defineProps(['drill']);
         answer_choices.value = [...choices];
     }
 
-    const mult_choice_answer_refs = ref([]);
-    const mult_choice_correct_answer_index = ref(null);
-    if (props.drill && props.drill.mult_choice_answer) {
-        mult_choice_correct_answer_index.value = props.drill.mult_choice_answer;
+    const mult_choice_options_editor_ref = useTemplateRef('multChoiceOptionsEditor');
+    const init_mult_choice_correct_answer_index = -1;
+    if (props.drill && props.drill.mult_choice_correct_answer_index) {
+        init_mult_choice_correct_answer_index = props.drill.mult_choice_correct_answer_index;
     }
 
-    const selectCorrectAnswerChoice = (index) => {
-        mult_choice_correct_answer_index.value = index;
-    }
 
-    function getChar(num) {
-        // Check if the number is within the range of lowercase alphabet (1-26)
-        if (num >= 1 && num <= 26) {
-            // Use the ASCII code of 'a' (97) to calculate the character code
-            return String.fromCharCode(64 + num); 
-        } else {
-            // Return null or handle the case where the number is out of range
-            return null;
-        }
-    }
-
-    //todo - allow multiple numeric answers
     const numericAnswer = ref(null);
-    if (props.drill && props.drill.input_answer) {
-        numericAnswer.value = props.drill.input_answer;
+    const numeric_answers = ref({answers: [{label: '', value: '', is_label: false}], require_all: true, is_label: false, label: ''});
+    if (props.drill && props.drill.numeric_answers) {
+        numeric_answers.value = props.drill.numeric_answers;
     }
 
     function reformatString(input) {
@@ -232,21 +232,32 @@ const props = defineProps(['drill']);
 
     const selected_custom_skills = ref([]);
 
+    const is_text_answer_label = ref(false);
+    const text_answer_label = ref('');
+    const addTextAnswerLabel = () => {
+        is_text_answer_label.value = true;
+    }
+    const removeTextAnswerLabel = () => {
+        is_text_answer_label.value = false;
+    }
+
 
 
     const saveDrillClicked = async () => {
         submitting.value = true;
-        const custom_skills = selected_custom_skills.value.map(skill => skill.tag);
-        
+        const custom_skills = selected_custom_skills.value.map(skill => skill.id);
         let db_answer_choices = [];
-        if (selected_answer_type.value == 'multiple_choice') {
-            db_answer_choices = mult_choice_answer_refs.value.map(choice => {
-                return {
-                    json: choice.editor.getJSON(),
-                    html: choice.editor.getHTML()
-                }
-            });
+        let mult_choice_section_label = null;
+        let mult_choice_correct_answer_index = null;
+        if (has_multiple_choice.value) {
+            let mult_choice_data = mult_choice_options_editor_ref.value.getOptions();
+            db_answer_choices = mult_choice_data.options;
+            if (mult_choice_data.section_label) {
+                mult_choice_section_label = mult_choice_data.label;
+            }
+            mult_choice_correct_answer_index = mult_choice_data.answer_index;
         }
+        
         let data = {
             instructions_html: instructionsEditorRef.value?.editor?.getHTML(),
             instructions_json: instructionsEditorRef.value?.editor?.getJSON(),
@@ -258,12 +269,17 @@ const props = defineProps(['drill']);
             test_section: selected_section.value, 
             cb_domain: cb_domain.value, 
             cb_skill: cb_skill.value,
-            answer_type: selected_answer_type.value,
-            numeric_answer: numericAnswer.value, 
+            has_numeric_input: has_numeric_input.value,
+            has_text_input: has_text_input.value,
+            has_multiple_choice: has_multiple_choice.value,
+            numeric_answers: numeric_answers.value.answers, 
+            require_all_numeric_answers: numeric_answers.value.require_all,
             text_answer_html: textAnswerEditorRef.value?.editor?.getHTML(), 
             text_answer_json: textAnswerEditorRef.value?.editor?.getJSON(), 
+            text_answer_label: text_answer_label.value,
             answer_is_exact: answer_is_exact.value,
             answer_choices: db_answer_choices,
+            mult_choice_label: mult_choice_section_label,
             mult_choice_correct_answer_index: mult_choice_correct_answer_index.value,
             explanation_html: explanationEditorRef.value?.editor?.getHTML(), 
             explanation_json: explanationEditorRef.value?.editor?.getJSON(),
@@ -287,9 +303,7 @@ const props = defineProps(['drill']);
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(resp);
             const resp_json = await resp.json();
-            console.log(resp_json);
         }
         
         
@@ -328,43 +342,25 @@ const props = defineProps(['drill']);
                     />
                 </div>
                 <div>
-                    <div :class='select_option_header_classes'>Answer Type</div>
-                    <span>
-                        <USelectMenu v-model="selected_answer_type" :options="answer_types" placeholder="Answer Type" value-attribute="id" option-attribute="label" />
-                    </span>
-                </div>
-                <div v-if="selected_answer_type == 'multiple_choice'">
+                    <div :class='select_option_header_classes'>Answer Type(s)</div>
+                    <div>
+                        <UCheckbox v-model="has_numeric_input" label="Numeric Input" />
+                        <UCheckbox v-model="has_text_input" label="Text Input" />
+                        <UCheckbox v-model="has_multiple_choice" label="Multiple Choice" />
+                    </div>
+                </div> 
+                <div v-if="has_multiple_choice">
                     <div :class='select_option_header_classes'>Answer Options</div>
-                    <div class="flex flex-col gap-4">
-                        <div v-for="(answer_choice, index) in answer_choices" class='answer_choice flex items-start gap-3'>
-                            <span class="grow-0 font-extrabold text-md">
-                                <button :index="index" 
-                                    class="answer-choice_option w-6 h-6 flex items-center justify-center border border-solid p-1 rounded-full"
-                                    :class="{
-                                        'text-slate-500 border-slate-500':  mult_choice_correct_answer_index != index, 
-                                        'bg-primary text-white border-primary':  mult_choice_correct_answer_index == index
-                                    }"
-                                    @click="selectCorrectAnswerChoice(index)">
-                                    {{ getChar(index+1) }}
-                                </button>
-                            </span>
-                            <span class="grow">
-                                <Tiptap 
-                                    :ref="(el) => {mult_choice_answer_refs[index] = el}"
-                                    :init_content="answer_choice.content"
-                                />
-                            </span>
-                        </div>
+                    <MultipleChoiceOptionsEditor ref="multChoiceOptionsEditor" :answer_index="mult_choice_correct_answer_index" :answer_choices="answer_choices" />
+                </div>
+                <div v-if="has_numeric_input" class="flex flex-col gap-4">
+                    <div :class='select_option_header_classes'>Numeric Answer(s)</div>
+                    <div>
+                        <NumericAnswerInputsEditor v-model="numeric_answers" />
                     </div>
                 </div>
-                <div v-else-if="selected_answer_type == 'numeric_input'" class="flex flex-col gap-4">
-                    <div :class='select_option_header_classes'>Answer</div>
-                    <div class="border border-red-500 border-solid m-0">
-                        <UInput v-model="numericAnswer" placeholder="Enter answer" />
-                    </div>
-                </div>
-                <div v-else-if="selected_answer_type == 'text_input'" class="flex flex-col gap-4">
-                    <div :class='select_option_header_classes'>Answer</div>
+                <div v-if="has_text_input" class="flex flex-col gap-4">
+                    <div :class='select_option_header_classes'>Text Answer</div>
                     <div>
                         <Tiptap 
                             ref="textAnswerEditor"
@@ -373,6 +369,13 @@ const props = defineProps(['drill']);
                     </div>
                     <div class="flex items-center gap-2">
                         <UCheckbox v-model="answer_is_exact" label="Answer must match exactly" />
+                    </div>
+                    <div v-if="!is_text_answer_label">
+                        <UButton @click="addTextAnswerLabel" size="sm" variant="ghost">Add label</UButton>
+                    </div>
+                    <div v-else class="flex items-center gap-2">
+                        <UInput v-model="text_answer_label" placeholder="Label" class="grow" />
+                        <UButton icon="i-lucide-x" square variant="ghost" size="xs" @click="removeTextAnswerLabel" />
                     </div>
                 </div>
                 <div>
@@ -400,7 +403,6 @@ const props = defineProps(['drill']);
 
                 <div>
                     <div :class='select_option_header_classes'>Custom Skills</div>
-                    <!--<TagsInput :options="custom_skills_options" />-->
                     <SATSkillsSelector v-model="selected_custom_skills" />
                 </div>
                 <div>

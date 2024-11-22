@@ -48,21 +48,22 @@ onMounted(async () => {
         </div>
         <div class="drills-container flex flex-col gap-1 bg-slate-100 p-1" ref="drillsEl">
             <div class="drills-headers drill-row flex flex-row">
-                <div class="drill-tag drills-header">SAT Type</div>
-                <div class="drill-name drills-header">Skill Name</div>
-                <div class="drill-description drills-header">Description</div>
+                <div class="drill-type drills-header">SAT Skill</div>
+                <div class="drill-question drills-header">Question</div>
                 <div class="drill-options drills-header">Options</div>
             </div>
             <div v-for="drill in drills" :key="drill.id"  class="drill-row flex flex-row">
                 <div class="drill-type drill-cell">
+                    <!--
                     <div v-if="drill.sat_section">
                         {{ sat_sections[drill.sat_section] }}
                     </div>
                     <div v-if="drill.cb_domain">
-                        {{ cb_domain_lookup[drill.cb_domain] }}
+                        {{ cb_domain_lookup[drill.cb_domain].label }}
                     </div>
+                    -->
                     <div v-if="drill.cb_skill">
-                        {{ cb_skill_lookup[drill.cb_skill] }}
+                        {{ cb_skill_lookup[drill.cb_skill].label }}
                     </div>
                 </div>
                 <div class="drill-question drill-cell">
@@ -104,7 +105,7 @@ onMounted(async () => {
 }
 
 
-.drill-row .drill-tag {
+.drill-row .drill-type {
     display: flex;
     flex-direction: column;
     gap: .25rem;
@@ -112,15 +113,7 @@ onMounted(async () => {
     flex-grow: 0;
 }
 
-.drill-row .drill-name {
-    display: flex;
-    flex-direction: column;
-    gap: .25rem;
-    width: 10rem;
-    flex-grow: 0;
-}
-
-.drill-row .drill-description {
+.drill-row .drill-question {
     display: flex;
     flex-direction: column;
     gap: .25rem;
