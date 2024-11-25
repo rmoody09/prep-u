@@ -1,6 +1,6 @@
 <script setup>
 
-const props = defineProps(['drill']);
+    const props = defineProps(['drill']);
     import Tiptap from '~/components/Tiptap.vue'
     const submitting = ref(false);
     const submitted = ref(false);
@@ -9,19 +9,8 @@ const props = defineProps(['drill']);
         {id: 'math', 'label': 'Math'},  
         {id: 'reading_writing', 'label': 'Reading and Writing'}
     ];
-    //comment1
 
-    const instructionsEditorRef = useTemplateRef('instructionsEditor');
-    let init_instructions_content = '';
-    if (props.drill && props.drill.instructions_html) {
-        init_instructions_content = props.drill.instructions_html;
-    }
     
-    const questionEditorRef = useTemplateRef('questionEditor');
-    let init_question_content = '';
-    if (props.drill && props.drill.question_html) {
-        init_question_content = props.drill.question_html;
-    }
 
     import { cb_domains, cb_skills, getCbDomainLookup, getCbSkillLookup, getCbSkillsByDomain } from '~/assets/composables/SATProblemTypes';
 
@@ -29,8 +18,6 @@ const props = defineProps(['drill']);
     const cb_skill_lookup = getCbSkillLookup();
     const cb_skills_by_domain = getCbSkillsByDomain();
     
-
-   
     const selected_section = ref(null);
     if (props.drill && props.drill.test_section) {
         selected_section.value = props.drill.test_section;
@@ -67,33 +54,6 @@ const props = defineProps(['drill']);
     }
     updateSelectCbSkillOptions();
 
-    const clearForm = () => {
-        instructionsEditorRef.value.editor.commands.setContent('');
-        questionEditorRef.value.editor.commands.setContent('');
-        selected_section.value = '';
-        cb_domain.value = '';
-        cb_skill.value = '';
-        selected_answer_type.value = null;
-        numericAnswer.value = null;
-        textAnswerEditorRef.value.editor.commands.setContent('');
-        answer_is_exact.value = false;
-        mult_choice_correct_answer_index.value = null;
-        answer_choices.value = [
-            {content: ""}, 
-            {content: ""}, 
-            {content: ""}, 
-            {content: ""}
-        ]; 
-        explanationEditorRef.value.editor.commands.setContent('');
-
-    }
-
-    const addAnotherDrillClicked = () => {
-        clearForm();
-        submitted.value = false;
-
-    }
-
     watch(selected_section, () => {
         updateSelectCbSkillOptions();
         updateSelectCbDomainOptions();
@@ -125,19 +85,39 @@ const props = defineProps(['drill']);
             selected_section.value = cb_skill_lookup[cb_skill.value].section;
         }
     });
+   
+    
+
+    const clearForm = () => {
+        instructionsEditorRef.value.editor.commands.setContent('');
+        questionEditorRef.value.editor.commands.setContent('');
+        selected_section.value = '';
+        cb_domain.value = '';
+        cb_skill.value = '';
+        textAnswerEditorRef.value.editor.commands.setContent('');
+        answer_is_exact.value = false;
+        mult_choice_correct_answer_index.value = null;
+        answer_choices.value = [
+            {content: ""}, 
+            {content: ""}, 
+            {content: ""}, 
+            {content: ""}
+        ]; 
+        explanationEditorRef.value.editor.commands.setContent('');
+
+    }
+
+    const addAnotherDrillClicked = () => {
+        clearForm();
+        submitted.value = false;
+
+    }
+
+    
 
     const select_option_header_classes = "font-semibold pb-2 text-base";
 
 
-    const answer_types = [
-        {id: 'multiple_choice', 'label': 'Multiple Choice'},
-        {id: 'numeric_input', 'label': 'Numeric Input'}, 
-        {id: 'text_input', 'label': 'Text Input'}
-    ];
-    const selected_answer_type = ref(null);
-    if (props.drill && props.drill.answer_type) {
-        selected_answer_type.value = props.drill.answer_type;
-    }
     const has_numeric_input = ref(false);
     if (props.drill && props.drill.has_numeric_input) {
         has_numeric_input.value = props.drill.has_numeric_input;
@@ -179,40 +159,23 @@ const props = defineProps(['drill']);
     }
 
 
-    const numericAnswer = ref(null);
     const numeric_answers = ref({answers: [{label: '', value: '', is_label: false}], require_all: true, is_label: false, label: ''});
     if (props.drill && props.drill.numeric_answers) {
         numeric_answers.value = props.drill.numeric_answers;
     }
 
-    function reformatString(input) {
-        // Remove all non-digit, non-slash, non-decimal characters
-        let cleaned = input.replace(/[^\d/.]/g, '');
-        
-        // Keep only the first slash
-        let parts = cleaned.split('/');
-        cleaned = parts.slice(0, 2).join('/');
-        
-        // Handle decimals in each part
-        parts = cleaned.split('/');
-        cleaned = parts.map(part => {
-            let decimals = part.split('.');
-            return decimals.slice(0, 2).join('.');
-        }).join('/');
-        
-        return cleaned;
+    const instructionsEditorRef = useTemplateRef('instructionsEditor');
+    let init_instructions_content = '';
+    if (props.drill && props.drill.instructions_html) {
+        init_instructions_content = props.drill.instructions_html;
+    }
+    
+    const questionEditorRef = useTemplateRef('questionEditor');
+    let init_question_content = '';
+    if (props.drill && props.drill.question_html) {
+        init_question_content = props.drill.question_html;
     }
 
-
-
-    watch(numericAnswer, () => {
-        let stripped = reformatString(numericAnswer.value);
-        if (stripped != numericAnswer.value) {
-            nextTick(() => {
-                numericAnswer.value = stripped;
-            });
-        }
-    });
 
     const textAnswerEditorRef = useTemplateRef('textAnswerEditor');
     let init_text_answer_content = '';
@@ -249,6 +212,7 @@ const props = defineProps(['drill']);
         let db_answer_choices = [];
         let mult_choice_section_label = null;
         let mult_choice_correct_answer_index = null;
+        let mult_choice_correct_answer_indices = [];
         if (has_multiple_choice.value) {
             let mult_choice_data = mult_choice_options_editor_ref.value.getOptions();
             db_answer_choices = mult_choice_data.options;
@@ -256,6 +220,7 @@ const props = defineProps(['drill']);
                 mult_choice_section_label = mult_choice_data.label;
             }
             mult_choice_correct_answer_index = mult_choice_data.answer_index;
+            mult_choice_correct_answer_indices = mult_choice_data.answer_indices;
         }
         
         let data = {
@@ -280,7 +245,8 @@ const props = defineProps(['drill']);
             answer_is_exact: answer_is_exact.value,
             answer_choices: db_answer_choices,
             mult_choice_label: mult_choice_section_label,
-            mult_choice_correct_answer_index: mult_choice_correct_answer_index.value,
+            mult_choice_correct_answer_index: mult_choice_correct_answer_index,
+            mult_choice_correct_answer_indices: mult_choice_correct_answer_indices,
             explanation_html: explanationEditorRef.value?.editor?.getHTML(), 
             explanation_json: explanationEditorRef.value?.editor?.getJSON(),
         };
@@ -351,7 +317,7 @@ const props = defineProps(['drill']);
                 </div> 
                 <div v-if="has_multiple_choice">
                     <div :class='select_option_header_classes'>Answer Options</div>
-                    <MultipleChoiceOptionsEditor ref="multChoiceOptionsEditor" :answer_index="mult_choice_correct_answer_index" :answer_choices="answer_choices" />
+                    <MultipleChoiceOptionsEditor ref="multChoiceOptionsEditor" :answer_index="init_mult_choice_correct_answer_index" :answer_choices="answer_choices" :can_select_multiple="true" />
                 </div>
                 <div v-if="has_numeric_input" class="flex flex-col gap-4">
                     <div :class='select_option_header_classes'>Numeric Answer(s)</div>

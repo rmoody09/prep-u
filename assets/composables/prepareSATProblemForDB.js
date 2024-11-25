@@ -25,7 +25,7 @@ function getNodeText(doc_node) {
 }
 
 export const prepareSATProblemForDB = (problem) => {
-    const { problem_source, subsource, is_practice_test, in_cb_question_bank, collegeboard_question_id, practice_test, section, module, cb_domain, cb_skill, answer_type, input_answer, mult_choice_correct_answer_index, difficulty, custom_skills, question, answer_choices } = problem;
+    const { problem_source, subsource, is_practice_test, in_cb_question_bank, collegeboard_question_id, practice_test, test_section, module, cb_domain, cb_skill, answer_type, input_answers, mult_choice_correct_answer_index, difficulty, custom_skills, question, answer_choices } = problem;
     console.log('prepareSATProblemForDB');
     console.log(subsource);
     console.log(is_practice_test);
@@ -58,11 +58,11 @@ export const prepareSATProblemForDB = (problem) => {
     //const question_text = removeTags(question_html);
     const question_text = getNodeText(question_json);
     const contains_graphic = question_text.includes('[img]');
-    let db_input_answer = answer_type == 'numeric_input' ? input_answer : null;
+    let db_input_answers = answer_type == 'numeric_input' ? input_answers : null;
     let db_mult_choice_answer = answer_type == 'multiple_choice' ? mult_choice_correct_answer_index : null;
     let db_difficulty = difficulty ? difficulty : null;
     const sb_data = {
-        source: problem_source, subsource: subsource, test_section: section, source_question_id: source_question_id, is_practice_test: is_practice_test, in_cb_question_bank: in_cb_question_bank, practice_test_id: practice_test_id, test_module: test_module, problem_number: problem_number, cb_domain: cb_domain, cb_skill: cb_skill, difficulty: db_difficulty, answer_type: answer_type, input_answer: db_input_answer, skills: custom_skills, question_text: question_text, question_tiptap_html: question_html, question_tiptap_json: question_json, answer_choices: answer_choices, mult_choice_answer: db_mult_choice_answer, source_solution: source_solution, manually_edited: true, contains_graphic: contains_graphic
+        source: problem_source, subsource: subsource, test_section, source_question_id: source_question_id, is_practice_test: is_practice_test, in_cb_question_bank: in_cb_question_bank, practice_test_id: practice_test_id, test_module: test_module, problem_number: problem_number, cb_domain: cb_domain, cb_skill: cb_skill, difficulty: db_difficulty, answer_type: answer_type, input_answers: db_input_answer, skills: custom_skills, question_text: question_text, question_tiptap_html: question_html, question_tiptap_json: question_json, answer_choices: answer_choices, mult_choice_answer: db_mult_choice_answer, source_solution: source_solution, manually_edited: true, contains_graphic: contains_graphic
     }
     return sb_data;
 }
