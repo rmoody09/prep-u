@@ -10,8 +10,6 @@ if (!props.drill) {
 }
 
 const drill = props.drill;
-console.log('drill');
-console.log(JSON.stringify(drill));
 
 let options = props.options;
 if (!options) {

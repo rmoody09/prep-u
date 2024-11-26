@@ -12,42 +12,12 @@ if (!options) {
     options = {allow_show_solution: true};
 }
 
+const multipleChoiceSelector = ref(null);
 
-const selected_answer_choice_index = ref(null);
-const stricken_answer_choices = ref([]);
-const allow_strike = ref(false);
+const striking_on = ref(false);
 
-const getChar = (index) => {
-    return String.fromCharCode(64 + index);
-}
 
-const selectAnswerChoice = (index) => {
-    selected_answer_choice_index.value = index;
-    stricken_answer_choices.value = stricken_answer_choices.value.filter(i => i != index);
-}
 
-const strikeAnswerChoice = (index) => {
-    console.log('strike answer choice', index);
-    if (stricken_answer_choices.value.includes(index)) {
-        stricken_answer_choices.value = stricken_answer_choices.value.filter(i => i != index);
-    } else {
-        if (selected_answer_choice_index.value == index) {
-            selected_answer_choice_index.value = null;
-        }
-        stricken_answer_choices.value.push(index);
-    }
-}
-
-const checkIfStricken = (index) => {
-    if (!allow_strike.value) {
-        return false;
-    }
-    return stricken_answer_choices.value.includes(index);
-}
-
-const checkIfSelected = (index) => {
-    return selected_answer_choice_index.value == index;
-}
 let desmosCalculator = null;
 const openDesmos = () => {
     desmosOpen.value = true;
@@ -87,12 +57,22 @@ onMounted(() => {
 
 
 const toggleStrikability = () => {
-    allow_strike.value = !allow_strike.value;
+    striking_on.value = !striking_on.value;
+    multipleChoiceSelector.value.toggleStrikability({value: striking_on.value});
 }
 
-const solution_accordion_items = [
-    {label: 'Show Solution', slot: 'source-solution'}
-]
+const showing_solution = ref(false);
+
+const showSolution = () => {
+    showing_solution.value = true;
+    multipleChoiceSelector.value.toggleSolution({value: true});
+}
+
+const hideSolution = () => {
+    showing_solution.value = false;
+    multipleChoiceSelector.value.toggleSolution({value: false});
+}
+
 
 
 </script>
@@ -114,7 +94,7 @@ const solution_accordion_items = [
             ></UButton>
             <UButton 
                 @click="toggleStrikability"
-                :variant="allow_strike ? 'solid' : 'outline'"
+                :variant="striking_on ? 'solid' : 'outline'"
                 size="2xs"
                 class="relative flex flex-col items-center justify-center"
             >
@@ -123,7 +103,7 @@ const solution_accordion_items = [
                 </span>
                 <span class="absolute my-auto w-[calc(100%-6px)] h-[2px] bg-primary rounded-full"
                     :class="{
-                        'bg-white': allow_strike,
+                        'bg-white': striking_on,
                     }"
                 ></span>
             </UButton>
@@ -178,58 +158,25 @@ const solution_accordion_items = [
                 </div>
             </div>
         </span>
-        <div class='p-2'>
-            <div class='problem-question'><TiptapReader :init_content="problem.question_html" /></div>
-            <div class='problem-answer-choices flex flex-col gap-4 pt-4'>
-                <div v-for="(answer_choice, index) in problem.answer_choices" :key="index" 
-                    class='answer-choice  flex flex-row items-center gap-2'
-                >
-                    <button 
-                        class="answer-choice-selector flex flex-col justify-center px-[2px] relative" 
-                        @click="selectAnswerChoice(index)"
-                    >
-                        <div class="answer-choice-selector-inner flex flex-row items-start gap-3 border border-solid p-2 rounded-md grow-1"
-                            :class="{
-                                'opacity-50': checkIfStricken(index),
-                                'border-primary': checkIfSelected(index), 
-                                'border-slate-300': !checkIfSelected(index),
-                                'border-2': checkIfSelected(index)
-                            }"
-                        >
-                            <span class="grow-0 font-extrabold text-md">
-                                <span
-                                class="answer-choice-label w-6 h-6 flex items-center justify-center border border-solid p-1 rounded-full"
-                                :class="{
-                                    'text-slate-500 border-slate-500':  selected_answer_choice_index != index, 
-                                    'bg-primary text-white border-primary':  selected_answer_choice_index == index
-                                }"
-                            >
-                                {{ getChar(index+1) }}
-                                </span>
-                            </span>
-                            <TiptapReader :init_content="answer_choice.html" class="text-left" />
-                        </div>
-                        <div v-if="checkIfStricken(index)" class="answer-choice-strike-indicator absolute w-full h-[2px] bg-stone-900 my-auto"></div>
-                    </button>
-                    <span v-if="allow_strike">
-                        <button v-if="!checkIfStricken(index)" class="answer-choice-strike-button relative flex flex-col items-center justify-center px-[2px]" @click="strikeAnswerChoice(index)">
-                            <span class="strike-button-label w-6 h-6 flex items-center justify-center border border-solid p-1 rounded-full border-slate-400 text-slate-400">{{ getChar(index+1) }}</span>
-                            <div class="strike-button-strike w-full h-[2px] bg-slate-400 my-auto absolute"></div>
-                        </button>
-                        <button v-else class="answer-choice-strike-button relative flex flex-col items-center justify-center px-[2px]" @click="strikeAnswerChoice(index)">
-                            <UIcon name="i-lucide-undo" class="w-4 h-4 top-0.5 relative text-slate-700" />
-                        </button>
-                    </span>
-                </div>
+        <div class='p-2 py-4'>
+            <div class='problem-question pb-6'><TiptapReader :init_content="problem.question_html" /></div>
+            <div v-if="problem.answer_type == 'multiple_choice'">
+                <MultipleChoiceSelector ref="multipleChoiceSelector" :answer_choices="problem.answer_choices" :correct_answers="[problem.mult_choice_answer]" :correct_answer="problem.mult_choice_answer" />
             </div>
+            
             <div v-if="options.allow_show_solution" class="pt-6">
-                <UAccordion :items="solution_accordion_items">
-                    <template #source-solution>
-                        <div class="pt-4">
-                            <TiptapReader :init_content="problem.source_solution.json" />
-                        </div>
-                    </template>
-                </UAccordion>
+                <div v-if="!showing_solution">
+                    <UButton @click="showSolution" variant="outline">Show Solution</UButton>
+                </div>
+                <div v-else>
+                    <div class="flex flex-row items-center justify-between">
+                        <span class="font-bold text-lg">Solution</span>
+                        <UButton @click="hideSolution" variant="ghost">Hide Solution</UButton>
+                    </div>
+                    <div class="pt-4">
+                        <TiptapReader :init_content="problem.source_solution.html" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
