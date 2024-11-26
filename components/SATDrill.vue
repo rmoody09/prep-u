@@ -16,89 +16,15 @@ if (!options) {
     options = {allow_show_solution: true};
 }
 
+const multipleChoiceSelector = ref(null);
 
-const selected_answer_choices = ref([]);
-const allow_multiple_selection = ref(false);
+let allow_multiple_selection = false;
 if (props.drill.allow_multiple_selection) {
-    allow_multiple_selection.value = true;
+    allow_multiple_selection = true;
 }
-const stricken_answer_choices = ref([]);
 const allow_strike = ref(true);
 const striking_on = ref(false);
 
-const getChar = (index) => {
-    return String.fromCharCode(64 + index);
-}
-
-const selectAnswerChoice = (index) => {
-    if (allow_multiple_selection.value) {
-        if (selected_answer_choices.value.includes(index)) {
-            selected_answer_choices.value = selected_answer_choices.value.filter(i => i != index);
-        } else {
-            selected_answer_choices.value.push(index);
-        }
-    } else {
-        selected_answer_choices.value = [index];
-    }
-    stricken_answer_choices.value = stricken_answer_choices.value.filter(i => i != index);
-}
-
-const strikeAnswerChoice = (index) => {
-    console.log('strike answer choice', index);
-    if (stricken_answer_choices.value.includes(index)) {
-        stricken_answer_choices.value = stricken_answer_choices.value.filter(i => i != index);
-    } else {
-        if (selected_answer_choices.value.includes(index)) {
-            selected_answer_choices.value = selected_answer_choices.value.filter(i => i != index);
-        }
-        stricken_answer_choices.value.push(index);
-    }
-}
-
-const checkIfStricken = (index) => {
-    if (!striking_on.value) {
-        return false;
-    }
-    return stricken_answer_choices.value.includes(index);
-}
-
-const checkIfSelected = (index) => {
-    if (selected_answer_choices.value.includes(index)) {
-        if (showing_solution.value) {
-            if (drill.mult_choice_answers.includes(index)) {
-                return true;
-            }
-            return false;
-        } else {
-            return true;
-        }
-    }
-    return false;
-}
-
-const checkIfUnselected = (index) => {
-    if (checkIfSelected(index) || checkIfWronglySelected(index)) {
-        return false;
-    }
-    return true;
-}
-
-const checkToShowIfCorrect = (index) => {
-    if (!showing_solution.value) {
-        return false;
-    }
-    return drill.mult_choice_answers.includes(index);
-}
-
-
-const checkIfWronglySelected = (index) => {
-    console.log('check if wrongly selected', index);
-    if (!showing_solution.value) {
-        return false;
-    }
-    console.log('wrongly selected');
-    return selected_answer_choices.value.includes(index) && !drill.mult_choice_answers.includes(index);
-}
 
 let desmosCalculator = null;
 const openDesmos = () => {
@@ -120,7 +46,6 @@ const closeDesmos = () => {
 }
 
 
-const mathReferenceEl = ref(null);
 const mathReferenceContainer = ref(null);
 const mathReferenceOpen = ref(false);
 
@@ -140,11 +65,8 @@ onMounted(() => {
 
 const toggleStrikability = () => {
     striking_on.value = !striking_on.value;
+    multipleChoiceSelector.value.toggleStrikability({value: striking_on.value});
 }
-
-const solution_accordion_items = [
-    {label: 'Show Solution', slot: 'source-solution'}
-]
 
 const numeric_input = ref('');
 const text_input = ref('');
@@ -164,6 +86,12 @@ const showing_solution = ref(false);
 
 const showSolution = () => {
     showing_solution.value = true;
+    multipleChoiceSelector.value.toggleSolution({value: true});
+}
+
+const hideSolution = () => {
+    showing_solution.value = false;
+    multipleChoiceSelector.value.toggleSolution({value: false});
 }
 
 </script>
@@ -259,7 +187,9 @@ const showSolution = () => {
                     <div v-if="drill.mult_choice_label" class="section-instructions">
                         {{ drill.mult_choice_label }}
                     </div>
-                    <div v-for="(answer_choice, index) in drill.answer_choices" :key="index" 
+                    <MultipleChoiceSelector ref="multipleChoiceSelector" :answer_choices="drill.answer_choices" :correct_answers="drill.mult_choice_answers" :allow_multiple_selection="allow_multiple_selection" />
+                    <!--
+                    <div v-else v-for="(answer_choice, index) in drill.answer_choices" :key="index" 
                         class='answer-choice flex flex-row items-center justify-stretch gap-2'
                     >
                         <button 
@@ -302,6 +232,7 @@ const showSolution = () => {
                             </button>
                         </span>
                     </div>
+                    -->
                 </div>
                 <div v-if="props.drill.has_numeric_input">
                     <div v-if="props.drill.numeric_answers_label"  class="section-instructions">
@@ -323,7 +254,7 @@ const showSolution = () => {
                 <div v-else>
                     <div class="flex flex-row items-center justify-between">
                         <span class="font-bold text-lg">Solution</span>
-                        <UButton @click="showing_solution = false" variant="ghost">Hide Solution</UButton>
+                        <UButton @click="hideSolution" variant="ghost">Hide Solution</UButton>
                     </div>
                     <div class="pt-4">
                         <TiptapReader :init_content="drill.explanation_html" />

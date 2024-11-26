@@ -222,6 +222,7 @@
         let mult_choice_section_label = null;
         let mult_choice_correct_answer_index = null;
         let mult_choice_correct_answer_indices = [];
+        let allow_multiple_selection = false;
         if (has_multiple_choice.value) {
             let mult_choice_data = mult_choice_options_editor_ref.value.getOptions();
             db_answer_choices = mult_choice_data.options;
@@ -230,7 +231,9 @@
             }
             mult_choice_correct_answer_index = mult_choice_data.answer_index;
             mult_choice_correct_answer_indices = mult_choice_data.answer_indices;
+            allow_multiple_selection = mult_choice_data.select_multiple_enabled;
         }
+
         let numeric_answers_label = null;
         if (numeric_answers.value.is_label) {
             numeric_answers_label = numeric_answers.value.label;
@@ -265,6 +268,7 @@
             mult_choice_label: mult_choice_section_label,
             mult_choice_correct_answer_index: mult_choice_correct_answer_index,
             mult_choice_correct_answer_indices: mult_choice_correct_answer_indices,
+            allow_multiple_selection: allow_multiple_selection,
             explanation_html: explanationEditorRef.value?.editor?.getHTML(), 
             explanation_json: explanationEditorRef.value?.editor?.getJSON(),
         };

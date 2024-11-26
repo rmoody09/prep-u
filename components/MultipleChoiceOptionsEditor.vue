@@ -6,9 +6,13 @@
         answer_choices: {type: Array, default: [{content: '', is_correct: false}, {content: '', is_correct: false}, {content: '', is_correct: false}, {content: '', is_correct: false}]},
         can_select_multiple: {type: Boolean, default: false}
     });
-    const can_select_multiple = ref(false);
+    let can_select_multiple = false;
     if (props.can_select_multiple) {
-        can_select_multiple.value = props.can_select_multiple;
+        can_select_multiple = props.can_select_multiple;
+    }
+    const select_multiple_enabled = ref(false);
+    if (props.select_multiple_enabled) {
+        select_multiple_enabled = props.select_multiple_enabled;
     }
 
     //const answer_choices = defineModel({default: []});
@@ -25,12 +29,15 @@
             });
         }
     }
-    if (props.answer_indices && can_select_multiple.value) {
+    if (props.answer_indices && can_select_multiple) {
+        if (props.answer_indices.length > 1) {
+            select_multiple_enabled.value = true;
+        }
         answer_choices.value.map((choice, index) => {
             choice.is_correct = props.answer_indices.includes(index);
         });
+        
     }
-    
     const choice_input_refs = ref([]);
 
     const is_section_label = ref(false);
@@ -55,7 +62,8 @@
             options: options,
             label: is_section_label.value ? section_label.value : null, 
             answer_index: answer_index,
-            answer_indices: answer_indices
+            answer_indices: answer_indices, 
+            select_multiple_enabled: select_multiple_enabled.value
         };
         return response;
     }
@@ -72,7 +80,7 @@
     }
 
     const toggleCorrectAnswerChoice = (index) => {
-        if (can_select_multiple.value) {
+        if (select_multiple_enabled.value) {
             answer_choices.value[index].is_correct = !answer_choices.value[index].is_correct;
         } else {
             answer_choices.value.map((choice, index) => {
@@ -142,6 +150,9 @@
 
 <template>
     <div class="flex flex-col gap-4" :key="main_key">
+        <div v-if="can_select_multiple">
+            <UCheckbox v-model="select_multiple_enabled" label="Allow multiple selection" />
+        </div>
         <div v-for="(answer_choice, index) in answer_choices" :key="index" class='answer_choice flex items-start gap-3'>
             <span class="grow-0 font-extrabold text-md flex flex-col justify-start">
                 <button :index="index" 
