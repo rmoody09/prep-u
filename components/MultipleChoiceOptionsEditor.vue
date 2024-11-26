@@ -17,7 +17,7 @@
         answer_choices.value = props.answer_choices;
     }
     const answer_index = ref(-1);
-    if (props.answer_index) {
+    if (props.answer_index || props.answer_index == 0) {
         if (props.answer_index > -1 && props.answer_index < answer_choices.value.length) {
             answer_index.value = props.answer_index;
             answer_choices.value.map((choice, index) => {
@@ -54,7 +54,7 @@
         let response = {
             options: options,
             label: is_section_label.value ? section_label.value : null, 
-            answer_index: answer_index.value,
+            answer_index: answer_index,
             answer_indices: answer_indices
         };
         return response;

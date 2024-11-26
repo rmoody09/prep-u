@@ -179,7 +179,7 @@ const solution_accordion_items = [
             </div>
         </span>
         <div class='p-2'>
-            <div class='problem-question'><TiptapReader :init_content="problem.question_tiptap_html" /></div>
+            <div class='problem-question'><TiptapReader :init_content="problem.question_html" /></div>
             <div class='problem-answer-choices flex flex-col gap-4 pt-4'>
                 <div v-for="(answer_choice, index) in problem.answer_choices" :key="index" 
                     class='answer-choice  flex flex-row items-center gap-2'
@@ -207,7 +207,7 @@ const solution_accordion_items = [
                                 {{ getChar(index+1) }}
                                 </span>
                             </span>
-                            <TiptapReader :init_content="answer_choice.html" />
+                            <TiptapReader :init_content="answer_choice.html" class="text-left" />
                         </div>
                         <div v-if="checkIfStricken(index)" class="answer-choice-strike-indicator absolute w-full h-[2px] bg-stone-900 my-auto"></div>
                     </button>

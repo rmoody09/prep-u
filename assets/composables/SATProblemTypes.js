@@ -84,6 +84,12 @@ export const cb_skills = [
       section: 'math',
       domain: 'problem_solving_and_data_analysis'
     },
+    {
+      id: 'one_variable_data_distributions_and_measures_of_center_and_spread',
+      label: 'One-variable data: Distributions and measures of center and spread',
+      section: 'math',
+      domain: 'problem_solving_and_data_analysis'
+    },
     { id: 'inference_from_sample_statistics_and_margin_of_error', 
       label: 'Inference from sample statistics and margin of error',
       section: 'math',
@@ -180,4 +186,13 @@ cb_skills.forEach(skill => {
 
 export const getCbSkillsByDomain = () => {
     return cb_skills_by_domain;
+}
+
+export const getCbSectionSkillIDs = (section) => {
+    const skills = cb_skills.map(skill => skill.id).filter(skill_id => cb_skill_lookup[skill_id].section == section);
+    return skills;
+}
+
+export const getCbSkillIDs = () => {
+  return cb_skills.map(skill => skill.id);
 }

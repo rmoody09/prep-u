@@ -32,7 +32,7 @@ export default function prepareSATProblemForDB(problem) {
     let db_mult_choice_answer = answer_type == 'multiple_choice' ? mult_choice_correct_answer_index : null;
     let db_cb_difficulty = cb_difficulty ? cb_difficulty : null;
     const sb_data = {
-        source: problem_source, subsource: cb_subsource, test_section: section, source_question_id: source_question_id, is_practice_test: is_practice_test, in_cb_question_bank: in_cb_question_bank, practice_test_id: practice_test_id, test_module: test_module, cb_domain: cb_domain, cb_skill: cb_skill, cb_difficulty: db_cb_difficulty, answer_type: answer_type, input_answer: db_input_answer, skills: custom_skills, question_text: question_text, question_tiptap_html: question_html, question_tiptap_json: question_json, answer_choices: answer_choices, mult_choice_answer: db_mult_choice_answer
+        source: problem_source, subsource: cb_subsource, test_section: section, source_question_id: source_question_id, is_practice_test: is_practice_test, in_cb_question_bank: in_cb_question_bank, practice_test_id: practice_test_id, test_module: test_module, cb_domain: cb_domain, cb_skill: cb_skill, cb_difficulty: db_cb_difficulty, answer_type: answer_type, input_answer: db_input_answer, skills: custom_skills, question_text: question_text, question_html: question_html, question_json: question_json, answer_choices: answer_choices, mult_choice_answer: db_mult_choice_answer
     }
     console.log('prepared sb data');
     return sb_data;

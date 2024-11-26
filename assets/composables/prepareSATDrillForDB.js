@@ -51,7 +51,7 @@ export const prepareSATDrillForDB = (drill) => {
     const explanation_text = getNodeText(explanation_json);
     const instructions_text = getNodeText(instructions_json);
     const sb_data = {
-        sat_section: test_section, cb_domain, cb_skill, instructions_html, instructions_json, instructions_text, question_html, question_json, question_text, answer_type, numeric_answers: db_numeric_answers, numeric_answers_label, require_all_numeric_answers, text_answer_html, text_answer_json, text_answer_text, text_answer_label, answer_is_exact, explanation_html, explanation_json, explanation_text, answer_choices, mult_choice_answer: mult_choice_correct_answer_index, mult_choice_answers: mult_choice_correct_answer_indices, mult_choice_label, custom_skills
+        test_section: test_section, cb_domain, cb_skill, instructions_html, instructions_json, instructions_text, question_html, question_json, question_text, answer_type, has_numeric_input, has_text_input, has_multiple_choice, numeric_answers: db_numeric_answers, numeric_answers_label, require_all_numeric_answers, text_answer_html, text_answer_json, text_answer_text, text_answer_label, answer_is_exact, explanation_html, explanation_json, explanation_text, answer_choices, mult_choice_answer: mult_choice_correct_answer_index, mult_choice_answers: mult_choice_correct_answer_indices, mult_choice_label, custom_skills
     }
     return sb_data;
         

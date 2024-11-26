@@ -17,6 +17,7 @@
     const cb_domain_lookup = getCbDomainLookup();
     const cb_skill_lookup = getCbSkillLookup();
     const cb_skills_by_domain = getCbSkillsByDomain();
+
     
     const selected_section = ref(null);
     if (props.drill && props.drill.test_section) {
@@ -153,9 +154,13 @@
     }
 
     const mult_choice_options_editor_ref = useTemplateRef('multChoiceOptionsEditor');
-    const init_mult_choice_correct_answer_index = -1;
-    if (props.drill && props.drill.mult_choice_correct_answer_index) {
-        init_mult_choice_correct_answer_index = props.drill.mult_choice_correct_answer_index;
+    let init_mult_choice_correct_answer_index = -1;
+    if (props.drill && props.drill.mult_choice_answer) {
+        init_mult_choice_correct_answer_index = props.drill.mult_choice_answer;
+    }
+    let init_mult_choice_correct_answer_indices = [];
+    if (props.drill && props.drill.mult_choice_answers) {
+        init_mult_choice_correct_answer_indices = props.drill.mult_choice_answers;
     }
 
 
@@ -179,10 +184,10 @@
 
     const textAnswerEditorRef = useTemplateRef('textAnswerEditor');
     let init_text_answer_content = '';
-    if (props.drill && props.drill.input_answer_html) {
-        init_text_answer_content = props.drill.input_answer_html;
-    } else if (props.drill && props.drill.input_answer) {
-        init_text_answer_content = props.drill.input_answer;
+    if (props.drill && props.drill.text_answer_html) {
+        init_text_answer_content = props.drill.text_answer_html;
+    } else if (props.drill && props.drill.text_answer_json) {
+        init_text_answer_content = props.drill.text_answer_json;
     }
 
     const explanationEditorRef = useTemplateRef('explanationEditor');
@@ -194,6 +199,10 @@
     }
 
     const selected_custom_skills = ref([]);
+    let init_custom_skills = [];
+    if (props.drill && props.drill.custom_skills) {
+        init_custom_skills = props.drill.custom_skills;
+    }
 
     const is_text_answer_label = ref(false);
     const text_answer_label = ref('');
@@ -216,11 +225,19 @@
         if (has_multiple_choice.value) {
             let mult_choice_data = mult_choice_options_editor_ref.value.getOptions();
             db_answer_choices = mult_choice_data.options;
-            if (mult_choice_data.section_label) {
+            if (mult_choice_data.label) {
                 mult_choice_section_label = mult_choice_data.label;
             }
             mult_choice_correct_answer_index = mult_choice_data.answer_index;
             mult_choice_correct_answer_indices = mult_choice_data.answer_indices;
+        }
+        let numeric_answers_label = null;
+        if (numeric_answers.value.is_label) {
+            numeric_answers_label = numeric_answers.value.label;
+        }
+        let text_answer_instructions = null;
+        if (is_text_answer_label.value) {
+            text_answer_instructions = text_answer_label.value;
         }
         
         let data = {
@@ -238,10 +255,11 @@
             has_text_input: has_text_input.value,
             has_multiple_choice: has_multiple_choice.value,
             numeric_answers: numeric_answers.value.answers, 
+            numeric_answers_label: numeric_answers_label, 
             require_all_numeric_answers: numeric_answers.value.require_all,
             text_answer_html: textAnswerEditorRef.value?.editor?.getHTML(), 
             text_answer_json: textAnswerEditorRef.value?.editor?.getJSON(), 
-            text_answer_label: text_answer_label.value,
+            text_answer_label: text_answer_instructions,
             answer_is_exact: answer_is_exact.value,
             answer_choices: db_answer_choices,
             mult_choice_label: mult_choice_section_label,
@@ -317,7 +335,7 @@
                 </div> 
                 <div v-if="has_multiple_choice">
                     <div :class='select_option_header_classes'>Answer Options</div>
-                    <MultipleChoiceOptionsEditor ref="multChoiceOptionsEditor" :answer_index="init_mult_choice_correct_answer_index" :answer_choices="answer_choices" :can_select_multiple="true" />
+                    <MultipleChoiceOptionsEditor ref="multChoiceOptionsEditor" :answer_index="init_mult_choice_correct_answer_index" :answer_indices="init_mult_choice_correct_answer_indices" :answer_choices="answer_choices" :can_select_multiple="true" />
                 </div>
                 <div v-if="has_numeric_input" class="flex flex-col gap-4">
                     <div :class='select_option_header_classes'>Numeric Answer(s)</div>
@@ -369,7 +387,7 @@
 
                 <div>
                     <div :class='select_option_header_classes'>Custom Skills</div>
-                    <SATSkillsSelector v-model="selected_custom_skills" />
+                    <SATSkillsSelector v-model="selected_custom_skills" :init_skills="init_custom_skills" />
                 </div>
                 <div>
                     <UButton @click="saveDrillClicked">Save</UButton>

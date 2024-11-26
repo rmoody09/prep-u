@@ -70,7 +70,10 @@ onMounted(async () => {
                     <div>{{ getTruncatedQuestionText(drill.question_text) }}</div>
                 </div>
                 <div class="drill-options drill-cell">
-                    <button class="option-button" @click="navigateTo(`/edit/sat-drill/${drill.tag}`)">
+                    <button class="option-button" @click="navigateTo(`/sat-drill/${drill.id}`)">
+                        <UIcon name="i-heroicons-eye" />
+                    </button>
+                    <button class="option-button" @click="navigateTo(`/edit/sat-drill/${drill.id}`)">
                         <UIcon name="i-heroicons-pencil-square" />
                     </button>
                     <button class="option-button" @click="deleteDrill(drill.id)">

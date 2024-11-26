@@ -159,11 +159,6 @@
         has_text_input.value = props.problem.has_text_input;
     }
 
-    const has_multiple_choice = ref(false);
-    if (props.problem && props.problem.has_multiple_choice) {
-        has_multiple_choice.value = props.problem.has_multiple_choice;
-    }
-
 
     const answer_choices = ref([
         {content: ""}, 
@@ -182,10 +177,11 @@
     //const mult_choice_answer_refs = ref([]);
 
     const mult_choice_options_editor_ref = useTemplateRef('multChoiceOptionsEditor');
-    const init_mult_choice_correct_answer_index = -1;
-    if (props.problem && props.problem.mult_choice_correct_answer_index) {
-        init_mult_choice_correct_answer_index = props.problem.mult_choice_correct_answer_index;
+    let init_mult_choice_correct_answer_index = -1;
+    if (props.problem && (props.problem.mult_choice_answer || props.problem.mult_choice_answer == 0)) {
+        init_mult_choice_correct_answer_index = props.problem.mult_choice_answer;
     }
+    
 
     const numeric_answers = ref({answers: [{label: '', value: '', is_label: false}], require_all: true, is_label: false, label: ''});
     if (props.problem && props.problem.numeric_answers) {
@@ -194,8 +190,8 @@
 
     const questionEditorRef = useTemplateRef('questionEditor');
     let init_question_content = '';
-    if (props.problem && props.problem.question_tiptap_html) {
-        init_question_content = props.problem.question_tiptap_html;
+    if (props.problem && props.problem.question_html) {
+        init_question_content = props.problem.question_html;
     }
 
     const sourceSolutionEditorRef = useTemplateRef('sourceSolutionEditor')
@@ -234,7 +230,7 @@
 
         let db_answer_choices = [];
         let mult_choice_correct_answer_index = null;
-        if (has_multiple_choice.value) {
+        if (selected_answer_type.value == 'multiple_choice') {
             let mult_choice_data = mult_choice_options_editor_ref.value.getOptions();
             db_answer_choices = mult_choice_data.options;
             mult_choice_correct_answer_index = mult_choice_data.answer_index;
@@ -263,7 +259,7 @@
                 json: questionEditorRef.value.editor.getJSON()
             },
             answer_choices: db_answer_choices, 
-            mult_choice_correct_answer_index: mult_choice_correct_answer_index.value,
+            mult_choice_correct_answer_index: mult_choice_correct_answer_index,
             module: selected_module.value, 
             problem_number: problem_number.value,
             source_solution: source_solution,
@@ -314,7 +310,7 @@
 
 
     const selected_custom_skills = ref([]);
-    const init_custom_skills = [];
+    let init_custom_skills = [];
     if (props.problem && props.problem.skills) {
         init_custom_skills = props.problem.skills;
     }

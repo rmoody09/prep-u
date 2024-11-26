@@ -2,7 +2,7 @@
     const props = defineProps(['init_skills']);
     const client = useSupabaseClient()
     console.log('satskillsselector')
-    const { data, error } = await client.from('sat_skills').select('tag, name')
+    const { data, error } = await client.from('sat_skills').select('id, tag, name')
     console.log('skills data:')
     console.log(JSON.stringify(data));
     const custom_skills_options = [...data];
