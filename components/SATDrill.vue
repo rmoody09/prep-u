@@ -17,6 +17,7 @@ if (!options) {
 }
 
 const multipleChoiceSelector = ref(null);
+const numericInput = ref(null);
 
 let allow_multiple_selection = false;
 if (props.drill.allow_multiple_selection) {
@@ -86,12 +87,22 @@ const showing_solution = ref(false);
 
 const showSolution = () => {
     showing_solution.value = true;
-    multipleChoiceSelector.value.toggleSolution({value: true});
+    if (multipleChoiceSelector.value) {
+        multipleChoiceSelector.value.toggleSolution({value: true});
+    }
+    if (numericInput.value) {
+        numericInput.value.showSolution();
+    }
 }
 
 const hideSolution = () => {
     showing_solution.value = false;
-    multipleChoiceSelector.value.toggleSolution({value: false});
+    if (multipleChoiceSelector.value) { 
+        multipleChoiceSelector.value.toggleSolution({value: false});
+    }
+    if (numericInput.value) {
+        numericInput.value.hideSolution();
+    }
 }
 
 </script>
@@ -188,57 +199,12 @@ const hideSolution = () => {
                         {{ drill.mult_choice_label }}
                     </div>
                     <MultipleChoiceSelector ref="multipleChoiceSelector" :answer_choices="drill.answer_choices" :correct_answers="drill.mult_choice_answers" :allow_multiple_selection="allow_multiple_selection" />
-                    <!--
-                    <div v-else v-for="(answer_choice, index) in drill.answer_choices" :key="index" 
-                        class='answer-choice flex flex-row items-center justify-stretch gap-2'
-                    >
-                        <button 
-                            class="answer-choice-selector flex flex-col justify-center px-[2px] relative grow" 
-                            @click="selectAnswerChoice(index)"
-                        >
-                            <div class="answer-choice-selector-inner flex flex-row items-start gap-3 p-2 border border-solid rounded-md w-full"
-                                :class="{
-                                    'opacity-50': checkIfStricken(index),
-                                    'border-primary': checkIfSelected(index), 
-                                    'border-slate-300': checkIfUnselected(index),
-                                    'border-2': checkIfSelected(index),
-                                    'border-red-500': checkIfWronglySelected(index),
-                                    'bg-green-100': checkToShowIfCorrect(index)
-                                }"
-                            >
-                                <span class="grow-0 font-extrabold text-md">
-                                    <span
-                                    class="answer-choice-label w-6 h-6 flex items-center justify-center border border-solid p-1 rounded-full"
-                                    :class="{
-                                        'text-slate-500 border-slate-500':  checkIfUnselected(index), 
-                                        'bg-primary text-white border-primary':  checkIfSelected(index),
-                                        'bg-red-400 text-white': checkIfWronglySelected(index)
-                                    }"
-                                >
-                                    {{ getChar(index+1) }}
-                                    </span>
-                                </span>
-                                <TiptapReader :init_content="answer_choice.html" />
-                            </div>
-                            <div v-if="checkIfStricken(index)" class="answer-choice-strike-indicator absolute w-full h-[2px] bg-stone-900 my-auto"></div>
-                        </button>
-                        <span v-if="allow_strike && striking_on">
-                            <button v-if="!checkIfStricken(index)" class="answer-choice-strike-button relative flex flex-col items-center justify-center px-[2px]" @click="strikeAnswerChoice(index)">
-                                <span class="strike-button-label w-6 h-6 flex items-center justify-center border border-solid p-1 rounded-full border-slate-400 text-slate-400">{{ getChar(index+1) }}</span>
-                                <div class="strike-button-strike w-full h-[2px] bg-slate-400 my-auto absolute"></div>
-                            </button>
-                            <button v-else class="answer-choice-strike-button relative flex flex-col items-center justify-center px-[2px]" @click="strikeAnswerChoice(index)">
-                                <UIcon name="i-lucide-undo" class="w-4 h-4 top-0.5 relative text-slate-700" />
-                            </button>
-                        </span>
-                    </div>
-                    -->
                 </div>
                 <div v-if="props.drill.has_numeric_input">
                     <div v-if="props.drill.numeric_answers_label"  class="section-instructions">
                         {{ props.drill.numeric_answers_label }} 
                     </div>
-                    <UInput v-model="numeric_input" />
+                    <NumericAnswersInput ref="numericInput" :answers="drill.numeric_answers" :require_all="drill.require_all_numeric_answers" />
                 </div>
                 <div v-if="props.drill.has_text_input">
                     <div v-if="props.drill.text_answer_label"  class="section-instructions">

@@ -63,14 +63,26 @@ const toggleStrikability = () => {
 
 const showing_solution = ref(false);
 
+const numericInput = ref(null);
+
 const showSolution = () => {
     showing_solution.value = true;
-    multipleChoiceSelector.value.toggleSolution({value: true});
+    if (multipleChoiceSelector.value) {
+        multipleChoiceSelector.value.toggleSolution({value: true});
+    }
+    if (numericInput.value) {
+        numericInput.value.showSolution();
+    }
 }
 
 const hideSolution = () => {
     showing_solution.value = false;
-    multipleChoiceSelector.value.toggleSolution({value: false});
+    if (multipleChoiceSelector.value) {
+        multipleChoiceSelector.value.toggleSolution({value: false});
+    }
+    if (numericInput.value) {
+        numericInput.value.hideSolution();
+    }
 }
 
 
@@ -162,6 +174,9 @@ const hideSolution = () => {
             <div class='problem-question pb-6'><TiptapReader :init_content="problem.question_html" /></div>
             <div v-if="problem.answer_type == 'multiple_choice'">
                 <MultipleChoiceSelector ref="multipleChoiceSelector" :answer_choices="problem.answer_choices" :correct_answers="[problem.mult_choice_answer]" :correct_answer="problem.mult_choice_answer" />
+            </div>
+            <div v-if="problem.answer_type == 'numeric_input'">
+                <NumericAnswersInput ref="numericInput" :answer_values="problem.input_answers" :require_all="false" />
             </div>
             
             <div v-if="options.allow_show_solution" class="pt-6">

@@ -31,8 +31,11 @@
     }
 
     function reformatString(input) {
-        // Remove all non-digit, non-slash, non-decimal characters
-        let cleaned = input.replace(/[^\d/.]/g, '');
+        // Allow minus sign at the beginning for negative numbers
+        let isNegative = input.startsWith('-');
+
+        // Remove all non-digit, non-slash, non-decimal, non-minus characters
+        let cleaned = input.replace(/[^\d/.-]/g, '');
         
         // Keep only the first slash
         let parts = cleaned.split('/');
@@ -44,8 +47,18 @@
             let decimals = part.split('.');
             return decimals.slice(0, 2).join('.');
         }).join('/');
+
+        // Remove any existing minus signs in the cleaned string
+        cleaned = cleaned.replace(/-/g, '');
+
+        // Remove leading zeros after minus sign but preserve single zero
+        cleaned = cleaned.replace(/^(-?)0+(?=\d)/, '$1');
         
-        return cleaned;
+        // Limit the length (excluding the minus sign)
+        cleaned = cleaned.slice(0, 5);
+        
+        // Add minus sign back if the original input was negative
+        return isNegative ? '-' + cleaned : cleaned;
     }
 
     function inputChanged(index) {

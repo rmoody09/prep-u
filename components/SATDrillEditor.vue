@@ -242,6 +242,7 @@
         if (is_text_answer_label.value) {
             text_answer_instructions = text_answer_label.value;
         }
+        console.log('numeric_answers', JSON.stringify(numeric_answers.value));
         
         let data = {
             instructions_html: instructionsEditorRef.value?.editor?.getHTML(),
