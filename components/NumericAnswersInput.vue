@@ -105,7 +105,6 @@
      */
     function getAlternativeValues(correctValue) {
         let accepted_values = [correctValue];
-
         // Helper functions to add variations of accepted answers
         function addAcceptedValue(value) {
             if (!accepted_values.includes(value)) {
@@ -150,6 +149,7 @@
         let absoluteDecimalValueString = absoluteDecimalValue.toString();
         if (absoluteDecimalValue > 0 && absoluteDecimalValue < 1) {
             // Special handling for decimals between 0 and 1
+            // JS Math operation will have this with a leading zero by default - we ant to accept with or without the leading zero, up to 5 characters
             if (absoluteDecimalValueString.length > 5) {
                 // Add both rounded and truncated versions for long decimals
                 let rounded_str = roundToXChars(absoluteDecimalValue, 5);
@@ -192,16 +192,24 @@
             
         } else {
             // Handle numbers >= 1 or <= -1
-            let rounded_str = roundToXChars(absoluteDecimalValue, 5);
-            if (isNegative) {
-                rounded_str = '-' + rounded_str;
+            if (absoluteDecimalValueString.length > 5) {
+                let rounded_str = roundToXChars(absoluteDecimalValue, 5);
+                if (isNegative) {
+                    rounded_str = '-' + rounded_str;
+                }
+                addAcceptedDecimalValue(rounded_str);
+                let truncated_str = absoluteDecimalValueString.slice(0, 5);
+                if (isNegative) {
+                    truncated_str = '-' + truncated_str;
+                }
+                addAcceptedDecimalValue(truncated_str);
+            } else {
+                let val = absoluteDecimalValueString;
+                if (isNegative) {
+                    val = '-' + val;
+                }
+                addAcceptedDecimalValue(val);
             }
-            addAcceptedDecimalValue(rounded_str);
-            let truncated_str = absoluteDecimalValueString.slice(0, 5);
-            if (isNegative) {
-                truncated_str = '-' + truncated_str;
-            }
-            addAcceptedDecimalValue(truncated_str);
         }
         return accepted_values;
     }
@@ -227,14 +235,37 @@
             inputDecimalValueString = inputDecimalValue.toString();
             let inputAbsoluteDecimalValue = Math.abs(inputDecimalValue);
             let inputAbsoluteDecimalValueString = inputAbsoluteDecimalValue.toString();
+            
             if (inputAbsoluteDecimalValueString.length > 5) {
                 let truncated_str = inputAbsoluteDecimalValueString.slice(0, 5);
                 if (inputIsNegative) {
                     truncated_str = '-' + truncated_str;
                 }
                 input_vals.push(truncated_str);
+            } else {
+                let val = inputAbsoluteDecimalValueString;
+                if (inputIsNegative) {
+                    val = '-' + val;
+                }
+                input_vals.push(val);
+            }
+        } else {
+            // Handle decimal inputs with trailing zeros
+            if (inputValue.includes('.')) {
+                let currentValue = inputValue;
+                if (currentValue.endsWith('0')) {
+                    while (currentValue.endsWith('0')) {
+                        currentValue = currentValue.slice(0, -1);
+                        input_vals.push(currentValue);
+                    }
+                }
+                // Remove trailing decimal point if present
+                if (currentValue.endsWith('.')) {
+                    input_vals.push(currentValue.slice(0, -1));
+                }
             }
         }
+        
         return input_vals;
     }
 
