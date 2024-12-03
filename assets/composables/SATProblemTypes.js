@@ -1,3 +1,17 @@
+export const test_sections = [
+    { id: 'reading_writing', label: 'Reading and Writing' },
+    { id: 'math', label: 'Math' }
+]
+
+const test_section_lookup = {};
+test_sections.forEach(section => {
+    test_section_lookup[section.id] = section;
+});
+
+export const getTestSectionLookup = () => {
+    return test_section_lookup;
+}
+
 export const cb_domains = [
     { id: 'algebra', label: 'Algebra', section: 'math' },
     { id: 'advanced_math', label: 'Advanced Math', section: 'math' },
