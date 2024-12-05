@@ -3,7 +3,7 @@ import renderMathInElement from "katex/dist/contrib/auto-render";
 import 'katex/dist/katex.min.css';
 
 const fetching_page = ref(true);
-const problems_per_page = 2;
+const problems_per_page = 20;
 const problems = ref([]);
 const problems_count = ref(-1);
 let search_filter_problem_counts = {}; // key is hash of search options, value will be total number of problems matching search options
@@ -41,6 +41,8 @@ const fetchProblems = async (options = {}) => {
         params.match_filters = {test_section: filter_options.value.test_section.id};
         search_filters.test_section = filter_options.value.test_section;
     }
+    let match_filters = {};
+    let any_match_filters = false;
     let in_filters = [];
     if (filter_options.value.cb_domains && filter_options.value.cb_domains.length > 0) {
         in_filters.push({column: 'cb_domain', values: filter_options.value.cb_domains.map(domain => domain.id)});
@@ -50,9 +52,22 @@ const fetchProblems = async (options = {}) => {
         in_filters.push({column: 'cb_skill', values: filter_options.value.cb_skills.map(skill => skill.id)});
         search_filters.cb_skills = filter_options.value.cb_skills;
     }
+    if (filter_options.value.manual_ai) {
+        any_match_filters = true;
+        if (filter_options.value.manual_ai.value == 'manual') {
+            match_filters.manually_edited = true;
+        } else {
+            match_filters.manually_edited = false;
+        }
+        search_filters.manual_ai = filter_options.value.manual_ai.value;
+    }
     if (in_filters.length > 0) {
         params.in_filters = in_filters;
     }
+    if (any_match_filters) {
+        params.match_filters = match_filters;
+    }
+    console.log('match_filters', JSON.stringify(match_filters));
     let search_hash = objectToHash(search_filters);
     if (search_hash != current_search_hash) {
         console.log('new search hash', search_hash);
@@ -69,7 +84,7 @@ const fetchProblems = async (options = {}) => {
             params.count = true;
         }
     }
-    console.log('page problems', JSON.stringify(page_problems));
+    //console.log('page problems', JSON.stringify(page_problems));
     if (page_problems[search_hash]?.[page_number.value]) {
         problems.value = page_problems[search_hash][page_number.value];
     } else {
@@ -179,6 +194,7 @@ const openProblemsFilter = () => {
 
 
 const applyFilter = (filter) => {
+    console.log('applying filter', filter);
     filter_options.value = filter;
     filterProblemsOpen.value = false;
     fetchProblems();
@@ -275,7 +291,7 @@ const renderKaTeX = () => {
         <div class="flex flex-row justify-between">
             <h1 class="text-3xl font-black pb-6">SAT Problems</h1>
             <span>
-                <UButton @click="navigateTo('/add-problem')">
+                <UButton @click="navigateTo('/add/sat-problem')">
                     Add Problem
                 </UButton>
             </span>
@@ -354,15 +370,9 @@ const renderKaTeX = () => {
                         <span>{{ getTruncatedQuestionText(problem.question_text) }}</span>
                     </div>
                     <div class="problem-options problem-cell">
-                        <button class="option-button" @click="navigateTo(`/sat-problem/${problem.id}`)">
-                            <UIcon name="i-heroicons-eye" />
-                        </button>
-                        <button class="option-button" @click="navigateTo(`/edit-problem/${problem.id}`)">
-                            <UIcon name="i-heroicons-pencil-square" />
-                        </button>
-                        <button class="option-button" @click="deleteProblem(problem.id)">
-                            <UIcon name="i-heroicons-trash" />
-                        </button>
+                        <UButton variant="outline" :to="`/sat-problem/${problem.id}`" icon="i-heroicons-eye" square size="2xs" />
+                        <UButton variant="outline" :to="`/edit-problem/${problem.id}`" icon="i-heroicons-pencil-square" square size="2xs" />
+                        <UButton variant="outline" @click="deleteProblem(problem.id)" icon="i-heroicons-trash" square size="2xs" />
                     </div>
                 </div>
             </div>

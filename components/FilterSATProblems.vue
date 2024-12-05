@@ -8,7 +8,8 @@
         let filter = {
             test_section: selected_test_section.value,
             cb_domains: selected_cb_domains.value,
-            cb_skills: selected_cb_skills.value
+            cb_skills: selected_cb_skills.value,
+            manual_ai: selected_manual_ai_option.value
         }
         emit('filterProblems', filter);
     }
@@ -19,11 +20,11 @@
 
     const selected_test_section = ref(null);
     const selected_cb_domains = ref([]);
-    if (props.cb_domains && props.cb_domains.length > 0) {
+    if (props.cb_domains) {
         selected_cb_domains.value = props.cb_domains;
     }
     const selected_cb_skills = ref([]);
-    if (props.cb_skills && props.cb_skills.length > 0) {
+    if (props.cb_skills) {
         selected_cb_skills.value = props.cb_skills;
     }
     const selected_skills = ref([]);
@@ -103,6 +104,12 @@
     const removeDomain = (domain_id) => {
         selected_cb_domains.value = selected_cb_domains.value.filter(domain => domain.id !== domain_id);
     }
+
+    const manual_ai_options = ref([
+        {label: 'Only show manually created/approved problems', value: 'manual'},
+        {label: 'Only show AI-generated problems', value: 'ai'}
+    ]); 
+    const selected_manual_ai_option = ref(null);
 </script>
 
 <template>
@@ -144,6 +151,15 @@
                 <SelectMultiWithChips v-model="selected_cb_skills" :options="select_cb_skill_options" optionAttribute="label" valueAttribute="id" placeholder="Select College Board Skills" />
             </div>
             
+        </div>
+        <div class="filter-section">
+            <div class="filter-section-label">
+                <span>Manual/AI Problems</span>
+                <UButton v-if="selected_manual_ai_option" variant="ghost" icon="i-heroicons-x-mark" size="xs" @click="selected_manual_ai_option = null" />
+            </div>
+            <div>
+                <USelectMenu v-model="selected_manual_ai_option" :options="manual_ai_options" placeholder="Select Manual/AI Problems" />
+            </div>
         </div>
         <div class="flex flex-row justify-center">
             <UButton @click="applyFilter">Apply Filter</UButton>

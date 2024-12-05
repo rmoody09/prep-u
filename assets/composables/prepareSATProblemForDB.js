@@ -1,4 +1,15 @@
-function getNodeText(doc_node) {
+function getTableRowText(doc_node) {
+    let text = '';
+    for (const [index, subnode] of doc_node.content.entries()) {
+        if (index > 0) {
+            text += "|";
+        }
+        text += getNodeText(subnode, {no_new_line: true});
+    }
+    return text;
+}
+
+function getNodeText(doc_node, options = {}) {
     let text = '';
     if (doc_node.text) {
         text += doc_node.text;
@@ -11,14 +22,19 @@ function getNodeText(doc_node) {
         text += '[img]';
     } else if (doc_node.type == 'listItem') {
         text += "-";
+    } else if (doc_node.type == 'tableRow') {
+        text += getTableRowText(doc_node) + "\n";
+        return text;
     }
     if (doc_node.content) {
         for (const subnode of doc_node.content) {
-            text += getNodeText(subnode);
+            text += getNodeText(subnode, options);
         }
     }
     if (doc_node.type == 'paragraph') {
-        text += "\n";
+        if (!options.no_new_line) {
+            text += "\n";
+        }
     }
     
     return text;
@@ -26,7 +42,7 @@ function getNodeText(doc_node) {
 
 export const prepareSATProblemForDB = (problem) => {
     const { problem_source, subsource, is_practice_test, in_cb_question_bank, collegeboard_question_id, practice_test, test_section, module, cb_domain, cb_skill, answer_type, input_answers, mult_choice_correct_answer_index, difficulty, custom_skills, question, answer_choices } = problem;
-    console.log('prepareSATProblemForDB');
+    console.log('prepareSATProblemForDB4');
     
     
     /*

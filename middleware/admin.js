@@ -1,4 +1,6 @@
 
+
+
 export default defineNuxtRouteMiddleware(async (to, _from) => {
     const user = useSupabaseUser()
     console.log('super-admin middleware');
@@ -26,8 +28,9 @@ export default defineNuxtRouteMiddleware(async (to, _from) => {
       console.log('error', error);
       return navigateTo('/sat/overview');
     }
-    if (data[0].admin_role != 'super_admin') {
-      return navigateTo('/sat/overview');
+    let admin_roles = ['admin', 'super_admin'];
+    if (!admin_roles.includes(data[0].admin_role)) {
+        return navigateTo('/sat/overview');
     }
     return;
     

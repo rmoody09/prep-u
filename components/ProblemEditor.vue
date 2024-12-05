@@ -183,10 +183,13 @@
     }
     
 
-    const numeric_answers = ref({answers: [{label: '', value: '', is_label: false}], require_all: true, is_label: false, label: ''});
-    if (props.problem && props.problem.numeric_answers) {
-        numeric_answers.value = props.problem.numeric_answers;
+    const numeric_answers = ref({answers: [{label: '', value: '', is_label: false}], require_all: false, is_label: false, label: ''});
+    console.log('check for numeric answers');
+    if (props.problem && props.problem.input_answers) {
+        let answers = props.problem.input_answers.map(answer => ({label: '', value: answer, is_label: false}));
+        numeric_answers.value.answers = answers;
     }
+    console.log(JSON.stringify(numeric_answers.value));
 
     const questionEditorRef = useTemplateRef('questionEditor');
     let init_question_content = '';
@@ -395,8 +398,9 @@
             </div>
             <div v-if="submitted">
                 <div>Problem saved successfully</div>
-                <div>
+                <div class="flex flex-row gap-4 pt-4">
                     <UButton @click="addAnotherProblemClicked">Add another problem</UButton>
+                    <UButton to="/admin/sat-problems" variant="outline">All problems</UButton>
                 </div>
             </div>
             <div class="flex flex-col gap-6" v-if="!submitting && !submitted">
@@ -476,27 +480,6 @@
                 <div v-if="selected_answer_type == 'multiple_choice'">
                     <div :class='section_header_classes'>Answer Options</div>
                     <MultipleChoiceOptionsEditor ref="multChoiceOptionsEditor" :answer_index="init_mult_choice_correct_answer_index" :answer_choices="answer_choices" />
-                    <!-- <div class="flex flex-col gap-4">
-                        <div v-for="(answer_choice, index) in answer_choices" class='answer_choice flex items-start gap-3'>
-                            <span class="grow-0 font-extrabold text-md">
-                                <button :index="index" 
-                                    class="answer-choice_option w-6 h-6 flex items-center justify-center border border-solid p-1 rounded-full"
-                                    :class="{
-                                        'text-slate-500 border-slate-500':  mult_choice_correct_answer_index != index, 
-                                        'bg-primary text-white border-primary':  mult_choice_correct_answer_index == index
-                                    }"
-                                    @click="selectCorrectAnswerChoice(index)">
-                                    {{ getChar(index+1) }}
-                                </button>
-                            </span>
-                            <span class="grow">
-                                <Tiptap 
-                                    :ref="(el) => {mult_choice_answer_refs[index] = el}"
-                                    :init_content="answer_choice.content"
-                                />
-                            </span>
-                        </div>
-                    </div> -->
                 </div>
                 <div v-if="selected_answer_type == 'numeric_input'" class="flex flex-col gap-4">
                     <div :class='section_header_classes'>Answer</div>

@@ -8,6 +8,7 @@ export default eventHandler(async (event) => {
         query = getQuery(event);
     } else {
         query = await readBody(event);
+        console.log('query', JSON.stringify(query));
     }
     
     const client = serverSupabaseServiceRole(event)
@@ -28,6 +29,7 @@ export default eventHandler(async (event) => {
     if (query.match_filters) {
         let match_filters = query.match_filters;
         db_query = db_query.match(match_filters);
+        console.log('match filters', JSON.stringify(match_filters));
     }
     if (query.in_filters) {
         let in_filters = query.in_filters;

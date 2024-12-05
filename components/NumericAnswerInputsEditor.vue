@@ -1,7 +1,8 @@
 <script setup>
     const props = defineProps({numeric_answers: {type: Object, default: {answers: [{label: '', value: '', is_label: false}], require_all: true, is_label: false, label: ''}}, options: {type: Object, default: {enable_section_label: true, enable_require_all: true}}});
     const numeric_answers = defineModel({default: {answers: [{label: '', value: '', is_label: false}], require_all: true, is_label: false, label: ''}});
-    
+    console.log('numeric inputs editor');
+    console.log(JSON.stringify(numeric_answers.value));
     const enable_section_label = ref(true);
     if (props.options.enable_section_label == false) {
         enable_section_label.value = false;
@@ -14,10 +15,14 @@
         numeric_answers.value.require_all = false;
     }
 
+    /*
     if (props.numeric_answers) {
-        numeric_answers.value = props.numeric_answers;
+        console.log('is props numeric answers');
+        numeric_answers.value = JSON.parse(JSON.stringify(props.numeric_answers));
     }
-    
+    */
+    console.log(JSON.stringify(numeric_answers.value));
+
     function addNumericInputLabel(index) {
         numeric_answers.value.answers[index].is_label = true;
     }
