@@ -1,8 +1,9 @@
 <script setup>
 onServerPrefetch(() => {
-  return navigateTo('/sat/overview/about');
+  return navigateTo('/sat/strategy/overview');
 })
 </script>
 
 <template>
 </template>
+

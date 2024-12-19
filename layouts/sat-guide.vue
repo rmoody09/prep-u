@@ -67,7 +67,7 @@
         strategy: {
             slug: 'strategy',
             title: 'General Strategy',
-            subsections: ['strategy-overview', 'strategy-planning', 'strategy-pacing', 'strategy-guessing', 'strategy-reading-writing', 'strategy-math', 'strategy-test-day'],
+            subsections: ['strategy-overview', 'strategy-planning', 'strategy-superscore', 'strategy-pacing', 'strategy-guessing', 'strategy-reading-writing', 'strategy-math', 'strategy-test-day'],
             top_level: true
         }, 
         'strategy-overview': {
@@ -82,6 +82,12 @@
             subsections: [],
             top_level: false
         }, 
+        'strategy-superscore': {
+            slug: 'superscore',
+            title: 'Max Your Superscore',
+            subsections: [],
+            top_level: false
+        },
         'strategy-pacing': {
             slug: 'pacing',
             title: 'Pacing & Flow',
