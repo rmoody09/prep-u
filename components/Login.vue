@@ -18,6 +18,8 @@ if (props.sign_in_or_up) {
 const showOTPModal = ref(false);
 
 const base_url = window.location.origin;
+console.log('base url:');
+console.log(base_url);
 
 const signInWithOtp = async () => {
     
@@ -40,14 +42,20 @@ const signInWithEmailPassword = async () => {
 }
 
 const signInWithGoogle = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-    })
+    const { error } = await supabase.auth.signInWithOAuth(
+        {provider: 'google'},
+        {
+            redirectTo: `${base_url}`,
+        }
+)
 }
 
 const signInWithFacebook = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
         provider: 'facebook',
+        options: {
+            redirectTo: `${base_url}/confirm`,
+        }
     })
 }
 

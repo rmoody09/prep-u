@@ -21,6 +21,9 @@ export default defineNuxtConfig({
       cookieRedirect: true,
     }
   }, 
+  build: {
+    transpile: ['katex']
+  },
   security: {
     corsHandler: {
         origin: '*'
