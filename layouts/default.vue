@@ -27,7 +27,6 @@
                 <img src="/images/logos/PrepULogo.png" class="h-8" />
             </span>
             <span class="flex gap-5 items-center">
-                <ULink active-class="text-primary" active to="/admin/sat-problems">Problems</ULink>
                 <ULink active-class="text-primary" active to="/sat">SAT Guide</ULink>
                 <span v-if="userState">
                     <UDropdown :items="user_menu_items" :popper="{ placement: 'bottom-start' }">

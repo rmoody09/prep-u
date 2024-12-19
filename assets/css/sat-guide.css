@@ -5,13 +5,22 @@
 h1.sat-guide-page-header {
    font-size: 2.5rem;
    font-weight: 800;
+   padding-bottom: 1rem;
 }
 
-h2 {
+h2.sat-guide-section-header {
     font-size: 1.5rem;
     font-weight: 700;
+    padding-bottom: .5rem;
 }
 
 h3 {
     
+}
+
+.section-description {
+    margin-bottom: 3rem;
+}
+.sat-guide-bottom-nav {
+    padding-bottom: 4rem;
 }

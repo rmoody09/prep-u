@@ -53,8 +53,8 @@ const signInWithFacebook = async () => {
 
 </script>
 <template>
-    <div class="w-full max-w-[400px] relative">
-        <h1>
+    <div class="w-full max-w-[400px] relative p-4 pt-10">
+        <h1 class="text-2xl font-bold mb-4">
             <span v-if="sign_in_or_up === 'sign_in'">Sign In</span>
             <span v-else>Sign Up</span>
         </h1>
@@ -63,21 +63,25 @@ const signInWithFacebook = async () => {
             Email a one-time password
             </UButton>
         </div>
+        <!--
         <div class="sign-in-up-button-container">
             <UButton variant="outline"  class="sign-in-up-button" @click="signInWithEmailPassword">
             <span v-if="sign_in_or_up === 'sign_up'">Set up </span><span v-else>Use</span> email and password
             </UButton>
         </div>
+        -->
         <div class="sign-in-up-button-container">
             <UButton variant="outline"  class="sign-in-up-button" @click="signInWithGoogle">
             Sign <span v-if="sign_in_or_up === 'sign_in'">in</span><span v-else>up</span> with Google
             </UButton>
         </div>
+        <!--
         <div class="sign-in-up-button-container">
             <UButton variant="outline"  class="sign-in-up-button" @click="signInWithFacebook">
             Sign <span v-if="sign_in_or_up === 'sign_in'">in</span><span v-else>up</span> with Facebook
             </UButton>
         </div>
+        -->
     </div>
   <UModal v-model="showOTPModal">
     <div class="p-6">

@@ -1,5 +1,3 @@
 <template>
-    <div>
-        Strategy
-    </div>
+    <NuxtPage />
 </template>
