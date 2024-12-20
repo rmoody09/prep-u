@@ -201,7 +201,7 @@
             <span class="flex gap-5 items-center">
                 <span v-if="userState">
                     <UDropdown :items="user_menu_items" :popper="{ placement: 'bottom-start' }">
-                        <UAvatar :alt="userState.name" size="md" />
+                        <UAvatar :alt="userState.user_metadata.name" size="md" />
                     </UDropdown>
                 </span>
                 <span v-else>

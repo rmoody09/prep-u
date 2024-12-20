@@ -13,6 +13,6 @@
   const userState = useState('user');
   const user = useSupabaseUser();
   if (user.value) {
-    userState.value = user.value.user_metadata;
+    userState.value = user.value;
   }
 </script>
