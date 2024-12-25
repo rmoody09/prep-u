@@ -1,5 +1,8 @@
 <template>
-    <h1 class='sat-guide-page-header'>General Reading & Writing Strategy</h1>
+    <h1 class="sat-guide-page-header">Reading & Writing General Strategy</h1>
+    <div class="section-description">
+        If you already read our <ULink to="/sat/strategy/reading-writing">Strategy > Reading & Writing</ULink> page, this page will be fairly redundant. Feel free to skip it.
+    </div>
 
     <div class="section-description">
         While some strategies apply to the whole test, there are some strategies that are specific to a section of the SAT, and others that are even more specific to types of questions within a section. Later, we'll get into more detailed and specific strategies for the Reading & Writing section, but on this page we'll cover some high-level strategies that apply to the Reading & Writing section as a whole.
@@ -9,7 +12,7 @@
     <div class="section-description">
         On each problem, the first thing you should do is jump to reading the actual question itself, after the passage. Because the Reading & Writing problems fall into distinct question types, you'll be able to identify what type of question you're dealing with by looking at the question. Then you'll know what to be looking for and strategies to employ.
     </div>
-    
+
     <h2 class='sat-guide-section-header'>Use The Question Order To Your Advantage</h2>
     <div class="section-description">
         In the Reading & Writing section, the questions are grouped together by question type, and the types of questions always fall in the same order. This means you can have a general idea of where Standard English questions will be, where Words in Context questions will be, and so on. As you get more familiar with the test and the types of questions, you'll get a sense of which types of questions you perform best on. Many students find it helpful to start with the types of questions they are best at and most comfortable with. This helps ensure that you actually get to spend time on the questions you're most likely to get right. It also helps warm up your brain, so that hopefully you'll be more ready to tackle the harder questions when you get to them. Additionally, it can be a confidence booster off the bat which can help with your overall mentality, and lead to a better overall score.
@@ -17,7 +20,7 @@
 
     <h2 class='sat-guide-section-header'>Look For Stereotypical Wrong Answers</h2>
     <div class="section-description">
-        Obviously, the College Board can't have everyone getting an 800 on the Reading & Writing section, so they need a lot of people to choose the wrong answers. To accomplish this, they have a number of tricks up their sleeve, but they have a tendency to reuse the same tricks. By learning the ways in which they dress up wrong answers to make them tempting to the untrained eye, you can avoid them and increase your chances of getting the right answer. We'll cover some of these tricks in more detail later, but for now, just be aware that they exist.
+        Obviously, the College Board can't have everyone getting an 800 on the Reading & Writing section, so they need a lot of people to choose the wrong answers. To accomplish this, they have a number of tricks up their sleeve, but they have a tendency to reuse the same tricks. By learning the ways in which they dress up wrong answers to make them tempting to the untrained eye, you can avoid them and increase your chances of getting the right answer. We'll cover some of these tricks in more detail in the next section.
     </div>
 
     <h2 class='sat-guide-section-header'>Become A Standard English Master</h2>
@@ -51,15 +54,12 @@
 
     <div class='sat-guide-bottom-nav'>
         <div class='sat-guide-bottom-nav-item'>
-            <UButton to='/sat/strategy/planning' variant='outline' size='xl'>
-                Next: Planning & Preparation
+            <UButton to='/sat/reading-writing/wrong-answers' variant='outline' size='xl'>
+                Next: Common Wrong Answers
                 <template #trailing>
                     <UIcon name='i-lucide-chevron-right' size="xl" />
                 </template>
             </UButton>
         </div>
     </div>
-
-
-
 </template>

@@ -1,8 +1,6 @@
 <script setup>
 const route = useRoute()
 const drill_id = route.params.id;
-console.log('drill id');
-console.log(drill_id);
 const resp = await useFetch('/api/get/sat-drill/' + drill_id)
 const drill = resp.data.value.data;
 </script>

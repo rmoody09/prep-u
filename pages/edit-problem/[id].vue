@@ -1,8 +1,6 @@
 <script setup>
 const route = useRoute()
 const problem_id = route.params.id;
-console.log('problem id');
-console.log(problem_id);
 const resp = await useFetch('/api/get/sat-problem/' + problem_id)
 const problem = resp.data.value.data;
 </script>

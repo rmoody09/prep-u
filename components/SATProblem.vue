@@ -2,10 +2,23 @@
 import TiptapReader from './TiptapReader.vue';
 import Desmos from 'desmos';
 const props = defineProps(['problem', 'problem_id', 'options']);
-if (!props.problem) {
-    console.log('no problem');
-    props.problem = await useFetch(`/api/get/sat-problem/${props.problem_id}`);
-}
+const currentProblem = ref(props.problem);
+
+// Only fetch if we don't have the problem and have an ID
+const { data: fetchedProblem } = await useFetch(
+  () => !currentProblem.value && props.problem_id ? `/api/get/sat-problem/${props.problem_id}` : null,
+  {
+    immediate: true,
+    watch: [props.problem_id],
+  }
+);
+
+
+watchEffect(() => {
+  if (!currentProblem.value && fetchedProblem.value?.data) {
+    currentProblem.value = fetchedProblem.value.data;
+  }
+});
 
 let options = props.options;
 if (!options) {
@@ -171,12 +184,19 @@ const hideSolution = () => {
             </div>
         </span>
         <div class='p-2 py-4'>
-            <div class='problem-question pb-6'><TiptapReader :init_content="problem.question_html" /></div>
-            <div v-if="problem.answer_type == 'multiple_choice'">
-                <MultipleChoiceSelector ref="multipleChoiceSelector" :answer_choices="problem.answer_choices" :correct_answers="[problem.mult_choice_answer]" :correct_answer="problem.mult_choice_answer" />
+            <div class='problem-question pb-6'>
+                <TiptapReader :init_content="currentProblem.question_html" />
             </div>
-            <div v-if="problem.answer_type == 'numeric_input'">
-                <NumericAnswersInput ref="numericInput" :answer_values="problem.input_answers" :require_all="false" />
+            <div v-if="currentProblem.answer_type == 'multiple_choice'">
+                <MultipleChoiceSelector 
+                    ref="multipleChoiceSelector" 
+                    :answer_choices="currentProblem.answer_choices" 
+                    :correct_answers="[currentProblem.mult_choice_answer]" 
+                    :correct_answer="currentProblem.mult_choice_answer" 
+                />
+            </div>
+            <div v-if="currentProblem.answer_type == 'numeric_input'">
+                <NumericAnswersInput ref="numericInput" :answer_values="currentProblem.input_answers" :require_all="false" />
             </div>
             
             <div v-if="options.allow_show_solution" class="pt-6">
@@ -189,7 +209,7 @@ const hideSolution = () => {
                         <UButton @click="hideSolution" variant="ghost">Hide Solution</UButton>
                     </div>
                     <div class="pt-4">
-                        <TiptapReader :init_content="problem.source_solution.html" />
+                        <TiptapReader :init_content="currentProblem.source_solution.html" />
                     </div>
                 </div>
             </div>

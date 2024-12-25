@@ -5,7 +5,7 @@
 
     <h2 class="sat-guide-section-header">What it tests</h2>
     <div class="section-description">
-        In short, the Reading & Writing section tests your ability to read, comprehend, and analyze passages, and your ability to adhere to the standard conventions of grammar and sentence structure. While the old paper-based test separated these into two different sections (Reading, and Wriring & Language), the new digital SAT combines them into a single section (Reading & Writing).
+        In short, the Reading & Writing section tests your ability to read, comprehend, and analyze passages, and your ability to adhere to the standard conventions of grammar and sentence structure. While the old paper-based test separated these into two different sections (Reading, and Writing & Language), the new digital SAT combines them into a single section (Reading & Writing).
     </div>
 
     <h2 class="sat-guide-section-header">Length and Number of Questions</h2>
