@@ -26,12 +26,12 @@
         These answers will often start off with a statement that seems to line up will with the passage, but then goes on to say something that's not supported by the text. For example, if the answer choice said "Dave disliked nature because he had a bad experience camping as a child." It might be clear from the passage that Dave disliked nature, making the answer choice seem good initially. But if there is nothing in the passage to back up why he disliked nature, then the answer choice would be incorrect. Remember, an answer choice is either fully right or it's wrong.
     </div>
 
-    <h2 class="sat-guide-section-header">Trap #2: Seems like it would be true</h2>
+    <h2 class="sat-guide-section-header">Trap #2: Seems plausible, but not directly supported by the text</h2>
     <div class="section-description">
         There are often answer choices that, based on the text plus things you know about the world, seem like they could very plausibly be true. But keep in mind that you shouldn't have to make any assumptions that aren't supported by the text, even if they seem like plausible assumptions. For example, if the text tells us that Ellen had a tendency to make offensive comments, and one of the answer choices says that Ellen does not have many friends. This seems very plausible - making offensive remarks can be off-putting to people, which might make them less likely to want to be friends with her. But if there is nothing in the text to more directly suggest that Ellen does not have many friends, then the answer choice would be making an assumption that isn't supported by the text.
     </div>
 
-    <h2 class="sat-guide-section-header">Trap #3: Uses language from the text</h2>
+    <h2 class="sat-guide-section-header">Trap #3: Steals language from the text</h2>
     <div class="section-description">
         Sometimes they will take some words or phrases verbatim from the text and put them in the answer choice. This can make the answer choice seem appealing, because it sounds very similar to what the text says. But normally if you see them recycling words directly from the text, this shoudl be a red flag that they might be trying to lure you toward that answer, even thought it might actually be saying something different than what the text supports. Generally, the correct answer is going to paraphrase the text rather than use the exact same language. Of course, you shouldn't rule out answers just because they have a word that you see in the text - if the text is about James then they'll probably mention James in the answer choice. But beware of it seeming like they're unnecessarily using the same words from the text instead of paraphrasing it.
     </div>
