@@ -19,7 +19,7 @@
                 <ULink active-class="text-gray-600 hover:text-primary transition duration-300" to="#faq">FAQ</ULink>
             </span>
             <span>
-                <UButton to="/sat">Get Started</UButton>
+                <UButton to="/sat/intro/about">Get Started</UButton>
             </span>
         </div>
         <div class="grow">

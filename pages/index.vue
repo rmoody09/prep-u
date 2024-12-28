@@ -22,7 +22,7 @@
       <section class="container mx-auto px-6 py-16 text-center">
         <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-gray-800">Master the SAT with Prep<span class="text-green-500">U</span></h1>
         <p class="text-xl mb-8 text-gray-600">Your digital guide to SAT success with interactive strategy guides, dynamic drills, and abundant practice problems</p>
-        <UButton to="/sat" size="xl" :ui="{ rounded: 'rounded-full' }" class="px-8 py-3">
+        <UButton to="/sat/intro/about" size="xl" :ui="{ rounded: 'rounded-full' }" class="px-8 py-3">
           Start Your Prep Journey
         </UButton>
       </section>
