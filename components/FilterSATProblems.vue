@@ -9,7 +9,9 @@
             test_section: selected_test_section.value,
             cb_domains: selected_cb_domains.value,
             cb_skills: selected_cb_skills.value,
-            manual_ai: selected_manual_ai_option.value
+            manual_ai: selected_manual_ai_option.value,
+            approval_status: selected_review_approval_status.value,
+            show_only_added_by_me: selected_show_only_added_by_me.value
         }
         emit('filterProblems', filter);
     }
@@ -110,6 +112,15 @@
         {label: 'Only show AI-generated problems', value: 'ai'}
     ]); 
     const selected_manual_ai_option = ref(null);
+
+    const review_approval_status_options = ref([
+        {label: 'Unapproved', value: 'unapproved'},
+        {label: 'Reviewed & Approved (but not by expert)', value: 'approved_not_expert'},
+        {label: 'Reviewed & Expert Approved', value: 'expert_approved'}
+    ]);
+    const selected_review_approval_status = ref(null);
+
+    const selected_show_only_added_by_me = ref(false);
 </script>
 
 <template>
@@ -160,6 +171,18 @@
             <div>
                 <USelectMenu v-model="selected_manual_ai_option" :options="manual_ai_options" placeholder="Select Manual/AI Problems" />
             </div>
+        </div>
+        <div class="filter-section">
+            <div class="filter-section-label">
+                <span>Review/Approval Status</span>
+                <UButton v-if="selected_review_approval_status" variant="ghost" icon="i-heroicons-x-mark" size="xs" @click="selected_review_approval_status = null" />
+            </div>
+            <div>
+                <USelectMenu v-model="selected_review_approval_status" :options="review_approval_status_options" placeholder="Select Review/Approval Status" />
+            </div>
+        </div>
+        <div class="filter-section">
+            <UCheckbox v-model="selected_show_only_added_by_me" label="Show Only Problems Added by Me" />
         </div>
         <div class="flex flex-row justify-center">
             <UButton @click="applyFilter">Apply Filter</UButton>

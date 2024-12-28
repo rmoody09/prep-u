@@ -13,6 +13,9 @@ const page_number = ref(1);
 const search_text = ref('');
 const search_options = ref({text: ''});
 const filter_options = ref({});
+
+const userState = useState('user');
+
 // Add debounced search function
 const debouncedSearch = debounceFunction(() => {
     search_options.value.text = search_text.value;
@@ -61,16 +64,33 @@ const fetchProblems = async (options = {}) => {
         }
         search_filters.manual_ai = filter_options.value.manual_ai.value;
     }
+    if (filter_options.value.approval_status) {
+        any_match_filters = true;
+        if (filter_options.value.approval_status.value == 'unapproved') {
+            match_filters.manually_approved = false;
+            match_filters.expert_approved = false;
+        } else if (filter_options.value.approval_status.value == 'approved_not_expert') {
+            match_filters.manually_approved = true;
+            match_filters.expert_approved = false;
+        } else if (filter_options.value.approval_status.value == 'expert_approved') {
+            match_filters.manually_approved = true;
+            match_filters.expert_approved = true;
+        }
+        search_filters.approval_status = filter_options.value.approval_status;
+    }
+    if (filter_options.value.show_only_added_by_me) {
+        match_filters.added_by_user = userState.value.id;
+        search_filters.show_only_added_by_me = true;
+        any_match_filters = true;
+    }
     if (in_filters.length > 0) {
         params.in_filters = in_filters;
     }
     if (any_match_filters) {
         params.match_filters = match_filters;
     }
-    console.log('match_filters', JSON.stringify(match_filters));
     let search_hash = objectToHash(search_filters);
     if (search_hash != current_search_hash) {
-        console.log('new search hash', search_hash);
         current_search_hash = search_hash;
         page_number.value = 1;
         problems_count.value = -1;
@@ -369,7 +389,15 @@ const renderKaTeX = () => {
                     >
                         <span>{{ getTruncatedQuestionText(problem.question_text) }}</span>
                     </div>
-                    <div class="problem-options problem-cell">
+                    <div class="problem-options problem-cell relative">
+                        <span class="absolute top-1 right-1 flex flex-row gap-1">
+                            <span class="rounded-full py-[1px] px-2 flex items-center justify-center" :class="problem.manually_approved ? 'bg-green-100 text-green-500' : 'bg-gray-100 text-gray-500'">
+                                <UIcon name="i-lucide-check" />
+                            </span>
+                            <span class="rounded-full py-[1px] px-2 flex items-center justify-center" :class="problem.expert_approved ? 'bg-green-100 text-green-500' : 'bg-gray-100 text-gray-500'">
+                                <UIcon name="i-lucide-check-check" />
+                            </span>
+                        </span> 
                         <UButton variant="outline" :to="`/sat-problem/${problem.id}`" icon="i-heroicons-eye" square size="2xs" />
                         <UButton variant="outline" :to="`/edit-problem/${problem.id}`" icon="i-heroicons-pencil-square" square size="2xs" />
                         <UButton variant="outline" @click="deleteProblem(problem.id)" icon="i-heroicons-trash" square size="2xs" />
