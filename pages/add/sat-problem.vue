@@ -1,6 +1,6 @@
 <script setup>
     definePageMeta({
-    middleware: 'super-admin'
+    middleware: 'admin'
 })
 </script>
 <template>
