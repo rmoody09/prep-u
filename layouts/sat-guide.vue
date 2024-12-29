@@ -387,7 +387,12 @@
     const get_current_section_id = () => {
         console.log('get_current_section_id');
         let sat_path_parts = route.path.split('/sat/');
-        let sat_path = sat_path_parts[1];
+        let sat_path = '';
+        if (sat_path_parts.length > 1) {
+            sat_path = sat_path_parts[1];
+        } else {
+            sat_path = 'intro';
+        }
         console.log('sat_path');
         console.log(sat_path);
         let path_parts = sat_path.split('/');
