@@ -2,6 +2,44 @@
     const userState = useState('user');
     import '~/assets/css/sat-guide.css'
     const route = useRoute();
+
+    const supabase = useSupabaseClient();
+
+    const signOut = () => {
+        supabase.auth.signOut();
+        userState.value = null;
+        navigateTo('/login');
+        
+    }
+    const user_menu_items = ref([]);
+    if (userState.value) {
+        user_menu_items.value = [
+            [{ label: 'Profile', icon: 'i-lucide-user', to: '/profile' }],
+            [{ label: 'Logout', icon: 'i-lucide-log-out', click: signOut }]
+        ];
+    }
+    const checkIfAdmin = async () => {
+        const user_id = userState.value.id;
+        //const client = useSupabaseClient();
+        const { data, error } = await supabase.from('profiles').select('*').eq('id', user_id);
+        if (error) {return false;}
+        let is_admin = false;
+        if (data[0].admin_role) {
+            is_admin = true;
+            user_menu_items.value = [
+                [{ label: 'Profile', icon: 'i-lucide-user', to: '/profile' }],
+                [{ label: 'Admin Dashboard', icon: 'i-lucide-user', to: '/admin' }],
+                [{ label: 'Logout', icon: 'i-lucide-log-out', click: signOut }]
+            ];
+            menu_key.value += 1;
+        }
+        return is_admin;
+    }
+
+    useAsyncData('checkIfAdmin', () => checkIfAdmin());
+
+    
+
     const sections = ref([
         {id: 'intro', name: 'Introduction'}, 
         {id: 'overview', name: 'Overview'}, 
@@ -191,9 +229,9 @@
             parent: 'reading-writing'
         },
         'standard-english-conventions': {
-            slug: 'standard-english-conventions',
+            slug: 'standard-english',
             title: 'Standard English Conventions',
-            subsections: [],
+            subsections: ['standard-english-overview', 'punctuation', 'verb-form', 'misplaced-modifiers', 'pronouns', 'standard-english-process'],
             top_level: false,
             parent: 'reading-writing'
         },
@@ -268,8 +306,8 @@
             parent: 'information-and-ideas'
         },
         'quantitative-command-of-evidence': {
-            slug: 'quantitative-command-of-evidence',
-            title: 'Quantitative Command of Evidence',
+            slug: 'charts',
+            title: 'Charts and Graphs',
             subsections: [],
             top_level: false,
             parent: 'information-and-ideas'
@@ -378,6 +416,97 @@
             subsections: [],
             top_level: false,
             parent: 'math'
+        },
+        'standard-english-overview': {
+            slug: 'overview',
+            title: 'Overview',
+            subsections: [],
+            top_level: false,
+            parent: 'standard-english-conventions'
+        },
+        'punctuation': {
+            slug: 'punctuation',
+            title: 'Punctuation',
+            subsections: ['overview', 'separating-complete-sentences', 'semicolons', 'colons', 'emdashes', 'parentheticals', 'commas', 'question-marks'],
+            top_level: false,
+            parent: 'standard-english-conventions'
+        },  
+        'separating-complete-sentences': {
+            slug: 'separating-complete-sentences',
+            title: 'Separating Complete Sentences',
+            subsections: [],
+            top_level: false,
+            parent: 'punctuation'
+        },  
+        'semicolons': {
+            slug: 'semicolons',
+            title: 'Semicolons',
+            subsections: [],
+            top_level: false,
+            parent: 'punctuation'
+        },
+        'colons': {
+            slug: 'colons',
+            title: 'Colons',
+            subsections: [],
+            top_level: false,
+            parent: 'punctuation'
+        },
+        'emdashes': {
+            slug: 'emdashes',
+            title: 'Em Dashes',
+            subsections: [],
+            top_level: false,
+            parent: 'punctuation'
+        },
+        'parentheticals': {
+            slug: 'parentheticals',
+            title: 'Parentheticals',
+            subsections: [],
+            top_level: false,
+            parent: 'punctuation'
+        },
+        'commas': {
+            slug: 'commas',
+            title: 'Commas',
+            subsections: [],
+            top_level: false,
+            parent: 'punctuation'
+        },  
+        'question-marks': {
+            slug: 'question-marks',
+            title: 'Question Marks',
+            subsections: [],
+            top_level: false,
+            parent: 'punctuation'
+        },  
+        'verb-form': {
+            slug: 'verb-form',
+            title: 'Verb Form',
+            subsections: [],
+            top_level: false,
+            parent: 'standard-english-conventions'
+        },  
+        'misplaced-modifiers': {
+            slug: 'misplaced-modifiers',
+            title: 'Misplaced Modifiers',
+            subsections: [],
+            top_level: false,
+            parent: 'standard-english-conventions'
+        },
+        'pronouns': {
+            slug: 'pronouns',
+            title: 'Pronouns',
+            subsections: [],
+            top_level: false,
+            parent: 'standard-english-conventions'
+        },  
+        'standard-english-process': {
+            slug: 'process-flow',
+            title: 'Process Flow',
+            subsections: [],
+            top_level: false,
+            parent: 'standard-english-conventions'
         },
 
          

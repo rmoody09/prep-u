@@ -210,3 +210,69 @@ export const getCbSectionSkillIDs = (section) => {
 export const getCbSkillIDs = () => {
   return cb_skills.map(skill => skill.id);
 }
+
+export const question_types = [
+  {
+    id: 'words_in_context_blank',
+    label: 'Words in Context (fill in blank)',
+    section: 'reading_writing',
+    domain: 'craft_and_structure',
+    skill: 'words_in_context'
+  },
+  {
+    id: 'words_in_context_underlined',
+    label: 'Words in Context (underlined)',
+    section: 'reading_writing',
+    domain: 'craft_and_structure',
+    skill: 'words_in_context'
+  },
+  {
+    id: 'main_purpose',
+    label: 'Main Purpose',
+    section: 'reading_writing',
+    domain: 'craft_and_structure',
+    skill: 'text_structure_and_purpose'
+  },
+  {
+    id: 'function_underlined_text',
+    label: 'Function of Underlined Text',
+    section: 'reading_writing',
+    domain: 'craft_and_structure',
+    skill: 'text_structure_and_purpose'
+  },
+  {
+    id: 'overall_structure',
+    label: 'Overall Structure',
+    section: 'reading_writing',
+    domain: 'craft_and_structure',
+    skill: 'text_structure_and_purpose'
+  },
+  {
+    id: 'cross_text_connections',
+    label: 'Cross-Text Connections',
+    section: 'reading_writing',
+    domain: 'craft_and_structure',
+    skill: 'cross_text_connections'
+  },
+  {
+    id: 'details',
+    label: 'Passage Details',
+    section: 'reading_writing',
+    domain: 'information_and_ideas',
+    skill: 'central_ideas_and_details'
+  },
+  {
+    id: 'main_idea',
+    label: 'Main Idea',
+    section: 'reading_writing',
+    domain: 'information_and_ideas',
+    skill: 'central_ideas_and_details'
+  },
+  {
+    id: 'inference',
+    label: 'Inference',
+    section: 'reading_writing',
+    domain: 'information_and_ideas',
+    skill: 'inferences'
+  }
+]

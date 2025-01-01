@@ -1,6 +1,7 @@
 <script setup>
 import renderMathInElement from "katex/dist/contrib/auto-render";
 import 'katex/dist/katex.min.css';
+import { cb_domains, cb_skills, getCbDomainLookup, getCbSkillLookup, getCbSkillsByDomain } from '~/assets/composables/SATProblemTypes';
 
 const fetching_page = ref(true);
 const problems_per_page = 20;
@@ -161,6 +162,11 @@ const domain_names = {
     "standard_english": "Standard English",
     "expression_of_ideas": "Expression of Ideas",    
 }
+
+const cb_domain_lookup = getCbDomainLookup();
+const cb_skill_lookup = getCbSkillLookup();
+
+/*
 const cb_skills = {
     systems_linear_equations: "Systems of two linear equations in two variables",
     linear_functions: "Linear functions",
@@ -191,6 +197,7 @@ const cb_skills = {
     boundaries: "Boundaries",
     form_structure_sense: "Form, Structure, and Sense"
 }
+*/
 
 const deleteProblem = async (id) => {
     const resp = await $fetch(`/api/delete/sat-problem/${id}`, {
@@ -377,10 +384,10 @@ const renderKaTeX = () => {
                             {{ section_names[problem.test_section] }}
                         </div>
                         <div>
-                            {{ domain_names[problem.cb_domain] }}
+                            {{ cb_domain_lookup[problem.cb_domain].label }}
                         </div>
                         <div>
-                            {{ cb_skills[problem.cb_skill] }}
+                            {{ cb_skill_lookup[problem.cb_skill].label }}
                         </div>
                     </div>
                     <div 

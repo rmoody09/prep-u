@@ -21,10 +21,12 @@
     }
     const checkIfAdmin = async () => {
         const user_id = userState.value.id;
-        const client = useSupabaseClient();
-        const { data, error } = await client.from('profiles').select('*').eq('id', user_id);
-        if (error) {return;}
+        //const client = useSupabaseClient();
+        const { data, error } = await supabase.from('profiles').select('*').eq('id', user_id);
+        if (error) {return false;}
+        let is_admin = false;
         if (data[0].admin_role) {
+            is_admin = true;
             user_menu_items.value = [
                 [{ label: 'Profile', icon: 'i-lucide-user', to: '/profile' }],
                 [{ label: 'Admin Dashboard', icon: 'i-lucide-user', to: '/admin' }],
@@ -32,6 +34,7 @@
             ];
             menu_key.value += 1;
         }
+        return is_admin;
     }
 
     useAsyncData('checkIfAdmin', () => checkIfAdmin());

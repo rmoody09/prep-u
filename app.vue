@@ -27,7 +27,9 @@
   useAsyncData('getUserProfile', () => {
       if (userState.value) {
         getUserProfile();
+        return true;
       }
+      return false;
     },
     {lazy: true}
   );
