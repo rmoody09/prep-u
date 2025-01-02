@@ -9,7 +9,7 @@
                 punctuation: {
                     label: "Punctuation", 
                     id: "punctuation",
-                    description: "The answer choices use different punctuation marks, or use them in different ways. There may be additional minor differences like the presence or absence of a conjunction."
+                    description: "The answer choices use different punctuation marks, or use them in different ways. There may be also be minor differences in wording."
                 },
                 verb_form: {
                     label: "Verb Form",
@@ -392,7 +392,7 @@
                 },
                 no: {
                     label: "No",
-                    id: "check_colon",
+                    id: "check_comma_fanboys",
                     description: ""
                 }
             }
@@ -446,13 +446,57 @@
                 },
                 no: {
                     label: "No",
+                    id: "check_comma_fanboys",
+                    description: ""
+                }
+            }
+        },
+        check_comma_fanboys: {
+            question: "Do any of the answer choices have a comma followed by a FANBOYS conjunction?",
+            question_context: "FANBOYS conjunctions are 'for', 'and', 'nor', 'but', 'or', 'yet', and 'so'.",
+            options: ['yes', 'no'], 
+            options_info: {
+                yes: {
+                    label: "Yes",
+                    id: "check_comma_fanboys_complete_sentences",
+                    description: ""
+                },
+                no: {
+                    label: "No",
                     id: "check_colon",
                     description: ""
                 }
             }
         },
+        check_comma_fanboys_complete_sentences: {
+            question: "Are the sentences to the left of the comma and to the right of the conjunction both complete sentences?",
+            options: ['yes', 'no'], 
+            options_info: {
+                yes: {
+                    label: "Yes",
+                    id: "comma_fanboys_complete_sentences",
+                    description: ""
+                },
+                no: {
+                    label: "No",
+                    id: "comma_fanboys_not_complete_sentences",
+                    description: ""
+                }
+            }
+        },
+        comma_fanboys_complete_sentences: {
+            is_correct: true,
+            text: "The comma is correctly used with a FANBOYS conjunction to separate two complete sentences. This is the correct answer.", 
+            yields_answer: true
+        },
+        comma_fanboys_not_complete_sentences: {
+            text: "When a comma is followed by a FANBOYS conjunction, it should be used to separate two complete sentences. Since this is not the case, you can eliminate this answer choice.",
+            is_incorrect: true,
+            next_step: "check_colon"
+        },
         check_colon: {
             question: "Do any of the remaining answer choices have a colon?",
+            question_context: "If there are multiple, pick one at a time to assess.",
             options: ['yes', 'no'], 
             options_info: {
                 yes: {
@@ -495,7 +539,7 @@
                 },
                 no: {
                     label: "No",
-                    id: "check_colon_right_run_on",
+                    id: "check_colon_relationship",
                     description: ""
                 }
             }
@@ -503,38 +547,37 @@
         colon_not_necessary: {
             text: "The colon is not necessary where it is used. You can eliminate this answer choice.",
             is_incorrect: true,
-            next_step: "check_comma"
+            next_step: "check_colon"
         },
-        colon_left_complete: {
-            question: "Is the sentence to the right of the colon a run-on sentence or comma splice?",
-            question_context: "Basically, does it combine two complete sentences into a single sentence, without connecting them with a comma + FANBOYS conjunction?",
+        check_colon_relationship: {
+            question: "Does the colon set up an explanation, exemplification, or specification of what comes before the colon?",
             options: ['yes', 'no'], 
             options_info: {
                 yes: {
                     label: "Yes",
-                    id: "colon_right_bad",
+                    id: "check_colon_right_grammar",
                     description: ""
                 },
                 no: {
                     label: "No",
-                    id: "colon_right_good",
+                    id: "colon_relationship_bad",
                     description: ""
                 }
             }
         },
-        check_colon_right_run_on: {
-            question: "Is the sentence to the right of the colon a run-on sentence or comma splice?",
-            question_context: "Basically, does it combine two complete sentences into a single sentence, without connecting them with a comma + FANBOYS conjunction?",
+        check_colon_right_grammar: {
+            question: "Does what follows the colon sound grammatically correct?",
+            question_context: "IT DOES NOT NEED TO BE A COMPLETE SENTENCE, but it should sound right. It should not be a run-on sentence or comma splice (combining two complete sentences into one without a comma + FANBOYS connecting them).",
             options: ['yes', 'no'], 
             options_info: {
                 yes: {
                     label: "Yes",
-                    id: "colon_right_bad",
+                    id: "colon_right_good",
                     description: ""
                 },
                 no: {
                     label: "No",
-                    id: "colon_right_good",
+                    id: "colon_right_bad",
                     description: ""
                 }
             }
@@ -542,22 +585,27 @@
         colon_left_incomplete: {
             text: "The colon is not used correctly. You can eliminate this answer choice.",
             is_incorrect: true,
-            next_step: "check_comma"
+            next_step: "check_colon"
+        },
+        colon_relationship_bad: {
+            text: "The colon is not used appropriately. You can eliminate this answer choice.",
+            is_incorrect: true,
+            next_step: "check_colon"
         },
         colon_right_bad: {
-            text: "The sentence to the right of the colon is a run-on sentence or comma splice. Therefore, the colon is not correctly used so you can eliminate this answer choice.",
+            text: "The clause to the right of the colon is not grammatically sound. You can eliminate this answer choice.",
             is_incorrect: true,
-            next_step: "check_comma"
+            next_step: "check_colon"
         },
         colon_right_good: {
             is_correct: true,
-            text: "The colon is correctly used to separate a complete sentence with an additional clause. This is the correct answer.", 
+            text: "The colon is correctly used to separate a complete sentence with something that explains or exemplifies that sentence. This is the correct answer.", 
             yields_answer: true
         },
         colon_not_correct: {
             text: "The colon is not used correctly. You can eliminate this answer choice.",
             is_incorrect: true,
-            next_step: "check_comma"
+            next_step: "check_colon"
         },
         check_comma: {
             question: "Do any of the remaining answer choices have a comma?",
@@ -629,7 +677,7 @@
                 },
                 no: {
                     label: "No",
-                    id: "check_comma_fanboys",
+                    id: "comma_check_non_essential_clause",
                     description: ""
                 }
             }
@@ -660,48 +708,6 @@
         comma_is_improper_subject_verb_separation: {
             is_incorrect: true,
             text: "There should never be a single comma between a noun and the verb performed by that noun. You can eliminate this answer choice.",
-            next_step: "check_comma"
-        },
-        check_comma_fanboys: {
-            question: "Is the comma followed by a FANBOYS conjunction?",
-            options: ['yes', 'no'], 
-            options_info: {
-                yes: {
-                    label: "Yes",
-                    id: "comma_is_fanboys",
-                    description: ""
-                },
-                no: {
-                    label: "No",
-                    id: "comma_check_non_essential_clause",
-                    description: ""
-                }
-            }
-        },
-        comma_is_fanboys: {
-            question: "Are the sentences to the left of the comma and to the right of the conjunction both complete sentences?",
-            options: ['yes', 'no'], 
-            options_info: {
-                yes: {
-                    label: "Yes",
-                    id: "comma_fanboys_complete_sentences",
-                    description: ""
-                },
-                no: {
-                    label: "No",
-                    id: "comma_fanboys_not_complete_sentences",
-                    description: ""
-                }
-            }
-        },
-        comma_fanboys_complete_sentences: {
-            is_correct: true,
-            text: "The comma is correctly used with a FANBOYS conjunction to separate two complete sentences. This is the correct answer.", 
-            yields_answer: true
-        },
-        comma_fanboys_not_complete_sentences: {
-            text: "When a comma is followed by a FANBOYS conjunction, it should be used to separate two complete sentences. Since this is not the case, you can eliminate this answer choice.",
-            is_incorrect: true,
             next_step: "check_comma"
         },
         comma_check_non_essential_clause: {
@@ -1696,41 +1702,50 @@
 </script>
 
 <template>
-    <div class="w-[800px] max-w-full">
-        <div class="inline-block border border-gray-200 rounded-md p-4" :class="{ 'bg-primary-50': process[current_step].yields_answer }">
-            <div v-if="process[current_step].instructions" class="pb-2 whitespace-pre-wrap">
-                {{ process[current_step].instructions }}
+    <ClientOnly>
+        <template #fallback>
+            <div class="w-[800px] max-w-full h-[100px]">
+                <div class="w-full h-full bg-gray-100 border border-gray-200 rounded-md animate-pulse flex items-center justify-center">
+                    <div class="text-gray-500">Standard English Wizard</div>
+                </div>
             </div>
-            <div v-if="process[current_step].text" class="pb-2 whitespace-pre-wrap">
-                {{ process[current_step].text }}
-            </div>
-            <div v-if="process[current_step].question">
-                <div class="text-lg font-semibold pb-2">
-                    {{ process[current_step].question }}
-                    <div v-if="process[current_step].question_context" class="font-normal text-sm text-gray-500 pt-[2px] whitespace-pre-wrap">
-                        {{ process[current_step].question_context }}
+        </template>
+        <div class="w-[800px] max-w-full">
+            <div class="inline-block border border-gray-200 rounded-md p-4" :class="{ 'bg-primary-50': process[current_step].yields_answer }">
+                <div v-if="process[current_step].instructions" class="pb-2 whitespace-pre-wrap">
+                    {{ process[current_step].instructions }}
+                </div>
+                <div v-if="process[current_step].text" class="pb-2 whitespace-pre-wrap">
+                    {{ process[current_step].text }}
+                </div>
+                <div v-if="process[current_step].question">
+                    <div class="text-lg font-semibold pb-2">
+                        {{ process[current_step].question }}
+                        <div v-if="process[current_step].question_context" class="font-normal text-sm text-gray-500 pt-[2px] whitespace-pre-wrap">
+                            {{ process[current_step].question_context }}
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <button @click="selectOption(option)" v-for="option in process[current_step].options" :key="option" class="process-step-option-button flex flex-row justify-between items-center bg-gray-100 rounded-md p-2 border border-gray-200 hover:bg-primary-50">
+                            <span class="text-left">
+                                <div class="process-step-option-button-label font-semibold">{{ process[current_step].options_info[option].label }}</div>
+                                <div class="process-step-option-button-description text-sm pt-1 text-gray-800">{{ process[current_step].options_info[option].description }}</div>
+                            </span>
+                            <UIcon name="i-lucide-arrow-right" />
+                        </button>
                     </div>
                 </div>
-                <div class="flex flex-col gap-2">
-                    <button @click="selectOption(option)" v-for="option in process[current_step].options" :key="option" class="process-step-option-button flex flex-row justify-between items-center bg-gray-100 rounded-md p-2 border border-gray-200 hover:bg-primary-50">
-                        <span class="text-left">
-                            <div class="process-step-option-button-label font-semibold">{{ process[current_step].options_info[option].label }}</div>
-                            <div class="process-step-option-button-description text-sm pt-1 text-gray-800">{{ process[current_step].options_info[option].description }}</div>
-                        </span>
-                        <UIcon name="i-lucide-arrow-right" />
-                    </button>
+                <div v-if="process[current_step].next_step" class="mt-4">
+                    <UButton @click="nextStepClicked">
+                        Continue
+                        <template #trailing>
+                            <UIcon name="i-lucide-arrow-right" class="w-5 h-5" />
+                        </template>
+                    </UButton>
                 </div>
             </div>
-            <div v-if="process[current_step].next_step" class="mt-4">
-                <UButton @click="nextStepClicked">
-                    Continue
-                    <template #trailing>
-                        <UIcon name="i-lucide-arrow-right" class="w-5 h-5" />
-                    </template>
-                </UButton>
-            </div>
         </div>
-    </div>
+    </ClientOnly>
 </template>
 
 <style scoped>

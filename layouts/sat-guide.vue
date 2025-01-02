@@ -502,8 +502,8 @@
             parent: 'standard-english-conventions'
         },  
         'standard-english-process': {
-            slug: 'process-flow',
-            title: 'Process Flow',
+            slug: 'wizard',
+            title: 'Wizard',
             subsections: [],
             top_level: false,
             parent: 'standard-english-conventions'
