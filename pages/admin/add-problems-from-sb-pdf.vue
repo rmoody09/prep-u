@@ -72,9 +72,23 @@ const from_test = ref(false);
 const problem_count = ref(0);
 
 const complete_msg = ref('');
+const is_error = ref(false);
+const is_success = ref(false);
+const error_msg = ref('');
+const success_summary = ref('');
+const processed_question_ids = ref([]);
+const failed_question_ids = ref([]);
+const unparsed_question_ids = ref([]);
 
 const addProblems = async () => {
     adding_problems.value = true;
+    is_error.value = false;
+    is_success.value = false;
+    error_msg.value = '';
+    success_summary.value = '';
+    processed_question_ids.value = [];
+    failed_question_ids.value = [];
+    unparsed_question_ids.value = [];
     const resp = await $fetch('/api/add/sat-problems-from-sb-pdf', 
         {
         method: 'POST',
@@ -88,9 +102,21 @@ const addProblems = async () => {
         }
     }
     )
-    complete_msg.value = resp;
     adding_problems.value = false;
     done_adding_problems.value = true;
+    if (resp.status == 'OK') {
+        success_summary.value = JSON.stringify(resp.summary);
+        processed_question_ids.value = resp.processed_question_ids;
+        failed_question_ids.value = resp.failed_question_ids;
+        unparsed_question_ids.value = resp.unparsed_question_ids;
+        is_success.value = true;
+    } else {
+        is_error.value = true;
+        error_msg.value = resp.message;
+        processed_question_ids.value = resp.processed_question_ids;
+        failed_question_ids.value = resp.failed_question_ids;
+        unparsed_question_ids.value = resp.unparsed_question_ids;
+    }
 }
 
 
@@ -149,7 +175,30 @@ const addProblems = async () => {
         </div>
         <div v-if="done_adding_problems">
             <div class="pb-2">
-                {{ complete_msg }}
+                <div v-if="is_success">
+                    {{ success_summary }}
+                </div>
+                <div v-else>
+                    {{ error_msg }}
+                </div>
+                <div>
+                    <div>
+                        <div>Identified Problem IDs:</div>
+                        <div>{{ identified_problem_ids.join(', ') }}</div>
+                    </div>
+                    <div>
+                        <div>Processed Question IDs:</div>
+                        <div>{{ processed_question_ids.join(', ') }}</div>
+                    </div>
+                    <div>
+                        <div>Failed Question IDs:</div>
+                        <div>{{ failed_question_ids.join(', ') }}</div>
+                    </div>
+                    <div>
+                        <div>Unparsed Question IDs:</div>
+                        <div>{{ unparsed_question_ids.join(', ') }}</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

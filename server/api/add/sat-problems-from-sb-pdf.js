@@ -345,6 +345,10 @@ export default eventHandler(async (event) => {
     let user = null;
     
     const response = {};
+    let identified_problem_ids = [];
+    let processed_question_ids = [];
+    let failed_question_ids = [];
+    let remaining_problem_ids = [];
     try {
         const user = await serverSupabaseUser(event);
         console.log('supabase user created')
@@ -373,7 +377,7 @@ export default eventHandler(async (event) => {
         const cb_skill = body.cb_skill;
         const expected_problem_count = parseInt(body.problem_count);
         console.log(body);
-
+        const resp_data_to_show = {};
         
         
 
@@ -428,20 +432,21 @@ export default eventHandler(async (event) => {
         const problem_ids = await getProblemIDsFromAnthropic(anthropic, pdfBase64, sample_json, test_section);
         console.log('parsed problem ids');
         console.log(problem_ids);
-        response.problem_ids = problem_ids;
+        identified_problem_ids = problem_ids;
+        response.identified_problem_ids = problem_ids;
+        resp_data_to_show.problems_identified = problem_ids.length;
         let problems = await getProblemsFromAnthropic(anthropic, pdfBase64, sample_json, test_section, true);
         
-        let processed_question_ids = problems.filter(problem => !!problem.question_id).map(problem => problem.question_id);
+        processed_question_ids = problems.filter(problem => !!problem.question_id).map(problem => problem.question_id);
         console.log('processed question ids:')
         console.log(processed_question_ids);
         
         const format_options = {from_test: from_test, test_section: test_section, cb_domain: cb_domain, cb_skill: cb_skill};
-        let { db_problems, question_ids, failed_question_ids } = await saveProblemsToDB(client, problems, format_options, user_id);
-
+        let { db_problems, question_ids, just_failed_question_ids } = await saveProblemsToDB(client, problems, format_options, user_id);
+        failed_question_ids = failed_question_ids.concat(just_failed_question_ids);
         console.log('saved problems');
         console.log(db_problems.length);
         
-        let remaining_problem_ids = [];
         for (let problem_id of problem_ids) {
             if (!processed_question_ids.includes(problem_id)) {
                 remaining_problem_ids.push(problem_id);
@@ -466,8 +471,10 @@ export default eventHandler(async (event) => {
             }
             remaining_problem_ids = remaining_problem_ids.filter(problem_id => !processed_question_ids.includes(problem_id));
         }
+        resp_data_to_show.problems_processed = db_problems.length;
         response.status = 'OK';
-        response.problems_processed = db_problems.length;
+        response.summary = resp_data_to_show;
+        response.processed_question_ids = processed_question_ids;
         response.failed_question_ids = failed_question_ids;
         response.unparsed_question_ids = remaining_problem_ids;
         return response;
@@ -477,6 +484,10 @@ export default eventHandler(async (event) => {
         response.status = 'error';
         response.message = 'error adding problems';
         response.error = err;
+        response.identified_problem_ids = identified_problem_ids;
+        response.processed_question_ids = processed_question_ids;
+        response.failed_question_ids = failed_question_ids;
+        response.unparsed_question_ids = remaining_problem_ids;
         return response;
     }
 });

@@ -231,7 +231,7 @@
         'standard-english-conventions': {
             slug: 'standard-english',
             title: 'Standard English Conventions',
-            subsections: ['standard-english-overview', 'punctuation', 'verb-form', 'misplaced-modifiers', 'pronouns', 'standard-english-process'],
+            subsections: ['standard-english-overview', 'essential-nonessential', 'punctuation', 'verb-form', 'misplaced-modifiers', 'pronouns', 'standard-english-process'],
             top_level: false,
             parent: 'reading-writing'
         },
@@ -427,10 +427,17 @@
         'punctuation': {
             slug: 'punctuation',
             title: 'Punctuation',
-            subsections: ['overview', 'separating-complete-sentences', 'semicolons', 'colons', 'emdashes', 'parentheticals', 'commas', 'question-marks'],
+            subsections: ['punctuation-overview', 'separating-complete-sentences', 'semicolons', 'colons', 'emdashes', 'commas', 'question-marks'],
             top_level: false,
             parent: 'standard-english-conventions'
         },  
+        'punctuation-overview': {
+            slug: 'overview',
+            title: 'Overview',
+            subsections: [],
+            top_level: false,
+            parent: 'punctuation'
+        },
         'separating-complete-sentences': {
             slug: 'separating-complete-sentences',
             title: 'Separating Complete Sentences',
@@ -459,12 +466,12 @@
             top_level: false,
             parent: 'punctuation'
         },
-        'parentheticals': {
-            slug: 'parentheticals',
-            title: 'Parentheticals',
+        'essential-nonessential': {
+            slug: 'essential-nonessential',
+            title: 'Essential/Non-Essential Clauses',
             subsections: [],
             top_level: false,
-            parent: 'punctuation'
+            parent: 'standard-english-conventions'
         },
         'commas': {
             slug: 'commas',
