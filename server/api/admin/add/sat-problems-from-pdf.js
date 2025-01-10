@@ -52,7 +52,7 @@ const getSystemPrompt = (options) => {
             answer_type: should be either 'multiple_choice' or 'numeric_input'
             answer_choices: an array listing the answer choices. each choice should be given in html form as well as json form, similarly to how you formatted the question in each of those formats. There should always be 4 answer choices for multiple choice questions. If the question is not a multiple choice question, this should be null.
             input_answers: This should be an array of strings that depict the correct answer when the type of answer is numeric_input. If the answer can be depicted as a fraction or a decimal, include only the fraction in the array. For example, the answer 1/3 should be included as ["1/3"] and not ["0.3333"] or ["1/3", "0.3333"]. There should only be multiple items in the array if the question is multiple distinct answers (like "-5" and "3"), but not when there is a single answer that can be given in fraction or decimal form. For multiple choice questions, this should be null.
-            difficulty: should indicate the difficulty of the question. Should be either an integer, 1, 2, or 3, representing easy, medium, or hard respectively.
+            difficulty: should indicate the difficulty of the question. Should be an integer, 1, 2, or 3, representing easy, medium, or hard respectively.
             contains_graphic: a boolean indicating whether there is a graphic in the problem that requires an image
             solution: the rationale behind selecting the correct answer. should be given in both html and json format, similarly to how you formatted the questions.
             skill: ${skills_instructions}
@@ -278,6 +278,10 @@ const getProblemsFromGemini = async (all_problems = true, problem_ids = []) => {
 function prepareProblemForDB(problem, options = {}) {
     console.log('prepareProblemForDB')
     let difficulties = {easy: 1, medium: 2, hard: 3};
+    let difficulty = problem.difficulty;
+    if (difficulties[difficulty]) {
+        difficulty = difficulties[difficulty];
+    }
     let is_practice_test = options.is_practice_test || false;
     let answer_choices = [];
     if (problem.answer_choices && problem.answer_choices.length > 0) {
@@ -302,7 +306,7 @@ function prepareProblemForDB(problem, options = {}) {
         answer_choices: answer_choices,
         input_answers: problem.input_answers,
         mult_choice_answer: problem.mult_choice_answer,
-        difficulty: difficulties[problem.difficulty], 
+        difficulty: difficulty, 
         source_solution: {html: problem.solution_html}, 
         contains_graphic: problem.contains_graphic,
     }

@@ -199,8 +199,12 @@
 
     const sourceSolutionEditorRef = useTemplateRef('sourceSolutionEditor')
     let init_source_solution_content = '';
-    if (props.problem && props.problem.source_solution && props.problem.source_solution.json) {
-        init_source_solution_content = props.problem.source_solution.json;
+    if (props.problem && props.problem.source_solution) {
+        if (props.problem.source_solution.json) {
+            init_source_solution_content = props.problem.source_solution.json;
+        } else if (props.problem.source_solution.html) {
+            init_source_solution_content = props.problem.source_solution.html;
+        }
     }
 
     const collegeBoardQuestionId = ref('');
