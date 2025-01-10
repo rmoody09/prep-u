@@ -185,7 +185,7 @@ const addProblems = async () => {
         <div v-if="done_adding_problems">
             <div class="pb-2">
                 <div v-if="is_success">
-                    <div v-if="problem_count > 0 && processed_question_ids.length == problem_count">
+                    <div v-if="problem_count > 0 && processed_question_ids.length != problem_count">
                         <div class="pb-2 text-red-500">
                             Warning: The number of problems processed does not match the expected number of problems. Please compare the list of processed question ids with the ones in the PDF you submitted, and manually add the missing problems.
                         </div>
