@@ -76,6 +76,7 @@ const is_error = ref(false);
 const is_success = ref(false);
 const error_msg = ref('');
 const success_summary = ref('');
+const identified_problem_ids = ref([]);
 const processed_question_ids = ref([]);
 const failed_question_ids = ref([]);
 const unparsed_question_ids = ref([]);
@@ -86,10 +87,14 @@ const addProblems = async () => {
     is_success.value = false;
     error_msg.value = '';
     success_summary.value = '';
+    identified_problem_ids.value = [];
     processed_question_ids.value = [];
     failed_question_ids.value = [];
     unparsed_question_ids.value = [];
-    const resp = await $fetch('/api/add/sat-problems-from-sb-pdf', 
+    //let fetch_url = '/api/add/sat-problems-from-sb-pdf';
+    let fetch_url = '/api/admin/add/sat-problems-from-pdf';
+    console.log('add problems from sb pdf');
+    const resp = await $fetch(fetch_url, 
         {
         method: 'POST',
         body: {
@@ -102,10 +107,12 @@ const addProblems = async () => {
         }
     }
     )
+    console.log('resp', resp);
     adding_problems.value = false;
     done_adding_problems.value = true;
     if (resp.status == 'OK') {
         success_summary.value = JSON.stringify(resp.summary);
+        identified_problem_ids.value = resp.identified_problem_ids;
         processed_question_ids.value = resp.processed_question_ids;
         failed_question_ids.value = resp.failed_question_ids;
         unparsed_question_ids.value = resp.unparsed_question_ids;
@@ -113,10 +120,12 @@ const addProblems = async () => {
     } else {
         is_error.value = true;
         error_msg.value = resp.message;
+        identified_problem_ids.value = resp.identified_problem_ids;
         processed_question_ids.value = resp.processed_question_ids;
         failed_question_ids.value = resp.failed_question_ids;
         unparsed_question_ids.value = resp.unparsed_question_ids;
     }
+    console.log('done adding problems');
 }
 
 
@@ -176,7 +185,16 @@ const addProblems = async () => {
         <div v-if="done_adding_problems">
             <div class="pb-2">
                 <div v-if="is_success">
-                    {{ success_summary }}
+                    <div v-if="problem_count > 0 && processed_question_ids.length == problem_count">
+                        <div class="pb-2 text-red-500">
+                            Warning: The number of problems processed does not match the expected number of problems. Please compare the list of processed question ids with the ones in the PDF you submitted, and manually add the missing problems.
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            {{ success_summary }}
+                        </div>
+                    </div>
                 </div>
                 <div v-else>
                     {{ error_msg }}

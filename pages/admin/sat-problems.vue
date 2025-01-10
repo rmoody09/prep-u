@@ -110,7 +110,6 @@ const fetchProblems = async (options = {}) => {
         problems.value = page_problems[search_hash][page_number.value];
     } else {
         const resp = await $fetch('/api/get/sat-problems', {method: 'POST', body: params});
-        //console.log(JSON.stringify(resp));
         problems.value = resp.data;
         page_problems[search_hash] = page_problems[search_hash] || {};
         page_problems[search_hash][page_number.value] = resp.data;
@@ -369,6 +368,9 @@ const renderKaTeX = () => {
                 <div v-for="problem in problems" :key="problem.id" class="problem-row flex flex-row">
                     <div class="problem-source problem-cell">
                         <div>{{ problem_sources[problem.source] }}</div>
+                        <div v-if="problem.source_question_id">
+                            {{ problem.source_question_id }}
+                        </div>
                         <div v-if="problem.subsource == 'practice_test' && problem.practice_test_id">
                             Practice Test {{ problem.practice_test_id }}
                             <div>

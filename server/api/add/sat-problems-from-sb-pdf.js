@@ -28,20 +28,20 @@ const getSystemPrompt = (options) => {
             If the test_section is reading_writing, the skill should take one of the following values: ${getCbSectionSkillIDs('reading_writing').join(', ')}.
         `;
     }
-    const system_prompt = `
+    const system_prompt_1 = `
         Your role is to take a pdf file of SAT practice problems and perform various actions to extract information from the document in JSON format.
         You should not return any additional text. Your response should consist only of the JSON string.
         You should make sure that your JSON response is formatted correctly. Double check that it can be parsed by the javascript function JSON.parse() without throwing an error. If that causes an error, you should try to fix the error and return the correct JSON string.
         Each problem in the pdf will start with a header that includes the text "Question ID", which should help you identify how to separate the problems from each other.
         
-        You may be asked to return an array depicting all of the problems in the document.
-        In that case, each item of the array should include the following fields: test_section, question_id, domain, skill, question_text, question_html, question_json, answer_type, answer_choices, mult_choice_answer, input_answers, difficulty, contains_graphic, solution.
+        You may be asked to return an array representing the problems in the document.
+        In that case, each item of the array should include the following fields: test_section, question_id, domain, skill, question_text, question_json, answer_type, answer_choices, mult_choice_answer, input_answers, difficulty, contains_graphic, solution_json.
         Here is an explanation of each of the fields:
             test_section: should be a string that is either 'math' or 'reading_writing'
             question_id: should be a string that depicts the college board question id
             domain: a snake-style string that indicates the domain of the question
             skill: a snake-style string that indicates the skill tested by the question
-            question_text: the content of the question depicted in plain text. in some cases, you might not be able to depict the question perfectly with plain text due to mathematical expressions and graphics, but do your best and use the examples given as a guide.
+            question_text: the content of the question depicted in plain text. in some cases, you might not be able to depict the question perfectly with plain text due to mathematical expressions and graphics, but do your best and use the examples given as a guide. Make sure to iclude only the question content, and not the answer choices here.
             question_html: the question content formatted as html that can be fed into the tiptap editor. Please use the examples provided below as a guide for how to format the question in html. For mathematical expressions, use latex to express those in the html, using the examples provided as guidance. If there are any tables of data, see the examples provided below as reference for how to depict them. If there is an image in the question (excluding a table that an be represented as discussed previously), such as a graph or diagram, make sure to include it here. Make sure it is positioned correctly. If it is positioned above the text in the pdf, then it should come before the text in your response. If it's between two blocks of text, then it should be between those blocks of text in your response. Do not try to anticipate the source of the image. Always use this url as a placeholder for the source of any image: https://hxosbmzvobqvyncpnxqt.supabase.co/storage/v1/object/public/Problem%20Graphics/CollegeBoard%20Question%20Bank%20Graphics/generic-graphic.png?t=2024-11-03T16%3A47%3A58.869Z
             question_json: the question content formatted as json that can be fed into the tiptap editor. Please use the examples provided below as a guide for how to format the question in json. For mathematical expressions, use latex to express those in the json object, using the examples provided as guidance. If there are any tables of data, see the examples provided below as reference for how to depict them. If there is an image in the question (excluding a table that an be represented as discussed previously), such as a graph or diagram, make sure to include it here. Make sure it is positioned correctly. If it is positioned above the text in the pdf, then it should come before the text in your response. If it's between two blocks of text, then it should be between those blocks of text in your response. Do not try to anticipate the source of the image.  Always use this url as a placeholder for the source of any image: https://hxosbmzvobqvyncpnxqt.supabase.co/storage/v1/object/public/Problem%20Graphics/CollegeBoard%20Question%20Bank%20Graphics/generic-graphic.png?t=2024-11-03T16%3A47%3A58.869Z
             answer_type: should be either 'multiple_choice' or 'numeric_input'
@@ -50,6 +50,33 @@ const getSystemPrompt = (options) => {
             difficulty: should indicate the difficulty of the question. Should be either an integer, 1, 2, or 3, representing easy, medium, or hard respectively.
             contains_graphic: a boolean indicating whether there is a graphic in the problem that requires an image
             solution: the rationale behind selecting the correct answer. should be given in both html and json format, similarly to how you formatted the questions.
+            skill: ${skills_instructions}
+
+        Below is some sample data of how an array of problems should be formatted:
+        ${sample_json}
+    `;
+
+    const system_prompt = `
+        Your role is to take a pdf file of SAT practice problems and perform various actions to extract information from the document in JSON format.
+        You should not return any additional text. Your response should consist only of the JSON string.
+        You should make sure that your JSON response is formatted correctly. Double check that it can be parsed by the javascript function JSON.parse() without throwing an error. If that causes an error, you should try to fix the error and return the correct JSON string.
+        Each problem in the pdf will start with a header that includes the text "Question ID", which should help you identify how to separate the problems from each other.
+        
+        You may be asked to return an array representing the problems in the document.
+        In that case, each item of the array should include the following fields: test_section, question_id, domain, skill, question_text, question_json, answer_type, answer_choices, mult_choice_answer, input_answers, difficulty, contains_graphic, solution_json.
+        Here is an explanation of each of the fields:
+            test_section: should be a string that is either 'math' or 'reading_writing'
+            question_id: should be a string that depicts the college board question id
+            domain: a snake-style string that indicates the domain of the question
+            skill: a snake-style string that indicates the skill tested by the question
+            question_text: the content of the question depicted in plain text. in some cases, you might not be able to depict the question perfectly with plain text due to mathematical expressions and graphics, but do your best and use the examples given as a guide. Make sure to iclude only the question content, and not the answer choices here.
+            question_json: the question content formatted as json that can be fed into the tiptap editor. Please use the examples provided below as a guide for how to format the question in json. Make sure to iclude only the question content, and not the answer choices here. For mathematical expressions, use latex to express those in the json object, using the examples provided as guidance. If there are any tables of data, see the examples provided below as reference for how to depict them. If there is an image in the question (excluding a table that an be represented as discussed previously), such as a graph or diagram, make sure to include it here. Make sure it is positioned correctly. If it is positioned above the text in the pdf, then it should come before the text in your response. If it's between two blocks of text, then it should be between those blocks of text in your response. Do not try to anticipate the source of the image.  Always use this url as a placeholder for the source of any image: https://hxosbmzvobqvyncpnxqt.supabase.co/storage/v1/object/public/Problem%20Graphics/CollegeBoard%20Question%20Bank%20Graphics/generic-graphic.png?t=2024-11-03T16%3A47%3A58.869Z
+            answer_type: should be either 'multiple_choice' or 'numeric_input'
+            answer_choices: an array listing the answer choices. each choice should be given in html form as well as json form, similarly to how you formatted the question in each of those formats. There should always be 4 answer choices for multiple choice questions. If the question is not a multiple choice question, this should be null.
+            input_answers: This should be an array of strings that depict the correct answer when the type of answer is numeric_input. If the answer can be depicted as a fraction or a decimal, include only the fraction in the array. For example, the answer 1/3 should be included as ["1/3"] and not ["0.3333"] or ["1/3", "0.3333"]. There should only be multiple items in the array if the question is multiple distinct answers (like "-5" and "3"), but not when there is a single answer that can be given in fraction or decimal form. For multiple choice questions, this should be null.
+            difficulty: should indicate the difficulty of the question. Should be either an integer, 1, 2, or 3, representing easy, medium, or hard respectively.
+            contains_graphic: a boolean indicating whether there is a graphic in the problem that requires an image
+            solution_json: the rationale behind selecting the correct answer, and why other answer choices are incorrect. should be given in json format, using the examples provided as a guide. The formatting will also be similar to the formatting of the question_json field.
             skill: ${skills_instructions}
 
         Below is some sample data of how an array of problems should be formatted:
@@ -73,14 +100,13 @@ function prepareProblemForDB(problem, options = {}) {
         cb_domain: problem.domain,
         cb_skill: problem.skill,
         question_text: problem.question_text,
-        question_html: problem.question_html,
         question_json: problem.question_json, 
         answer_type: problem.answer_type,
         answer_choices: problem.answer_choices,
         input_answers: problem.input_answers,
         mult_choice_answer: problem.mult_choice_answer,
         difficulty: difficulties[problem.difficulty], 
-        source_solution: problem.solution, 
+        source_solution: {json: problem.solution_json}, 
         contains_graphic: problem.contains_graphic,
     }
     return db_problem;
@@ -226,11 +252,521 @@ const getProblemIDsFromAnthropic = async (anthropic, pdfBase64, sample_json, tes
     let attempts = 0;
     let succeeded = false;
     let question_ids = [];
-    const user_prompt = `
-        Please identify all the question ids in the document, and return them as a JSON array. The question ids should be in the order in which they appear in the document.
+    const user_prompt_0 = `
+        Please identify all of the unique question ids in the document, and return them as a JSON array. Every time a new question ID is presented in the PDF, it is preceded by the text "Question ID", which should help you find them. Is is very important that you don't miss any and that you return the complete list of all unique question IDs in the whole document. The question ids should be in the order in which they appear in the document.
         Your response should consist only of the JSON array, with no additional text.
-        You should make sure that your JSON response is formatted correctly. Double check that it can be parsed by the javascript function JSON.parse() without throwing an error. If that causes an error, you should try to fix the error and return the correct JSON string.
+        Verify that the JSON can be parsed by JSON.parse() before returning
     `;
+    const user_prompt_reflective_6 = `
+        I previously gave you the following prompt, with the attached pdf:
+
+        --previous prompt start--
+        The attached document contains SAT practice problems across multiple pages. Each problem begins with a header containing 'Question ID' followed by an alphanumeric ID that is 8 characters in length. The same ID is then repeated in an 'ID: [id]' line and an 'ID: [id] Answer' section. 
+
+        Please:
+        1. Scan all pages of the document from beginning to end
+        2. Identify all unique question IDs, counting each ID only once
+        3. Verify each ID appears in both a question header and an answer section
+        4. Return a JSON object containing:
+        - total_pages_processed: number of pages scanned
+        - total_ids_found: count of unique IDs
+        - ids: array of IDs in order of first appearance
+
+        Before responding, please verify you've reached the end of the document and haven't missed any pages.
+        --previous prompt end--
+
+        In your response, you missed a few question ids that were actually present in the document.
+        These missed question ids were: ["f8a698f7", "d2cae91a", "3a7aa34d"]
+        You also returned the same id twice: "a3d03f49"
+
+        How can I improve the prompt to make sure you don't miss and don't return any duplicates?
+    `
+
+    const user_prompt_next = `
+        The attached document contains SAT practice problems. Each problem begins with a header containing 'Question ID' followed by an alphanumeric ID that is 8 characters in length. The same ID is then repeated in an 'ID: [id]' line and an 'ID: [id] Answer' section. Please identify all unique question IDs, counting each ID only once, and return them in order of first appearance in the document as a JSON array. Verify each ID appears in both a question header and an answer section before including it. Make sure you scan the complete document linearly, and don't miss any.
+    `
+
+    const user_prompt_4 = `
+        The attached document contains SAT practice problems across multiple pages. Each problem begins with a header containing 'Question ID' followed by an alphanumeric ID that is 8 characters in length. The same ID is then repeated in an 'ID: [id]' line and an 'ID: [id] Answer' section. 
+
+        Please:
+        1. Scan all pages of the document from beginning to end
+        2. Identify all unique question IDs, counting each ID only once
+        3. Verify each ID appears in both a question header and an answer section
+        4. Return a JSON object containing:
+        - total_pages_processed: number of pages scanned
+        - total_ids_found: count of unique IDs
+        - ids: array of IDs in order of first appearance
+
+        Before responding, please verify you've reached the end of the document and haven't missed any pages.
+    `
+
+    //this was closest so far - it just missed one and made up one
+    const user_prompt_5 = `
+        The attached document contains SAT practice problems. Each problem begins with a header containing 'Question ID' followed by an alphanumeric ID that is 8 characters in length. The same ID is then repeated in an 'ID: [id]' line and an 'ID: [id] Answer' section. Working page by page through the entire document, identify all unique question IDs that appear with both a question header and answer section. After scanning all pages, combine the IDs into a single JSON array ordered by first appearance in the document. Before submitting your response, verify that the number of IDs in your array matches the total number of unique question headers in the document.
+    `
+
+    //this was what it suggested after #5, but it was worse - only returned 10 ids
+    const user_prompt_6 = `
+        The attached document contains SAT practice problems. Each problem begins with a header containing 'Question ID' followed by an alphanumeric ID that is 8 characters in length. The same ID is then repeated in an 'ID: [id]' line and an 'ID: [id] Answer' section. Working page by page through the entire document, identify all unique question IDs that appear with both a question header and answer section. 
+        
+        For each ID you identify, verify that:
+        - It appears in a 'Question ID' header
+        - It appears in both an 'ID: [id]' line and 'ID: [id] Answer' section
+        - It is exactly 8 characters long
+        - It only contains alphanumeric characters
+
+        Process the document in the following way:
+        - Scan each page sequentially from top to bottom
+        - For each page, first identify all Question ID headers
+        - For each header found, verify the ID appears in both required locations on that page
+        - Keep a running list of verified IDs as you process each page
+        - After completing all pages, review your list and verify the count matches the total number of complete question/answer pairs found
+
+        After creating your list:
+        - Verify each ID appears exactly once in your list
+        - Verify each ID exists in the original document
+        - Verify that the IDs are listed in the order they appear in the document
+        - Verify that the total number of IDs in your list matches the total number of unique question headers in the document
+        - Verify that the JSON can be parsed by JSON.parse() before returning
+
+        Your response should consist only of the JSON array, with no additional text.
+    `
+
+    //this missed 5, made up 3
+    const user_prompt_7 = `
+        The attached document contains SAT practice problems across multiple pages. Each problem begins with a header containing 'Question ID' followed by an alphanumeric ID that is 8 characters in length. The same ID is then repeated in an 'ID: [id]' line and an 'ID: [id] Answer' section.
+
+        Please process the document using these strict guidelines:
+
+        1. Process each page methodically:
+        - Scan for all 'Question ID' headers
+        - For each header, verify matching 'ID:' and 'ID: [id] Answer' sections
+        - Maintain a running set of unique IDs
+        - Before adding any ID, verify it:
+            * Is exactly 8 characters
+            * Has not been previously recorded
+            * Has all required sections present
+
+        2. Track your progress:
+        - Keep count of pages processed
+        - Maintain a list of IDs in order of first appearance
+        - Check for duplicates before adding any ID
+
+        3. Before completing:
+        - Verify you've reached the final page
+        - Confirm your ID count matches your unique IDs list length
+        - Verify no duplicates exist in your final list
+
+        Return a JSON object containing:
+        - total_pages_processed: number of pages scanned
+        - total_ids_found: count of unique IDs
+        - ids: array of IDs in order of first appearance
+
+        Include in your response a confirmation that you've performed all validation steps.
+    `
+
+    const user_prompt_reflexive_7 = `
+        I previously gave you the following prompt, with the attached pdf:
+
+        --previous prompt start--
+       The attached document contains SAT practice problems across multiple pages. Each problem begins with a header containing 'Question ID' followed by an alphanumeric ID that is 8 characters in length. The same ID is then repeated in an 'ID: [id]' line and an 'ID: [id] Answer' section.
+
+        Please process the document using these strict guidelines:
+
+        1. Process each page methodically:
+        - Scan for all 'Question ID' headers
+        - For each header, verify matching 'ID:' and 'ID: [id] Answer' sections
+        - Maintain a running set of unique IDs
+        - Before adding any ID, verify it:
+            * Is exactly 8 characters
+            * Has not been previously recorded
+            * Has all required sections present
+
+        2. Track your progress:
+        - Keep count of pages processed
+        - Maintain a list of IDs in order of first appearance
+        - Check for duplicates before adding any ID
+
+        3. Before completing:
+        - Verify you've reached the final page
+        - Confirm your ID count matches your unique IDs list length
+        - Verify no duplicates exist in your final list
+
+        Return a JSON object containing:
+        - total_pages_processed: number of pages scanned
+        - total_ids_found: count of unique IDs
+        - ids: array of IDs in order of first appearance
+
+        Include in your response a confirmation that you've performed all validation steps.
+        --previous prompt end--
+
+        In your response, you missed a few question ids that were actually present in the document, and you made up some ids that were not present in the document.
+        These missed question ids were: ["f8a698f7", "d2cae91a", "3a7aa34d", "97f3dbe0", "a351b98d"]
+        These made up question ids were: ["5c1751d6", "80f346ea", "005e9982"]
+
+        Why did you miss some question ids?
+        Why did you make up some question ids that were not present in the document?
+
+        How can I improve the prompt to make sure you don't miss any ids and don't make up any ids that were not present in the document?
+    `
+
+
+    const user_prompt_8 = `
+        The attached document contains SAT practice problems across multiple pages. Each problem begins with a header containing the exact text 'Question ID' followed by an alphanumeric ID that is 8 characters in length. I want you to return an array of all the question ids in the document.
+
+        Please process the document using these strict guidelines:
+
+        1. Process each page methodically, in order from first page to last:
+        - Scan for any 'Question ID' headers
+        - Maintain a running set of unique IDs (the 8-character alphanumeric id that follows 'Question ID')
+        - Maintain a running count of how many 'Question ID' headers you see
+        - Before adding any ID, verify it:
+            * Is exactly 8 characters
+            * Is actually present in the document
+            * Is not a duplicate
+
+        2. Track your progress:
+        - Keep count of pages processed
+        - Maintain a list of IDs in order of first appearance
+        - Check for duplicates before adding any ID
+
+        3. Before completing:
+        - Verify you've reached the final page
+        - Confirm your ID count matches your unique IDs list length
+        - Verify no duplicates exist in your final list
+
+        Return a JSON object containing:
+        - total_pages_processed: number of pages scanned
+        - total_question_id_headers_found: count of question id headers in the document
+        - ids: array of IDs in order of first appearance
+    `
+
+    const user_prompt_reflexive_8 = `
+        I previously gave you the following prompt, with the attached pdf:
+
+        --previous prompt start--
+        The attached document contains SAT practice problems across multiple pages. Each problem begins with a header containing the exact text 'Question ID' followed by an alphanumeric ID that is 8 characters in length. I want you to return an array of all the question ids in the document.
+
+        Please process the document using these strict guidelines:
+
+        1. Process each page methodically, in order from first page to last:
+        - Scan for any 'Question ID' headers
+        - Maintain a running set of unique IDs (the 8-character alphanumeric id that follows 'Question ID')
+        - Maintain a running count of how many 'Question ID' headers you see
+        - Before adding any ID, verify it:
+            * Is exactly 8 characters
+            * Is actually present in the document
+            * Is not a duplicate
+
+        2. Track your progress:
+        - Keep count of pages processed
+        - Maintain a list of IDs in order of first appearance
+        - Check for duplicates before adding any ID
+
+        3. Before completing:
+        - Verify you've reached the final page
+        - Confirm your ID count matches your unique IDs list length
+        - Verify no duplicates exist in your final list
+
+        Return a JSON object containing:
+        - total_pages_processed: number of pages scanned
+        - total_question_id_headers_found: count of question id headers in the document
+        - ids: array of IDs in order of first appearance
+        --previous prompt end--
+
+        In your response, you missed a few question ids that were actually present in the document, and you listed one of the ids twice.
+        These missed question ids were: ["f8a698f7", "d2cae91a", "2dfb2204"]
+        This duplicate question id was: ["7cfe6c55"]
+
+        Why did you miss some question ids?
+        Why did include a duplicate despite my instructions not to verify no duplicates were in the final list?
+
+        How can I improve the prompt to make sure you don't miss any ids and don't make up any ids that were not present in the document?
+    `
+
+    const user_prompt_9 = `
+        The attached document contains SAT practice problems across multiple pages. Each problem begins with a header containing the exact text 'Question ID' followed by an alphanumeric ID that is 8 characters in length. I want you to return an array of all the question ids in the document.
+
+        Please process the document using these strict guidelines:
+
+        For each page:
+        1. First locate all instances of the exact text "Question ID" on the page
+        2. For each instance found:
+        - Extract the exactly 8 characters that follow "Question ID"
+        - Before adding to your list:
+            a. Verify the ID is exactly 8 characters long
+            b. Verify it consists only of alphanumeric characters
+            c. Check against your current list to ensure it's not already included
+            d. Document the page number where you found it
+        3. Before moving to next page:
+        - Record how many IDs were found on current page
+        - Verify each ID found against original document text
+
+        2. Add requirement for detailed tracking:
+        Maintain a tracking object for each ID:
+        {
+            "id": "the 8-char ID",
+            "page_found": page number,
+            "position_on_page": "first/second/etc occurrence on page"
+        }
+
+        3. Add explicit verification steps:
+        Before returning final result:
+        1. Re-scan each page specifically looking for "Question ID"
+        2. Cross-reference each ID in your list with the document
+        3. Run a duplicate check on your final list
+        4. Verify total count matches unique IDs collected
+    `;
+
+    const guidance_prompt = `
+        I need help forming a prompt to get exactly what I want from your api.
+        The attached PDF contains SAT practice problems across multiple pages. Each problem begins with a header containing the exact text 'Question ID' followed by an alphanumeric ID that is 8 characters in length. I am looking to get an array of all the unique question ids in the document. In my previous attempts with your api, I have had issues with you missing some ids, returning duplicates, and returning ids that appear to be made up and were not present in the document. Most importantly, I want to make sure that you don't miss any ids and don't make any up. I want to make sure that you don't get distracted or lose focus as you process the document, and that there are checks in place to make sure you don't miss any ids and don't make any up.
+        
+        Can you please suggest a prompt that will return an array of all the unique question ids in the document, with the goals above in mind?
+    `
+
+    const guidance_prompt_10 = `
+        I have been trying to use your api to get the question ids from the attached pdf. I have tried many different prompts with varying results, but one question ID you always miss is "f8a698f7". Why is this one consistently more difficult than the rest for you to identify? How can I improve the prompt to make sure you capture this one?
+
+        My latest prompt was:
+        --previous prompt start--
+        The attached PDF contains SAT practice problems across multiple pages. Each problem begins with a header containing the exact text 'Question ID' followed by an alphanumeric ID that is 8 characters in length. I am looking to get an array of all the unique question ids in the document.
+
+        Please carefully scan through the document and perform the following steps:
+
+        1. First pass: Scan through the document and every time you encounter the exact text 'Question ID', record the 8-character alphanumeric identifier that follows it.
+
+        2. Second pass: Go through the document again independently and perform the same identification process, creating a second list.
+
+        3. Compare both lists to ensure they match exactly. If there are any discrepancies, perform a third pass to resolve them.
+
+        4. Remove any duplicates from the final list.
+
+        5. For each ID in your final list, verify that you can find it in the original document by searching for 'Question ID' followed by that specific ID.
+
+        6. Return only an array of the verified unique 8-character question IDs, sorted alphabetically.
+
+        Please note: Only include IDs that follow the exact pattern of appearing after the text 'Question ID' in the document. Each ID should be exactly 8 characters long. Do not generate or infer any IDs - only include those explicitly present in the document.
+
+        Please return a JSON array representing your final list of unique question ids.
+        --previous prompt end--
+    `
+
+    const user_prompt_10 = `
+
+        The attached PDF contains SAT practice problems across multiple pages. Each problem begins with a header containing the exact text 'Question ID' followed by an alphanumeric ID that is 8 characters in length. I am looking to get an array of all the unique question ids in the document.
+
+        Please carefully scan through the document and perform the following steps:
+
+        1. First pass: Scan through the document and every time you encounter the exact text 'Question ID', record the 8-character alphanumeric identifier that follows it.
+
+        2. Second pass: Go through the document again independently and perform the same identification process, creating a second list.
+
+        3. Compare both lists to ensure they match exactly. If there are any discrepancies, perform a third pass to resolve them.
+
+        4. Remove any duplicates from the final list.
+
+        5. For each ID in your final list, verify that you can find it in the original document by searching for 'Question ID' followed by that specific ID.
+
+        6. Return only an array of the verified unique 8-character question IDs, sorted alphabetically.
+
+        Please note: Only include IDs that follow the exact pattern of appearing after the text 'Question ID' in the document. Each ID should be exactly 8 characters long. Do not generate or infer any IDs - only include those explicitly present in the document.
+
+        Please return a JSON array representing your final list of unique question ids.
+    `
+
+    const user_prompt_11 = `
+
+        The attached PDF contains SAT practice problems across multiple pages. 
+
+        Each problem in the document follows a consistent structure:
+        - It begins with a header containing "Question ID" followed by an 8-character identifier
+        - The header may be preceded by page information or other content
+        - The header may be followed by mathematical expressions, equations, or other content
+
+        When scanning the document:
+        - Look for the exact phrase "Question ID" regardless of surrounding content
+        - Always check the next 8 characters after each instance of "Question ID"
+        - Do not let surrounding mathematical notation or complex formatting affect the identification process
+        
+        Please carefully scan through the document and perform the following steps:
+
+        1. First pass: Scan through the document and every time you encounter the exact text 'Question ID', record the 8-character alphanumeric identifier that follows it. Look for the exact phrase "Question ID" regardless of surrounding content. Always check the next 8 characters after each instance of "Question ID". Do not let surrounding mathematical notation or complex formatting affect the identification process. Record the full context where it was found for verification.
+
+        2. Second pass: Go through the document again independently and perform the same identification process, creating a second list.
+
+        3. Compare both lists to ensure they match exactly. If there are any discrepancies, perform a third pass to resolve them.
+
+        4. Remove any duplicates from the final list.
+
+        5. For each ID in your final list, verify that you can find it in the original document by searching for 'Question ID' followed by that specific ID.
+
+        6. Return only an array of the verified unique 8-character question IDs, sorted alphabetically.
+
+        Please note: Only include IDs that follow the exact pattern of appearing after the text 'Question ID' in the document. Each ID should be exactly 8 characters long. Do not generate or infer any IDs - only include those explicitly present in the document.
+
+        Please return a JSON array representing your final list of unique question ids.
+    `
+
+    //very close - returned 18, including the one it normally misses, but still missed one (2dfb2204)
+    const user_prompt_12 = `
+        Take the attached PDF, and do the following:
+        1: Count how many times the exact text "Question ID" appears in the document, and note the page number where it appears.
+        2: Go back to each instance of "Question ID" found, and note the 8-character alphanumeric identifier that follows it. Store this identifier in a list.
+        3: Make sure that the length of the list of identifiers is the same as the count of "Question ID" found in step 1. If it is not, go back and find the missing identifiers.
+        4: Return a JSON array of the 8-character alphanumeric identifiers, sorted by order of appearance in the document.
+    `
+
+    const user_prompt_13 = `
+        Take the attached PDF, and do the following:
+        1: Count how many times the exact text "Question ID" appears in the document, and note the page number and position where it appears.
+        2: Go back to each instance of "Question ID" found, and note the 8-character alphanumeric identifier that follows it. Store this identifier in a list along with the page number and position where it was found.
+        3: Make sure that the length of the list of identifiers is the same as the count of "Question ID" found in step 1. If it is not, go back and find the missing identifiers.
+        4: Return a JSON object with the following fields:
+            - question_id_count: the count of "Question ID" found in step 1
+            - instances: an array of objects with the following fields:
+                - page_number: the page number where the "Question ID" was found
+                - id: the 8-character alphanumeric identifier that follows the "Question ID"
+    `
+
+    const user_prompt_14 = `
+        Take the attached PDF, and do the following:
+        
+        1. Count how many times the exact text "Question ID" appears in the document, noting the page number for each occurrence. Look for the exact phrase "Question ID" regardless of surrounding content. Do not let surrounding mathematical notation or complex formatting affect the identification process. Store these occurrences for reference. Report this count back to me before moving on to step 2.
+        2. Go back to each instance of "Question ID" found, and note the 8-character alphanumeric identifier that follows it. Store this identifier in a list along with the page number and position where it was found. Make sure that this is done for every single instance of "Question ID" found in step 1.
+        3. Make sure that the length of the list of identifiers is the same as the count of "Question ID" found in step 1. If it is not, go back and find the missing identifiers.
+        4. Return a JSON object with the following fields:
+            - question_id_count: the total number of "Question ID" occurrences found in step 1
+            - instances: an array of objects with the following fields:
+                - page_number: the page number where the "Question ID" was found
+                - id: the 8-character alphanumeric identifier that follows the "Question ID"
+    `
+    const user_prompt_15 = `
+        Take the attached PDF, and do the following:
+        
+        1. Carefully scan through each page of the document, looking for the exact text "Question ID" regardless of surrounding content. Ignore all other content on the page, only concerning yourself with whether the text "Question ID" is present. If it is, note the page number where it was found.
+        2. If there were any pages where the text "Question ID" was not found, go back to them and double check that you didn't miss it.
+        3. Report back how many times the text "Question ID" was found in the document, and on which pages.
+        4. Report back which pages didn't include the text "Question ID", and the first 100 characters of the page.
+    `
+    //did good - found 18
+    const user_prompt_16 = `
+        Your task is to find ALL question IDs in this document. Question IDs will be preceded by the text "Question ID". Be aware that due to PDF processing, the words "Question" and "ID" might:
+        1. Appear split across page boundaries
+        2. Have variations in spacing
+        3. Have parts of the word split within a page
+
+        Please search for:
+        - "Question ID" as a complete phrase
+        - "Question" and "ID" separately, checking if they form the pattern even across page breaks
+        - Common variations like:
+        - "Quest ion ID"
+        - "Question I D"
+        - "Questi onID"
+        - Any other potential splits or spacing variations
+
+        Process:
+        1. First do a complete scan for the intact phrase "Question ID"
+        2. Then do another pass looking for any instance of "Question" and check nearby text (including the next page) for "ID"
+        3. Look for partial matches that might indicate split words
+        4. For each potential match, examine the surrounding context to verify it's actually referring to a question identifier
+
+        After finding each "Question ID" instance, carefully extract the ID that follows it which should be 8 alphanumeric characters long.
+
+        Before submitting your response:
+        - Cross-check the number of IDs found against the total number of questions in the document
+        - Verify you've found close to 19 IDs (the known total)
+        - If you have fewer, perform another pass with different splitting patterns
+
+        Return your results as a valid JSON array of question IDs in order of appearance.
+    `
+
+    const user_prompt = `
+        I've been trying to have you find all the question ids in the pdf, but you have been having trouble finding them all. I wonder if this might be due to the way that you process the pdf, that you see it differently than how it appears on a pdf viewer. Perhaps the phrase "Question ID" gets split between pages when you view it, or appears in different locations than where you expect it? Can you assess whether this is the case, and why you might be consistently failing to find all the ids?
+    `
+    
+    const user_prompt_a = `
+        Please carefully analyze the entire document from start to finish to extract a complete list of Question IDs found in the document.
+        It is very important that you return the complete list of all unique question IDs in the whole document, and don't miss any.
+        You should perform the following steps:
+        1. First pass:
+        - Scan through the document linearly
+        - Every time you see "Question ID", extract and store the ID that follows it
+        - Keep a running numbered list to ensure you don't lose track
+
+        2. Final verification:
+        - Count the number of times the phrase "Question ID" appears in the document
+        - Verify that the length of your list of IDs is the same as this count
+        - If there's a mismatch, scan the document again to find any missed IDs
+
+        3. Return results:
+        - Format the complete list of unique question IDs as a JSON array
+        - Maintain the original order of appearance in the document
+        - Your response should consist only of the JSON array with no additional text
+        - Verify that the JSON can be parsed by JSON.parse() before returning
+
+        
+    `
+    const user_prompt_2 = `
+        Please carefully analyze the entire document from start to finish and perform the following steps:
+
+        1. First pass:
+        - Scan through the document linearly
+        - Every time you see "Question ID", extract and store the ID that follows it
+        - Keep a running numbered list to ensure you don't lose track
+
+        2. Second pass:
+        - Scan through the document again looking for any instances of question IDs that might appear in other formats or contexts
+        - Add any new IDs you find to your list
+
+        3. Final verification:
+        - Count the total number of questions in the document
+        - Verify that your list of IDs matches this count
+        - If there's a mismatch, scan the document again to find any missed IDs
+
+        4. Return results:
+        - Format the complete list of unique question IDs as a JSON array
+        - Maintain the original order of appearance in the document
+        - Your response should consist only of the JSON array with no additional text
+        - Verify that the JSON can be parsed by JSON.parse() before returning
+
+        Example response format:
+        ["5df44e78","a65952d9","bcbf0e45"]
+
+        Please ensure the returned JSON array includes every single question ID from the document, with no omissions.
+    `
+    const user_prompt_3 = `
+        Your task is to find ALL question IDs in this document. This is crucial - missing even one ID is a significant error.
+
+        Process:
+        1. First, identify how many total pages are in the document and how many questions you see in total.
+
+        2. Then, do these passes through EVERY page:
+        - Pass 1: Look for "Question ID"
+        - Pass 2: Look for any strings matching the pattern of question IDs
+        - Pass 3: Look for question numbers, test items, or any other indicators of questions that might have associated IDs
+        - Pass 4: Check all metadata, headers, and footers for IDs
+
+        3. For each ID you find, mark its page number and location on the page.
+
+        4. Create a structured list showing:
+        - Total questions found
+        - Total unique IDs found
+        - Any discrepancy between these numbers
+        - Location details for each ID
+
+        5. Only after completing this analysis, return just the JSON array of IDs in order of appearance:
+        ["id1", "id2", ...]
+
+        Before submitting your response, verify that:
+        - You've examined every single page
+        - You've cross-referenced your count of questions with your count of IDs
+        - Your final count matches the document structure
+        - The JSON is properly formatted for JSON.parse()
+
+        If your count of IDs is less than 47, you must go back and search again as you have missed some.
+    `
     while (attempts < 3 && !succeeded) {
         attempts++;
         const msg = await anthropic.beta.messages.create({
@@ -410,27 +946,31 @@ export default eventHandler(async (event) => {
         console.log('sample problem ids:')
         console.log(sample_problem_ids);
         //const { data: sample_data, error: sample_error } = await client.from('sat_problems').select('test_section, source_question_id:question_id, cb_domain:domain, cb_skill:skill, question_text, question_html, question_json, answer_type, answer_choices, mult_choice_answer, input_answers, difficulty, contains_graphic, source_solution:solution').in('id', sample_problem_ids);
-        const { data: sample_problems, error: sample_error } = await client.from('sat_problems').select('test_section, question_id:source_question_id, domain:cb_domain, skill:cb_skill, question_text, question_html, question_json, answer_type, answer_choices, mult_choice_answer, input_answers, difficulty, contains_graphic, solution:source_solution').in('id', sample_problem_ids);
+        let { data: sample_problems, error: sample_error } = await client.from('sat_problems').select('test_section, question_id:source_question_id, domain:cb_domain, skill:cb_skill, question_text, question_json, answer_type, answer_choices, mult_choice_answer, input_answers, difficulty, contains_graphic, solution:source_solution').in('id', sample_problem_ids);
         if (sample_error) {
             console.log('error:')
             console.log(sample_error);
             return { status: 'error', message: 'error getting sample data'};
         }
         if (sample_problems) {
-            console.log('got sample problems');
-            console.log(sample_problems.length);
             //console.log(sample_problems[0]);
         } else {
             console.log('no sample data');
         }
-        
         const anthropic = new Anthropic({apiKey: process.env.ANTHROPIC_API_KEY});
         console.log('formed anthropic client')
         //let sample_ids = sample_problems.map(problem => problem.question_id);
         //let sample_data = {question_ids: sample_ids, problems: sample_problems};
+        sample_problems = sample_problems.map(problem => {
+            problem.solution_json = problem.solution.json;
+            delete problem.solution;
+            return problem;
+        });
         let sample_json = JSON.stringify(sample_problems);
+        console.log('sample problems');
+        console.log(sample_json);
         const problem_ids = await getProblemIDsFromAnthropic(anthropic, pdfBase64, sample_json, test_section);
-        console.log('parsed problem ids');
+        console.log('identified problem ids');
         console.log(problem_ids);
         identified_problem_ids = problem_ids;
         response.identified_problem_ids = problem_ids;
