@@ -2,3 +2,15 @@ html, body {
     font-family: 'Noto Sans', sans-serif;
     background-color: #ffffff;
 }
+ul {
+    @apply list-disc list-outside pl-4;
+}
+ul ul {
+    @apply pl-6 pb-2;
+}
+ul ul li {
+    list-style-type: circle;
+}
+ul ul ul li {
+    list-style-type: square;
+}

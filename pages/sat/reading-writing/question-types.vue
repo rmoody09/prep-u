@@ -50,7 +50,7 @@
         </div>
 
         <div class="pt-4">
-            When you get your SAT score back, they won't release the problems from the test and show you what you missed, but they will give you a vague breakdown of how you did on each domain (it's rather frustrating, they don't even tell you how many questions you missed per domain, just an approximation like 4 out of 7 bars). Since this is the categorization used by College Board, we will also use it as our starting point. But we will be more concerned with the specific question types, identifying those, and learning the strategies to concquer each one.
+            When you get your SAT score back, they won't release the problems from the test and show you what you missed, but they will give you a vague breakdown of how you did on each domain (it's rather frustrating, they don't even tell you how many questions you missed per domain, just an approximation like 4 out of 7 bars). Since this is the categorization used by College Board, we will also use it as our starting point. But we will be more concerned with the specific question types, identifying those, and learning the strategies to conquer each one.
         </div>
     </div>
 

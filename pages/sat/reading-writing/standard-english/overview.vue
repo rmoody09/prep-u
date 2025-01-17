@@ -5,7 +5,13 @@
 
     <h2 class="sat-guide-section-header">Overview</h2>
     <div class="section-description">
-        According to the College Board, Standard English Conventions questions "test your ability to edit passages for conventional sentence structure, usage, and punctuation." In essence, these questions are testing grammar. You can easily identify questions that fall under this domain because they all ask the same exact question: "Which choice completes the text so that it conforms to the conventions of Standard English?"
+        According to the College Board, Standard English Conventions questions "test your ability to edit passages for conventional sentence structure, usage, and punctuation." 
+        <div class='pt-4'>
+            Basically, these questions are testing grammar. 
+        </div>
+        <div class='pt-4'>
+            They all ask the same exact question: "Which choice completes the text so that it conforms to the conventions of Standard English?" - making them easy to identify.
+        </div>
     </div>
 
     <h2 class="sat-guide-section-header">General Approach</h2>
@@ -15,10 +21,13 @@
 
     <h2 class="sat-guide-section-header">Go Straight to the Answer Choices</h2>
     <div class="section-description">
-        Once you've identified that you're looking at a Standard English Conventions question, go straight to the answer choices. Try to identify what is different between the answer choices. The differences you'll notice betwen the choices will fall under one of the following patterns:
+        Once you've identified that you're looking at a Standard English Conventions question, go straight to the answer choices. Try to identify what is different between the answer choices. 
+        <div class='pt-4 pb-4'>
+            The differences you'll notice betwen the choices will fall under one of the following patterns:
+        </div>
         <ul>
             <li>
-                <div>
+                <div class='font-semibold'>
                     Punctuation
                 </div>
                 <ul>
@@ -33,7 +42,7 @@
                 </ul>
             </li>
             <li>
-                <div>
+                <div class='font-semibold'>
                     Verb Form
                 </div>
                 <ul>
@@ -43,7 +52,7 @@
                 </ul>
             </li>
             <li>
-                <div>
+                <div class='font-semibold'>
                     Different Subjects
                 </div>
                 <ul>
@@ -51,7 +60,7 @@
                 </ul>
             </li>
             <li>
-                <div>
+                <div class='font-semibold'>
                     Apostrophe Placement
                 </div>
                 <ul>
@@ -59,7 +68,7 @@
                 </ul>
             </li>
             <li>
-                <div>
+                <div class='font-semibold'>
                     Different Pronouns
                 </div>
                 <ul>
@@ -74,3 +83,18 @@
         While the above patterns get you closer to knowing what you are being tested on, some of these groupings have numerous rules or conventions that they might be testing. We'll teach you all the rules that might fall under each of these categories, and will also teach you a step by step process to ensure you ultimately arrive at the correct answer.
     </div>
 </template>
+
+<style scoped>
+    ul {
+        @apply list-disc list-outside pl-4;
+    }
+    ul ul {
+        @apply pl-6 pb-2;
+    }
+    ul ul li {
+        list-style-type: circle;
+    }
+    ul ul ul li {
+        list-style-type: square;
+    }
+</style>

@@ -5,12 +5,12 @@
 
     <h2 class="sat-guide-section-header">What's a Non-Essential Clause?</h2>
     <div class="section-description">
-        Non-essential clauses are portions of a sentence that provide extra information, but are not necessary to the sentence's meaning. For example, "Kevin, who is studying hard for the SAT, is hoping for a good score." In this sentence, "who is studying hard for the SAT" is a non-essential clause that adds extra information about Kevin. If we were to omit it from the sentence, the sentence wouldn't change in meaning, it would just be lacking a bit of extra information: "Kevin is hoping for a good score." With non-essential clauses, you should always be able to remove them from the sentence with the sentence remaining grammatically correct, and the sentence still meaning the same thing.
+        Non-essential clauses are portions of a sentence that provide extra information, but are not necessary to the sentence's meaning. For example, "Kevin, who is studying hard for the SAT, is hoping for a good score." In this sentence, "who is studying hard for the SAT" is a non-essential clause that adds extra information about Kevin. If we were to omit it from the sentence, the sentence wouldn't change in meaning, it would just be lacking a bit of extra information: "Kevin is hoping for a good score." With non-essential clauses, you should always be able to remove them from the sentence with the sentence remaining grammatically correct, and without chainging the fundamental meaning of the sentence.
     </div>
 
     <h2 class="sat-guide-section-header">What's an Essential Clause?</h2>
     <div class="section-description">
-        Essential clauses can look similar to non-essential clauses; like non-essential clauses, they can generally be removed from the sentence without making it grammatically incorrect. But unlike non-essential clauses, if you remove them from the sentence you will alter the sentence's meaning. Rather than merely adding extra information, essential clauses typically help specify who or what we are talking about. For example, "The students who study hard for the SAT will score well." In this sentence, "who study hard for the SAT" is an essential clause that specifies which students will score well. If we were to omit it from the sentence ("The students will score well."), the sentence would no longer be saying the same thing. It now sounds like all students will score well, rather than just the students who study hard.
+        Essential clauses have some similiarity to non-essential clauses; like non-essential clauses, they can generally be removed from the sentence without making it grammatically incorrect. But unlike non-essential clauses, if you remove them from the sentence you will alter the sentence's meaning. Rather than merely adding extra information, essential clauses typically help specify who or what we are talking about. For example, "The students who study hard for the SAT will score well." In this sentence, "who study hard for the SAT" is an essential clause that specifies which students will score well. If we were to omit it from the sentence ("The students will score well."), the sentence would no longer be saying the same thing. It now sounds like all students will score well, rather than just the students who study hard.
     </div>
 
     <h2 class="sat-guide-section-header">Why Is This Important?</h2>
@@ -20,17 +20,72 @@
 
     <h2 class="sat-guide-section-header">Non-Essential Clauses at the Beginning of a Sentence</h2>
     <div class="section-description">
-        Non-essential clauses often show up at the beginning of a sentence, in which case they are normally describing (aka "modifying" in grammar terms) the subject of the sentence. For example, take the sentence "Afraid of failing the test, Caroline stayed up all night studying." In this sentence, "afraid of failing the test" is a non-essential clause that modifies the subject of the sentence, "Caroline." If we were to remove it from the sentence, the sentence would still make sense: "Caroline stayed up all night studying." Non-essential clauses at the beginning of a sentence should be separated from the rest of the sentence with a comma. 
+        Non-essential clauses often show up at the beginning of a sentence, in which case they are normally describing (aka "modifying" in grammar terms) the subject of the sentence. For example, take the sentence "Hoping to get into a good college, Katherine prepared thoroughly for the SAT." In this sentence, "hoping to get into a good college" is a non-essential clause that modifies the subject of the sentence, "Katherine." If we were to remove it from the sentence, the sentence would still make sense: "Katherine prepared thoroughly for the SAT." Non-essential clauses at the beginning of a sentence should be separated from the rest of the sentence with a comma. 
+        <div class='pt-4'>Here are a few more examples:</div>
+        <ul>
+            <li>
+                "Tired from his run yesterday, Jack collapsed on his couch."
+            </li>
+            <li>
+                "Afraid of failing the test, Caroline stayed up all night studying."
+            </li>
+            <li>
+                "Walking to the store, Jim stopped to buy a newspaper."
+            </li>
+            <li>
+                "An opera lover, Janet went to see the Metropolitan Opera."
+            </li>
+        </ul>
     </div>
 
     <h2 class="sat-guide-section-header">Non-Essential Clauses in the Middle of a Sentence</h2>
     <div class="section-description">
-        Non-essential clauses can also show up in the middle of a sentence. For example, take the sentence "George, who loves burritos, is going to Chipotle." The non-essential clause in this sentence is "who loves burritos". When a non-essential clause is in the middle of a sentence, it can be separated from the rest of the sentence either by two commas or two em dashes. For the purposes of the SAT, it doesn't really matter which you use, but it does matter that you use the same punctuation at the beginning and end of the clause. For example, you could also say "George — who loves burritos — is going to Chipotle.", but you could not say "George, who loves burritos — is going to Chipotle."
+        Non-essential clauses can also show up in the middle of a sentence. For example, take the sentence "George, who loves burritos, is going to Chipotle." The non-essential clause in this sentence is "who loves burritos". Again, we could remove it from the sentence while maintaining a complete sentence with the same meaning: "George is going to Chipotle." 
+        <div class='pt-4 font-semibold'>
+            Can be separated by two commas or two em dashes
+        </div>
+        <div class='pt-2'>
+            When a non-essential clause is in the middle of a sentence, it can be separated from the rest of the sentence either by two commas or two em dashes. For the purposes of the SAT, it doesn't really matter which you use, but it does matter that you use the same punctuation at the beginning and end of the clause. For example, you could also say "George — who loves burritos — is going to Chipotle.", but you could not say "George, who loves burritos — is going to Chipotle."
+        </div>
+        <div class='pt-4'>
+            Here are a few more examples:
+        </div>
+        <ul>
+            <li>
+                "Jack, tired from his run yesterday, collapsed on his couch."
+            </li>
+            <li>
+                "Caroline, afraid of failing the test, stayed up all night studying."
+            </li>
+            <li>
+                "Jim, walking to the store, stopped to buy a newspaper."
+            </li>
+            <li>
+                "Janet, an opera lover, went to see the Metropolitan Opera."
+            </li>
+        </ul>
     </div>
 
     <h2 class="sat-guide-section-header">Non-Essential Clauses at the End of a Sentence</h2>
     <div class="section-description">
         Non-essential clauses can also show up at the end of a sentence, like in the sentence "He adopted a german shepherd - a dog breed known for its loyalty." Non-essential clauses at the end of a sentence can be separated from the rest of the sentence with a comma or an em dash.
+        <div class='pt-4'>
+            Here are a few more examples:
+        </div>
+        <ul>
+            <li>
+                "Jack collapsed on his couch, tired from his run yesterday."
+            </li>
+            <li>
+                "Caroline stayed up all night studying, afraid of failing the test."
+            </li>
+            <li>
+                "Jim stopped to buy a newspaper, hoping to learn more about the election."
+            </li>
+            <li>
+                "Janet went to see Best In Show, a movie about dog competitions."
+            </li>
+        </ul>
     </div>
 
     <h2 class="sat-guide-section-header">Words That Can Start Dependent Clauses</h2>
