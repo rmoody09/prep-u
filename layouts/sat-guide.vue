@@ -364,13 +364,64 @@
         'algebra': {
             slug: 'algebra',
             title: 'Algebra',
-            subsections: ['algebra-overview'],
+            subsections: ['algebra-overview', 'single-variable-solving', 'single-variable-graphing', 'linear-number-of-solutions', 'slope-intercept-form', 'standard-form', 'linear-systems-of-equations',
+            'parallel-perpendicular-lines'
+            ],
             top_level: false,
             parent: 'math'
         },
         'algebra-overview': {
             slug: 'overview',
             title: 'Overview',
+            subsections: [],
+            top_level: false,
+            parent: 'algebra'
+        },
+        'single-variable-solving': {
+            slug: 'single-variable-solving',
+            title: 'Single Variable Solving',
+            subsections: [],
+            top_level: false,
+            parent: 'algebra'
+        },
+        'single-variable-graphing': {
+            slug: 'single-variable-graphing',
+            title: 'Single Variable Graphing',
+            subsections: [],
+            top_level: false,
+            parent: 'algebra'
+        },
+        'linear-number-of-solutions': {
+            slug: 'number-of-solutions',
+            title: 'Number of Solutions',
+            subsections: [],
+            top_level: false,
+            parent: 'algebra'
+        },
+        'slope-intercept-form': {
+            slug: 'slope-intercept-form',
+            title: 'Slope Intercept Form',
+            subsections: [],
+            top_level: false,
+            parent: 'algebra'
+        },
+        'standard-form': {
+            slug: 'standard-form',
+            title: 'Standard Form',
+            subsections: [],
+            top_level: false,
+            parent: 'algebra'
+        },
+        'linear-systems-of-equations': {
+            slug: 'systems-of-equations',
+            title: 'Systems of Equations',
+            subsections: [],
+            top_level: false,
+            parent: 'algebra'
+        },
+        'parallel-perpendicular-lines': {
+            slug: 'parallel-perpendicular-lines',
+            title: 'Parallel & Perpendicular Lines',
             subsections: [],
             top_level: false,
             parent: 'algebra'

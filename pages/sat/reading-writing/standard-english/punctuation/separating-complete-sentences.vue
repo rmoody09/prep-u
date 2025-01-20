@@ -1,21 +1,75 @@
 <template>
-    <div class="sat-guide-page-header">
+    <h1 class="sat-guide-page-header">
         Separating Complete Sentences
-    </div>
+    </h1>
 
     <h2 class="sat-guide-section-header">What's a Complete Sentence?</h2>
     <div class="section-description">
-        A complete sentence, also known as an independent clause, is a sentence that expresses a complete thought. To qualify as a complete sentence, all a sentence needs is a subject and a verb. A subject is a noun or pronoun, and a verb is an action that the subject performs. For example, "The cat sleeps." is a complete sentence because it has a subject (cat) and a verb (sleeps). Complete sentences, particularly on the SAT, can be much more complex than this by incorporating additional modifiers, but the only criteria it needs to be a complete sentence is a subject and a verb performed by the subject.
+        A complete sentence, also known as an independent clause, is a sentence that expresses a complete thought. To qualify as a complete sentence, all a sentence needs is a subject and a main verb. A subject is a noun or pronoun, and a main verb is an action that the subject performs. For example, "The cat sleeps." is a complete sentence because it has a subject (cat) and a main verb (sleeps). Complete sentences, particularly on the SAT, can be much more complex than this by incorporating additional modifiers, but the only criteria it needs to be a complete sentence is a subject and a main verb performed by the subject.
     </div>
 
-    <h2 class="sat-guide-section-header">What Counts as a Verb?</h2>
+    <h2 class="sat-guide-section-header">Not All Verbs Count as Main Verbs</h2>
     <div class="section-description">
-        Some words we would classically think of as verbs can become a different part of speech depending on how they are used. For example, when we add "ing" to the end of a verb, it can become a noun, known as a "gerund", or and adjective, known as a "present participle". For example, the phrase "The sleeping cat" is not a complete sentence because "sleeping" is not used as a verb; it is used as an adjective (known as a present participle) to describe the state of the cat. Or, in the sentence "Sleeping is the cat's favorite activity", "sleeping" is not used as a verb; it is used as noun (known as a gerund) that represents the activity of sleeping. This sentence is complete, however, because now "sleeping" is the subject of the sentence and the verb is "is". When you place a "to be" verb (like "is", "was", "are", etc.) in front of an "ing" verb, it becomes forms a verb phrase that can act as a main verb. For example "The cat is sleeping" is a complete sentence because "is sleeping" is a verb phrase that acts as the main verb.
-        <div class="font-semibold">
-            Infinitive Verbs
+        Some words that are typically verbs can become a different part of speech, or fail to qualify as a main verb, depending on how they are used. 
+        <div class="font-bold text-lg pt-4 pb-2">
+            Verbs ending in "ing"
+        </div>
+        <div class="pl-4">  
+            <div class='font-semibold pb-1'>Need a helper verb to act as a main verb</div>     
+            <div>
+                When we add "ing" to the end of a verb, it can only act as a main verb if it's preceded by helper verb, often a "to be" verb (e.g. "Tim is helping Mary with her move"). Without a helper verb, an "ing" verb cannot be the main verb in a sentence. It might be a gerund, a present participle, or it might be used to lead off a non-essential clause, as we'll explore below. Here are a few examples of "ing" verbs combined with a helper verb to act as a main verb phrase:
+                <ul>
+                    <li>
+                        "The cat <b>is sleeping</b>."
+                    </li>
+                    <li>
+                        "The comfort of having close friends next to her <b>made watching</b> the scary movie more tolerable."
+                    </li>
+                    <li>
+                        "The lion <b>started running</b> after its prey."
+                    </li>
+                </ul>
+            </div>
+            <div class='font-semibold pt-5 pb-1'>Gerunds</div>
+            <div>
+                When an "ing" verb acts as a noun, it's called a gerund. For example, in the sentence "Sleeping is the cat's favorite activity", "sleeping" is used as noun that represents the activity of sleeping. This sentence is complete because  "sleeping" is the subject of the sentence and the main verb is "is". Here are a few more examples of gerunds:
+                <ul>
+                    <li>
+                        "Reading books is a great way to learn."
+                    </li>
+                    <li>
+                        "Running marathons helps Jack to stay fit."
+                    </li>
+                    <li>
+                        "Joes likes climbing mountains."
+                    </li>
+                </ul>
+            </div>
+            <div class='font-semibold pt-5 pb-1'>Present Participles</div>
+            <div>
+                "ing" verbs can also be used as an adjective, known as a present participle. For example, the phrase "The sleeping cat" is not a complete sentence because "sleeping" is not used as a verb; it is used as an adjective  to describe the state of the cat. We could make the sentence complete by adding a main verb, like "The sleeping cat was woken by the squeaking mouse." Here are a few more examples of present participles:
+                <ul>
+                    <li>
+                        "It's tough to commute to work without a working car"
+                    </li>
+                    <li>
+                        "The dog chased the fleeing squirrel."
+                    </li>
+                    <li>
+                        "Anthony was annoyed by the barking dog."
+                    </li>
+                </ul>
+            </div>
+            <div class="font-semibold pt-5 pb-1">Non-essential clauses</div>
+            <div>
+                "Ing" verbs can also be used to lead off non-essential clauses, as we saw in the earlier section. For example, "The cat, <b>hoping to finally catch its prey</b>, pounced on the red dot." In that sentence, "hoping to finally catch its prey" is a non-essential clause that is separated from the rest of the sentence by commas, so "hoping" is not a main verb.
+            </div>
+        </div>
+        <div class="font-bold text-lg pt-4 pb-2">
+            "To" Verbs (aka Infinitives)
         </div>
         <div>
-            When you add the word "to" in front of a verb, it becomes what's known as an infinitive verb, which does not act as an actionable verb. Depending on the context, it may act as a noun, adjective, or adverb. For example, in the sentence "To err is human", "to err" is an infinitive verb that acts as a noun, representing the act of erring. Also, in the sentence "I need to win", "to win" acts as a noun because it represents a thing that is needed. In the sentence "I went to buy bananas", "to buy" acts as an adverb because it describes the reason the subject "went". An infinitive verb can also act as an adjective, describing a noun. For example, in the sentence "The book to read is on the shelf", "to read" acts as an adjective describing the book.
+            When you add the word "to" in front of a verb, it becomes what's known as an infinitive verb, which does not act as a main verb. Depending on the context, it may act as a noun, adjective, or adverb. For example, in the sentence "To err is human", "to err" is an infinitive verb that acts as a noun, representing the act of erring. Also, in the sentence "I need to win", "to win" acts as a noun because it represents a thing that is needed. In the sentence "I went to buy bananas", "to buy" acts as an adverb because it describes the reason the subject "went". An infinitive verb can also act as an adjective, describing a noun. For example, in the sentence "The book to read is on the shelf", "to read" acts as an adjective describing the book.
         </div>
     </div>
 
@@ -67,7 +121,7 @@
             </li>
             <li>
                 <div class="font-semibold">
-                    Colons
+                    Colons (sometimes)
                 </div>
                 <ul>
                     <li>
@@ -78,6 +132,16 @@
                     </li>
                     <li>
                         After the colon, we may have a complete sentence, or we might have a sentence fragment.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <div class="font-semibold">
+                    The word "because"
+                </div>
+                <ul>
+                    <li>
+                        For example, "I went to the store because I needed milk."
                     </li>
                 </ul>
             </li>
