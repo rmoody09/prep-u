@@ -28,11 +28,6 @@
         As mentioned above, student-produced response questions are questions where you type in the exact answer. The app will accept up to 5 characters, and will accept decimal answers (like 1.5), as well as fractions (like 3/2). However, the app will not accept mixed fractions (like 1 1/2). If the decimal form of the correct answer requires more than 5 characters, then you'll need to either round or truncate the answer to 5 characters. For example, if the correct answer is 2/3, or 0.6666666666..., then you can enter it as 0.667 (rounded), or as 0.666 (truncated). Note that these are 5 characters when you include the decimal point. It would also be acceptable to enter .6667 or .6666 (without the leading 0 before the decimal). And of course, you can enter the fraction form as well (2/3).
     </div>
 
-    <h2 class="sat-guide-section-header">Question Types</h2>
-    <div class="section-description">
-        Similarly to the Reading & Writing section, the College Board identifies 4 "domains" that their Math questions fall under. And within each domain, they identify multiple "skills" that are incldued in that domain. While Reading & Writing questions can be more clearly bucketed into types of questions that show up on every test, Math questions can be a bit more diverse in nature. In our math preparation, we'll focus less on classifying each question under repeated "types", and more on the underlying skills that are being tested, and developing an intuition of when and how to apply them.
-    </div>
-
     <h2 class="sat-guide-section-header">Can I use a calculator?</h2>
     <div class="section-description">
         Yes! In fact, not only can you use one calculator, you can use two! The testing app (called Bluebook) has Desmos built in, and you can also use your own calculator. If you aren't familiar with Desmos, it's a free online graphing calculator that you can use to graph functions, solve equations, and more. We'll have more tips on using Desmos later, but I recommend you playing around with it <ULink active-class="text-primary" inactive-class="text-primary" to="https://www.desmos.com/calculator" target="_blank">here</ULink>.

@@ -1,7 +1,8 @@
 <script setup>
 import renderMathInElement from "katex/dist/contrib/auto-render";
+import 'katex/dist/katex.min.css';
 
-onMounted(async () => {
+const renderKaTeX = () => {
     try {
         console.log('Rendering LaTeX');
         // Only target elements that actually contain LaTeX content
@@ -23,6 +24,11 @@ onMounted(async () => {
     } catch (error) {
         console.error('Error in KaTeX rendering:', error);
     }
+}
+
+onMounted(async () => {
+    await nextTick();
+    renderKaTeX();
 })
 </script>
 

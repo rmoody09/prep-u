@@ -343,20 +343,13 @@
         math: {
             slug: 'math',
             title: 'Math',
-            subsections: ['math-overview', 'math-domains', 'math-cheat-sheet', 'algebra', 'advanced-math', 'data-analysis', 'geometry-trigonometry'],
+            subsections: ['math-overview', 'algebra', 'advanced-math', 'data-analysis', 'geometry-trigonometry', 'math-cheat-sheet'],
             top_level: true,
             parent: null
         }, 
         'math-overview': {
             slug: 'overview',
             title: 'Overview',
-            subsections: [],
-            top_level: false,
-            parent: 'math'
-        },
-        'math-domains': {
-            slug: 'domains',
-            title: 'Domains',
             subsections: [],
             top_level: false,
             parent: 'math'

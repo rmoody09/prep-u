@@ -83,6 +83,7 @@ export const cb_skills = [
       section: 'math',
       domain: 'problem_solving_and_data_analysis'
     },
+
     { id: 'percentages', 
       label: 'Percentages',
       section: 'math',
@@ -276,3 +277,28 @@ export const question_types = [
     skill: 'inferences'
   }
 ]
+
+
+
+const wrong_answer_types = {
+  'right_answer_wrong_question': {
+    label: 'Right Answer Wrong Question',
+    section: 'math',
+    subskills: []
+  },
+  'problem_misinterpretation': {
+    label: 'Problem Misinterpretation',
+    section: 'math',
+    subskills: []
+  },
+  'problem_oversimplification': {
+    label: 'Problem Oversimplification',
+    section: 'math',
+    subskills: []
+  },
+  'question_misinterpretation': {
+    label: 'Question Misinterpretation',
+    section: 'math',
+    subskills: []
+  }
+}
