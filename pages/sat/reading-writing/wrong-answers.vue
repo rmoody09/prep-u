@@ -4,26 +4,16 @@
         The SAT wouldn't be a very useful test if everyone got all the questions right, so the test makers carefully craft many of their wrong answers to make them seem tempting. But there are commons themes to the tricks and traps they use to make answers wrong, which we'll explore here. If you know what to look for, you can avoid these traps and improve your chances of getting questions right.
     </div>
 
-    <h2 class="sat-guide-section-header">These apply to many question types, but not to all</h2>
+    <h2 class="sat-guide-section-header">Not all traps apply to all question types</h2>
     <div class="section-description">
-        The common types of wrong answers we'll explore here can apply to most types of questions in the Reading and Writing section, but not all. And there may be certain nuances to how they use them on different types of questions, which we'll be sure to cover when we dive deeper into those question types. The question types where these wrong answers don't really apply are:
-        <ul>
-            <li>
-                Standard English Conventions
-            </li>
-            <li>Transition Questions</li>
-            <li>Words in Context Questions</li>
-            <li>Strengthen/Undermine Questions</li>
-        </ul>
+        The common types of wrong answers we'll explore here can apply to numerous types of questions in the Reading and Writing section, but not all. And there may be certain nuances to how they use them on different types of questions, which we'll be sure to cover when we dive deeper into those question types. In particular, Standard English questions are their own beast, and the wrong answers we'll explore here don't really apply to them. 
 
-        <div>
-            These question types still have their own strategies for getting to the right answer, but the general types of wrong answers discussed here are less applicable to them.
-        </div>
+        
     </div>
 
     <h2 class="sat-guide-section-header">Trap #1: Partially true, but says something that's not supported</h2>
     <div class="section-description">
-        These answers will often start off with a statement that seems to line up will with the passage, but then goes on to say something that's not supported by the text. For example, if the answer choice said "Dave disliked nature because he had a bad experience camping as a child." It might be clear from the passage that Dave disliked nature, making the answer choice seem good initially. But if there is nothing in the passage to back up why he disliked nature, then the answer choice would be incorrect. Remember, an answer choice is either fully right or it's wrong.
+        These answers will often start off with a statement that seems to line up will with the passage, but then goes on to say something that's not supported by the text. For example, if the answer choice said "Dave disliked nature because he had a bad experience camping as a child." It might be clear from the passage that Dave disliked nature, making the answer choice seem good initially. But if there is nothing in the passage to back up why he disliked nature, then the answer choice would be incorrect. An answer choice is either fully right or it's wrong. You shouldn't have to make any logical leaps or assumptions that aren't directly supported by the text.
     </div>
 
     <h2 class="sat-guide-section-header">Trap #2: Seems plausible, but not directly supported by the text</h2>
@@ -33,7 +23,7 @@
 
     <h2 class="sat-guide-section-header">Trap #3: Steals language from the text</h2>
     <div class="section-description">
-        Sometimes they will take some words or phrases verbatim from the text and put them in the answer choice. This can make the answer choice seem appealing, because it sounds very similar to what the text says. But normally if you see them recycling words directly from the text, this shoudl be a red flag that they might be trying to lure you toward that answer, even thought it might actually be saying something different than what the text supports. Generally, the correct answer is going to paraphrase the text rather than use the exact same language. Of course, you shouldn't rule out answers just because they have a word that you see in the text - if the text is about James then they'll probably mention James in the answer choice. But beware of it seeming like they're unnecessarily using the same words from the text instead of paraphrasing it.
+        Sometimes they will take some words or phrases verbatim from the text and put them in the answer choice. This can make the answer choice seem appealing, because it sounds very similar to what the text says. But if you see them recycling words directly from the text, especially words that they could easily have paraphrased instead, this should be a red flag that they might be trying to lure you toward a wrong answer. Generally, the correct answer is going to paraphrase the text rather than use the exact same language. Of course, you shouldn't rule out answers just because they have a word that you see in the text - if the text is about James then they'll probably mention James in the answer choice. But beware of it seeming like they're unnecessarily using the same words from the text instead of paraphrasing it.
     </div>
 
     <h2 class="sat-guide-section-header">Trap #4: Overstating the text</h2>
@@ -59,5 +49,16 @@
     <h2 class="sat-guide-section-header">Spotting the right answer</h2>
     <div class="section-description">
         Often, the right answer might not look appealing off the bat. The right answer will frequently be a paraphrase of what the text says, and is often more vaguely worded. Because of this, it might seem at first glance like it's not relevant because you don't see it directly saying things that correspond to the language in the text. You should treat answer choices as "innocent until proven guilty". Assume that each answer is correct at first - if it uses more general or vague language, see if this language might make sense as a paraphrase of the text. The right answer is often the safest one - the one you can't prove wrong. All the wrong answer choices should have some reason that disqualifies them from being correct.
+    </div>
+
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/question-types' variant='outline' size='xl'>
+                Next: Question Types
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
+        </div>
     </div>
 </template>

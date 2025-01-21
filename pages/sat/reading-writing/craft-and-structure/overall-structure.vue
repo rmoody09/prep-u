@@ -32,12 +32,23 @@
             <div>
                 As we mentioned, the answer choices tend to make at least two claims. Some answer choices might have one claim that accurately portrays a portion of the passage, but the other claim does not line up with what we see in the text. If part of the answer choice is incorrect, the entire answer choice is incorrect.
             </div>
-            <div>
+            <div class="pt-3">
                 <strong>Too extreme</strong>
             </div>
             <div>
                 These answer choices might mostly reflect the sentiment of the passage, but are too extreme with the claims they make. Be wary of words like "always", "never", "all", "none", "most", "least", "more than", "less than", etc.
             </div>
+        </div>
+    </div>
+
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/craft-and-structure/cross-text-connections' variant='outline' size='xl'>
+                Next: Cross-Text Connections
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
         </div>
     </div>
 </template>

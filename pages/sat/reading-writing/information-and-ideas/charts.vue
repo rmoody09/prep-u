@@ -55,13 +55,13 @@
     <h2 class="sat-guide-section-header">Use Process of Elimination</h2>
     <div class="section-description">
         If you were able to spot the right trend yourself and find it in the answer choices, then you might not need to do this - if you feel confident you can just select it and move on. But often it's best to go through the answer choices one by one. When you do so, ask yourself two things:
-        <div class="font-semibold">
+        <div class="pt-3 font-semibold">
             Does the answer choice achieve the goal of the question?
         </div>
         <div>
             Before worrying about whether the answer choice is actually reflected in the data, let's assume it is and ask whether it does a good job of achieving the goal of the question. If not, then you can eliminate it without having to check the data.
         </div>
-        <div class="font-semibold">
+        <div class="pt-3 font-semibold">
             Is the answer choice supported by the data?
         </div>
         <div>
@@ -77,11 +77,22 @@
         <div>
             Some wrong answers would be a good choice to answer the question if they were actually true, but they might not line up with the data provided. If the answer choices doesn't line up with the data in the graphic, then it's not the right answer.
         </div>
-        <div class="font-semibold">
+        <div class="pt-3 font-semibold">
             Reflected in the data, but doesn't answer the question
         </div>
         <div>
             Other wrong answers might take actual data from the graphic, but that data either goes against what the question is looking to achieve, or is irrelevant to it.
+        </div>
+    </div>
+
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/information-and-ideas/illustrate-claim' variant='outline' size='xl'>
+                Next: Illustrate the Claim
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
         </div>
     </div>
 </template>

@@ -182,6 +182,17 @@
     <div class="section-description">
         You'll see that we've adopted the College Board's 4 domains, with each listed in our navigation menu. When you click on a domain, you'll be walked through all the question types that fall under that domain.
     </div>
+
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/craft-and-structure/words-in-context-blank' variant='outline' size='xl'>
+                Next: Words in Context (Fill in the Blank)
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
+        </div>
+    </div>
 </template>
 
 <style scoped>

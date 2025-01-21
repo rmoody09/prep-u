@@ -50,4 +50,15 @@
     <div class="section-description">
         Just like with the other type of "Words in Context" question, it's crucial that you properly interpret what the passage is trying to convey. Look out for clues like transition words and phrases, colons, or other indicators of the direction or tone of the passage.
     </div>
+
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/craft-and-structure/main-purpose' variant='outline' size='xl'>
+                Next: Main Purpose Questions
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
+        </div>
+    </div>
 </template>

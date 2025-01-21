@@ -31,18 +31,29 @@
             <div>
                 Some wrong answers may accurately reflect what is in the text, but only cover a relatively minor point or detail. The correct answer should not just be accurate, but should be the <b>main idea</b>. If two answers both seem accurate based on the text, choose the one that seems to cover the passage more broadly or seem like a more important point.
             </div>
-            <div>
+            <div class="pt-3">
                 <strong>Steals language from the text</strong>
             </div>
             <div>
                 Watch out for answer choices that use exact words from the text, when they could have been paraphrased. These reused words are often there to lure you toward thinking it's reflecting the text. Don't rule it out just because you notice it taking words from the text, but be wary of this trap. Generally, the correct answer is going to paraphrase the text, trying not to pull too much language directly from it.
             </div>
-            <div>
+            <div class="pt-3">
                 <strong>Seems plausible, but not directly supported</strong>
             </div>
             <div>
                 Watch out for answer choices that sounds like they very well could be true, but there isn't actually evidence in the text to support it. You shouldn't have to apply outside knowledge of the world or subject matter - all the evidence you need should be in the text itself.
             </div>
+        </div>
+    </div>
+
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/information-and-ideas/details' variant='outline' size='xl'>
+                Next: Details Questions
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
         </div>
     </div>
 </template>

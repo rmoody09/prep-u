@@ -29,7 +29,11 @@
 
     <h2 class="sat-guide-section-header">Two Criteria for the Correct Answer</h2>
     <div class="section-description">
-        There are two main criteria that an answer choice has to fulfill to be the correct answer. First, whatever it says must be true based on what the passage says. It shouldn't make additional assumptions or claims that go beyond what is supported by the passsage. Second, it has to be reasonable to call it the "main purpose" of the passage. If it's true based on the passage, but only represents a minor detail, then it's not the main purpose. If it seems like two answer choices are both true based on the passage, then go with the one that seems to more broadly cover the main purpose, or what the author would be trying to achieve.
+        There are two main criteria that an answer choice has to fulfill to be the correct answer. 
+        <div class='font-semibold pt-2'>Must be backed up by passage</div>
+        First, whatever it says must be true based on what the passage says. It shouldn't make additional assumptions or claims that go beyond what is supported by the passsage.
+        <div class='font-semibold pt-3'>Must be the main purpose</div>
+        Second, it has to be reasonable to call it the "main purpose" of the passage. If it's true based on the passage, but only represents a minor detail, then it's not the main purpose. If it seems like two answer choices are both true based on the passage, then go with the one that seems to more broadly cover the main purpose, or what the author would be trying to achieve.
     </div>
 
     <h2 class="sat-guide-section-header">Trap answers</h2>
@@ -43,12 +47,23 @@
                 In this case "doesn't answer the question" means that the answer choice doesn't adequately represent the main purpose of the passage. It might accurately describe a minor detail of the passage, but not the main purpose. If we see two answers that are both true based on the passage, then go with the one that seems to more broadly cover the main purpose, or what the author would be trying to achieve.
             </div>
 
-            <div>
+            <div class='pt-3'>
                 <strong>Overstating the text</strong>
             </div>
             <div>
                 Watch out for answer chioces that seem to convey the sentiment of the main purpose, but go too far in what they claim, using overly exteme language or comparisons that aren't supported by the text.
             </div>
+        </div>
+    </div>
+
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/craft-and-structure/underlined-function' variant='outline' size='xl'>
+                Next: Function of Underlined Portion
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
         </div>
     </div>
 </template>

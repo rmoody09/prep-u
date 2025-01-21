@@ -10,7 +10,7 @@
     <h2 class="sat-guide-section-header">What does it test?</h2>
     <div class="section-description">
         In short, the Reading & Writing section tests your ability to read, comprehend, and analyze passages, and your ability to adhere to the standard conventions of grammar and sentence structure. To break it into a little more detail, here are the main skills it tests:
-        <ul>
+        <ul class="pl-6 mt-4">
             <li>
                 Vocabulary
             </li>
@@ -45,5 +45,21 @@
         In the Reading & Writing modules questions are grouped together by question type, and the question types will always fall in the same order. It will always start off with a few "Words in Context" questions, and will always finish with some "Rhetorical Synthesis" questions, with many other types in between. We'll get into more detail on the exact question types and their order in the "Question Types" section.
     </div>
 
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/wrong-answers' variant='outline' size='xl'>
+                Next: Common Wrong Answers
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
+        </div>
+    </div>
+
     
 </template>
+<style scoped>
+    ul li {
+        @apply mb-1;
+    }
+</style>

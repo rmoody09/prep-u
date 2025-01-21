@@ -44,4 +44,15 @@
     <div class="section-description">
         In order to properly infer what would make proper sense in the blank, it's crucial that you properly interpret what the passage is trying to convey. Look out for clues that indicate the direction they are going with their statement, claim, argument, etc. Keeping an eye out for transition words and phrases can be very helpful. If we see a contrast transition word/phrase like "however", "nevertheless", or "on the other hand", then we know that the author is going to say something different than what they just said, which can inform what should go in the blank. If, on the other hand (see what I did there - transition phrase), we see a transition word like "likewise" or "furthermore", then we know that the author is going to say something more in agreement with what they just said, which can also inform what should go in the blank. Another good indicator is a colon, which indicates that the author is going to say something more about what they just said.
     </div>
+
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/craft-and-structure/words-in-context-underlined' variant='outline' size='xl'>
+                Next: Words in Context (Underlined)
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
+        </div>
+    </div>
 </template>

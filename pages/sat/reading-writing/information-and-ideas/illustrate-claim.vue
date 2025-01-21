@@ -41,4 +41,15 @@
     <div class="section-description">
        Some of the works used can be somewhat poetic, so the claim might be demonstrated through use of metaphors rather than using more direct language. So be careful not to always interpret the quotations too literally, especially if the work referenced is a poem. Many of the works are also older texts, so the language might seem more antiquated than you're used to. Try to familiarize with some older phrases (for example "thou" and "thee" mean "you" in in old English, and "thy" and thine typically mean "your").
     </div>
+
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/information-and-ideas/strengthen-undermine' variant='outline' size='xl'>
+                Next: Strengthen/Undermine Questions
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
+        </div>
+    </div>
 </template>

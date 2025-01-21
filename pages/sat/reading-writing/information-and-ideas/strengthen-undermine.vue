@@ -58,7 +58,14 @@
         This goes back to the first step - make sure you carefully read the question to see which direction you're looking for. A very common mistake is to choose an answer that supports the claim, when the question is actually asking you to undermine it. So make sure you are clear on which direction you're looking for, and that you pick an answer choice that achieves that goal.
     </div>
 
-
-    
-
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/standard-english/overview' variant='outline' size='xl'>
+                Next: Standard English Conventions
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
+        </div>
+    </div>
 </template>

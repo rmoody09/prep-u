@@ -44,17 +44,28 @@
         <div>
             Watch out for answers that try to make answers seem tempting by re-using specific words from the text. Make sure the answer choice makes logical sense as a conclusion to the passage.
         </div>
-        <div class="font-semibold">
+        <div class="pt-3 font-semibold">
             Opposite of the correct answer
         </div>
         <div>
             Particularly in passages where there is a change in direction (with words like "however", "previously", "now", etc.), you'll often see answers that are the opposite of the correct answer. These answers can look right because they might line up with information in the passage, so if you miss the context that the author is disagreeing or about to present a contrasting idea, you might be tempted to pick one of these.
         </div>
-        <div class="font-semibold">
+        <div class="pt-3 font-semibold">
             Seems plausible
         </div>
         <div>
             Watch out for answers that seem like they very well could be true, but don't flow logically from the text.
+        </div>
+    </div>
+
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/information-and-ideas/charts' variant='outline' size='xl'>
+                Next: Charts & Graphs
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
         </div>
     </div>
 </template>

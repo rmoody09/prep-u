@@ -37,13 +37,24 @@
             Stolen Language
         </div>
         <div>Wrong answers will often reuse specific language from the text to try to make the answer seem like it lines up with the text. Pay careful attention to what the answer choice is actually saying, not just the words used.</div>
-        <div class="font-semibold">
+        <div class="pt-3 font-semibold">
             Seems Plausible
         </div>
         <div>Watch out for answers that seem like they very well could be true, but rely on assumptions not supported directly by the text.</div>
-        <div class="font-semibold">
+        <div class="pt-3 font-semibold">
             Overstates Something From the Text
         </div>
         <div>Some answer choices might take a claim or sentiment that is in the text, but take it too far, overstating it beyond what can actually be supported by the text.</div>
+    </div>
+
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/information-and-ideas/inference' variant='outline' size='xl'>
+                Next: Inference Questions
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
+        </div>
     </div>
 </template>

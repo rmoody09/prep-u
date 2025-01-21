@@ -12,7 +12,7 @@
     <div class="section-description">
         <div class="question-container">
             <ClientOnly>
-                <SATProblem problem_id="e829a681-98d1-420b-a0e6-79c9ad90b37b" />
+                <SATProblem problem_id="c360b121-260d-46b1-91a6-1ba643bd615d" />
             </ClientOnly>
         </div>
     </div>
@@ -47,7 +47,7 @@
             <div>
                 Some wrong answers might take something claimed in a text, but overexaggerate it or take it too far to be supported by the text.
             </div>
-            <div>
+            <div class="pt-3">
                 <strong>Opposite</strong>
             </div>
             <div>
@@ -56,5 +56,14 @@
         </div>
     </div>
 
-
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/information-and-ideas/main-idea' variant='outline' size='xl'>
+                Next: Main Idea Questions
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
+        </div>
+    </div>
 </template>
