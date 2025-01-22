@@ -96,6 +96,42 @@
     <h2 class="sat-guide-section-header">Know the Applicable Rules</h2>
     <div class="section-description">
         While the above patterns get you closer to knowing what you are being tested on, some of these groupings have numerous rules or conventions that they might be testing. We'll teach you all the rules that might fall under each of these categories, and will also teach you a step by step process to ensure you ultimately arrive at the correct answer.
+
+        <div class='pt-4'>
+            Before we get into the processes for each of the above patterns, we'll first address a couple of important concepts:
+            <ul class='pt-4'>
+                <li>
+                    <span class='font-semibold'>
+                        Complete Sentences
+                    </span>
+                    <ul>
+                        <li>
+                            What constitutes a complete sentence
+                        </li>
+                        <li>
+                            How to separate or combine complete sentences
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span class='font-semibold'>Essential and Nonessential Clauses</span>
+                </li>
+            </ul>
+            <div class='pt-4'>
+                While the above concepts are most relevant to punctuation questions, they can sometimes come into play in other types as well.
+            </div>
+        </div>
+    </div>
+
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/standard-english/essential-nonessential' variant='outline' size='xl'>
+                Next: Essential and Nonessential Clauses
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
+        </div>
     </div>
 </template>
 

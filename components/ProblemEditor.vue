@@ -212,6 +212,8 @@
         collegeBoardQuestionId.value = props.problem.source_question_id;
     }
 
+    const justAddedProblemId = ref(null);
+
     const saveProblemClicked = async () => {
         submitting.value = true;
         /*
@@ -282,6 +284,7 @@
                     'Content-Type': 'application/json'
                 }
             });
+            justAddedProblemId.value = props.problem.id;
             console.log(resp);
         } else {
             const resp = await fetch("/api/add/sat-problem", {
@@ -293,6 +296,9 @@
             });
             console.log(resp);
             const resp_json = await resp.json();
+            if (resp_json.data) {
+                justAddedProblemId.value = resp_json.data[0].id;
+            }
             console.log(resp_json);
         }
         
@@ -402,6 +408,14 @@
             </div>
             <div v-if="submitted">
                 <div>Problem saved successfully</div>
+                <div v-if="justAddedProblemId">
+                    <div>
+                        Problem ID: {{ justAddedProblemId }}
+                    </div>
+                    <div>
+                        <UButton :to="`/sat-problem/${justAddedProblemId}`">View Problem</UButton>
+                    </div>
+                </div>
                 <div class="flex flex-row gap-4 pt-4">
                     <UButton @click="addAnotherProblemClicked">Add another problem</UButton>
                     <UButton to="/admin/sat-problems" variant="outline">All problems</UButton>

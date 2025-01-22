@@ -1,11 +1,15 @@
 <template>
     <h1 class="sat-guide-page-header">
-        Separating Complete Sentences
+        Complete Sentences
     </h1>
 
     <h2 class="sat-guide-section-header">What's a Complete Sentence?</h2>
     <div class="section-description">
         A complete sentence, also known as an independent clause, is a sentence that expresses a complete thought. To qualify as a complete sentence, all a sentence needs is a subject and a main verb. A subject is a noun or pronoun, and a main verb is an action that the subject performs. For example, "The cat sleeps." is a complete sentence because it has a subject (cat) and a main verb (sleeps). Complete sentences, particularly on the SAT, can be much more complex than this by incorporating additional modifiers, but the only criteria it needs to be a complete sentence is a subject and a main verb performed by the subject.
+
+        <div class='pt-4'>
+            Below we will elaborate on what qualifies as a complete sentence (what counts as a "main verb", etc.), and how to separate or connect complete sentences. The SAT isn't going to test you on any of the terminology (like gerunds, non-essential clauses, etc.), but it's important to understand the concepts. It will help to know the terminology though since we might refer to it when analyzing whether sentences/answer choices are correct.
+        </div>
     </div>
 
     <h2 class="sat-guide-section-header">Not All Verbs Count as Main Verbs</h2>
@@ -18,7 +22,7 @@
             <div class='font-semibold pb-1'>Need a helper verb to act as a main verb</div>     
             <div>
                 When we add "ing" to the end of a verb, it can only act as a main verb if it's preceded by helper verb, often a "to be" verb (e.g. "Tim is helping Mary with her move"). Without a helper verb, an "ing" verb cannot be the main verb in a sentence. It might be a gerund, a present participle, or it might be used to lead off a non-essential clause, as we'll explore below. Here are a few examples of "ing" verbs combined with a helper verb to act as a main verb phrase:
-                <ul>
+                <ul class='pt-2 pl-8'>
                     <li>
                         "The cat <b>is sleeping</b>."
                     </li>
@@ -30,25 +34,25 @@
                     </li>
                 </ul>
             </div>
-            <div class='font-semibold pt-5 pb-1'>Gerunds</div>
+            <div class='font-semibold pt-6 pb-1'>Gerunds (when an "ing" verb acts as a noun)</div>
             <div>
                 When an "ing" verb acts as a noun, it's called a gerund. For example, in the sentence "Sleeping is the cat's favorite activity", "sleeping" is used as noun that represents the activity of sleeping. This sentence is complete because  "sleeping" is the subject of the sentence and the main verb is "is". Here are a few more examples of gerunds:
-                <ul>
+                <ul class='pt-2 pl-8'>
                     <li>
-                        "Reading books is a great way to learn."
+                        "Reading is a great way to learn."
                     </li>
                     <li>
-                        "Running marathons helps Jack to stay fit."
+                        "Running helps Jack to stay fit."
                     </li>
                     <li>
                         "Joes likes climbing mountains."
                     </li>
                 </ul>
             </div>
-            <div class='font-semibold pt-5 pb-1'>Present Participles</div>
+            <div class='font-semibold pt-6 pb-1'>Present Participles (when an "ing" verb acts as an adjective)</div>
             <div>
                 "ing" verbs can also be used as an adjective, known as a present participle. For example, the phrase "The sleeping cat" is not a complete sentence because "sleeping" is not used as a verb; it is used as an adjective  to describe the state of the cat. We could make the sentence complete by adding a main verb, like "The sleeping cat was woken by the squeaking mouse." Here are a few more examples of present participles:
-                <ul>
+                <ul class='pt-2 pl-8'>
                     <li>
                         "It's tough to commute to work without a working car"
                     </li>
@@ -60,12 +64,12 @@
                     </li>
                 </ul>
             </div>
-            <div class="font-semibold pt-5 pb-1">Non-essential clauses</div>
+            <div class="font-semibold pt-5 pb-1">"ing" verbs can begin non-essential clauses</div>
             <div>
-                "Ing" verbs can also be used to lead off non-essential clauses, as we saw in the earlier section. For example, "The cat, <b>hoping to finally catch its prey</b>, pounced on the red dot." In that sentence, "hoping to finally catch its prey" is a non-essential clause that is separated from the rest of the sentence by commas, so "hoping" is not a main verb.
+                "Ing" verbs can also be used to lead off non-essential clauses, as we saw in the earlier section. For example, "The cat, <b>hoping to finally catch its prey</b>, pounced on the red dot." In that sentence, "hoping to finally catch its prey" is a non-essential clause that is separated from the rest of the sentence by commas, so "hoping" is not a main verb. These non-essential clauses might appear in the middle of a sentence, like we just saw, or they can also be at the beginning of a sentence ("Hoping to finally catch its prey, the cat pounced on the red dot."), or at the end of a sentence ("The cat pounced on the red dot, hoping to finally catch its prey.").
             </div>
         </div>
-        <div class="font-bold text-lg pt-4 pb-2">
+        <div class="font-bold text-lg pt-8 pb-2">
             "To" Verbs (aka Infinitives)
         </div>
         <div>
@@ -150,6 +154,17 @@
 
     <h2 class="sat-guide-section-header">Adjacent Complete Sentences ALWAYS Require One of the Above</h2>
     <div class="section-description">
-        It's not just that you CAN use one of the above to connect two complete sentences; when there are two complete sentences next to each other, you MUST use one of the above to connect them. Otherwise, there is some grammatical error sucha as a run-on sentence or a comma splice.
+        It's not just that you CAN use one of the above to connect two complete sentences; when there are two complete sentences next to each other, you MUST use one of the above to connect them. Otherwise, there is some grammatical error such as a run-on sentence or a comma splice.
+    </div>
+
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/standard-english/punctuation/overview' variant='outline' size='xl'>
+                Next: Punctuation
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
+        </div>
     </div>
 </template>

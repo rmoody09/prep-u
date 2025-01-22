@@ -231,7 +231,7 @@
         'standard-english-conventions': {
             slug: 'standard-english',
             title: 'Standard English Conventions',
-            subsections: ['standard-english-overview', 'essential-nonessential', 'punctuation', 'verb-form', 'misplaced-modifiers', 'pronouns', 'standard-english-process'],
+            subsections: ['standard-english-overview', 'essential-nonessential', 'separating-complete-sentences', 'english-question-types', 'standard-english-process'],
             top_level: false,
             parent: 'reading-writing'
         },
@@ -471,9 +471,9 @@
         'punctuation': {
             slug: 'punctuation',
             title: 'Punctuation',
-            subsections: ['punctuation-overview', 'separating-complete-sentences', 'semicolons', 'colons', 'emdashes', 'commas', 'question-marks'],
+            subsections: ['punctuation-overview', 'semicolons', 'colons', 'emdashes', 'commas', 'question-marks'],
             top_level: false,
-            parent: 'standard-english-conventions'
+            parent: 'english-question-types'
         },  
         'punctuation-overview': {
             slug: 'overview',
@@ -487,8 +487,29 @@
             title: 'Separating Complete Sentences',
             subsections: [],
             top_level: false,
-            parent: 'punctuation'
+            parent: 'standard-english-conventions'
         },  
+        'english-question-types': {
+            slug: 'question-types',
+            title: 'Question Types',
+            subsections: [ 'english-question-types-overview', 'pronouns', 'apostrophes', 'question-marks', 'punctuation', 'verb-form', 'misplaced-modifiers' ],
+            top_level: false,
+            parent: 'standard-english-conventions'
+        },
+        'english-question-types-overview': {
+            slug: 'overview',
+            title: 'Overview',
+            subsections: [],
+            top_level: false,
+            parent: 'english-question-types'
+        },
+        'apostrophes': {
+            slug: 'apostrophes',
+            title: 'Apostrophes',
+            subsections: [],
+            top_level: false,
+            parent: 'english-question-types'
+        },
         'semicolons': {
             slug: 'semicolons',
             title: 'Semicolons',
@@ -529,28 +550,28 @@
             title: 'Question Marks',
             subsections: [],
             top_level: false,
-            parent: 'punctuation'
+            parent: 'english-question-types'
         },  
         'verb-form': {
             slug: 'verb-form',
             title: 'Verb Form',
             subsections: [],
             top_level: false,
-            parent: 'standard-english-conventions'
+            parent: 'english-question-types'
         },  
         'misplaced-modifiers': {
             slug: 'misplaced-modifiers',
             title: 'Misplaced Modifiers',
             subsections: [],
             top_level: false,
-            parent: 'standard-english-conventions'
+            parent: 'english-question-types'
         },
         'pronouns': {
             slug: 'pronouns',
             title: 'Pronouns',
             subsections: [],
             top_level: false,
-            parent: 'standard-english-conventions'
+            parent: 'english-question-types'
         },  
         'standard-english-process': {
             slug: 'wizard',

@@ -139,4 +139,15 @@
     <div class="section-description">
         We just saw that the words "that" and "which" can tell us whether a clause is essential or non-essential. But as we saw above, there are many other ways to start off dependent clauses. So how do you we know if a clause is non-essential (and should be punctuated) or essential (and should not be punctuated)? The key question to ask is whether omitting that clause would change the sentence's meaning. In essential clauses, that clause is needed to specify one of the nouns we are talking about, whereas non-essential clauses just give additional information about something the sentence is talking about. For example, "The athlete who trains the hardest will win the race" contains the essential clause "who trains the hardest", which is necessary to specify which athlete we are talking about. Whereas in the sentence "The race was won by Eliud Kipchoge, who trained the hardest" we are already talking about a specific athlete, so the clause "who trained the hardest" just provides additional information about him.
     </div>
+
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/standard-english/separating-complete-sentences' variant='outline' size='xl'>
+                Next: Complete Sentences
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
+        </div>
+    </div>
 </template>
