@@ -1,7 +1,7 @@
 <template>
-    <div class="sat-guide-page-header">
+    <h1 class="sat-guide-page-header">
         Misplaced Modifiers
-    </div>
+    </h1>
 
     <h2 class="sat-guide-section-header">How to Identify</h2>
     <div class="section-description">

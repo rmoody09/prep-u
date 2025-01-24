@@ -471,7 +471,7 @@
         'punctuation': {
             slug: 'punctuation',
             title: 'Punctuation',
-            subsections: ['punctuation-overview', 'semicolons', 'colons', 'emdashes', 'commas', 'question-marks'],
+            subsections: ['punctuation-overview', 'periods', 'semicolons', 'colons', 'emdashes', 'commas'],
             top_level: false,
             parent: 'english-question-types'
         },  
@@ -510,6 +510,13 @@
             top_level: false,
             parent: 'english-question-types'
         },
+        'periods': {
+            slug: 'periods',
+            title: 'Periods',
+            subsections: [],
+            top_level: false,
+            parent: 'punctuation'
+        },
         'semicolons': {
             slug: 'semicolons',
             title: 'Semicolons',
@@ -547,7 +554,7 @@
         },  
         'question-marks': {
             slug: 'question-marks',
-            title: 'Question Marks',
+            title: 'Question vs Statement',
             subsections: [],
             top_level: false,
             parent: 'english-question-types'

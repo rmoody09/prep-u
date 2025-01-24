@@ -5,6 +5,9 @@ html, body {
 ul {
     @apply list-disc list-outside pl-4;
 }
+ol {
+    @apply list-decimal list-outside pl-4;
+}
 ul ul {
     @apply pl-6 pb-2;
 }

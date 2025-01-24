@@ -11,30 +11,30 @@
     </div>
 
     <h2 class="sat-guide-section-header">
-        We'll Address Apostrophe Questions Separately
+        Apostrophes and Question Marks Are Addressed Separately
     </h2>
     <div class="section-description">
-        While apostrophes are technically a type of punctuation, we will look at these as their own category of questions. This is because when the SAT tests on apostrophes, the answer choices won't differ in other types of punctuation, so these questions can be isolated.
+        While both of these are technically types of punctuation, questions that test on these don't overlap with other types of punctuation questions. That is why we addressed them as their own categories on previous pages.
     </div>
 
     <h2 class="sat-guide-section-header">
-        Important Concepts
+        Nonessential Clauses, Essential Clauses, and Complete Sentences
     </h2>
     <div class="section-description">
-        Before we jump into the types of punctuation tested, there are a couple of concepts we'll address first, because they are applicable to multiple types of punctuation. The first is identifying what constitutes a complete sentence, and how you can separate or combine complete sentences. The second is the concept of essential clauses vs non-essential clauses. We'll cover these concepts on their own pages next.
+        These are concepts that are important to understand to correctly solve many punctuation questions. If you are reading this guide in order, then you've already read about these concepts on the pages <ULink active-class="text-primary" active to="/sat/reading-writing/standard-english/essential-nonessential" >Essential/Nonessential Clauses</ULink> and <ULink active-class="text-primary" active to="/sat/reading-writing/standard-english/complete-sentences" >Complete Sentences</ULink>. If you haven't read them yet, then you should read them before continuing.
     </div>
 
     <h2 class="sat-guide-section-header">
         Types of Punctuation Tested
     </h2>
     <div class="section-description">
-        We'll dive into the applicable rules for each type of punctuation on their own pages, but here's a look at the types of punctuation that the SAT tests on:
+        We'll dive into the applicable rules for each type of punctuation on their own pages, but here's a look at the types of punctuation that the SAT tests on punctuation questions:
         <ul>
             <li>Semicolons (;)</li>
             <li>Periods (.)</li>
             <li>Em Dashes (—)</li>
             <li>Colons (:)</li>
-            <li>Question Marks (?)</li>
+            <li>Commas (,)</li>
         </ul>
     </div>
 </template>

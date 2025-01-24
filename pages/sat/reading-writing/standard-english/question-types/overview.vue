@@ -36,7 +36,7 @@
             </li>
             <li>
                 <div class='font-semibold'>
-                    Question Marks vs Periods
+                    Questions vs Statements
                 </div>
                 <ul>
                     <li>Usually, two answer choices will end with question marks, and the other two will end with periods.</li>
@@ -106,7 +106,7 @@
         </div>
     </div>
 
-    <h2 class="sat-guide-section-header">Question Marks vs Periods</h2>
+    <h2 class="sat-guide-section-header">Questions vs Statements</h2>
     <div class="section-description">
         These questions will usually have two answer choices that end with question marks, and the other two answer choices will end with periods. They are testing you on whether the sentence should be a statement or a question, and how it should be phrased to align with whether it is a statement or a question. Below is an example of one of these questions:
         <div class="pt-6">

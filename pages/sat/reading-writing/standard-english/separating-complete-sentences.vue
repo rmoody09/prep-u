@@ -159,8 +159,8 @@
 
     <div class='sat-guide-bottom-nav'>
         <div class='sat-guide-bottom-nav-item'>
-            <UButton to='/sat/reading-writing/standard-english/punctuation/overview' variant='outline' size='xl'>
-                Next: Punctuation
+            <UButton to='/sat/reading-writing/standard-english/question-types/overview' variant='outline' size='xl'>
+                Next: Standard English Question Types
                 <template #trailing>
                     <UIcon name='i-lucide-chevron-right' size="xl" />
                 </template>
