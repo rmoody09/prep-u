@@ -223,7 +223,91 @@
             Check the subject
         </div>
         <div>
-            If the "it" test gave you a single outlier, if you're pressed for time then you might want to just select the outlier and move one, but it's generally good practice to double check by identifying the subject and making sure it matches the verb. Look at all the nouns earlier in the passage, and ask yourself if that is the specific noun that would be performing the verb in the answer choice.
+            If the "it" test gave you a single outlier, then that outlier is most likely the right answer; if you're pressed for time then you might want to just select the outlier and move one, but it's generally good practice to double check by identifying the subject and making sure it matches the verb. Look at all the nouns earlier in the passage, and ask yourself if that is the specific noun that would be performing the verb in the answer choice.
+
+            <div class="pt-3 font-bold">
+                The subject isn't always the closest noun to the verb
+            </div>
+            <div>
+                College Board doesn't like to make things easy on you, so when testing subject verb agreement, they normally don't put the subject right next to the verb. They'll often have additional clauses or phrases come in between the subject and the verb, making it trickier to identify exactly which noun in the sentence is performing the verb. This also makes it so that using the "ear test" doesn't always make the wrong answers sound obviously wrong.
+            </div>
+
+            <div class="pt-3 font-bold">
+                Watch out for prepositional phrases after nouns
+            </div>
+            <div>
+                Sometimes prepositional phrases can mislead students into thinking the subject is a different noun than the one that's actually performing the verb. For example, in the sentence "The color of her eyes is blue", the  prepositional phrase "of her eyes" comes after the main subject "color". It can be easy to think that the subject is "her eyes", which would be plural, but the subject is actually the singular word "color".
+            </div>
         </div>
     </div>
+
+    <h2 class="sat-guide-section-header">Verb tense</h2>
+    <div class="section-description">
+        If you've gone through the steps above and it doesn't seem to be testing either of the first two concepts, then the question is probably testing you on verb tense.
+
+        <div class="font-bold text-lg pb-2 pt-5">
+            How to determine the correct verb tense
+        </div>
+        <div>
+            To determine which tense the verb should be in, we'll want to look for clues in the sentence or in previous sentences. 
+            
+            <div class="pt-3 font-semibold">
+                Here are some things to look for:
+            </div>
+            <ul class="pl-8 pt-1">
+                <li>
+                    Other verbs in the sentence or in previous sentences
+                    <ul class="pl-8 pt-2">
+                        <li>
+                            Generally, you'll want the tense of the verb to match the tense of the other verbs in the sentence, or in the previous sentence.
+                        </li>
+                        <li>
+                            But it's always possible that the tense can change within a sentence or between sentences, so don't count on this 100%.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Reference to years or time periods
+                    <ul class="pl-8 pt-2">
+                        <li>
+                            If the sentence starts off with "In 1905, ", for example, then we have a good idea that this sentence will be in the past tense.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Transition phrases that indicate time shifts
+                    <ul class="pl-8 pt-2">
+                        <li>
+                            Phrases like "Next, ", "Then, ", "Subsequently, ", etc. indicate that whatever follows takes place after what was mentioned previously. So if it was talking in present tense before that, it's probably shifting to future tense.
+                        </li>
+                        <li>
+                            Phrases like "Previously, ", "Historically, ", "In the past, ", "Until recently, ", etc. indicate that whatever follows takes in the past tense.
+                        </li>
+                        <li>
+                            Phrases like "Now, ", "Currently, ", "Presently, ", etc. indicate that whatever follows takes place in the present tense.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="font-bold text-lg pt-8 pb-2">
+            When in doubt, simpler is probably better
+        </div>
+        <div>
+            While the main 3 tenses are past, present, and future, there are a number of more complicated tenses, like past perfect, future perfect, etc. Generally, the right answer will be a simpler tense, so if you're unsure between options like "had been helping" and "helped", if the simpler one (helped) sounds ok, go with that one. This isn't always the case though, so if the slightly more complicated form sounds clearly better to you, go with your gut; just don't unnecessarily complicate things.
+        </div>
+    </div>
+
+    <div class='sat-guide-bottom-nav'>
+        <div class='sat-guide-bottom-nav-item'>
+            <UButton to='/sat/reading-writing/standard-english/question-types/misplaced-modifiers' variant='outline' size='xl'>
+                Next: Misplaced Modifiers
+                <template #trailing>
+                    <UIcon name='i-lucide-chevron-right' size="xl" />
+                </template>
+            </UButton>
+        </div>
+    </div>
+    
 </template>
+
