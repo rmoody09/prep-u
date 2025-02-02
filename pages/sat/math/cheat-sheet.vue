@@ -1178,6 +1178,136 @@ onMounted(async () => {
                         </div>
                     </div>
                 </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Pre-Percentage Amount
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            Sometimes you might be told the amount after a percentage has been applied, and you need to find the original amount.
+                        </div>
+                        <div>
+                            The easiest way to intuitively set up this formula is:
+                        </div>
+                        <div>
+                            final amount = original amount * (1 + percentage)
+                        </div>
+                        <div>
+                            e.g. if a shirt costs $22 after a 10% increase, then:
+                        </div>
+                        <div>
+                            $22 = original amount * (1.1)
+                        </div>
+                        <div>
+                            So, ultimately the equation for finding the original amount is:
+                        </div>
+                        <div>
+                            <span class="latex-formula">$$original = \frac{final}{1 + percentage}$$</span>
+                        </div>
+                        <div>
+                            e.g. <span class="latex-formula">$$original = \frac{22}{1.1}$$</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Ratios
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            A ratio is a comparison of two quantities by division
+                        </div>
+                        <div>
+                            e.g. if you have 3 apples and 2 oranges, the ratio of apples to oranges is 3:2 or 3/2
+                        </div>
+                        <div>
+                            If you know two things have the same ratio, you can set up a proportion to find the unknown quantity
+                        </div>
+                        <div>
+                            e.g. if two similar triangles have corresponding sides of 3 and 5 on one triangle, and 6 and x on the other, you can set up the proportion:
+                        </div>
+                        <div>
+                            <span class="latex-formula">$$\frac{3}{5} = \frac{6}{x}$$</span>
+                        </div>
+                        <div>
+                            Cross-multiplying gives:
+                        </div>
+                        <div>
+                            <span class="latex-formula">$$3x = 30$$</span>
+                        </div>
+                        <div>
+                            Then divide both sides by 3 to get:
+                        </div>
+                        <div>
+                            <span class="latex-formula">$$x = 10$$</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Unit Conversion
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            Multiply the original quantity by the conversion ratio to get the new quantity
+                        </div>
+                        <div>
+                            e.g. if 1 mile = 5,280 feet, the conversion ratio can be written as <span class="latex-formula">$$\frac{5280\ feet}{1\ mile}$$</span> or <span class="latex-formula">$$\frac{1\ mile}{5280\ feet}$$</span>
+                        </div>
+                        <div>
+                            Since the numerator and denominator represent the same distance, the conversion ratio is equal to 1, so multiplying by it doesn't change the original quantity
+                        </div>
+                        <div>
+                           e.g. if you want to convert 10 miles to feet, you can multiply 10 miles by the conversion ratio:
+                        </div>
+                        <div>
+                            <span class="latex-formula">$$10\ miles * \frac{5280\ feet}{1\ mile} = 52,800\ feet$$</span>
+                        </div>
+                        <div>
+                            You want to set the numerator and denominator so that the correct units cancel out, leaving you with the desired units
+                        </div>
+                        <div>
+                            e.g. in the example above, we want to cancel out miles and end up with feet, so we put miles in the denominator
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Chemical Solutions/Mixed Materials
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            Some problems deal with combining two substances, each consisting of mixed elements
+                        </div>
+                        <div>
+                            e.g. combining 1L of saline that is 10% salt with 2L of saline that is 20% salt
+                        </div>
+                        <div>
+                            The ratio might be given as percent by volume, or percent by mass, but the concept is the same
+                        </div>
+                        <div>
+                            It could also be given as a ratio instead of a percent
+                        </div>
+                        <div>
+                            The general formula for this type of problem is:
+                        </div>
+                        <div>
+                            <span class="latex-formula">$$V_1 * P_1 + V_2 * P_2 = (V_1 + V_2) * P_f$$</span>
+                        </div>
+                        <div>
+                            e.g. In the above formula, V1 represents the volume of the first substance, P1 represents the percent of the first substance, Pf represents the percent of the final combined substance, and so forth
+                        </div>
+                        <div>
+                            To demonstrate with the saline example from above, we would plug in the values as follows:
+                        </div>
+                        <div>
+                            <span class="latex-formula">$$1 * 0.1 + 2 * 0.2 = (1 + 2) * P_f$$</span>
+                        </div>
+                        <div>
+                            This yields a final solution of 16% salt
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
