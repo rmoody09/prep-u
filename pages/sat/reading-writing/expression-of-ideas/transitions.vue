@@ -1,6 +1,6 @@
 <template>
     <h1 class="sat-guide-page-header">
-        Transitions
+        Transition Questions
     </h1>
 
     <h2 class="sat-guide-section-header">How to Identify</h2>
