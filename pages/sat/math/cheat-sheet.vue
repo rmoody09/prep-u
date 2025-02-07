@@ -1,6 +1,7 @@
 <script setup>
 import renderMathInElement from "katex/dist/contrib/auto-render";
 import 'katex/dist/katex.min.css';
+import { Chart } from 'chart.js/auto';
 
 const renderKaTeX = () => {
     try {
@@ -30,8 +31,640 @@ const renderKaTeX = () => {
 
 onMounted(async () => {
     await nextTick();
-    renderKaTeX(); 
-})
+    renderKaTeX();
+});
+
+const createParabolaChart = () => {
+    const ctx = document.getElementById('parabolaChart');
+    if (!ctx) return;
+
+    // Generate x values from -3 to 3
+    const xValues = Array.from({length: 61}, (_, i) => (i - 30) / 10);
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: xValues,
+            datasets: [
+                {
+                    label: 'f(x) = x²',
+                    data: xValues.map(x => ({x: x, y: x * x})),
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.4,
+                    pointRadius: 0
+                },
+                {
+                    label: 'f(x) = x² + 3',
+                    data: xValues.map(x => ({x: x, y: x * x + 3})),
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.4,
+                    pointRadius: 0
+                },
+                {
+                    label: 'f(x) = x² - 3',
+                    data: xValues.map(x => ({x: x, y: x * x - 3})),
+                    borderColor: 'rgb(54, 162, 235)',
+                    tension: 0.4,
+                    pointRadius: 0
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 1,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 10,
+                        padding: 10,
+                        font: {
+                            size: 12
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'center',
+                    min: -5,
+                    max: 5,
+                    grid: {
+                        drawOnChartArea: false,
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        font: {
+                            size: 8
+                        }
+                    }
+                },
+                y: {
+                    type: 'linear',
+                    position: 'center',
+                    min: -5,
+                    max: 5,
+                    grid: {
+                        drawOnChartArea: false,
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        font: {
+                            size: 8
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+const createParabolaShiftChart = () => {
+    const ctx = document.getElementById('parabolaShiftChart');
+    if (!ctx) return;
+
+    // Generate x values from -5 to 5
+    const xValues = Array.from({length: 101}, (_, i) => (i - 50) / 10);
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: xValues,
+            datasets: [
+                {
+                    label: 'f(x) = x²',
+                    data: xValues.map(x => ({x: x, y: x * x})),
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.4,
+                    pointRadius: 0
+                },
+                {
+                    label: 'f(x) = (x-3)²',
+                    data: xValues.map(x => ({x: x, y: Math.pow(x - 3, 2)})),
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.4,
+                    pointRadius: 0
+                },
+                {
+                    label: 'f(x) = (x+3)²',
+                    data: xValues.map(x => ({x: x, y: Math.pow(x + 3, 2)})),
+                    borderColor: 'rgb(54, 162, 235)',
+                    tension: 0.4,
+                    pointRadius: 0
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 1,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 10,
+                        padding: 10,
+                        font: {
+                            size: 12
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'center',
+                    min: -5,
+                    max: 5,
+                    grid: {
+                        drawOnChartArea: false,
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        stepSize: 1,
+                        font: {
+                            size: 8
+                        }
+                    }
+                },
+                y: {
+                    type: 'linear',
+                    position: 'center',
+                    min: -5,
+                    max: 5,
+                    grid: {
+                        drawOnChartArea: false,
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return value === -5 || value === 5 ? value : '';
+                        },
+                        font: {
+                            size: 8
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+const createLinearFunctionChart = () => {
+    const ctx = document.getElementById('linearFunctionChart');
+    if (!ctx) return;
+
+    const xValues = Array.from({length: 101}, (_, i) => (i - 50) / 10);
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: xValues,
+            datasets: [
+                {
+                    label: 'f(x) = x',
+                    data: xValues.map(x => ({x: x, y: x})),
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.4,
+                    pointRadius: 0
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 1,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Linear Function',
+                    font: {
+                        size: 14
+                    },
+                    padding: {
+                        bottom: 10
+                    }
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 10,
+                        padding: 10,
+                        font: {
+                            size: 12
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'center',
+                    min: -5,
+                    max: 5,
+                    grid: {
+                        drawOnChartArea: false,
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        stepSize: 1,
+                        font: {
+                            size: 8
+                        }
+                    }
+                },
+                y: {
+                    type: 'linear',
+                    position: 'center',
+                    min: -5,
+                    max: 5,
+                    grid: {
+                        drawOnChartArea: false,
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return value === -5 || value === 5 ? value : '';
+                        },
+                        font: {
+                            size: 8
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+const createAbsoluteValueChart = () => {
+    const ctx = document.getElementById('absoluteValueChart');
+    if (!ctx) return;
+
+    const xValues = Array.from({length: 101}, (_, i) => (i - 50) / 10);
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: xValues,
+            datasets: [
+                {
+                    label: 'f(x) = |x|',
+                    data: xValues.map(x => ({x: x, y: Math.abs(x)})),
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.4,
+                    pointRadius: 0
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 1,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Absolute Value',
+                    font: {
+                        size: 14
+                    },
+                    padding: {
+                        bottom: 10
+                    }
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 10,
+                        padding: 10,
+                        font: {
+                            size: 12
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'center',
+                    min: -5,
+                    max: 5,
+                    grid: {
+                        drawOnChartArea: false,
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        stepSize: 1,
+                        font: {
+                            size: 8
+                        }
+                    }
+                },
+                y: {
+                    type: 'linear',
+                    position: 'center',
+                    min: -5,
+                    max: 5,
+                    grid: {
+                        drawOnChartArea: false,
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return value === -5 || value === 5 ? value : '';
+                        },
+                        font: {
+                            size: 8
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+const createPowerFunctionsChart = () => {
+    const ctx = document.getElementById('powerFunctionsChart');
+    if (!ctx) return;
+
+    const xValues = Array.from({length: 101}, (_, i) => (i - 50) / 10);
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: xValues,
+            datasets: [
+                {
+                    label: 'f(x) = x²',
+                    data: xValues.map(x => ({x: x, y: Math.pow(x, 2)})),
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.4,
+                    pointRadius: 0
+                },
+                {
+                    label: 'f(x) = √x',
+                    data: xValues.filter(x => x >= 0).map(x => ({x: x, y: Math.sqrt(x)})),
+                    borderColor: 'rgb(54, 162, 235)',
+                    tension: 0.4,
+                    pointRadius: 0
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 1,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Parabola and Square Root',
+                    font: {
+                        size: 14
+                    },
+                    padding: {
+                        bottom: 10
+                    }
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 10,
+                        padding: 10,
+                        font: {
+                            size: 12
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'center',
+                    min: -5,
+                    max: 5,
+                    grid: {
+                        drawOnChartArea: false,
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        stepSize: 1,
+                        font: {
+                            size: 8
+                        }
+                    }
+                },
+                y: {
+                    type: 'linear',
+                    position: 'center',
+                    min: -5,
+                    max: 5,
+                    grid: {
+                        drawOnChartArea: false,
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return value === -5 || value === 5 ? value : '';
+                        },
+                        font: {
+                            size: 8
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+const createExponentialFunctionsChart = () => {
+    const ctx = document.getElementById('exponentialFunctionsChart');
+    if (!ctx) return;
+
+    const xValues = Array.from({length: 101}, (_, i) => (i - 50) / 10);
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: xValues,
+            datasets: [
+                {
+                    label: 'f(x) = 2ˣ',
+                    data: xValues.map(x => ({x: x, y: Math.pow(2, x)})),
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.4,
+                    pointRadius: 0
+                },
+                {
+                    label: 'f(x) = (1/2)ˣ',
+                    data: xValues.map(x => ({x: x, y: Math.pow(1/2, x)})),
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.4,
+                    pointRadius: 0
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 1,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Exponential Growth and Decay',
+                    font: {
+                        size: 14
+                    },
+                    padding: {
+                        bottom: 10
+                    }
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 10,
+                        padding: 10,
+                        font: {
+                            size: 12
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'center',
+                    min: -5,
+                    max: 5,
+                    grid: {
+                        drawOnChartArea: false,
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        stepSize: 1,
+                        font: {
+                            size: 8
+                        }
+                    }
+                },
+                y: {
+                    type: 'linear',
+                    position: 'center',
+                    min: -5,
+                    max: 5,
+                    grid: {
+                        drawOnChartArea: false,
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return value === -5 || value === 5 ? value : '';
+                        },
+                        font: {
+                            size: 8
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+const createCubicFunctionChart = () => {
+    const ctx = document.getElementById('cubicFunctionChart');
+    if (!ctx) return;
+
+    const xValues = Array.from({length: 101}, (_, i) => (i - 50) / 10);
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: xValues,
+            datasets: [
+                {
+                    label: 'f(x) = x³',
+                    data: xValues.map(x => ({x: x, y: Math.pow(x, 3)})),
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.4,
+                    pointRadius: 0
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 1,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Cubic Function',
+                    font: {
+                        size: 14
+                    },
+                    padding: {
+                        bottom: 10
+                    }
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 10,
+                        padding: 10,
+                        font: {
+                            size: 12
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'center',
+                    min: -5,
+                    max: 5,
+                    grid: {
+                        drawOnChartArea: false,
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        stepSize: 1,
+                        font: {
+                            size: 8
+                        }
+                    }
+                },
+                y: {
+                    type: 'linear',
+                    position: 'center',
+                    min: -5,
+                    max: 5,
+                    grid: {
+                        drawOnChartArea: false,
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return value === -5 || value === 5 ? value : '';
+                        },
+                        font: {
+                            size: 8
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+onMounted(() => {
+    createParabolaChart();
+    createParabolaShiftChart();
+    createLinearFunctionChart();
+    createAbsoluteValueChart();
+    createPowerFunctionsChart();
+    createExponentialFunctionsChart();
+    createCubicFunctionChart();
+});
 </script>
 <template>
     <h1 class="sat-guide-page-header">Math Cheat Sheet</h1>
@@ -707,13 +1340,13 @@ onMounted(async () => {
                             xᵃ * xᵇ = x⁽ᵃ⁺ᵇ⁾
                         </div>
                         <div>
-                            e.g. x² * x³ = x⁵
+                            e.g. x² * x³ = x<sup>2+3</sup> = x<sup>5</sup>
                         </div>
                         <div>
                             Note that this can also be applied in reverse
                         </div>
                         <div>
-                            e.g. x²ᵃ⁺³ = x²ᵃ * x³
+                            e.g. 2<sup>x+3</sup> = 2<sup>x</sup> * 2<sup>3</sup> = 2<sup>x</sup> * 8
                         </div>
                     </div>
                 </div>
@@ -802,14 +1435,68 @@ onMounted(async () => {
                         <div>
                             Whenever you have a fractional exponent, you can rewrite it as a radical
                         </div>
-                        <div>
-                            xᵃ/ᵇ = ᵇ√(xᵃ)
+                        <div class="text-lg">
+                            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msup>
+                                    <mi>x</mi>
+                                    <mfrac>
+                                    <mi>a</mi>
+                                    <mi>b</mi>
+                                    </mfrac>
+                                </msup>
+                                <mo>=</mo>
+                                <mroot>
+                                    <msup>
+                                    <mi>x</mi>
+                                    <mi>a</mi>
+                                    </msup>
+                                    <mi>b</mi>
+                                </mroot>
+                            </math>
+                        </div>
+                        <div class="text-lg">
+                            <span class="text-sm">e.g. </span>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <msup>
+                                    <mi>x</mi>
+                                    <mfrac>
+                                        <mn>2</mn>
+                                        <mn>3</mn>
+                                    </mfrac>
+                                    </msup>
+                                    <mo>=</mo>
+                                    <mroot>
+                                    <msup>
+                                        <mi>x</mi>
+                                        <mn>2</mn>
+                                    </msup>
+                                    <mn>3</mn>
+                                    </mroot>
+                                </mrow>
+                            </math>
                         </div>
                         <div>
-                            e.g. x²/³ = ³√(x²)
-                        </div>
-                        <div>
-                            If you forget which number goes where, think of a simple example, like x¹/³ = ³√(x)
+                            If you forget which number goes where, think of a simple example, like
+                            <math class="text-lg"
+                            xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mstyle displaystyle="true" scriptlevel="0">
+                                <mrow>
+                                    <msup>
+                                    <mi>x</mi>
+                                    <mfrac>
+                                        <mn>1</mn>
+                                        <mn>3</mn>
+                                    </mfrac>
+                                    </msup>
+                                    <mo>=</mo>
+                                    <mroot>
+                                    <mi>x</mi>
+                                    <mn>3</mn>
+                                    </mroot>
+                                </mrow>
+                            </mstyle>
+                            </math>
                         </div>
                     </div>
                 </div>
@@ -930,6 +1617,91 @@ onMounted(async () => {
                         </div>
                         <div>
                             Normally on the SAT, you'll only need to know the simple formula
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cheat-sheet-subsection">
+            <h3 class="cheat-sheet-subsection-header">
+                Transformations
+            </h3>
+            <div class="cheat-sheet-subsection-content">
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Vertical Shift
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            If you have a function f(x)
+                        </div>
+                        <div>
+                            The function f(x) + c shifts the graph up by c units
+                        </div>
+                        <div>
+                            e.g. if you have f(x) = x², and you want to shift it up by 3 units, you can add 3 to the function to get f(x) = x² + 3
+                        </div>
+                        <div class="mt-4" style="width: 200px; height: 200px;">
+                            <canvas id="parabolaChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Horizontal Shift
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            If you have a function f(x)
+                        </div>
+                        <div>
+                            The function f(x - c) shifts the graph to the right by c units
+                        </div>
+                        <div>
+                            e.g. if you have f(x) = x², and you want to shift it to the right by 3 units, you can replace all instances of x with (x-3) to get f(x) = (x - 3)²
+                        </div>
+                        <div class="mt-4" style="width: 200px; height: 200px;">
+                            <canvas id="parabolaShiftChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Other Transformations
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            -f(x) reflects the graph over the x-axis (flips it upside down)
+                        </div>
+                        <div>
+                            f(-x) reflects the graph over the y-axis (flips it left to right)
+                        </div>
+                        <div>
+                            c*f(x) stretches the graph vertically by a factor of c (makes it skinnier if c > 1, or fatter if c < 1)
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Graphs of Common Functions
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div class="flex flex-wrap gap-4 justify-start">
+                            <div style="width: 200px; height: 200px;">
+                                <canvas id="linearFunctionChart"></canvas>
+                            </div>
+                            <div style="width: 200px; height: 200px;">
+                                <canvas id="absoluteValueChart"></canvas>
+                            </div>
+                            <div style="width: 200px; height: 200px;">
+                                <canvas id="powerFunctionsChart"></canvas>
+                            </div>
+                            <div style="width: 200px; height: 200px;">
+                                <canvas id="exponentialFunctionsChart"></canvas>
+                            </div>
+                            <div style="width: 200px; height: 200px;">
+                                <canvas id="cubicFunctionChart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1306,6 +2078,175 @@ onMounted(async () => {
                         <div>
                             This yields a final solution of 16% salt
                         </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Mixed Substances/Solutions
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            When you combine two substances (e.g. saline solutions with different concentrations), the final concentration of the substance is a weighted average of the concentrations of the two substances
+                        </div>
+                        <div>
+                            <span class="latex-formula">$$C_f = \frac{C_1V_1 + C_2V_2}{V_1 + V_2}$$</span>
+                        </div>
+                        <div>
+                            C<sub>f</sub> = final concentration
+                        </div>
+                        <div>
+                            C<sub>1</sub> = concentration of the first substance
+                        </div>
+                        <div>
+                            V<sub>1</sub> = volume of the first substance
+                        </div>
+                        <div>
+                            C<sub>2</sub> = concentration of the second substance
+                        </div>
+                        <div>
+                            V<sub>2</sub> = volume of the second substance
+                        </div>
+                        <div>
+                            e.g. if you have 100g of saline that is 10% salt and 200g of saline that is 20% salt, the final concentration is (100*10 + 200*20) / (100 + 200) = 15%
+                        </div>
+                        <div>
+                            The same concept applies when it's percent by mass instead of percent by volume
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Distance, Rate, and Time
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            Distance = Rate * Time
+                        </div>
+                        <div>
+                            Easiest way to remember: speed is given in miles per hour: speed  = miles/hour
+                        </div>
+                        <div>
+                            Since speed is the rate, miles is the distance, and hours is the time: r = d/t
+                        </div>
+                        <div>
+                            This can be manipulated to either d = r*t or t = d/r
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 class="sat-guide-section-header">Geometry and Trigonometry</h2>
+    <div class="section-description">
+        <div class="cheat-sheet-subsection">
+            <h3 class="cheat-sheet-subsection-header">
+                Provided Formulas
+            </h3>
+            <div class="cheat-sheet-subsection-content">
+                The SAT provides you with many geometry and trigonometry formulas. Since they're provided, it's not necessary to memorize them. However, it's important to familiarize yourself with which ones are provided, so you know where to find them. We already showed these earlier on the page, so we won't repeat them here.
+            </div>
+        </div>
+        <div class="cheat-sheet-subsection">
+            <h3 class="cheat-sheet-subsection-header">
+                General Angle Rules
+            </h3>
+            <div class="cheat-sheet-subsection-content">
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Vertical Angles
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            Vertical angles are angles that are opposite each other when two lines intersect
+                        </div>
+                        <div>
+                            Vertical angles are equal in measure
+                        </div>
+                        <svg width="120" height="120" viewBox="0 0 120 120" class="my-2">
+                            <!-- Two intersecting lines -->
+                            <line x1="30" y1="10" x2="90" y2="110" stroke="black" stroke-width="2"/>
+                            <line x1="30" y1="110" x2="90" y2="10" stroke="black" stroke-width="2"/>
+                            
+                            <!-- Angle labels -->
+                            <text x="60" y="30" font-size="12" text-anchor="middle">60°</text>
+                            <text x="60" y="95" font-size="12" text-anchor="middle">60°</text>
+                        </svg>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Supplementary and Complementary Angles
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            Supplementary angles are two angles that add up to 180 degrees
+                        </div>
+                        <div>
+                            Complementary angles are two angles that add up to 90 degrees
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Linear Pair
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            Linear pairs are two angles that are adjacent and together form a straight line
+                        </div>
+                        <div>
+                            Linear pairs are supplementary, meaning they add up to 180 degrees
+                        </div>
+                        <div>
+                            e.g. in the example below, the 60° angle and the 120° angle form a linear pair
+                        </div>
+                        <svg width="120" height="120" viewBox="0 0 120 120" class="my-2">
+                            <!-- Two intersecting lines -->
+                            <line x1="30" y1="10" x2="90" y2="110" stroke="black" stroke-width="2"/>
+                            <line x1="30" y1="110" x2="90" y2="10" stroke="black" stroke-width="2"/>
+                            
+                            <!-- Angle labels -->
+                            <text x="60" y="30" font-size="12" text-anchor="middle">60°</text>
+                            <text x="75" y="60" font-size="12" text-anchor="start">120°</text>
+                        </svg>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Parallel Lines With Transversal
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            Parallel lines are lines that never intersect
+                        </div>
+                        <div>
+                            A transversal is a line that cuts through two parallel lines, creating 8 angles
+                        </div>
+                        <div>
+                            Unless the transversal is perpendicular to the parallel lines, you'll have 4 acute angles (&lt;90°) and 4 obtuse angles (&gt;90°)
+                        </div>
+                        <div>
+                            All 4 acute angles are congruent (equal in measure), and all 4 obtuse angles are congruent
+                        </div>
+                        <svg width="200" height="200" viewBox="0 0 200 200" class="my-4">
+                            <!-- Parallel lines -->
+                            <line x1="40" y1="80" x2="160" y2="80" stroke="black" stroke-width="2"/>
+                            <line x1="40" y1="120" x2="160" y2="120" stroke="black" stroke-width="2"/>
+                            
+                            <!-- Transversal line -->
+                            <line x1="60" y1="60" x2="140" y2="140" stroke="black" stroke-width="2"/>
+                            
+                            <!-- Angle labels -->
+                            <text x="55" y="75" font-size="14" text-anchor="middle">a</text>
+                            <text x="88" y="75" font-size="14" text-anchor="middle">b</text>
+                            <text x="75" y="95" font-size="14" text-anchor="middle">b</text>
+                            <text x="100" y="92" font-size="14" text-anchor="middle">a</text>
+                            
+                            <text x="95" y="115" font-size="14" text-anchor="middle">a</text>
+                            <text x="123" y="115" font-size="14" text-anchor="middle">b</text>
+                            <text x="115" y="135" font-size="14" text-anchor="middle">b</text>
+                            <text x="142" y="133" font-size="14" text-anchor="middle">a</text>
+                        </svg>
                     </div>
                 </div>
             </div>
