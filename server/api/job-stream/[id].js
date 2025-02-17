@@ -11,7 +11,6 @@ export default eventHandler(async (event) => {
   const id = event.context.params.id
   
   try {
-    let isConnectionActive = true;
 
     // Create a write function to send SSE
     const write = (data) => {
@@ -24,23 +23,16 @@ export default eventHandler(async (event) => {
       }
     }
 
-    // Monitor for potential Vercel timeout
-    const timeoutCheckInterval = setInterval(() => {
-        console.log('Checking for timeout');
-      if (event.context.callbackWaitsForEmptyEventLoop === false) {
-        console.log('Detected potential Vercel timeout');
-        write({ 
-          status: 'TIMEOUT_WARNING',
-          message: 'Connection may be terminated soon'
-        });
-        clearInterval(timeoutCheckInterval);
-      }
-    }, 5000);
+    // Add keepalive interval
+    const keepaliveInterval = setInterval(() => {
+      console.log('Sending keepalive');
+      event.node.res.write(`:keepalive\n\n`);
+    }, 30000); // Send keepalive every 30 seconds
 
     // Clean up intervals if client disconnects
     event.node.req.on('close', () => {
       console.log(`Client disconnected from run ${id}`);
-      clearInterval(timeoutCheckInterval);
+      clearInterval(keepaliveInterval);
     });
 
     try {
@@ -58,17 +50,29 @@ export default eventHandler(async (event) => {
         // End connection if job is complete
         if (data.status === 'COMPLETED' || data.status === 'FAILED') {
           console.log(`Run ${id} finished with status: ${data.status}`);
+          clearInterval(keepaliveInterval);  // Clear interval before ending
           event.node.res.end();
           console.log('Connection ended successfully');
           break;
         }
       }
-    } finally {
-      clearInterval(timeoutCheckInterval);
+    } catch (error) {
+      console.error('Error in job stream handler:', error);
+      try {
+        clearInterval(keepaliveInterval);  // Clear interval on error
+        write({ 
+          status: 'ERROR',
+          error: error.message 
+        });
+        event.node.res.end();
+      } catch (sendError) {
+        console.error('Error sending error to client:', sendError);
+      }
     }
   } catch (error) {
     console.error('Error in job stream handler:', error);
     try {
+      clearInterval(keepaliveInterval);  // Clear interval on error
       write({ 
         status: 'ERROR',
         error: error.message 
