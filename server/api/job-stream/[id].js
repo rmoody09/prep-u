@@ -1,12 +1,14 @@
-import { eventHandler, setHeader } from 'h3'
 import { runs } from "@trigger.dev/sdk/v3"
 
-export default eventHandler(async (event) => {
+export default defineEventHandler(async (event) => {
   // Set headers for SSE
   console.log('subscribing to run', event.context.params.id)
   setHeader(event, 'Content-Type', 'text/event-stream')
   setHeader(event, 'Cache-Control', 'no-cache')
   setHeader(event, 'Connection', 'keep-alive')
+
+  // Important: Disable Nuxt's default response handling
+  event.respond = false; // Prevents Nuxt from automatically sending a response
 
   const id = event.context.params.id
   
@@ -24,10 +26,9 @@ export default eventHandler(async (event) => {
 
     // Setup heartbeat interval
     const heartbeat = setInterval(() => {
-      console.log('Setting up heartbeat interval');
       try {
+        console.log('Sending heartbeat');
         event.node.res.write(': keepalive\n\n');
-        console.log('Sent heartbeat successfully');
       } catch (error) {
         console.error('Error sending heartbeat:', error);
       }
