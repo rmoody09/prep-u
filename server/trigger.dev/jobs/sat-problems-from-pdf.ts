@@ -370,8 +370,6 @@ console.log("Attempting to register SAT Problems task...");
 // Define the job
 export const processSATProblems = task({
   id: "process-sat-problems", // unique identifier
-  name: "Process SAT Problems",
-  version: "1.0.0",
   run: async (payload) => {
     console.log('payload:')
     console.log(JSON.stringify(payload));

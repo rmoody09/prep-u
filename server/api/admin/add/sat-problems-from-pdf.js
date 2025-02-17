@@ -1,5 +1,4 @@
 
-import { client as triggerClient } from "@/server/trigger.dev/triggers";
 import { serverSupabaseUser, serverSupabaseServiceRole } from '#supabase/server'
 
 import { processSATProblems } from "@/server/trigger.dev/jobs/sat-problems-from-pdf";
