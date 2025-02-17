@@ -1,10 +1,12 @@
 <script setup>
 import { test_sections, cb_domains, cb_skills, getCbDomainLookup, getCbSkillLookup, getCbSkillsByDomain } from '~/assets/composables/SATProblemTypes';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { getCbSectionSkillIDs, getCbSkillIDs } from '~/assets/composables/SATProblemTypes';
+import { createClient } from '@supabase/supabase-js'
 
 const adding_problems = ref(false);
 const done_adding_problems = ref(false);
 const selected_section = ref(null);
-
 const cb_domain_lookup = getCbDomainLookup();
 const cb_skill_lookup = getCbSkillLookup();
 const cb_skills_by_domain = getCbSkillsByDomain();
@@ -81,6 +83,44 @@ const processed_question_ids = ref([]);
 const failed_question_ids = ref([]);
 const unparsed_question_ids = ref([]);
 
+const jobId = ref(null);
+const status = ref('pending');
+const progress = ref(0);
+const error = ref(null);
+let eventSource = null;
+
+function connectToEventStream(id) {
+    console.log('connecting to event stream', id);
+    eventSource = new EventSource(`/api/job-stream/${id}`);
+    
+    eventSource.onmessage = (event) => {
+        console.log('event stream message');
+        const data = JSON.parse(event.data);
+        console.log('data', JSON.stringify(data));
+        status.value = data.status;
+        
+        if (data.status === 'COMPLETED') {
+            adding_problems.value = false;
+            done_adding_problems.value = true;
+            success_summary.value = JSON.stringify(data.output.summary);
+            identified_problem_ids.value = data.output.identified_problem_ids;
+            processed_question_ids.value = data.output.processed_question_ids;
+            failed_question_ids.value = data.output.failed_question_ids;
+            unparsed_question_ids.value = data.output.unparsed_question_ids;
+            is_success.value = true;
+            eventSource.close();
+        } else if (data.status === 'FAILED') {
+            error.value = data.output?.error || 'Job failed';
+            eventSource.close();
+        }
+    };
+    
+    eventSource.onerror = () => {
+        error.value = 'Connection lost';
+        eventSource.close();
+    };
+}
+
 const addProblems = async () => {
     adding_problems.value = true;
     is_error.value = false;
@@ -108,6 +148,22 @@ const addProblems = async () => {
     }
     )
     console.log('resp', resp);
+
+    if (resp.status == 'error') {
+        is_error.value = true;
+        error_msg.value = resp.message;
+        identified_problem_ids.value = resp.identified_problem_ids;
+        processed_question_ids.value = resp.processed_question_ids;
+        failed_question_ids.value = resp.failed_question_ids;
+        unparsed_question_ids.value = resp.unparsed_question_ids;
+        return;
+    }
+    console.log('resp', resp);
+    jobId.value = resp.jobId;
+    console.log('jobId', jobId.value);
+    connectToEventStream(jobId.value);
+    
+    /*
     adding_problems.value = false;
     done_adding_problems.value = true;
     if (resp.status == 'OK') {
@@ -126,6 +182,7 @@ const addProblems = async () => {
         unparsed_question_ids.value = resp.unparsed_question_ids;
     }
     console.log('done adding problems');
+    */
 }
 
 

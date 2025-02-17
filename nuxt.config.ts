@@ -28,5 +28,5 @@ export default defineNuxtConfig({
     corsHandler: {
         origin: '*'
     }
-  },
+  }
 })

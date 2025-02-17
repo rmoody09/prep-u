@@ -47,7 +47,7 @@
                     </li>
                     <li>
                         <span class="font-semibold">PrepU:</span>
-                        <span> Basically, any situation or function that can be depicted by a graph of a straight line (think y=mx+b). Note that in the real world of math, the term algebra can refer to a lot more than this. By "algebra" they really mean "linear algebra"</span>
+                        <span> Basically, any situation or function that can be depicted by a graph of a straight line (think y=mx+b). Note that in the real world of math, the term algebra can refer to a lot more than this.</span>
                     </li>
                 </ul>
             </li>
