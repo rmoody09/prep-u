@@ -24,13 +24,15 @@ export default eventHandler(async (event) => {
 
     // Setup heartbeat interval
     const heartbeat = setInterval(() => {
-      console.log('Sending heartbeat');
+      console.log('Setting up heartbeat interval');
       try {
         event.node.res.write(': keepalive\n\n');
+        console.log('Sent heartbeat successfully');
       } catch (error) {
         console.error('Error sending heartbeat:', error);
       }
-    }, 30000); // Send keepalive every 30 seconds
+    }, 5000); // Reduced to 5 seconds for testing
+    console.log('Heartbeat interval established');
 
     // Use the documented subscribeToRun method
     console.log(`Starting subscription to run ${id}`);

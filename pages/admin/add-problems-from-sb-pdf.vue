@@ -89,6 +89,11 @@ const progress = ref(0);
 const error = ref(null);
 let eventSource = null;
 
+console.log('set test interval');
+let testInterval = setInterval(() => {
+    console.log('test interval');
+}, 10000);
+
 function connectToEventStream(id) {
     console.log('connecting to event stream', id);
     eventSource = new EventSource(`/api/job-stream/${id}`);
