@@ -24,6 +24,7 @@ export default eventHandler(async (event) => {
 
     // Setup heartbeat interval
     const heartbeat = setInterval(() => {
+      console.log('Sending heartbeat');
       try {
         event.node.res.write(': keepalive\n\n');
       } catch (error) {
