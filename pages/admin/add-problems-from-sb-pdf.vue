@@ -98,6 +98,14 @@ function connectToEventStream(id) {
         const data = JSON.parse(event.data);
         console.log('data', JSON.stringify(data));
         status.value = data.status;
+
+        if (data.status === 'TIMEOUT_WARNING') {
+            console.log('Server warning: Connection may timeout soon');
+            // Optionally set up a new connection or handle differently
+            eventSource.close();
+            connectToEventStream(id);
+            return;
+        }
         
         if (data.status === 'COMPLETED') {
             adding_problems.value = false;
