@@ -13,14 +13,21 @@ export default eventHandler(async (event) => {
   try {
     // Create a write function to send SSE
     const write = (data) => {
-      event.node.res.write(`data: ${JSON.stringify(data)}\n\n`)
+      console.log('Attempting to write SSE data:', data);
+      try {
+        event.node.res.write(`data: ${JSON.stringify(data)}\n\n`);
+        console.log('Successfully wrote SSE data');
+      } catch (writeError) {
+        console.error('Error writing SSE data:', writeError);
+      }
     }
 
     // Use the documented subscribeToRun method
+    console.log(`Starting subscription to run ${id}`);
     for await (const data of runs.subscribeToRun(id, {
       apiKey: process.env.TRIGGER_API_KEY
     })) {
-      console.log('run data ' + id, JSON.stringify(data));
+      console.log('Received run data for ' + id, JSON.stringify(data));
       write({ 
         status: data.status, 
         output: data.output 
@@ -28,16 +35,24 @@ export default eventHandler(async (event) => {
 
       // End connection if job is complete
       if (data.status === 'COMPLETED' || data.status === 'FAILED') {
-        event.node.res.end()
-        break
+        console.log(`Run ${id} finished with status: ${data.status}`);
+        event.node.res.end();
+        console.log('Connection ended successfully');
+        break;
       }
     }
 
     // Clean up if client disconnects
     event.node.req.on('close', () => {
-      // Note: subscribeToRun doesn't need explicit cleanup
-    })
+      console.log(`Client disconnected from run ${id}`);
+    });
   } catch (error) {
-    event.node.res.end(`data: ${JSON.stringify({ error: error.message })}\n\n`)
+    console.error('Error in job stream handler:', error);
+    try {
+      event.node.res.end(`data: ${JSON.stringify({ error: error.message })}\n\n`);
+      console.log('Sent error to client');
+    } catch (sendError) {
+      console.error('Error sending error to client:', sendError);
+    }
   }
 })

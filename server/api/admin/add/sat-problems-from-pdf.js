@@ -37,7 +37,7 @@ export default eventHandler(async (event) => {
         try {
           // Trigger the job
           console.log('triggering job')
-          const { id: jobId } = await processSATProblems.trigger({
+          const jobInfo = await processSATProblems.trigger({
             file_url: file_url,
             test_section: test_section,
             cb_domain: cb_domain,
@@ -46,7 +46,8 @@ export default eventHandler(async (event) => {
             user_id: user.id
           });
           console.log('job triggered')
-          console.log(jobId)
+          console.log(JSON.stringify(jobInfo))
+          const jobId = jobInfo.id;
       
           return {
             jobId,
