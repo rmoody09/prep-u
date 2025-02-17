@@ -22,6 +22,15 @@ export default eventHandler(async (event) => {
       }
     }
 
+    // Setup heartbeat interval
+    const heartbeat = setInterval(() => {
+      try {
+        event.node.res.write(': keepalive\n\n');
+      } catch (error) {
+        console.error('Error sending heartbeat:', error);
+      }
+    }, 30000); // Send keepalive every 30 seconds
+
     // Use the documented subscribeToRun method
     console.log(`Starting subscription to run ${id}`);
     for await (const data of runs.subscribeToRun(id, {
@@ -35,6 +44,7 @@ export default eventHandler(async (event) => {
 
       // End connection if job is complete
       if (data.status === 'COMPLETED' || data.status === 'FAILED') {
+        clearInterval(heartbeat); // Clear heartbeat interval
         console.log(`Run ${id} finished with status: ${data.status}`);
         event.node.res.end();
         console.log('Connection ended successfully');
@@ -44,6 +54,7 @@ export default eventHandler(async (event) => {
 
     // Clean up if client disconnects
     event.node.req.on('close', () => {
+      clearInterval(heartbeat); // Clear heartbeat interval
       console.log(`Client disconnected from run ${id}`);
     });
   } catch (error) {
