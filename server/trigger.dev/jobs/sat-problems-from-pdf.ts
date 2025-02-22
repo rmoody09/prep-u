@@ -363,16 +363,43 @@ async function saveProblemsToDB(client, problems, options = {}, user_id) {
   return {db_problems, question_ids, failed_question_ids};
 }
 
+// Add a new function to update task status
+async function updateTaskStatus(taskId: string, status: string, data: any = null, message: string = '') {
+  console.log('updateTaskStatus')
+  console.log('taskId:')
+  console.log(taskId);
+  console.log('status:')
+  console.log(status);
+  console.log('data:')
+  console.log(data);
+  const { error } = await supabaseAdmin
+    .from('task_status')
+    .upsert({
+      id: taskId,
+      status: status,
+      data: data,
+      message: message,
+      updated_at: new Date().toISOString()
+    });
 
+  if (error) {
+    console.error('Error updating task status:', error);
+  }
+}
 
 console.log("Attempting to register SAT Problems task...");
 
 // Define the job
 export const processSATProblems = task({
   id: "process-sat-problems", // unique identifier
-  run: async (payload) => {
+  run: async (payload, ctx) => {
     console.log('payload:')
     console.log(JSON.stringify(payload));
+    console.log('ctx:')
+    console.log(ctx);
+    const taskId = ctx.ctx.run.id;
+    console.log('taskId:')
+    console.log(taskId);
     const response = {};
     const resp_data_to_show = {};
     let identified_problem_ids = [];
@@ -383,6 +410,8 @@ export const processSATProblems = task({
 
     try {
         // Log start of processing
+        await updateTaskStatus(taskId, 'processing', null, 'Starting SAT problem processing');
+
         console.log("Starting SAT problem processing");
         console.log('timestamp:', new Date().toISOString());  // Added timestamp log
         console.log('test section:')
@@ -442,10 +471,13 @@ export const processSATProblems = task({
             console.log('got data');
         } else {
             console.log('no data');
+            await updateTaskStatus(taskId, 'error', {
+                error: 'no data'
+            }, 'no data');
             return { status: 'error', message: 'no data'};
         }
         const arrayBuffer = await data.arrayBuffer();
-        
+        await updateTaskStatus(taskId, 'got_pdf', null, 'Uploading PDF to Gemini');
         // Upload the downloaded data.
         const formData = new FormData();
         const metadata = { file: { mimeType: "application/pdf", displayName: `sat_pdf_${file_path}` } };
@@ -460,8 +492,12 @@ export const processSATProblems = task({
         console.log(uploadResult);
         gemini_pdf_info = uploadResult;
         console.log(`Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.file.uri}`);
-
+        await updateTaskStatus(taskId, 'loaded_gemini_pdf', null, 'Getting question ids from Gemini');
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+        //console.log('run simple AI test:')
+        //const test_result = await model.generateContent("Explain how AI works");
+        //console.log('test result:')
+        //console.log(test_result.response.text());
         const result = await model.generateContent([
         `Return a JSON array of all the question ids in the pdf.    Each question id should be 8 alphanumeric characters long. Please return just the JSON with no additional text.
         `,
@@ -483,7 +519,7 @@ export const processSATProblems = task({
         identified_problem_ids = problem_ids;
         response.identified_problem_ids = problem_ids;
         resp_data_to_show.problems_identified = problem_ids.length;
-
+        await updateTaskStatus(taskId, 'got_problem_ids', problem_ids, 'Got problem ids from Gemini - now getting problems');
 
         let problems = await getProblemsFromGemini();
         console.log('got gemini resp 2');
@@ -506,6 +542,7 @@ export const processSATProblems = task({
         }
         let extra_attempts = 0;
         while (remaining_problem_ids.length > 0) {
+            await updateTaskStatus(taskId, 'processed_some_problems', {processed_problem_ids: processed_question_ids, remaining_problem_ids: remaining_problem_ids}, 'Processed some problems - getting Gemini to process the rest');
             console.log('remaining problem ids:')
             console.log(remaining_problem_ids);
             extra_attempts++;
@@ -534,12 +571,16 @@ export const processSATProblems = task({
         response.processed_question_ids = processed_question_ids;
         response.failed_question_ids = failed_question_ids;
         response.unparsed_question_ids = remaining_problem_ids;
+        await updateTaskStatus(taskId, 'completed', response, 'SAT problems added to database');
         return response;
 
       console.log("Processing completed successfully");
       return { success: true };
 
     } catch (error) {
+      await updateTaskStatus(taskId, 'error', {
+        error: error.message
+      }, 'Processing failed');
       console.log("Processing failed", { error });
       throw error;
     }

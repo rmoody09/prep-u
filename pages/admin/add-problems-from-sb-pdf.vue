@@ -6,6 +6,8 @@ import { createClient } from '@supabase/supabase-js'
 
 const adding_problems = ref(false);
 const done_adding_problems = ref(false);
+const progress_status_msg = ref('');
+const progress_status_data = ref('');
 const selected_section = ref(null);
 const cb_domain_lookup = getCbDomainLookup();
 const cb_skill_lookup = getCbSkillLookup();
@@ -87,52 +89,71 @@ const jobId = ref(null);
 const status = ref('pending');
 const progress = ref(0);
 const error = ref(null);
-let eventSource = null;
+const supabase = useSupabaseClient()
+const subscription = ref(null)
 
-console.log('set test interval');
-let testInterval = setInterval(() => {
-    console.log('test interval');
-}, 10000);
 
-function connectToEventStream(id) {
-    console.log('connecting to event stream', id);
-    eventSource = new EventSource(`/api/job-stream/${id}`);
-    
-    eventSource.onmessage = (event) => {
-        console.log('event stream message');
-        const data = JSON.parse(event.data);
-        console.log('data', JSON.stringify(data));
-        status.value = data.status;
 
-        if (data.status === 'TIMEOUT_WARNING') {
-            console.log('Server warning: Connection may timeout soon');
-            // Optionally set up a new connection or handle differently
-            eventSource.close();
-            connectToEventStream(id);
-            return;
+
+function subscribeToTaskStatus(id) {
+  console.log('subscribing to task status', id)
+  
+  // Unsubscribe from any existing subscription first
+  if (subscription.value) {
+    subscription.value.unsubscribe()
+  }
+  
+  subscription.value = supabase
+    .channel(`task_status_${id}`) // Give unique channel name
+    .on(
+      'postgres_changes',
+      {
+        event: '*', // Listen to all events (INSERT, UPDATE, DELETE)
+        schema: 'public',
+        table: 'task_status',
+        filter: `id=eq.${id}`,
+      },
+      (payload) => {
+        console.log('task status update received:', payload)
+        const data = payload.new;
+        status.value = data.status
+
+        if (data.status === 'completed') {
+          console.log('completed')
+          adding_problems.value = false
+          done_adding_problems.value = true
+          success_summary.value = JSON.stringify(data.data.summary)
+          identified_problem_ids.value = data.data.identified_problem_ids
+          processed_question_ids.value = data.data.processed_question_ids
+          failed_question_ids.value = data.data.failed_question_ids
+          unparsed_question_ids.value = data.data.unparsed_question_ids
+          is_success.value = true
+          subscription.value.unsubscribe()
+        } else if (data.status === 'error') {
+          error.value = data.data?.error || 'Job failed'
+          subscription.value.unsubscribe()
+          adding_problems.value = false
+          done_adding_problems.value = true
+          is_error.value = true
+          error_msg.value = error.value
+          identified_problem_ids.value = []
+          processed_question_ids.value = []
+          failed_question_ids.value = []
+        } else {
+            progress_status_msg.value = data.message
+            progress_status_data.value = JSON.stringify(data.data)
         }
-        
-        if (data.status === 'COMPLETED') {
-            adding_problems.value = false;
-            done_adding_problems.value = true;
-            success_summary.value = JSON.stringify(data.output.summary);
-            identified_problem_ids.value = data.output.identified_problem_ids;
-            processed_question_ids.value = data.output.processed_question_ids;
-            failed_question_ids.value = data.output.failed_question_ids;
-            unparsed_question_ids.value = data.output.unparsed_question_ids;
-            is_success.value = true;
-            eventSource.close();
-        } else if (data.status === 'FAILED') {
-            error.value = data.output?.error || 'Job failed';
-            eventSource.close();
-        }
-    };
-    
-    eventSource.onerror = () => {
-        error.value = 'Connection lost';
-        eventSource.close();
-    };
+      }
+    )
+    .subscribe((status, error) => {
+      if (error) {
+        console.error('Subscription error:', error)
+      } else {
+        console.log('Subscribed successfully:', status)
+      }
+    })
 }
+
 
 const addProblems = async () => {
     adding_problems.value = true;
@@ -144,7 +165,6 @@ const addProblems = async () => {
     processed_question_ids.value = [];
     failed_question_ids.value = [];
     unparsed_question_ids.value = [];
-    //let fetch_url = '/api/add/sat-problems-from-sb-pdf';
     let fetch_url = '/api/admin/add/sat-problems-from-pdf';
     console.log('add problems from sb pdf');
     const resp = await $fetch(fetch_url, 
@@ -174,46 +194,18 @@ const addProblems = async () => {
     console.log('resp', resp);
     jobId.value = resp.jobId;
     console.log('jobId', jobId.value);
-    connectToEventStream(jobId.value);
-    
-    /*
-    adding_problems.value = false;
-    done_adding_problems.value = true;
-    if (resp.status == 'OK') {
-        success_summary.value = JSON.stringify(resp.summary);
-        identified_problem_ids.value = resp.identified_problem_ids;
-        processed_question_ids.value = resp.processed_question_ids;
-        failed_question_ids.value = resp.failed_question_ids;
-        unparsed_question_ids.value = resp.unparsed_question_ids;
-        is_success.value = true;
-    } else {
-        is_error.value = true;
-        error_msg.value = resp.message;
-        identified_problem_ids.value = resp.identified_problem_ids;
-        processed_question_ids.value = resp.processed_question_ids;
-        failed_question_ids.value = resp.failed_question_ids;
-        unparsed_question_ids.value = resp.unparsed_question_ids;
-    }
-    console.log('done adding problems');
-    */
+    subscribeToTaskStatus(jobId.value);
 }
 
-
-
-
-
+onUnmounted(() => {
+  if (subscription.value) {
+    subscription.value.unsubscribe()
+  }
+})
 </script>
 
 <template>
     <div class="p-8">
-        <div v-if="adding_problems">
-            <div class="pb-2">
-                <UProgress animation="carousel"  />
-            </div>
-            <div class="pb-2">  
-                Processing problems...this could take a few minutes.
-            </div>
-        </div>
         <div v-if="!adding_problems && !done_adding_problems">
             <div class="pb-2">
                 <h1 class="text-lg font-bold">Add Problems from Supabase PDF</h1>
@@ -252,9 +244,26 @@ const addProblems = async () => {
                 <UButton @click="addProblems">Add Problems</UButton>
             </div>
         </div>
+        <div v-if="adding_problems">
+            <div class="pb-2">
+                <UProgress animation="carousel"  />
+            </div>
+            <div class="pb-2">  
+                Processing problems...this could take a few minutes.
+            </div>
+            <div class="pb-2 text-wrap max-w-full border-2 border-gray-300 rounded-md p-2" v-if="progress_status_msg">
+                {{ progress_status_msg }}
+                <div v-if="progress_status_data" class="text-wrap max-w-full border-2 border-gray-300 rounded-md p-2 break-words whitespace-pre-wrap">
+                    {{ progress_status_data }}
+                </div>
+            </div>
+        </div>
         <div v-if="done_adding_problems">
             <div class="pb-2">
                 <div v-if="is_success">
+                    <div class="font-bold font-large pb-2">
+                        Processing Complete
+                    </div>
                     <div v-if="problem_count > 0 && processed_question_ids.length != problem_count">
                         <div class="pb-2 text-red-500">
                             Warning: The number of problems processed does not match the expected number of problems. Please compare the list of processed question ids with the ones in the PDF you submitted, and manually add the missing problems.
@@ -267,6 +276,9 @@ const addProblems = async () => {
                     </div>
                 </div>
                 <div v-else>
+                    <div class="font-bold font-large pb-2">
+                        Error Processing Problems
+                    </div>
                     {{ error_msg }}
                 </div>
                 <div>
