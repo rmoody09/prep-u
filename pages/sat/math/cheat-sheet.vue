@@ -2249,6 +2249,707 @@ onMounted(() => {
                         </svg>
                     </div>
                 </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Radians
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            Radians are another way to measure angles (instead of degrees)
+                        </div>
+                        <div>
+                            2π radians = 360 degrees
+                        </div>
+                        <div>
+                            (or π radians = 180 degrees)
+                        </div>
+                        <div>
+                            To convert from one unit to the other, set up a proportion:
+                        </div>
+                        <div>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML" style="font-size: 20px;">
+                                <mfrac>
+                                    <mtext>degrees</mtext>
+                                    <mn>180</mn>
+                                </mfrac>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mtext>radians</mtext>
+                                    <mi style="font-size: 22px;">π</mi>
+                                </mfrac>
+                            </math>
+                        </div>
+                    </div>  
+                        
+                </div>
+            </div>
+        </div>
+        <div class="cheat-sheet-subsection">
+            <h3 class="cheat-sheet-subsection-header">
+                Triangles
+            </h3>
+            <div class="cheat-sheet-subsection-content">
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Sum of Interior Angles
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            The sum of the interior angles of a triangle is 180 degrees
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Types of Triangles  
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            <span class="font-bold">Right Triangle</span> - One angle is 90 degrees
+                        </div>
+                        <div>
+                            <span class="font-bold">Equilateral Triangle</span> - All sides are equal, and all angles are 60 degrees
+                        </div>
+                        <div>
+                            <span class="font-bold">Isosceles Triangle</span> - Two sides are equal, and two angles are equal
+                        </div>
+                        <div>
+                            <span class="font-bold">Scalene Triangle</span> - No sides are equal, and no angles are equal
+                        </div>
+                        <div>
+                            <span class="font-bold">Right Triangle</span> - One angle is 90 degrees
+                        </div>  
+                        <div>
+                            <span class="font-bold">Acute Triangle</span> - All angles are less than 90 degrees
+                        </div>
+                        <div>
+                            <span class="font-bold">Obtuse Triangle</span> - One angle is greater than 90 degrees
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Right Triangles Concepts
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            <span class="font-bold">Hypotenuse</span> - The longest side of a right triangle, opposite the right angle
+                        </div>
+                        <div>
+                            <span class="font-bold">Legs</span> - The two shorter sides of a right triangle, adjacent to the right angle
+                        </div>
+                        <div>
+                            Most triangle problems on the SAT will deal with right triangles
+                        </div>
+                        <div>
+                            The Pythagorean Theorem (covered later) applies only to right triangles
+                        </div>
+                        <div>
+                            Questions involving Sine, Cosine, and Tangent (covered later) will only be asked about right triangles
+                        </div>                        
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Pythagorean Theorem
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            Applies only to right triangles
+                        </div>
+                        <div>
+                            When you have the lengths of two sides of a right triangle, you can use the Pythagorean Theorem to find the length of the third side
+                        </div>
+                        <div>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML" >
+                                <msup>
+                                    <mi>a</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>+</mo>
+                                <msup>
+                                    <mi>b</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>=</mo>
+                                <msup>
+                                    <mi>c</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </math>
+                        </div>
+                        <div>
+                            a and b are the lengths of the legs of the triangle (the two shorter sides adjacent to the right angle)
+                        </div>
+                        <div>
+                            c is the length of the hypotenuse (the longest side, opposite the right angle)
+                        </div>
+                        <div>
+                            This is provided on the SAT formula sheet, but you should still memorize it
+                        </div>
+                        <div>
+                            <svg width="150" height="100" xmlns="http://www.w3.org/2000/svg" viewBox="30 40 230 120">
+                                <polygon points="50,150 250,150 50,50" stroke="black" stroke-width="2" fill="none" />
+                                <text x="115" y="165" font-size="16">a</text>
+                                <text x="35" y="100" font-size="16">b</text>
+                                <text x="150" y="90" font-size="16">c</text>
+                                <rect x="50" y="140" width="10" height="10" stroke="black" stroke-width="1" fill="white" />
+                            </svg>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Pythagorean Triples
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            Pythagorean triples are special right triangles with side lengths that neatly work out to whole numbers
+                        </div>
+                        <div>
+                            Recognizing them will save you time, so that you don't have to apply the Pythagorean Theorem
+                        </div>
+                        <div>
+                            The two most common ones have side lengths 3-4-5 and 5-12-13
+                        </div>
+                        <div>
+                            So, for example, if you see a triangle with a leg of 5 and a hypotenuse of 13, you will know that the other leg is 12
+                        </div>
+                        <div>
+                            You might also see a scaled up version of 3-4-5, like 6-8-10
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        SOH-CAH-TOA
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            SOH-CAH-TOA is a way to remember the three basic trigonometric functions: Sine, Cosine, and Tangent
+                        </div>
+                        <div>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML" style="font-size: 18px;">
+                                <mi>sin</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mtext>Opposite</mtext>
+                                    <mtext>Hypotenuse</mtext>
+                                </mfrac>
+                            </math>
+                        </div>
+                        <div>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML" style="font-size: 18px;">
+                                <mi>cos</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mtext>Adjacent</mtext>
+                                    <mtext>Hypotenuse</mtext>
+                                </mfrac>
+                            </math>
+                        </div>
+                        <div>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML" style="font-size: 18px;">
+                                <mi>tan</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mtext>Opposite</mtext>
+                                    <mtext>Adjacent</mtext>
+                                </mfrac>
+                            </math>
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Special Right Triangles
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            There are two right triangles with "special" angles that show up often on the SAT
+                        </div>
+                        <div>
+                            The 30-60-90 triangle:
+                        </div>
+                        
+                        <div>
+                            <svg width="200" height="80" xmlns="http://www.w3.org/2000/svg">
+                                <polygon points="20,62 120,62 20,2" stroke="black" stroke-width="2" fill="none" />
+                                <text x="60" y="79" font-size="14">x√3</text>
+                                <text x="0" y="37" font-size="14">x</text>
+                                <text x="75" y="27" font-size="14">2x</text>
+                                <text x="75" y="58" font-size="12">30°</text>
+                                <text x="25" y="27" font-size="12">60°</text>
+                                <rect x="20" y="52" width="10" height="10" stroke="black" stroke-width="1" fill="white" />
+                            </svg>
+                        </div>
+                        <div>
+                            The 45-45-90 triangle (aka isosceles right triangle):
+                        </div>
+                        <div>
+                            <svg width="150" height="100" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="20" y="72" width="10" height="10" stroke="black" stroke-width="1" fill="none" />
+                                <polygon points="20,82 100,82 20,2" stroke="black" stroke-width="2" fill="none" />
+                                <text x="53" y="94" font-size="14">x</text>
+                                <text x="8" y="50" font-size="14">x</text>
+                                <text x="64" y="39" font-size="14">x√2</text>
+                                <text x="65" y="78" font-size="12">45°</text>
+                                <text x="23" y="36" font-size="12">45°</text>
+                            </svg>
+                        </div>
+                        <div>
+                            They are provided on the SAT formula sheet, memorizing their side ratios will help you recognize them on the test
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Sine-Cosine Relationship
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            The sine of an angle is equal to the cosine of its complement
+                        </div>
+                        <div>
+                            sin(θ) = cos(90° - θ)
+                        </div>
+                        <div>
+                            cos(θ) = sin(90° - θ)
+                        </div>                      
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Similar Triangles
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            Have all the same angles
+                        </div>
+                        <div>
+                            They might be different sizes, but the ratio of their side lengths is the same
+                        </div>
+                        <div>
+                            There are three ways to prove that two triangles are similar:
+                        </div>
+                        <div>
+                            <span class="font-bold">AA</span> - Two angles are congruent (equal)
+                        </div>
+                        <div>
+                            <span class="font-bold">SSS</span> - All three sides are proportional
+                        </div>
+                        <div>
+                            <span class="font-bold">SAS</span> - Two sides are proportional and the angle between them is congruent
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Triangle Altitude
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            The altitude of a triangle is the perpendicular distance from one vertex to the opposite side
+                        </div>
+                        <div>
+                            Sometimes the altitude is inside the triangle:
+                        </div>
+                        <div>
+                            <svg width="110" height="110" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="55" y="90" height="10" width="10" stroke="black" stroke-width="1" fill="none" />
+                                <polygon points="10,100 100,100 55,10" stroke="black" stroke-width="2" fill="none" />
+                                <line x1="55" y1="10" x2="55" y2="100" stroke="red" stroke-width="2" stroke-dasharray="4 4" />
+                                
+                                </svg>
+                        </div>
+                        <div>
+                            Sometimes the altitude is outside the triangle:
+                        </div>
+                        <div>
+                            <svg width="130" height="110" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10" y="90" height="10" width="10" stroke="black" stroke-width="1" fill="none" />
+                                <polygon points="40,100 120,100 10,10" stroke="black" stroke-width="2" fill="none" />
+                                <line x1="10" y1="10" x2="10" y2="100" stroke="red" stroke-width="2" stroke-dasharray="4 4" />
+                                <line x1="10" y1="100" x2="40" y2="100" stroke="black" stroke-width="2" stroke-dasharray="4 4" />
+                                
+                            </svg>
+                        </div>
+                        <div>
+                            The altitude can be used as the "height" to calculate the area of a triangle
+                        </div>
+                        
+                    </div>
+                        
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Area of a Triangle
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML" style="font-size: 18px;">
+                                <mi>Area</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mi>1</mi>
+                                    <mi>2</mi>
+                                </mfrac>
+                                <mo>&middot;</mo>
+                                <mi>base</mi>
+                                <mo>&middot;</mo>
+                                <mi>height</mi>
+                            </math>
+                        </div>
+                        <div>
+                            In a right triangle, the two legs are the base and height
+                        </div>
+                        <div>
+                            In any other triangle, you can use any side as the base, and its altitude as the height
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Right Triangle Similar Subtriangles
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            If you have a right triangle, and you draw an altitude from the right angle to the hypotenuse, you will create two smaller right triangles
+                        </div>
+                        <div>
+                            These two smaller right triangles are similar to the original triangle and to each other
+                        </div>
+                        <div>
+                            <svg width="180" height="140" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="20" y="110" width="10" height="10" stroke="black" stroke-width="2" fill="none" />
+                                <rect x="65" y="54" width="10" height="10" stroke="gray" stroke-width="1" fill="none" transform="rotate(36, 65, 54)" />
+                                <rect x="65" y="54" width="10" height="10" stroke="gray" stroke-width="1" fill="none" transform="rotate(128, 65, 54)" />
+                                <polygon points="20,120 160,120 20,20" stroke="black" stroke-width="2" fill="none" />
+                                <line x1="20" y1="120" x2="65" y2="54" stroke="gray" stroke-width="2" stroke-dasharray="4 4" />
+                                <text x="6" y="16">A</text>
+                                <text x="165" y="125">B</text>
+                                <text x="6" y="134">C</text>
+                                <text x="68" y="47">D</text>
+                                <text x="23" y="40" font-size="12">a</text>
+                                <text x="130" y="115" font-size="12">b</text>
+                                <text x="23" y="100" font-size="12">b</text>
+                                <text x="38" y="113" font-size="12">a</text>
+                            </svg>
+                        </div>
+                        <div>
+                            Trianges ABC, ACD, CBD are all similar
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cheat-sheet-subsection">
+            <div class="cheat-sheet-subsection-header">
+                Circles
+            </div>
+            <div class="cheat-sheet-subsection-content">
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Radius and Diameter
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            The radius of a circle is the distance from the center to a point on the circle
+                        </div>
+                        <div>
+                            The diameter of a circle is the distance across the circle through the center
+                        </div>
+                        <div>
+                            The diameter is twice the radius
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Circumference and Area of a Circle
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            The circumference of a circle is the distance around the circle (the perimeter)
+                        </div>
+                        <div>
+                            The circumference of a circle is given by the formula:
+                        </div>
+                        <div>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML" style="font-size: 18px;">
+                                <mi>C</mi>
+                                <mo>=</mo>
+                                <mi>2</mi>
+                                <mi>π</mi>
+                                <mi>r</mi>
+                            </math>
+                        </div>
+                        <div>
+                            The area of a circle is the amount of space inside.
+                        </div>
+                        <div>
+                            The area of a circle is given by the formula:
+                        </div>
+                        <div>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML" style="font-size: 18px;">
+                                <mi>A</mi>
+                                <mo>=</mo>
+                                <mi>π</mi>
+                                <msup>
+                                    <mi>r</mi>
+                                    <mn>2</mn>  
+                                </msup>
+                            </math>
+                        </div>
+                        <div>
+                            Both formulas are provided on the SAT formula sheet, but doesn't hurt to memorize them!
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Circle Arcs and Sectors
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            An arc is a part of the circumference of a circle
+                        </div>
+                        <div>
+                            <svg width="150" height="150" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="75" cy="75" r="65" stroke="gray" stroke-width="2" fill="none" />
+                                <path d="M 75,10 A 65,65 0 0,1 140, 75" stroke="black" stroke-width="6" fill="none" />
+                                
+                            </svg>
+                        </div>
+                        <div>
+                            A sector is a part of the area of a circle
+                        </div>
+                        <div>
+                            <svg width="150" height="150" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="75" cy="75" r="65" stroke="gray" stroke-width="2" fill="none" />
+                                <path d="M 75,10 A 65,65 0 0,1 140, 75 L 75,75 Z" stroke="black" stroke-width="3" fill="lightblue" />
+                            </svg>
+                        </div>
+                        <div>
+                            You can set up proportions to find unknowns
+                        </div>
+                        <div>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML" style="font-size: 20px;">
+                                <mfrac>
+                                    <mtext>angle</mtext>
+                                    <mn>360</mn>
+                                </mfrac>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mtext>arc length</mtext>
+                                    <mtext>circumference</mtext>
+                                </mfrac>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mtext>sector area</mtext>
+                                    <mtext>circle area</mtext>
+                                </mfrac>
+                            </math>
+                        </div>
+                        <div>
+                            
+                        </div>
+                    </div>
+                        
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Circle Tangents
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            A tangent is a line that touches the circle at exactly one point
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="9 9 32 32" width="128" height="128">
+                                <!-- Circle -->
+                                <circle cx="25" cy="25" r="15" fill="none" stroke="black" stroke-width="0.5"/>
+                                
+                                
+                                
+                                <!-- Tangent line -->
+                                <line x1="40" y1="10" x2="40" y2="40" stroke="black" stroke-width="0.5"/>
+                                
+                                <!-- Center point -->
+                                <circle cx="25" cy="25" r="1" fill="black"/>
+                                
+                                <!-- Radius to point of tangency -->
+                                <line x1="25" y1="25" x2="40" y2="25" stroke="gray"  stroke-width="0.25"/>
+                                
+                                <!-- Right angle square -->
+                                <path d="M37,25 L37,28 L40,28" fill="none" stroke="gray" stroke-width="0.375"/>
+                            </svg>
+                        </div>
+                        <div>
+                            The radius and tangent line form a right angle
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Inscribed and Central Angles
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            An inscribed angle is an angle with its vertex on the circle
+                        </div>
+                        <div>
+                            A central angle is an angle with its vertex at the center of the circle
+                        </div>
+                        <div>
+                            The measure of an inscribed angle is half the measure of the central angle
+                        </div>
+                        <div>
+                            <svg width="150" height="150" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="75" cy="75" r="50" stroke="black" stroke-width="2" fill="none" />
+                                <circle cx="75" cy="75" r="2" fill="black" />
+                                
+                                <line x1="75" y1="75" x2="75" y2="25" stroke="gray" stroke-width="2" />
+                                <line x1="75" y1="75" x2="123.41" y2="62.5" stroke="gray" stroke-width="2" />
+
+                                <line x1="45" y1="115" x2="75" y2="25" stroke="gray" stroke-width="2" />
+                                <line x1="45" y1="115" x2="123.41" y2="62.5" stroke="gray" stroke-width="2" />
+                                <text x="56" y="100" font-size="12">x</text>
+                                <text x="78" y="67" font-size="12">2x</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cheat-sheet-subsection">
+                <div class="cheat-sheet-subsection-header">
+                    Polygons
+                </div>
+                <div class="cheat-sheet-subsection-content">
+                    <div class="cheat-sheet-concept">
+                        <div class="cheat-sheet-concept-header">
+                            Regular Polygon
+                        </div>
+                        <div class="cheat-sheet-concept-content">
+                            <div>
+                                A regular polygon is a polygon where all sides and all angles are equal
+                            </div>
+                            <div>
+                                Examples include equilateral triangles, squares, and octagons shaped like stop signs
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cheat-sheet-concept">
+                        <div class="cheat-sheet-concept-header">
+                            Interior Angles
+                        </div>
+                        <div class="cheat-sheet-concept-content">
+                            If n represents the number of sides of a polygon, the sum of the interior angles is given by the formula:
+                        </div>
+                        <div>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML" style="font-size: 18px;">
+                                <mi>Sum</mi>
+                                <mo>=</mo>
+                                <mi>180</mi>
+                                <mi>(n-2)</mi>
+                            </math>
+                        </div>
+                        <div>
+                            For regular polygons, each interior angle is the sum divided by the number of sides:
+                        </div>
+                        <div>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML" style="font-size: 20px;">
+                                <mi>Angle</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mi>180(n-2)</mi>
+                                    <mi>n</mi>
+                                </mfrac>
+                            </math>
+                        </div>
+                    </div>
+                    <div class="cheat-sheet-concept">
+                        <div class="cheat-sheet-concept-header">
+                            Exterior Angles
+                        </div>
+                        <div class="cheat-sheet-concept-content">
+                            <div>
+                                An exterior angle is the angle between one side of a polygon and the extension of an adjacent side (see diagram below)
+                            </div>
+                            <div>
+                                The sum of the all the exterior angles of a polygon is 360 degrees
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="70 25 160 175" width="150" height="150">
+                                    <!-- Hexagon -->
+                                    <polygon points="150,30 220,65 220,135 150,170 80,135 80,65" 
+                                            fill="none" stroke="black" stroke-width="3"/>
+                                    
+                                    <!-- Extended side with dashed line -->
+                                    <line x1="150" y1="170" x2="80" y2="195" stroke="black" stroke-width="3" stroke-dasharray="5,5"/>
+                                    
+                                    <!-- Corrected external angle arc -->
+                                    <path d="M 130 160 A 10 10 0 0 0 130 178" fill="none" stroke="gray" stroke-width="3"/>
+                                    
+                                    <!-- Alpha label -->
+                                    <text x="105" y="174" font-family="Arial" font-size="20">α</text>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="cheat-sheet-concept">
+                        <div class="cheat-sheet-concept-header">
+                            Parallelograms
+                        </div>
+                        <div class="cheat-sheet-concept-content">
+                            <div>
+                                Opposite sides are parallel and equal in length (congruent)
+                            </div>
+                            <div>
+                                Opposite angles are congruent
+                            </div>
+                            <div>
+                                Consecutive angles are supplementary
+                            </div>
+                            <div>
+                                The diagonals bisect each other (cut each other in half - see diagram below)
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 110" height="110" width="270">
+                                    
+                                    <polygon points="10,10 190,10 260,100 80,100" fill="none" stroke="black" stroke-width="3"/>
+                                    <line x1="10" y1="10" x2="260" y2="100" stroke="gray" stroke-width="3"/>
+                                    <line x1="190" y1="10" x2="80" y2="100" stroke="gray" stroke-width="3"/>
+                                    <text x="85" y="33" font-size="16">a</text>
+                                    <text x="188" y="70" font-size="16">a</text>
+                                    <text x="92" y="76" font-size="16">b</text>
+                                    <text x="143" y="35" font-size="16">b</text>
+                                </svg>
+                            </div>
+                            <div>
+                                The sum of the interior angles is 360 degrees
+                            </div>
+                            <div>
+                                Area = base x height
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 120" height="110" width="270">
+                                    <rect x="80" y="90" width="10" height="10" stroke="gray" stroke-width="2" fill="none"/>
+                                    <polygon points="10,10 190,10 260,100 80,100" fill="none" stroke="black" stroke-width="3"/>
+                                    <line x1="80" y1="100" x2="80" y2="10" stroke="gray" stroke-width="2" stroke-dasharray="4,4"/>
+                                    <text x="83" y="60" font-size="14">height</text>
+                                    <text x="140" y="115" font-size="14">base</text>
+                                    
+                                    
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
