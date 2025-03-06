@@ -1,3 +1,3 @@
 <template>
-    <h1>System of LinearEquations</h1>
+    <h1 class="sat-guide-page-header">System of Linear Equations</h1>
 </template>

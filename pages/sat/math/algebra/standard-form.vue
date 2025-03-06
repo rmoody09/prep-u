@@ -1,5 +1,5 @@
 <template>
-    <h1>Standard Form of a Linear Equation</h1>
+    <h1 class="sat-guide-page-header">Standard Form of a Linear Equation</h1>
     <div class="section-description">
         Although slope-intercept form (y = mx + b) is the most common and generally the most useful form of a linear equation, "standard form" refers to a different format. In standard form, the equation is written as ax + by = c, where a, b, and c are constants. For example, 2x + 3y = 6 is in standard form, where a=2, b=3, and c=6.
     </div>

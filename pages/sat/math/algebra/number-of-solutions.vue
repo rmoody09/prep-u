@@ -1,5 +1,5 @@
 <template>
-    <h1>Number of Solutions/Intersections to Linear Equations</h1>
+    <h1 class="sat-guide-page-header">Number of Solutions/Intersections to Linear Equations</h1>
 
     <div class="section-description">
         When you are asked something regarding the number of solutions to a linear equation or the number of times two lines intersect, it's going to come down to the slopes and y-intercepts of the lines. 

@@ -1,6 +1,23 @@
 .sat-guide-page {
     padding: 1rem;
     font-family: 'Noto Sans', sans-serif;
+    & .sat-guide-section {
+        padding-bottom: 2rem;
+    }
+    & .sat-guide-subsection {
+        padding-bottom: 1rem;
+    }
+    & .sat-guide-subsection-content {
+        
+    }
+    & .sat-guide-subsection-concept {
+        padding-bottom: 1rem;
+    }
+    & .sat-guide-subsection-concept-header {
+        font-size: 1rem;
+        font-weight: 700;
+        padding-bottom: .2rem;
+    }
 }
 h1.sat-guide-page-header {
    font-size: 2.5rem;
@@ -10,6 +27,12 @@ h1.sat-guide-page-header {
 
 h2.sat-guide-section-header {
     font-size: 1.5rem;
+    font-weight: 700;
+    padding-bottom: .5rem;
+}
+
+h3.sat-guide-subsection-header {
+    font-size: 1.25rem;
     font-weight: 700;
     padding-bottom: .5rem;
 }

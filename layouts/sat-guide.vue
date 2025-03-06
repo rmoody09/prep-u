@@ -357,8 +357,17 @@
         'algebra': {
             slug: 'algebra',
             title: 'Algebra',
-            subsections: ['algebra-overview', 'single-variable-solving', 'single-variable-graphing', 'linear-number-of-solutions', 'slope-intercept-form', 'standard-form', 'linear-systems-of-equations',
-            'parallel-perpendicular-lines'
+            subsections: [
+                'algebra-overview',
+                'single-variable-solving',
+                'single-variable-graphing',
+                'linear-number-of-solutions',
+                'slope-intercept-form',
+                'standard-form',
+                'linear-systems-of-equations',
+                'parallel-perpendicular-lines',
+                'distance-midpoint',
+                'word-problems'
             ],
             top_level: false,
             parent: 'math'
@@ -419,10 +428,44 @@
             top_level: false,
             parent: 'algebra'
         },
+        'distance-midpoint': {
+            slug: 'distance-midpoint',
+            title: 'Distance & Midpoint',
+            subsections: [],
+            top_level: false,
+            parent: 'algebra'
+        },
+        'word-problems': {
+            slug: 'word-problems',
+            title: 'Word Problems',
+            subsections: ['rate-problems', 'mixture-problems'],
+            top_level: false,
+            parent: 'algebra'
+        },
+        'rate-problems': {
+            slug: 'rate-problems',
+            title: 'Rate Problems',
+            subsections: [],
+            top_level: false,
+            parent: 'word-problems'
+        },
+        'mixture-problems': {
+            slug: 'mixture-problems',
+            title: 'Mixture Problems',
+            subsections: [],
+            top_level: false,
+            parent: 'word-problems'
+        },
         'advanced-math': {
             slug: 'advanced-math',
             title: 'Advanced Math',
-            subsections: ['advanced-math-overview'],
+            subsections: [
+                'advanced-math-overview',
+                'quadratic-functions',
+                'function-transformations',
+                'exponential-functions',
+                'rational-expressions'
+            ],
             top_level: false,
             parent: 'math'
         },
@@ -433,23 +476,126 @@
             top_level: false,
             parent: 'advanced-math'
         },
+        'quadratic-functions': {
+            slug: 'quadratic-functions',
+            title: 'Quadratic Functions',
+            subsections: [],
+            top_level: false,
+            parent: 'advanced-math'
+        },
+        'function-transformations': {
+            slug: 'transformations',
+            title: 'Function Transformations',
+            subsections: [],
+            top_level: false,
+            parent: 'advanced-math'
+        },
+        'exponential-functions': {
+            slug: 'exponential',
+            title: 'Exponential Functions',
+            subsections: [],
+            top_level: false,
+            parent: 'advanced-math'
+        },
+        'rational-expressions': {
+            slug: 'rational',
+            title: 'Rational Expressions',
+            subsections: [],
+            top_level: false,
+            parent: 'advanced-math'
+        },
         'data-analysis': {
-            slug: 'problem-solving-data',
+            slug: 'data-analysis',
             title: 'Data Analysis',
-            subsections: ['data-analysis-overview'],
+            subsections: [
+                'data-analysis-overview',
+                'statistics',
+                'probability',
+                'data-interpretation'
+            ],
             top_level: false,
             parent: 'math'
+        },
+        'data-analysis-overview': {
+            slug: 'overview',
+            title: 'Overview',
+            subsections: [],
+            top_level: false,
+            parent: 'data-analysis'
+        },
+        'statistics': {
+            slug: 'statistics',
+            title: 'Statistics',
+            subsections: [],
+            top_level: false,
+            parent: 'data-analysis'
+        },
+        'probability': {
+            slug: 'probability',
+            title: 'Probability',
+            subsections: [],
+            top_level: false,
+            parent: 'data-analysis'
+        },
+        'data-interpretation': {
+            slug: 'data-interpretation',
+            title: 'Data Interpretation',
+            subsections: [],
+            top_level: false,
+            parent: 'data-analysis'
         },
         'geometry-trigonometry': {
             slug: 'geometry-trig',
             title: 'Geometry & Trigonometry',
-            subsections: ['geometry-trig-overview'],
+            subsections: [
+                'geometry-trig-overview',
+                'circles',
+                'triangles',
+                'quadrilaterals',
+                'polygons',
+                'trigonometry'
+            ],
             top_level: false,
             parent: 'math'
         },
         'geometry-trig-overview': {
             slug: 'overview',
             title: 'Overview',
+            subsections: [],
+            top_level: false,
+            parent: 'geometry-trigonometry'
+        },
+        'circles': {
+            slug: 'circles',
+            title: 'Circles',
+            subsections: [],
+            top_level: false,
+            parent: 'geometry-trigonometry'
+        },
+        'triangles': {
+            slug: 'triangles',
+            title: 'Triangles',
+            subsections: [],
+            top_level: false,
+            parent: 'geometry-trigonometry'
+        },
+        'quadrilaterals': {
+            slug: 'quadrilaterals',
+            title: 'Quadrilaterals',
+            subsections: [],
+            top_level: false,
+            parent: 'geometry-trigonometry'
+        },
+        'polygons': {
+            slug: 'polygons',
+            title: 'Polygons',
+            subsections: [],
+            top_level: false,
+            parent: 'geometry-trigonometry'
+        },
+        'trigonometry': {
+            slug: 'trigonometry',
+            title: 'Trigonometry',
             subsections: [],
             top_level: false,
             parent: 'geometry-trigonometry'

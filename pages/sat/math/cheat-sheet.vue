@@ -2148,6 +2148,64 @@ onMounted(() => {
         </div>
         <div class="cheat-sheet-subsection">
             <h3 class="cheat-sheet-subsection-header">
+                Terminology
+            </h3>
+            <div class="cheat-sheet-subsection-content">
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Supplementary Angles
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        Supplementary angles are two angles that add up to 180 degrees
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Complementary Angles
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        Complementary angles are two angles that add up to 90 degrees
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Congruent
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            Means equal and is represented by the symbol ≅
+                        </div>
+                        <div>
+                            Congruent angles have the same measure
+                        </div>
+                        <div>
+                            Congruent lines have the same length
+                        </div>
+                        <div>
+                            Congruent polygons have all sides and all angles equal
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Similar
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            Similar means proportional and is represented by the symbol ∼
+                        </div>
+                        <div>
+                            Similar polygons have all corresponding angles equal and all corresponding sides proportional
+                        </div>
+                        <div>
+                            e.g. a right triangle with sides 3, 4, and 5 is similar to a right triangle with sides 6, 8, and 10
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cheat-sheet-subsection">
+            <h3 class="cheat-sheet-subsection-header">
                 General Angle Rules
             </h3>
             <div class="cheat-sheet-subsection-content">

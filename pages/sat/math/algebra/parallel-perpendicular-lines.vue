@@ -1,5 +1,5 @@
 <template>
-    <h1>Parallel and Perpendicular Lines</h1>
+    <h1 class="sat-guide-page-header">Parallel and Perpendicular Lines</h1>
 
     <div class="section-description">
         Parallel and perpendicular lines are two types of lines that are important to understand in algebra. Parallel lines are lines that never intersect, while perpendicular lines are lines that intersect at a right angle (90 degrees). Whether lines are parallel or perpendicular depends on their slopes.
