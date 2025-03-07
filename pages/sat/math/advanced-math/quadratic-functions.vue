@@ -1,7 +1,18 @@
 <template>
     <h1 class="sat-guide-page-header">Quadratic Functions/Parabolas</h1>
     <div class="section-description">
-        Quadratic functions are equations where the independent variable (usually x) is squared. A typical example of a quadratic equation is <span v-html="'<math><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi></math>'"></span>, although the exact form can differ. The graph of a quadratic function is a parabola, which is a U-shaped curve that opens either up or down. One important thing to note is that x should be the only variable squared - if you see an x<sup>2</sup> and a y<sup>2</sup> in the same equation, you're looking at an equation for a circle, not a parabola.
+        Quadratic functions are equations where the independent variable (usually x) is squared. A typical example of a quadratic equation is 
+        <math>
+            <mi>y</mi>
+            <mo>=</mo>
+            <msup><mi>x</mi><mn>2</mn></msup>
+            <mo>+</mo>
+            <mi>b</mi>
+            <mi>x</mi>
+            <mo>+</mo>
+            <mi>c</mi>
+        </math>
+        , although the exact form can differ. The graph of a quadratic function is a parabola, which is a U-shaped curve that opens either up or down. One important thing to note is that x should be the only variable squared - if you see an x<sup>2</sup> and a y<sup>2</sup> in the same equation, you're looking at an equation for a circle, not a parabola.
     </div>
 
     <div class="sat-guide-section">
@@ -10,7 +21,13 @@
         </h2>
         <div class="sat-guide-section-content">
             <div class="section-description">
-                As mentioned above, a parabola is a U-shaped curve that opens either up or down. The simplest parabola would be the graph of <span v-html="'<math><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></math>'"></span>, which is shown below:
+                As mentioned above, a parabola is a U-shaped curve that opens either up or down. The simplest parabola would be the graph of 
+                <math>
+                    <mi>y</mi>
+                    <mo>=</mo>
+                    <msup><mi>x</mi><mn>2</mn></msup>
+                </math>
+                , which is shown below:
                 <div>
                     <canvas style="height: 150px; width: 150px;" ref="quadraticChart"></canvas>
                 </div>
@@ -33,7 +50,14 @@
                     Direction
                 </h3>
                 <div class="sat-guide-subsection-content">
-                    The direction of a parabola (whether it looks like a U or an upside-down U) is determined by the sign of the coefficient of the x<sup>2</sup> term. If the coefficient is positive, the parabola opens upward (like a U). If the coefficient is negative, the parabola opens downward (like an upside-down U). In the graph of y=x<sup>2</sup> above, the coefficient of the x<sup>2</sup> term is 1, so the parabola opens upward. The graph of y=-x<sup>2</sup> is shown below. In that case, the coefficient of the x<sup>2</sup> term is -1, so the parabola opens downward.
+                    The direction of a parabola (whether it looks like a U or an upside-down U) is determined by the sign of the coefficient of the x<sup>2</sup> term. If the coefficient is positive, the parabola opens upward (like a U). If the coefficient is negative, the parabola opens downward (like an upside-down U). In the graph of y=x<sup>2</sup> above, the coefficient of the x<sup>2</sup> term is 1, so the parabola opens upward. The graph of 
+                    <math>
+                        <mi>y</mi>
+                        <mo>=</mo>
+                        <mo>-</mo>
+                        <msup><mi>x</mi><mn>2</mn></msup>
+                    </math>
+                    is shown below.
                     <div>
                         <canvas style="height: 150px; width: 150px;" ref="downwardParabolaChart"></canvas>
                     </div>
@@ -44,7 +68,20 @@
                     Vertex
                 </h3>
                 <div class="sat-guide-subsection-content">
-                    The vertex of a parabola is the point where the curve changes direction. At this point, the slope of the line is zero. For U-shaped parabolas that open upward, like <span v-html="'<math><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></math>'"></span>, this is the minimum point. The slope is decreasing on the left side of the vertex, increasing on the right side, and zero right at the vertex. For inverted U-shaped parabolas that open downward, like <span v-html="'<math><mi>y</mi><mo>=</mo><mo>-</mo><msup><mi>x</mi><mn>2</mn></msup></math>'"></span>, this is the maximum point. The slope is increasing on the left side of the vertex, decreasing on the right side, and zero right at the vertex.
+                    The vertex of a parabola is the point where the curve changes direction. At this point, the slope of the line is zero. For U-shaped parabolas that open upward, like 
+                    <math>
+                        <mi>y</mi>
+                        <mo>=</mo>
+                        <msup><mi>x</mi><mn>2</mn></msup>
+                    </math>
+                    , this is the minimum point. The slope is decreasing on the left side of the vertex, increasing on the right side, and zero right at the vertex. For inverted U-shaped parabolas that open downward, like 
+                    <math>
+                        <mi>y</mi>
+                        <mo>=</mo>
+                        <mo>-</mo>
+                        <msup><mi>x</mi><mn>2</mn></msup>
+                    </math>
+                    , this is the maximum point.
                     
                 </div>
             </div>
@@ -53,9 +90,29 @@
                     X-intercepts
                 </h3>
                 <div class="sat-guide-subsection-content">
-                    The x-intercepts of a parabola are the points where the parabola crosses the x-axis. For any point on the x-axis, the y-coordinate is 0, so to find the x-intercepts, we set y=0 and solve for x. For example, to find the x-intercepts of <span v-html="'<math><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>1</mn></math>'"></span>, we set y=0 and solve for x:
+                    The x-intercepts of a parabola are the points where the parabola crosses the x-axis. For any point on the x-axis, the y-coordinate is 0, so to find the x-intercepts, we set y=0 and solve for x. For example, to find the x-intercepts of 
+                    <math>
+                        <mi>y</mi>
+                        <mo>=</mo>
+                        <msup><mi>x</mi><mn>2</mn></msup>
+                        <mo>+</mo>
+                        <mn>2</mn>
+                        <mi>x</mi>
+                        <mo>+</mo>
+                        <mn>1</mn>
+                    </math>
+                    , we set y=0 and solve for x:
                     <div>
-                        <span v-html="'<math><mi>0</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>1</mn></math>'"></span>
+                        <math>
+                            <mi>0</mi>
+                            <mo>=</mo>
+                            <msup><mi>x</mi><mn>2</mn></msup>
+                            <mo>+</mo>
+                            <mn>2</mn>
+                            <mi>x</mi>
+                            <mo>+</mo>
+                            <mn>1</mn>
+                        </math>
                     </div>
                     <div>
                         By solving for x in the above equation, we would find the x values where the parabola crosses the x-axis. We'll get more into how to actually solve for x below.
@@ -83,16 +140,58 @@
         </h2>
         <div class="sat-guide-section-content">
             <div class="section-description">
-                A quadratic equation can be expressed in different formats, but the most common is the standard form. The standard form of a quadratic equation is <span v-html="'<math><mi>y</mi><mo>=</mo><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi></math>'"></span>, where a, b, and c are constants. An example of a quadratic equation in standard form is <span v-html="'<math><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>1</mn></math>'"></span>. When a quadratic is expressed in a different form, you can always manipulate it into standard form. From standard form, we can apply various rules and formulas to find important information about the parabola.
+                A quadratic equation can be expressed in different formats, but the most common is the standard form. The standard form of a quadratic equation is 
+                <math>
+                    <mi>y</mi>
+                    <mo>=</mo>
+                    <mi>a</mi>
+                    <msup><mi>x</mi><mn>2</mn></msup>
+                    <mo>+</mo>
+                    <mi>b</mi>
+                    <mi>x</mi>
+                    <mo>+</mo>
+                    <mi>c</mi>
+                </math>
+                , where a, b, and c are constants. An example of a quadratic equation in standard form is 
+                <math>
+                    <mi>y</mi>
+                    <mo>=</mo>
+                    <msup><mi>x</mi><mn>2</mn></msup>
+                    <mo>+</mo>
+                    <mn>2</mn>
+                    <mi>x</mi>
+                    <mo>+</mo>
+                    <mn>1</mn>
+                </math>
+                . When a quadratic is expressed in a different form, you can always manipulate it into standard form. From standard form, we can apply various rules and formulas to find important information about the parabola.
             </div>
             <div class="sat-guide-subsection">
                 <h3 class="sat-guide-subsection-header">
                     Vertex from Standard Form
                 </h3>
                 <div class="sat-guide-subsection-content">
-                    When a quadratic equation is in standard form (<span v-html="'<math><mi>y</mi><mo>=</mo><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi></math>'"></span>), we can find the x-coordinate of the vertex using the formula below:
+                    When a quadratic equation is in standard form (
+                    <math>
+                        <mi>y</mi>
+                        <mo>=</mo>
+                        <mi>a</mi>
+                        <msup><mi>x</mi><mn>2</mn></msup>
+                        <mo>+</mo>
+                        <mi>b</mi>
+                        <mi>x</mi>
+                        <mo>+</mo>
+                        <mi>c</mi>
+                    </math>
+                    ), we can find the x-coordinate of the vertex using the formula below:
                     <div>
-                        <span v-html="'<math><mi>x</mi><mo>=</mo><mfrac><mrow><mo>-</mo><mi>b</mi></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></math>'"></span>
+                        <math>
+                            <mi>x</mi>
+                            <mo>=</mo>
+                            <mfrac>
+                                <mrow><mo>-</mo><mi>b</mi></mrow>
+                                <mrow><mn>2</mn><mi>a</mi></mrow>
+                            </mfrac>
+                        </math>
                     </div>
                     <div>
                         Once we have the x-coordinate, we can find the y-coordinate by plugging the x-coordinate back into the original equation.
@@ -100,12 +199,46 @@
                     <div class="pt-4">
                         For example, take the quadradict equation below:
                         <div>
-                            <span v-html="'<math><mi>y</mi><mo>=</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>12</mn><mi>x</mi><mo>+</mo><mn>8</mn></math>'"></span>
+                            <math>
+                                <mi>y</mi>
+                                <mo>=</mo>
+                                <mn>3</mn>
+                                <msup><mi>x</mi><mn>2</mn></msup>
+                                <mo>+</mo>
+                                <mn>12</mn>
+                                <mi>x</mi>
+                                <mo>+</mo>
+                                <mn>8</mn>
+                            </math>
                         </div>
                         <div>
-                            In terms of standard form, our "a" is 3, our "b" is 12, and our "c" is 8. So, to get the x-coordinate of the vertex, we plug in the values for a and b into the formula <span v-html="'<math><mi>x</mi><mo>=</mo><mfrac><mrow><mo>-</mo><mi>b</mi></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></math>'"></span>, like this:
+                            In terms of standard form, our "a" is 3, our "b" is 12, and our "c" is 8. So, to get the x-coordinate of the vertex, we plug in the values for a and b into the formula 
+                            <math>
+                                <mi>x</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mrow><mo>-</mo><mi>b</mi></mrow>
+                                    <mrow><mn>2</mn><mi>a</mi></mrow>
+                                </mfrac>
+                            </math>
+                            , like this:
                             <div>
-                                <span v-html="'<math><mi>x</mi><mo>=</mo><mfrac><mrow><mo>-</mo><mn>(12)</mn></mrow><mrow><mn>2</mn><mo>·</mo><mn>(3)</mn></mrow></mfrac><mo>=</mo><mfrac><mrow><mo>-</mo><mn>12</mn></mrow><mrow><mn>6</mn></mrow></mfrac><mo>=</mo><mo>-</mo><mn>2</mn></math>'"></span>
+                                <math>
+                                    <mi>x</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mrow><mo>-</mo><mn>(12)</mn></mrow>
+                                        <mrow><mn>2</mn><mo>·</mo><mn>(3)</mn></mrow>
+                                    </mfrac>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mrow><mo>-</mo><mn>12</mn></mrow>
+                                        <mrow><mn>6</mn></mrow>
+                                    </mfrac>
+                                    <mo>=</mo>
+                                    <mo>-</mo>
+                                    <mn>2</mn>
+                                </math>
                             </div>
                             <div>
                                 So, the x-coordinate of the vertex is -2.
@@ -115,13 +248,55 @@
                     <div class="pt-4">
                         Then, to find the y-coordinate, we plug -2 in for x in the original equation:
                         <div>
-                            <span v-html="'<math><mi>y</mi><mo>=</mo><mn>3</mn><msup><mrow><mo>(</mo><mo>-</mo><mn>2</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mn>12</mn><mo>(</mo><mo>-</mo><mn>2</mn><mo>)</mo><mo>+</mo><mn>8</mn></math>'"></span>
+                            <math>
+                                <mi>y</mi>
+                            <mo>=</mo>
+                          <mn>3</mn>
+                                <msup>
+                        <mrow>
+                          <mo>(</mo>
+                          <mo>-</mo>
+                          <mn>2</mn>
+                          <mo>)</mo>
+                        </mrow>
+                          <mn>2</mn>
+                        </msup>
+                        <mo>+</mo>
+                                <mn>12</mn>
+                                <mo>(</mo>
+                                <mo>-</mo>
+                                <mn>2</mn>
+                                <mo>)</mo>
+                                <mo>+</mo>
+                                <mn>8</mn>
+                            </math>
                         </div>
                         <div>
-                            <span v-html="'<math><mi>y</mi><mo>=</mo><mn>3</mn><mo>·</mo><mn>4</mn><mo>-</mo><mn>24</mn><mo>+</mo><mn>8</mn></math>'"></span>
+                            <math>
+                                <mi>y</mi>
+                                <mo>=</mo>
+                                <mn>3</mn>
+                                <mo>·</mo>
+                                <mn>4</mn>
+                                <mo>-</mo>
+                                <mn>24</mn>
+                                <mo>+</mo>
+                                <mn>8</mn>
+                            </math>
                         </div>
                         <div>
-                            <span v-html="'<math><mi>y</mi><mo>=</mo><mn>12</mn><mo>-</mo><mn>24</mn><mo>+</mo><mn>8</mn><mo>=</mo><mo>-</mo><mn>4</mn></math>'"></span>
+                            <math>
+                                <mi>y</mi>
+                                <mo>=</mo>
+                                <mn>12</mn>
+                                <mo>-</mo>
+                                <mn>24</mn>
+                                <mo>+</mo>
+                                <mn>8</mn>
+                                <mo>=</mo>
+                                <mo>-</mo>
+                                <mn>4</mn>
+                            </math>
                         </div>
                     </div>  
                     <div>
@@ -144,7 +319,29 @@
                 </h3>
                 <div class="sat-guide-subsection-content">
                     <div class="pb-4">
-                        Factoring a quadratic means you are maniuplating the equation so that you end up with two expressions that are multiplied together. For example, the quadratic equation <span v-html="'<math><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>7</mn><mi>x</mi><mo>+</mo><mn>12</mn></math>'"></span> can be factored into <span v-html="'<math><mi>y</mi><mo>=</mo><mo>(</mo><mi>x</mi><mo>+</mo><mn>3</mn><mo>)</mo><mo>(</mo><mi>x</mi><mo>+</mo><mn>4</mn><mo>)</mo></math>'"></span>. You'll notice that if you multiply the two expressions together (using the FOIL method), you get back the original quadratic equation.
+                        Factoring a quadratic means you are maniuplating the equation so that you end up with two expressions that are multiplied together. For example, the quadratic equation <math>
+                            <mi>y</mi>
+                            <mo>=</mo>
+                            <msup><mi>x</mi><mn>2</mn></msup>
+                            <mo>+</mo>
+                            <mn>7</mn>
+                            <mi>x</mi>
+                            <mo>+</mo>
+                            <mn>12</mn>
+                        </math> can be factored into <math>
+                            <mi>y</mi>
+                            <mo>=</mo>
+                            <mo>(</mo>
+                            <mi>x</mi>
+                            <mo>+</mo>
+                            <mn>3</mn>
+                            <mo>)</mo>
+                            <mo>(</mo>
+                            <mi>x</mi>
+                            <mo>+</mo>
+                            <mn>4</mn>
+                            <mo>)</mo>
+                        </math>. You'll notice that if you multiply the two expressions together (using the FOIL method), you get back the original quadratic equation.
                     </div>
                     <div class="sat-guide-subsection-concept">
                         <div class="sat-guide-subsection-concept-header">
@@ -153,24 +350,68 @@
                         <div>
                             When the coefficient of the x<sup>2</sup> term is 1 (aka "a" is 1 in standard form), factoring is relatively simple. We just need to find two numbers that multiply together to get the constant term (c) and add up to the coefficient of the x term (b). For example, take the equation below:
                             <div>
-                                <span v-html="'<math><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>7</mn><mi>x</mi><mo>+</mo><mn>12</mn></math>'"></span>
+                                <math>
+                                    <mi>y</mi>
+                                    <mo>=</mo>
+                                    <msup><mi>x</mi><mn>2</mn></msup>
+                                    <mo>+</mo>
+                                    <mn>7</mn>
+                                    <mi>x</mi>
+                                    <mo>+</mo>
+                                    <mn>12</mn>
+                                </math>
                             </div>
                             <div>
                                 We need to find two numbers that multiply to 12 and add up to 7. These numbers are 3 and 4, so we can factor the quadratic as:
                                 <div>
-                                    <span v-html="'<math><mi>y</mi><mo>=</mo><mo>(</mo><mi>x</mi><mo>+</mo><mn>3</mn><mo>)</mo><mo>(</mo><mi>x</mi><mo>+</mo><mn>4</mn><mo>)</mo></math>'"></span>
+                                    <math>
+                                        <mi>y</mi>
+                                        <mo>=</mo>
+                                        <mo>(</mo>
+                                        <mi>x</mi>
+                                        <mo>+</mo>
+                                        <mn>3</mn>
+                                        <mo>)</mo>
+                                        <mo>(</mo>
+                                        <mi>x</mi>
+                                        <mo>+</mo>
+                                        <mn>4</mn>
+                                        <mo>)</mo>
+                                    </math>
                                 </div>
                                 <div>
                                     Let's do one more example:
                                 </div>
                                 <div>
-                                    <span v-html="'<math><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>15</mn></math>'"></span>
+                                    <math>
+                                        <mi>y</mi>
+                                        <mo>=</mo>
+                                        <msup><mi>x</mi><mn>2</mn></msup>
+                                        <mo>+</mo>
+                                        <mn>2</mn>
+                                        <mi>x</mi>
+                                        <mo>+</mo>
+                                        <mn>15</mn>
+                                    </math>
                                 </div>
                                 <div>
                                     Here, we need to find two numbers that multiply to 15 and add up to 2. These numbers are 5 and -3, so we can factor the quadratic as:
                                 </div>
                                 <div>
-                                    <span v-html="'<math><mi>y</mi><mo>=</mo><mo>(</mo><mi>x</mi><mo>+</mo><mn>5</mn><mo>)</mo><mo>(</mo><mi>x</mi><mo>-</mo><mn>3</mn><mo>)</mo></math>'"></span>
+                                    <math>
+                                        <mi>y</mi>
+                                        <mo>=</mo>
+                                        <mo>(</mo>
+                                        <mi>x</mi>
+                                        <mo>+</mo>
+                                        <mn>5</mn>
+                                        <mo>)</mo>
+                                        <mo>(</mo>
+                                        <mi>x</mi>
+                                        <mo>-</mo>
+                                        <mn>3</mn>
+                                        <mo>)</mo>
+                                    </math>
                                 </div>
                             </div>
                         </div>
@@ -183,10 +424,17 @@
                             When the coefficient of the x<sup>2</sup> term is greater than 1, factoring is a bit more complicated. We need to find two numbers that multiply to the product of a and c, and add up to b. For example, take the equation below:
                         </div>
                         <div>
-                            For example, take the equation below:
-                        </div>
-                        <div>
-                            <span v-html="'<math><mi>y</mi><mo>=</mo><mn>4</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>11</mn><mi>x</mi><mo>+</mo><mn>6</mn></math>'"></span>
+                            <math>
+                                <mi>y</mi>
+                                <mo>=</mo>
+                                <mn>4</mn>
+                                <msup><mi>x</mi><mn>2</mn></msup>
+                                <mo>+</mo>
+                                <mn>11</mn>
+                                <mi>x</mi>
+                                <mo>+</mo>
+                                <mn>6</mn>
+                            </math>
                         </div>
                         <div>
                             Here, we need to find two numbers that multiply to 24 and add up to 11. These numbers are 3 and 8 (since 3 * 8 = 24 and 3 + 8 = 11).
@@ -195,19 +443,63 @@
                             Once we've found the two numbers, we use them to split the "x" term into the sum of two terms, like this:
                         </div>
                         <div>
-                            <span v-html="'<math><mi>y</mi><mo>=</mo><mn>4</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>8</mn><mi>x</mi><mo>+</mo><mn>3</mn><mi>x</mi><mo>+</mo><mn>6</mn></math>'"></span>
+                            <math>
+                                <mi>y</mi>
+                                <mo>=</mo>
+                                <mn>4</mn>
+                                <msup><mi>x</mi><mn>2</mn></msup>
+                                <mo>+</mo>
+                                <mn>8</mn>
+                                <mi>x</mi>
+                                <mo>+</mo>
+                                <mn>3</mn>
+                                <mi>x</mi>
+                                <mo>+</mo>
+                                <mn>6</mn>
+                            </math>
                         </div>
                         <div>
                             Next, we factor out the greatest common factor from the first two terms and the last two terms. Since 4x<sup>2</sup> and 8x have a common factor of 4x, we can factor out 4x from the first two terms. And 3x and 6 have a common factor of 3, so we can factor out 3 from the last two terms:
                         </div>
                         <div>
-                            <span v-html="'<math><mi>y</mi><mo>=</mo><mn>4</mn><mi>x</mi><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo><mo>+</mo><mn>3</mn><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo></math>'"></span>
+                            <math>
+                                <mi>y</mi>
+                                <mo>=</mo>
+                                <mn>4</mn>
+                                <mi>x</mi>
+                                <mo>(</mo>
+                                <mi>x</mi>
+                                <mo>+</mo>
+                                <mn>2</mn>
+                                <mo>)</mo>
+                                <mo>+</mo>
+                                <mn>3</mn>
+                                <mo>(</mo>
+                                <mi>x</mi>
+                                <mo>+</mo>
+                                <mn>2</mn>
+                                <mo>)</mo>
+                            </math>
                         </div>
                         <div>
                             It should always work out so that the two terms in parentheses are the same. In this case, both terms in parentheses are (x+2), so we can factor out (x+2) from the entire expression, giving us the final factored form:
                         </div>
                         <div>
-                            <span v-html="'<math><mi>y</mi><mo>=</mo><mo>(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo>)</mo><mo>(</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>3</mn><mo>)</mo></math>'"></span>
+                            <math>
+                                <mi>y</mi>
+                                <mo>=</mo>
+                                <mo>(</mo>
+                                <mi>x</mi>
+                                <mo>+</mo>
+                                <mn>2</mn>
+                                <mo>)</mo>
+                                <mo>(</mo>
+                                <mn>4</mn>
+                                <mi>x</mi>
+                                <mo>+</mo>
+                                <mn>3</mn>
+                                <mo>)</mo>
+                            </math>
                         </div>
                     </div>
                 </div>
@@ -219,7 +511,14 @@
                 <div class="sat-guide-subsection-content">
                     The quadratic formula is a formula that can be used to find x-intercepts of a quadratic function, or the solutions to a quadratic equation or system of equations. The quadratic formula is shown below:
                     <div>
-                        <span v-html="'<math><mi>x</mi><mo>=</mo><mfrac><mrow><mo>-</mo><mi>b</mi><mo>±</mo><msqrt><mi>b</mi><mo>²</mo><mo>-</mo><mn>4</mn><mi>a</mi><mi>c</mi></msqrt></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></math>'"></span>
+                        <math>
+                            <mi>x</mi>
+                            <mo>=</mo>
+                            <mfrac>
+                                <mrow><mo>-</mo><mi>b</mi><mo>±</mo><msqrt><mi>b</mi><mo>²</mo><mo>-</mo><mn>4</mn><mi>a</mi><mi>c</mi></msqrt></mrow>
+                                <mrow><mn>2</mn><mi>a</mi></mrow>
+                            </mfrac>
+                        </math>
                     </div>
                     <div>
                         Before applying the formula, however, we need to make sure the quadratic equation is in standard form, and set equal to 0. So it needs to look something like this:
@@ -267,25 +566,1157 @@
                         Now, we can plug these values into the quadratic formula:
                     </div>
                     <div>
-                        <span v-html="'<math><mi>x</mi><mo>=</mo><mfrac><mrow><mo>-</mo><mi>(10)</mi><mo>±</mo><msqrt><mi>(10)</mi><mo>²</mo><mo>-</mo><mn>4</mn><mi>(5)</mi><mi>(-8)</mi></msqrt></mrow><mrow><mn>2</mn><mi>(5)</mi></mrow></mfrac></math>'"></span>
+                        <math>
+                            <mi>x</mi>
+                            <mo>=</mo>
+                            <mfrac>
+                                <mrow><mo>-</mo><mi>(10)</mi><mo>±</mo><msqrt><mi>(10)</mi><mo>²</mo><mo>-</mo><mn>4</mn><mi>(5)</mi><mi>(-8)</mi></msqrt></mrow>
+                                <mrow><mn>2</mn><mi>(5)</mi></mrow>
+                            </mfrac>
+                        </math>
                     </div>
                     <div>
-                        <span v-html="'<math><mi>x</mi><mo>=</mo><mfrac><mrow><mo>-</mo><mi>(10)</mi><mo>±</mo><msqrt><mi>100</mi><mo>+</mo><mn>160</mn></msqrt></mrow><mrow><mn>10</mn></mrow></mfrac></math>'"></span>
+                        <math>
+                            <mi>x</mi>
+                            <mo>=</mo>
+                            <mfrac>
+                                <mrow><mo>-</mo><mi>10</mi><mo>±</mo><msqrt><mi>100</mi><mo>+</mo><mn>160</mn></msqrt></mrow>
+                                <mrow><mn>10</mn></mrow>
+                            </mfrac>
+                        </math>
                     </div>
                     <div>
-                        
+                        <math>
+                            <mi>x</mi>
+                            <mo>=</mo>
+                            <mfrac>
+                                <mrow><mo>-</mo><mi>10</mi><mo>±</mo><msqrt><mi>260</mi></msqrt></mrow>
+                                <mrow><mn>10</mn></mrow>
+                            </mfrac>
+                        </math>
+                    </div>
+                    <div>
+                        <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <mrow>
+                            <mi>x</mi>
+                            <mo>=</mo>
+                            <mrow>
+                            <mn>-1</mn>
+                            <mo>±</mo>
+                            <mfrac>
+                                <msqrt>
+                                <mn>260</mn>
+                                </msqrt>
+                                <mn>10</mn>
+                            </mfrac>
+                            </mrow>
+                        </mrow>
+                        </math>
+                    </div>
+                    <div>
+                        This gives us two solutions:
+                    </div>
+                    <div>
+                        <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <mrow>
+                            <mi>x</mi>
+                            <mo>=</mo>
+                            <mrow>
+                            <mn>-1</mn>
+                            <mo>+</mo>
+                            <mfrac>
+                                <msqrt>
+                                <mn>260</mn>
+                                </msqrt>
+                                <mn>10</mn>
+                            </mfrac>
+                            </mrow>
+                        </mrow>
+                        </math>
+                    </div>
+                    <div>
+                        <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <mrow>
+                            <mi>x</mi>
+                            <mo>=</mo>
+                            <mrow>
+                            <mn>-1</mn>
+                            <mo>-</mo>
+                            <mfrac>
+                                <msqrt>
+                                <mn>260</mn>
+                                </msqrt>
+                                <mn>10</mn>
+                            </mfrac>
+                            </mrow>
+                        </mrow>
+                        </math>
+                    </div>
+                    <div>
+                        Which we could also represent as decimal approximations:
+                    </div>
+                    <div>
+                        x = 1.28 and x = -3.28
                     </div>
                     
-
                 </div>
             </div>
         </div>
     </div>
 
-    <h2 class="sat-guide-section-header">
-        
-    </h2>
-    
+    <div class="sat-guide-section">
+        <h2 class="sat-guide-section-header">
+            Vertex Form
+        </h2>
+        <div class="sat-guide-section-content">
+            <div class="section-description">
+                Vertex form is a different format that can be used to represent a quadratic function. While less commonly used than standard form, it can be useful for finding the vertex of a quadratic function. A quadratic function in vertex form is given look like this:
+                <div>
+                    <math>
+                        <mi>y</mi>
+                        <mo>=</mo>
+                        <mi>a</mi>
+                        <mo>(</mo>
+                        <mi>x</mi>
+                        <mo>-</mo>
+                        <mi>h</mi>
+                        <mo>)</mo>
+                        <mo>²</mo>
+                        <mo>+</mo>
+                        <mi>k</mi>
+                    </math>
+                </div>
+                <div>
+                    In this format, (h, k) is the vertex of the parabola. Similarly to standard form, the sign of a tells you whether the parabola opens up or down. If a is positive, the parabola opens up, and if a is negative, the parabola opens down. It's important to note that the default form is <b>x - h</b>, not h + x, meaning the x-coordinate of the vertex has the opposite sign of what you see in the parentheses.
+                </div>
+                <div>
+                    For example, if we have the following quadratic function:
+                </div>
+                <div>
+                    <math>
+                        <mi>y</mi>
+                        <mo>=</mo>
+                        <mo>2</mo>
+                        <mo>(</mo>
+                        <mi>x</mi>
+                        <mo>+</mo>
+                        <mn>2</mn>
+                        <mo>)</mo>
+                        <mo>²</mo>
+                        <mo>+</mo>
+                        <mn>3</mn>
+                    </math>
+                </div>
+                <div>
+                    The x-coordinate of the vertex is -2, and the y-coordinate is 3.
+                </div>
+                <div>
+                    It's important to be familiar with the vertex form of a quadratic function. Occasionally on the SAT, a question will have a quadratic function that is already in vertex form, and ask you about its vertex. Of course, you could always convert it to standard form, then find the x-coordinate of the vertex using 
+                    <math>
+                        <mfrac>
+                            <mrow><mo>-</mo><mi>b</mi></mrow>
+                            <mrow><mn>2</mn><mi>a</mi></mrow>
+                        </mfrac>
+                    </math>
+                    , then plug that back into the equation to find the y-coordinate. But this would take way more time than just recognizing that it's already in vertex form, so the vertex is simply (h, k).
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sat-guide-section">
+        <h2 class="sat-guide-section-header">
+            Single Variable Quadratic Equations
+        </h2>
+        <div class="sat-guide-section-content">
+            <div class="section-description">
+                A single variable quadratic equation is a quadratic equation that has only one variable. Rather than being expressed as a function of x, like y = x<sup>2</sup> + 4x + 3, or f(x) = x<sup>2</sup> + 4x + 3, it is simply expressed as an equation where the only variable is x. 
+                <div>
+                    For example, below are a few examples of single variable quadratic equations:
+                </div>
+                <div>
+                    <math>
+                        <mi>2x</mi>
+                        <mo>²</mo>
+                        <mo>-</mo>
+                        <mn>4</mn>
+                        <mi>x</mi>
+                        <mo>+</mo>
+                        <mn>3</mn>
+                        <mo>=</mo>
+                        <mi>5x</mi>
+                        <mo>²</mo>
+                        <mo>+</mo>
+                        <mn>6</mn>
+                        <mi>x</mi>
+                        <mo>+</mo>
+                        <mn>8</mn>
+                    </math>
+                </div>
+                <div>
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                      <mrow>
+                        <mrow>
+                          <mo>(</mo>
+                          <mi>x</mi>
+                          <mo>+</mo>
+                          <mn>3</mn>
+                          <mo>)</mo>
+                        </mrow>
+                        <mrow>
+                          <mo>(</mo>
+                          <mi>x</mi>
+                          <mo>-</mo>
+                          <mn>2</mn>
+                          <mo>)</mo>
+                        </mrow>
+                        <mo>=</mo>
+                        <mrow>
+                          <mo>(</mo>
+                          <mi>x</mi>
+                          <mo>+</mo>
+                          <mn>1</mn>
+                          <mo>)</mo>
+                        </mrow>
+                        <mrow>
+                          <mo>(</mo>
+                          <mi>x</mi>
+                          <mo>-</mo>
+                          <mn>4</mn>
+                          <mo>)</mo>
+                        </mrow>
+                      </mrow>
+                    </math>
+                </div>
+                <div>
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                      <mrow>
+                        <mn>3</mn>
+                        <mrow>
+                          <mo>(</mo>
+                          <mi>x</mi>
+                          <mo>-</mo>
+                          <mn>2</mn>
+                          <mo>)</mo>
+                        </mrow>
+                        <msup>
+                          <mrow></mrow>
+                          <mn>2</mn>
+                        </msup>
+                        <mo>+</mo>
+                        <mn>5</mn>
+                        <mo>=</mo>
+                        <mn>4</mn>
+                        <msup>
+                          <mi>x</mi>
+                          <mn>2</mn>
+                        </msup>
+                        <mo>-</mo>
+                        <mn>20</mn>
+                        <mi>x</mi>
+                        <mo>+</mo>
+                        <mn>29</mn>
+                      </mrow>
+                    </math>
+                </div>
+            </div>
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">
+                    Solving Single Variable Quadratic Equations
+                </h3>
+                <div class="sat-guide-subsection-content">
+                    Solving a single variable quadratic equation consists of three main steps:
+                    <ol>
+                        <li>
+                            Isolate the quadratic expression on one side of the equation, so that it is equal to 0.
+                        </li>
+                        <li>
+                            Get the expression into standard form (ax<sup>2</sup> + bx + c).
+                        </li>
+                        <li>
+                            Solve for x by either factoring or using the quadratic formula.
+                        </li>
+                    </ol>
+                    <div>
+                        Let's look at an example:
+                    </div>
+                    <div>
+                        <math>
+                        <mrow>
+                            <mrow>
+                            <mo>(</mo>
+                            <mn>2</mn>
+                            <mi>x</mi>
+                            <mo>-</mo>
+                            <mn>3</mn>
+                            <mo>)</mo>
+                            </mrow>
+                            <mrow>
+                            <mo>(</mo>
+                            <mi>x</mi>
+                            <mo>+</mo>
+                            <mn>5</mn>
+                            <mo>)</mo>
+                            </mrow>
+                            <mo>=</mo>
+                            <mrow>
+                            <mo>(</mo>
+                            <mi>x</mi>
+                            <mo>+</mo>
+                            <mn>5</mn>
+                            <mo>)</mo>
+                            </mrow>
+                            <mrow>
+                            <mo>(</mo>
+                            <mi>x</mi>
+                            <mo>-</mo>
+                            <mn>1</mn>
+                            <mo>)</mo>
+                            </mrow>
+                        </mrow>
+                        </math>
+                    </div>
+                    <div>
+                        First, we'll get all terms on one side of the equation, so that it is equal to 0.
+                    </div>
+                    <div>
+                        <math>
+                            <mrow>
+                            <mo>(</mo>
+                            <mn>2</mn>
+                            <mi>x</mi>
+                            <mo>-</mo>
+                            <mn>3</mn>
+                            <mo>)</mo>
+                            <mo>(</mo>
+                            <mi>x</mi>
+                            <mo>+</mo>
+                            <mn>5</mn>
+                            <mo>)</mo>
+                            <mo>-</mo>
+                            <mrow>
+                                <mo>(</mo>
+                                <mi>x</mi>
+                                <mo>+</mo>
+                                <mn>5</mn>
+                                <mo>)</mo>
+                                <mo>(</mo>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                                <mo>)</mo>
+                            </mrow>
+                            <mo>=</mo>
+                            <mn>0</mn>
+                        </mrow>
+                        </math>
+                    </div>
+                    <div>
+                        Next, we'll need to multiply out the left side of the equation, then combine like terms to get it into standard form:
+                    </div>
+                    <div>
+                        <math>
+                            <mrow>
+                                <mo>(</mo>
+                                <mn>2</mn>
+                                <mi>x</mi>
+                                <mo>²</mo>
+                                <mo>+</mo>
+                                <mn>10</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>3</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>15</mn>
+                                <mo>)</mo>
+                                <mo>-</mo>
+                                <mo>(</mo>
+                                <mi>x</mi>
+                                <mo>²</mo>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                                <mi>x</mi>
+                                <mo>+</mo>
+                                <mn>5</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>5</mn>
+                                <mo>)</mo>
+                                <mo>=</mo>
+                                <mn>0</mn>
+                            </mrow>
+                        </math>
+                    </div>
+                    <div>
+                        Next, combine like terms:
+                    </div>
+                    <div>
+                        <math>
+                            <mrow>
+                                <mi>x</mi>
+                                <mo>²</mo>
+                                <mo>+</mo>
+                                <mn>3</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>10</mn>
+                                <mo>=</mo>
+                                <mn>0</mn>
+                            </mrow>
+                        </math>
+                    </div>
+                    <div>
+                        Since this equation happens to be factorable, we can use factoring to solve it rather than using the quadratic formula. 
+                    </div>
+                    <div>
+                        It factors into:
+                    </div>
+                    <div>
+                        <math>
+                            <mrow>
+                                <mo>(</mo>
+                                <mi>x</mi>
+                                <mo>+</mo>
+                                <mn>5</mn>
+                                <mo>)</mo>
+                                <mo>(</mo>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>2</mn>
+                                <mo>)</mo>
+                                <mo>=</mo>
+                                <mn>0</mn>
+                            </mrow>
+                        </math>
+                    </div>
+                    <div>
+                        Now, using the Zero Product Property (if two numbers multiply to 0, one of them must be 0), we know that either <math>
+                            <mi>x</mi>
+                            <mo>+</mo>
+                            <mn>5</mn>
+                            <mo>=</mo>
+                            <mn>0</mn>
+                        </math> or <math>
+                            <mi>x</mi>
+                            <mo>-</mo>
+                            <mn>2</mn>
+                            <mo>=</mo>
+                            <mn>0</mn>
+                        </math>
+                    </div>
+                    <div>
+                        Solving each equation, we get:
+                    </div>
+                    <div>
+                        <math>
+                            <mrow>
+                                <mi>x</mi>
+                                <mo>=</mo>
+                                <mn>2</mn>
+                            </mrow>
+                        </math>
+                    </div>  
+                    <div>
+                        <math>
+                            <mrow>
+                                <mi>x</mi>
+                                <mo>=</mo>
+                                <mn>-5</mn>
+                            </mrow>
+                        </math>
+                    </div> 
+                </div>
+                 
+            </div>
+        </div>
+    </div>
+
+    <div class="sat-guide-section">
+        <h2 class="sat-guide-section-header">
+            Systems of Quadratic Equations/Functions
+        </h2>
+        <div class="sat-guide-section-content">
+            <div class="section-description">
+                A system of quadratic equations is a set of two equations or functions that are solved simultaneously. The solutions to the system are the values of the variables that make both equations true. Or, since each equation/function can be represented as a graph, we can think of the solutions as the points where the graphs intersect.
+            </div>
+            <div>
+                For example, let's say we have the following system of quadratic equations, and we're asked to solve for the values of x and y that make both equations true:
+            </div>
+            <div>
+                <math>
+                    <mi>y</mi>                    
+                    <mo>=</mo>
+                    <msup>
+                        <mi>x</mi>
+                        <mn>2</mn>
+                    </msup>
+                    <mo>+</mo>
+                    <mn>4</mn>
+                    <mi>x</mi>
+                    <mo>-</mo>
+                    <mn>5</mn>
+                </math>
+            </div>
+            <div>
+                <math>
+                    <mi>y</mi>
+                    <mo>=</mo>
+                    <mn>2</mn>
+                    <msup>
+                        <mi>x</mi>
+                        <mn>2</mn>
+                    </msup>
+                    <mo>+</mo>
+                    <mn>7</mn>
+                    <mi>x</mi>
+                    <mo>-</mo>
+                    <mn>15</mn>
+                </math>
+            </div>
+            <div>
+                This would essentially be the same as if we were given the two following functions, and asked to find the points of intersection:
+            </div>
+            <div>
+                <math>
+                    <mi>f</mi>
+                    <mo>(</mo>
+                    <mi>x</mi>
+                    <mo>)</mo>
+                    <mo>=</mo>
+                    <msup>
+                        <mi>x</mi>
+                        <mn>2</mn>
+                    </msup>
+                    <mo>+</mo>
+                    <mn>4</mn>
+                    <mi>x</mi>
+                    <mo>-</mo>
+                    <mn>5</mn>
+                </math>
+            </div>
+            <div>
+                <math>
+                    <mi>g</mi>
+                    <mo>(</mo>
+                    <mi>x</mi>
+                    <mo>)</mo>
+                    <mo>=</mo>
+                    <mn>2</mn>
+                    <msup>
+                        <mi>x</mi>
+                        <mn>2</mn>
+                    </msup>
+                    <mo>+</mo>
+                    <mn>7</mn>
+                    <mi>x</mi>
+                    <mo>-</mo>
+                    <mn>15</mn>
+                </math>
+            </div>
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">
+                    Solving Systems of Quadratic Equations
+                </h3>
+                <div class="sat-guide-subsection-content">
+                    To solve a system of quadratic equations, we first need to combine the two equations into a single equation. We can do this either by using substitution or elimination. Since the system of equations above already has both equations expressing y in terms of x (y is isolated on one side of the equation), we can use either method easily. Let's start by using substitution.
+                    <div class="sat-guide-subsection-concept">
+                        <div class="sat-guide-subsection-concept-header">
+                            Substitution Method
+                        </div>
+                        <div>
+                            To use substitution, you first need to isolate y in one of the equations. Once you've done that, you can substitute the expression for y into the other equation. In our system of equations above, y is already isolated, so we can substitute the expression for y from the first equation into the second equation:
+                        </div>
+                        <div>
+                            <math>
+                                <msup>
+                                    <mi>x</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>+</mo>
+                                <mn>4</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>5</mn>
+                                <mo>=</mo>
+                                <mn>2</mn>
+                                <msup>
+                                    <mi>x</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>+</mo>
+                                <mn>7</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>15</mn>
+                            </math>
+                        </div>
+                        <div>
+                            Now we have a single equation with a single variable, so we can solve it the rest of the way by using the same methods outlined above in the section on solving single variable quadratic equations. We'll start by getting all terms on one side of the equation, so that it is equal to 0:
+                        </div>
+                        <div>
+                            <math>
+                                <mn>2</mn>
+                                <msup>
+                                    <mi>x</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>+</mo>
+                                <mn>7</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>15</mn>
+                                <mo>-</mo>
+                                <mo>(</mo>
+                                <msup>
+                                    <mi>x</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>+</mo>
+                                <mn>4</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>5</mn>
+                                <mo>)</mo>
+                                <mo>=</mo>
+                                <mn>0</mn>
+                            </math>
+                        </div>
+                        <div>
+                            Next, combine like terms:
+                        </div>
+                        <div>
+                            <math>
+                                <msup>
+                                    <mi>x</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>+</mo>
+                                <mn>3</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>10</mn>
+                                <mo>=</mo>
+                                <mn>0</mn>
+                            </math>
+                        </div>
+                        <div>
+                            Now, we can solve for x by factoring:
+                        </div>
+                        <div>
+                            <math>
+                                <mo>(</mo>
+                                <mi>x</mi>
+                                <mo>+</mo>
+                                <mn>5</mn>
+                                <mo>)</mo>
+                                <mo>(</mo>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>2</mn>
+                                <mo>)</mo>
+                                <mo>=</mo>
+                                <mn>0</mn>
+                            </math>
+                        </div>
+                        <div>
+                            Using the Zero Product Property, we can conclude that the solutions are <math>
+                                <mi>x</mi>
+                                <mo>=</mo>
+                                <mn>-5</mn>
+                            </math> and <math>
+                                <mi>x</mi>
+                                <mo>=</mo>
+                                <mn>2</mn>
+                            </math>
+                        </div>
+                    </div>
+                    <div class="sat-guide-subsection-concept">
+                        <div class="sat-guide-subsection-concept-header">
+                            Elimination Method
+                        </div>
+                        <div>
+                           Let's use a different example to illustrate the elimination method. Let's say we have the following system of equations:
+                        </div>
+                        <div>
+                            <math>
+                                <mi>y</mi>
+                                <mo>=</mo>
+                                <msup>
+                                    <mi>x</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>+</mo>
+                                <mn>4</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>5</mn>
+                            </math>
+                        </div>
+                        <div>
+                            <math>
+                                <mn>2</mn>
+                                <mi>y</mi>
+                                <mo>=</mo>
+                                <mn>4</mn>
+                                <msup>
+                                    <mi>x</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>+</mo>
+                                <mn>14</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>30</mn>
+                            </math>
+                        </div>
+                        <div>
+                            With the elimination method, we want to add or subtract one equation from the other so that one of the variables is eliminated. With quadratic equations, we generally want to eliminate the dependent variable (y), so that we're left with an equation that has only x's.
+                        </div>
+                        <div>
+                            Since one equation has a y, and one has a 2y, we can't just subtract one from the other to eliminate the y's. Instead, we can multiply one of the equations by a constant so that y terms have the same coefficient. Let's multiply the first equation by 2, which now gives us the two equations:
+                        </div>
+                        <div>
+                            <math>
+                                <mn>2</mn>
+                                <mi>y</mi>
+                                <mo>=</mo>
+                                <mn>2</mn>
+                                <msup>
+                                    <mi>x</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>+</mo>
+                                <mn>8</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>10</mn>
+                            </math>
+                        </div>
+                        <div>
+                            <math>
+                                <mn>2</mn>
+                                <mi>y</mi>
+                                <mo>=</mo>
+                                <mn>4</mn>
+                                <msup>
+                                    <mi>x</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>+</mo>
+                                <mn>14</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>30</mn>
+                            </math>
+                        </div>
+                        <div>
+                            Now, we can subtract the second equation from the first equation. By this, we mean that we'll subtract the left side of the second equation from the left side of the first equation, and the right side of the second equation from the right side of the first equation:
+                        </div>
+                        <div>
+                            <math>
+                                <mn>2</mn>
+                                <mi>y</mi>
+                                <mo>-</mo>
+                                <mn>2</mn>
+                                <mi>y</mi>
+                                <mo>=</mo>
+                                <mn>2</mn>
+                                <msup>
+                                    <mi>x</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>+</mo>
+                                <mn>8</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>10</mn>
+                                <mo>-</mo>
+                                <mo>(</mo>
+                                <mn>4</mn>
+                                <msup>
+                                    <mi>x</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>+</mo>
+                                <mn>14</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>30</mn>
+                                <mo>)</mo>
+                                
+                            </math>
+                        </div>
+                        <div>
+                            Now, combine like terms:
+                        </div>
+                        <div>
+                            <math>
+                                <mn>0</mn>
+                                <mo>=</mo>
+                                <mo>-</mo>
+                                <mn>2</mn>
+                                <msup>
+                                    <mi>x</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>6</mn>
+                                <mi>x</mi>
+                                <mo>+</mo>
+                                <mn>20</mn>
+                            </math>
+                        </div>
+                        <div>
+                            We can simplify this equation by dividing both sides by -2:
+                        </div>
+                        <div>
+                            <math>
+                                <mn>0</mn>
+                                <mo>=</mo>
+                                <msup>
+                                    <mi>x</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>+</mo>
+                                <mn>3</mn>
+                                <mi>x</mi>
+                                <mo>-</mo>
+                                <mn>10</mn>
+                            </math>
+                        </div>
+                        <div>
+                            Which actually leaves us with the same equation as in our substitution example. So it will give us the same solutions, <math>
+                                <mi>x</mi>
+                                <mo>=</mo>
+                                <mn>-5</mn>
+                            </math> and <math>
+                                <mi>x</mi>
+                                <mo>=</mo>
+                                <mn>2</mn>
+                            </math>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">
+                    Linear-Quadratic Systems
+                </h3>
+                <div class="sat-guide-subsection-content">
+                    Sometimes on the SAT, you may encounter a system of equations that contains one linear equation and one quadratic equation. Let's say we have the following system of equations:
+                </div>
+                <div>
+                    <math>
+                        <mi>y</mi>
+                        <mo>=</mo>
+                        <msup>
+                            <mi>x</mi>
+                            <mn>2</mn>
+                        </msup>
+                        <mo>+</mo>  
+                        <mn>4</mn>
+                        <mi>x</mi>
+                        <mo>-</mo>
+                        <mn>5</mn>
+                    </math>
+                </div>
+                <div>
+                    <math>
+                        <mi>y</mi>
+                        <mo>=</mo>
+                        <mi>x</mi>
+                        <mo>+</mo>
+                        <mn>5</mn>
+                    </math>
+                </div>
+                <div>
+                    Ultimately, our approach will be essentially the same as it was when we had two quadratic equations. We can use either substitution or elimination to combine the equations into a single equation with a single variable. This resulting equation will be a quadratic equation, so we can solve it by either factoring or using the quadratic formula.
+                </div>
+                <div>
+                    By using elimination, we can subtract the second equation from the first equation to eliminate the y term:
+                </div>
+                <div>
+                    <math>
+                        <mn>0</mn>
+                        <mo>=</mo>  
+                        <msup>
+                            <mi>x</mi>
+                            <mn>2</mn>
+                        </msup>
+                        <mo>+</mo>
+                        <mn>4</mn>
+                        <mi>x</mi>
+                        <mo>-</mo>
+                        <mn>5</mn>
+                        <mo>-</mo>
+                        <mo>(</mo>
+                        <mi>x</mi>
+                        <mo>+</mo>
+                        <mn>5</mn>
+                        <mo>)</mo>
+                        
+                    </math>
+                </div>
+                <div>
+                    Now, combine like terms:
+                </div>
+                <div>
+                    <math>
+                        <mn>0</mn>
+                        <mo>=</mo>
+                        <msup>
+                            <mi>x</mi>
+                            <mn>2</mn>
+                        </msup>
+                        <mo>+</mo>
+                        <mn>3</mn>
+                        <mi>x</mi>
+                        <mo>-</mo>
+                        <mn>10</mn>
+                    </math>
+                </div>
+                <div>
+                    Again, we end up with the same quadratic equation as in our previous examples, so the solutions are <math>
+                        <mi>x</mi>
+                        <mo>=</mo>
+                        <mn>-5</mn>
+                    </math> and <math>
+                        <mi>x</mi>
+                        <mo>=</mo>
+                        <mn>2</mn>
+                    </math>
+                </div>
+                <div>
+                    To think about this graphically, we have one function that is represented by a parabola, and one function that is represented by a line. The fact that we have two solutions means that the line intersects the parabola at two points. The x-coordinates of these points are the solutions to the system of equations. We could find the y-coordinates by plugging the x-coordinates back into either equation. Let's use the simpler equation, <math>
+                        <mi>y</mi>
+                        <mo>=</mo>
+                        <mi>x</mi>
+                        <mo>+</mo>
+                        <mn>5</mn>
+                    </math>, or in function notation, <math>
+                        <mi>f</mi>
+                        <mo>(</mo>
+                        <mi>x</mi>
+                        <mo>)</mo>
+                        <mo>=</mo>
+                        <mi>x</mi>
+                        <mo>+</mo>
+                        <mn>5</mn>
+                    </math>.
+                </div>
+                <div>
+                    Plugging in <math>
+                        <mi>x</mi>
+                        <mo>=</mo>
+                        <mn>-5</mn>
+                    </math> gives us <math>
+                        <mi>f</mi>
+                        <mo>(</mo>
+                        <mi>-5</mi>
+                        <mo>)</mo>
+                        <mo>=</mo>
+                        <mn>-5</mn>
+                        <mo>+</mo>
+                        <mn>5</mn>
+                        <mo>=</mo>
+                        <mn>0</mn>
+                    </math>
+                </div>
+                <div>
+                    Plugging in <math>
+                        <mi>x</mi>
+                        <mo>=</mo>
+                        <mn>2</mn>
+                    </math> gives us <math>
+                        <mi>f</mi>
+                        <mo>(</mo>
+                        <mi>2</mi>
+                        <mo>)</mo>
+                        <mo>=</mo>
+                        <mn>2</mn>
+                        <mo>+</mo>
+                        <mn>5</mn>
+                        <mo>=</mo>
+                        <mn>7</mn>
+                    </math>
+                    
+                </div>
+                <div>
+                    So, the two exact coordinate points of intersection are <math>
+                        <mo>(</mo>
+                        <mn>-5</mn>
+                        <mo>,</mo>
+                        <mn>0</mn>
+                        <mo>)</mo>
+                    </math> and <math>
+                        <mo>(</mo>
+                        <mn>2</mn>
+                        <mo>,</mo>
+                        <mn>7</mn>
+                        <mo>)</mo>
+                    </math>
+                </div>
+                <div>
+                    Let's look at what the graph of these two functions actually looks like:
+                </div>
+                <div>
+                    <canvas style="height: 150px; width: 200px;" ref="linearQuadraticSystemChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sat-guide-section">
+        <h2 class="sat-guide-section-header">
+            Number of Solutions
+        </h2>
+        <div class="sat-guide-subsection-content">
+            We saw earlier how parabolas can have two, one, or no x-intercepts. The solutions to a quadratic equation can be thought of as the x-intercepts of the parabola, so it's also the case that a quadratic equation can have two, one, or no solutions. The number of solutions to a quadratic equation is ultimately determined by its discriminant.
+        </div>
+        <div class="sat-guide-subsection">
+            <h3 class="sat-guide-subsection-header">
+                The Discriminant
+            </h3>
+            <div class="sat-guide-subsection-content">
+                The discriminant of a quadratic equation is the part of the quadratic formula under the square root.
+                <div>
+                    Remember, the quadratic formula is:
+                </div>
+                <div>
+                    <math>
+                        <mi>x</mi>
+                        <mo>=</mo>
+                        <mfrac>
+                            <mrow><mo>-</mo><mi>b</mi><mo>±</mo><msqrt><mi>b</mi><mo>²</mo><mo>-</mo><mn>4</mn><mi>a</mi><mi>c</mi></msqrt></mrow>
+                            <mrow><mn>2</mn><mi>a</mi></mrow>
+                        </mfrac>
+                    </math>
+                </div>
+                <div>
+                    So the discriminant (the part under the square root) is: 
+                </div>
+                <div>
+                    <math>
+                        <mi>b</mi>
+                        <mo>²</mo>
+                        <mo>-</mo>
+                        <mn>4</mn>
+                        <mi>a</mi>
+                        <mi>c</mi>
+                    </math>
+                </div>
+                
+            </div>
+        </div>
+        <div class="sat-guide-subsection">
+            <h3 class="sat-guide-subsection-header">
+                Zero Solutions = Negative Discriminant
+            </h3>
+            <div class="sat-guide-subsection-content">
+                We know that we can't take the square root of a negative number. Since the discriminant is inside the square root, it cannot be negative, or else the equation we end up with no (real) solutions. We say "real" because in theory there are complex solutions that involve imaginary numbers, but we don't need to worry about that for the SAT. So for the purposes of the SAT, a quadratic equation has no solutions if its discriminant is negative.
+            </div>
+            <div class="sat-guide-subsection-content">
+                Let's look at an example:
+            </div>
+            <div>
+                <math>
+                    <mi>x</mi>
+                    <mo>²</mo>
+                    <mo>-</mo>
+                    <mn>4</mn>
+                    <mi>x</mi>
+                    <mo>+</mo>
+                    <mn>5</mn>
+                    <mo>=</mo>
+                    <mn>0</mn>
+                </math>
+            </div>
+            <div>
+                Linking this back to standard form (<math>
+                    <mi>a</mi>
+                    <msup>
+                        <mi>x</mi>
+                        <mn>2</mn>
+                    </msup>
+                    <mo>+</mo>
+                    <mi>b</mi>
+                    <mi>x</mi>
+                    <mo>+</mo>
+                    <mi>c</mi>
+                </math>), we have <math><mi>a</mi><mo>=</mo><mn>1</mn></math>, <math><mi>b</mi><mo>=</mo><mn>-4</mn></math>, and <math><mi>c</mi><mo>=</mo><mn>5</mn></math>.
+            </div>
+            <div>
+                Plugging these values into the discriminant, we get:
+            </div>
+            <div>
+                <math>
+                    <msup>
+                        <mi>(-4)</mi>
+                        <mn>2</mn>
+                    </msup>
+                    <mo>-</mo>
+                    <mn>4</mn>
+                    <mn>(1)</mn>
+                    <mn>(5)</mn>
+                </math>
+            </div>
+            <div>
+                Simplifying this, we get:
+            </div>
+            <div>
+                <math>
+                    <mn>16</mn>
+                    <mo>-</mo>
+                    <mn>20</mn>
+                    <mo>=</mo>
+                    <mn>-4</mn>
+                </math>
+            </div>
+            <div>
+                Since the discriminant is negative, we know that this quadratic equation has no solutions.
+            </div>
+            <div>
+                Accordingly, if we graph it we see that the parabola does not intersect the x-axis at all.
+            </div>
+            <div>
+                <canvas style="height: 150px; width: 200px;" ref="noXInterceptsChart2"></canvas>
+            </div>
+        </div>
+        <div class="sat-guide-subsection">
+            <h3 class="sat-guide-subsection-header">
+                One Solution (Discriminant = 0)
+            </h3>
+            <div class="sat-guide-subsection-content">
+                If the discriminant is zero, then the quadratic equation has exactly one solution. If we refer back to the quadratic formula, this makes sense, because if the discriminant is zero, our two solutions would be:
+                <div>
+                    <math>
+                        <mi>x</mi>
+                        <mo>=</mo>
+                        <mfrac>
+                            <mrow><mo>-</mo><mi>b</mi><mo>+</mo><msqrt><mn>0</mn></msqrt></mrow>
+                            <mrow><mn>2</mn><mi>a</mi></mrow>
+                        </mfrac>
+                    </math> and 
+                    <math>
+                        <mi>x</mi>
+                        <mo>=</mo>
+                        <mfrac>
+                            <mrow><mo>-</mo><mi>b</mi><mo>-</mo><msqrt><mn>0</mn></msqrt></mrow>
+                            <mrow><mn>2</mn><mi>a</mi></mrow>
+                        </mfrac>
+                    </math>
+                </div>
+                <div>
+                    Since <math><msqrt>0</msqrt><mo>=</mo><mn>0</mn></math>, and neither adding nor subtracting zero changes an expression, both solutions end up being just:
+                </div>
+                <div>
+                    <math><mfrac><mrow>-b</mrow><mrow>2a</mrow></mfrac></math>
+                </div>
+            </div>
+            <div class="sat-guide-subsection-content">
+                
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -298,6 +1729,8 @@ export default {
         this.createDownwardParabolaChart()
         this.createTwoXInterceptsChart()
         this.createNoXInterceptsChart()
+        this.createLinearQuadraticSystemChart()
+        this.createNoXInterceptsChart2()
     },
     methods: {
         createParabolaChart(ctx) {
@@ -330,6 +1763,7 @@ export default {
                             grid: {
                                 display: true,
                                 drawOnChartArea: true,
+                                drawTicks: false,
                                 color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
                             },
                             border: {
@@ -348,6 +1782,7 @@ export default {
                             grid: {
                                 display: true,
                                 drawOnChartArea: true,
+                                drawTicks: false,
                                 color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
                             },
                             border: {
@@ -402,6 +1837,7 @@ export default {
                             grid: {
                                 display: true,
                                 drawOnChartArea: true,
+                                drawTicks: false,
                                 color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
                             },
                             border: {
@@ -420,6 +1856,7 @@ export default {
                             grid: {
                                 display: true,
                                 drawOnChartArea: true,
+                                drawTicks: false,
                                 color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
                             },
                             border: {
@@ -474,6 +1911,7 @@ export default {
                             grid: {
                                 display: true,
                                 drawOnChartArea: true,
+                                drawTicks: false,
                                 color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
                             },
                             border: {
@@ -492,6 +1930,7 @@ export default {
                             grid: {
                                 display: true,
                                 drawOnChartArea: true,
+                                drawTicks: false,
                                 color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
                             },
                             border: {
@@ -546,6 +1985,7 @@ export default {
                             grid: {
                                 display: true,
                                 drawOnChartArea: true,
+                                drawTicks: false,
                                 color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
                             },
                             border: {
@@ -564,6 +2004,7 @@ export default {
                             grid: {
                                 display: true,
                                 drawOnChartArea: true,
+                                drawTicks: false,
                                 color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
                             },
                             border: {
@@ -577,6 +2018,226 @@ export default {
                             },
                             min: -2,
                             max: 5
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true
+                        }
+                    }
+                }
+            })
+        },
+        createLinearQuadraticSystemChart() {
+            // Generate points for both functions
+            const quadraticPoints = []
+            const linearPoints = []
+            
+            // Generate more points for smoother curves
+            for (let x = -6; x <= 3; x += 0.1) {
+                quadraticPoints.push({
+                    x: x,
+                    y: x * x + 4 * x - 5  // y = x² + 4x - 5
+                })
+                
+                linearPoints.push({
+                    x: x,
+                    y: x + 5  // y = x + 5
+                })
+            }
+
+            const ctx = this.$refs.linearQuadraticSystemChart
+            new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        {
+                            label: 'y = x² + 4x - 5',
+                            data: quadraticPoints,
+                            showLine: true,
+                            borderColor: '#2196F3',
+                            backgroundColor: '#2196F3',
+                            pointRadius: 0,
+                        },
+                        {
+                            label: 'y = x + 5',
+                            data: linearPoints,
+                            showLine: true,
+                            borderColor: '#4CAF50',
+                            backgroundColor: '#4CAF50',
+                            pointRadius: 0,
+                        },
+                        {
+                            label: 'Intersection Points',
+                            data: [
+                                { 
+                                    x: -5, 
+                                    y: 0,
+                                    pointStyle: 'circle',
+                                    pointBackgroundColor: '#F44336'
+                                },
+                                { 
+                                    x: 2, 
+                                    y: 7,
+                                    pointStyle: 'circle',
+                                    pointBackgroundColor: '#F44336'
+                                }
+                            ],
+                            showLine: false,
+                            borderColor: '#F44336',
+                            backgroundColor: '#F44336',
+                            pointRadius: 4,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: {
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
+                            },
+                            border: {
+                                display: false
+                            },
+                            title: {
+                                display: false
+                            },
+                            ticks: {
+                                display: true,
+                                font: {
+                                    size: 8
+                                },
+                                stepSize: 1,
+                                callback: function(value) {
+                                    if (Number.isInteger(value)) {
+                                        return value;
+                                    }
+                                }
+                            },
+                            min: -6,
+                            max: 3
+                        },
+                        y: {
+                            grid: {
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
+                            },
+                            border: {
+                                display: false
+                            },
+                            title: {
+                                display: false
+                            },
+                            ticks: {
+                                display: true,
+                                font: {
+                                    size: 8
+                                }
+                            },
+                            min: -10,
+                            max: 10
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true,
+                            callbacks: {
+                                label: function(context) {
+                                    const point = context.raw;
+                                    if (point.x === -5 && point.y === 0) {
+                                        return '(-5, 0)';
+                                    } else if (point.x === 2 && point.y === 7) {
+                                        return '(2, 7)';
+                                    }
+                                    return '';
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+        },
+        createNoXInterceptsChart2() {
+            // Generate points for y = x² - 4x + 5
+            const points = []
+            for (let x = -1; x <= 5; x += 0.1) {
+                points.push({
+                    x: x,
+                    y: x * x - 4 * x + 5
+                })
+            }
+
+            const ctx = this.$refs.noXInterceptsChart2
+            new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'y = x² - 4x + 5',
+                        data: points,
+                        showLine: true,
+                        borderColor: '#2196F3',
+                        backgroundColor: '#2196F3',
+                        pointRadius: 0,
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: {
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
+                            },
+                            border: {
+                                display: false
+                            },
+                            title: {
+                                display: false
+                            },
+                            ticks: {
+                                display: true,
+                                font: {
+                                    size: 8
+                                },
+                                stepSize: 1
+                            },
+                            min: -1,
+                            max: 5
+                        },
+                        y: {
+                            grid: {
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
+                            },
+                            border: {
+                                display: false
+                            },
+                            title: {
+                                display: false
+                            },
+                            ticks: {
+                                display: true,
+                                font: {
+                                    size: 8
+                                }
+                            },
+                            min: -2,
+                            max: 4
                         }
                     },
                     plugins: {
