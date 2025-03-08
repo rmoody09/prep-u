@@ -1889,10 +1889,9 @@
                 </h3>
                 <div class="sat-guide-subsection-content">
                     When we are given certain points on a parabola, knowledge of its symmetry can sometimes help us infer the coordinates of other points on the parabola. Often on the SAT, we are given two points with the same y-coordinate (like the two x-intercepts). Because a parabola is symmetric, the two x-intercepts are equidistant from the axis of symmetry, and therefore the x-coordinate of the vertex will fall halfway between them. Or, in other words, the x-coordinate of the vertex is the average of the x-coordinates of the two x-intercepts.
+                </div>
             </div>
         </div>
-        
-                
     </div>
 </template>
 
