@@ -1609,7 +1609,7 @@
         </div>
         <div class="sat-guide-subsection">
             <h3 class="sat-guide-subsection-header">
-                Zero Solutions = Negative Discriminant
+                Zero Solutions (Discriminant < 0)
             </h3>
             <div class="sat-guide-subsection-content">
                 We know that we can't take the square root of a negative number. Since the discriminant is inside the square root, it cannot be negative, or else the equation we end up with no (real) solutions. We say "real" because in theory there are complex solutions that involve imaginary numbers, but we don't need to worry about that for the SAT. So for the purposes of the SAT, a quadratic equation has no solutions if its discriminant is negative.
@@ -1706,16 +1706,193 @@
                     </math>
                 </div>
                 <div>
-                    Since <math><msqrt>0</msqrt><mo>=</mo><mn>0</mn></math>, and neither adding nor subtracting zero changes an expression, both solutions end up being just:
+                    Both of these solutions end up being the same number, since adding or subtracting zero doesn't change an expression. So, the one solution is:
                 </div>
                 <div>
-                    <math><mfrac><mrow>-b</mrow><mrow>2a</mrow></mfrac></math>
+                    <math>
+                        <mi>x</mi>
+                        <mo>=</mo>
+                        <mfrac>
+                            <mrow><mo>-</mo><mi>b</mi></mrow>
+                            <mrow><mn>2</mn><mi>a</mi></mrow>
+                        </mfrac>
+                    </math>
+                </div>
+                <div>
+                    You might recall that is is the same formula we use to find the x-coordinate of the vertex of a parabola. This makes sense, because when there is only one solution, that means the parabola only intersects the x-axis at one point, which is the vertex.
+                </div>
+                <div>
+                    Let's look at an example:
+                </div>
+                <div>
+                    <math>
+                        <mi>x</mi>
+                        <mo>²</mo>
+                        <mo>-</mo>
+                        <mn>4</mn>
+                        <mi>x</mi>
+                        <mo>+</mo>
+                        <mn>4</mn>
+                        <mo>=</mo>
+                        <mn>0</mn>
+                    </math>
+                </div>
+                <div>
+                    Linking this back to standard form (<math>
+                        
+                    </math>), we have <math><mi>a</mi><mo>=</mo><mn>1</mn></math>, <math><mi>b</mi><mo>=</mo><mn>-4</mn></math>, and <math><mi>c</mi><mo>=</mo><mn>4</mn></math>.
+                </div>
+                <div>
+                    Plugging these values into the discriminant, we get:
+                </div>
+                <div>
+                    <math>
+                        <msup>
+                            <mi>(-4)</mi>
+                            <mn>2</mn>
+                        </msup>
+                        <mo>-</mo>
+                        <mn>4</mn>
+                        <mn>(1)</mn>
+                        <mn>(4)</mn>
+                    </math>
+                </div>
+                <div>
+                    Simplifying this, we get:
+                </div>
+                <div>
+                    <math>
+                        <mn>16</mn>
+                        <mo>-</mo>
+                        <mn>16</mn>
+                        <mo>=</mo>
+                        <mn>0</mn>
+                    </math>
+                </div>
+                <div>
+                    Since the discriminant is zero, we know that this quadratic equation has exactly one solution.
+                </div>
+                <div>
+                    When a quadratic equation has exactly one solution, it can be factored as a binomial squared. For example, the example above can be factored as <math>
+                        <mo>(</mo>
+                        <mi>x</mi>
+                        <mo>-</mo>
+                        <mn>2</mn>
+                        <mo>)</mo>
+                        <mo>²</mo>
+                        <mo>=</mo>
+                        <mn>0</mn>
+                    </math>
+                </div>
+                <div>
+                    Hence, there is only one solution, <math><mi>x</mi><mo>=</mo><mn>2</mn></math>.
+                </div>
+                <div>
+                    Now let's take a look at the graph of this quadratic equation:
+                </div>
+                <div>
+                    <canvas style="height: 150px; width: 200px;" ref="oneOffsetXInterceptChart"></canvas>
+                </div>
+                <div>
+                    As you can see, the parabola just glances off the x-axis at one point, which is the vertex.
                 </div>
             </div>
+        </div>
+        <div class="sat-guide-subsection">
+            <h3 class="sat-guide-subsection-header">
+                Two Solutions (Discriminant > 0)
+            </h3>
             <div class="sat-guide-subsection-content">
-                
+                If the discriminant is positive, then the quadratic equation has two solutions. This means that the parabola intersects the x-axis at two points.
+            </div>
+            <div>
+                Again, this makes sense when we look at the quadratic formula. If the discriminant is positive, when we take its square root we get a positive number. This means that the "plus or minus" part of the quadratic formula will give us two different numbers.
+            </div>
+            <div>
+                Let's look at an example:
+            </div>
+            <div>
+                <math>
+                    <mi>x</mi>
+                    <mo>²</mo>
+                    <mo>-</mo>
+                    <mn>4</mn>
+                    <mi>x</mi>
+                    <mo>+</mo>
+                    <mn>2</mn>
+                    <mo>=</mo>
+                    <mn>0</mn>
+                </math>
+            </div>
+            <div>
+                Here, the discriminant is:
+            </div>
+            <div>
+                <math>
+                    <msup>
+                        <mi>(-4)</mi>
+                        <mn>2</mn>
+                    </msup>
+                    <mo>-</mo>
+                    <mn>4</mn>
+                    <mn>(1)</mn>
+                    <mn>(2)</mn>
+                </math>
+            </div>
+            <div>
+                Simplifying this, we get:
+            </div>
+            <div>
+                <math>
+                    <mn>16</mn>
+                    <mo>-</mo>
+                    <mn>8</mn>
+                    <mo>=</mo>
+                    <mn>8</mn>
+                </math>
+            </div>
+            <div>
+                Since the discriminant is positive, we know that this quadratic equation has two solutions.
+            </div>
+            <div>
+                Here is what the graph of this quadratic equation looks like:
+            </div>
+            <div>
+                <canvas style="height: 150px; width: 200px;" ref="twoSolutionsChart"></canvas>
+            </div>
+            <div>
+                As you can see, the parabola intersects the x-axis at two points.
             </div>
         </div>
+    </div>
+    <div class="sat-guide-section">
+        <h2 class="sat-guide-section-header">
+            Parabola Symmetry
+        </h2>
+        <div class="sat-guide-section-content">
+            All parabolas are symmetric. If you draw a vertical line through the vertex of the parabola, the parabola is symmetric on both sides of that line.
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">
+                    Axis of Symmetry
+                </h3>
+                <div class="sat-guide-subsection-content">
+                    The vertical line through the vertex of the parabola is called the axis of symmetry. It is shown in the graph below.
+                    <div>
+                        <canvas style="height: 150px; width: 200px;" ref="axisOfSymmetryChart"></canvas>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">
+                    Why is this important?
+                </h3>
+                <div class="sat-guide-subsection-content">
+                    When we are given certain points on a parabola, knowledge of its symmetry can sometimes help us infer the coordinates of other points on the parabola. Often on the SAT, we are given two points with the same y-coordinate (like the two x-intercepts). Because a parabola is symmetric, the two x-intercepts are equidistant from the axis of symmetry, and therefore the x-coordinate of the vertex will fall halfway between them. Or, in other words, the x-coordinate of the vertex is the average of the x-coordinates of the two x-intercepts.
+            </div>
+        </div>
+        
+                
     </div>
 </template>
 
@@ -1731,6 +1908,9 @@ export default {
         this.createNoXInterceptsChart()
         this.createLinearQuadraticSystemChart()
         this.createNoXInterceptsChart2()
+        this.createOneOffsetXInterceptChart()
+        this.createTwoSolutionsChart()
+        this.createAxisOfSymmetryChart()
     },
     methods: {
         createParabolaChart(ctx) {
@@ -2243,6 +2423,285 @@ export default {
                     plugins: {
                         legend: {
                             display: true
+                        }
+                    }
+                }
+            })
+        },
+        createOneOffsetXInterceptChart() {
+            // Generate points for y = x² - 4x + 4
+            const points = []
+            for (let x = -1; x <= 5; x += 0.1) {
+                points.push({
+                    x: x,
+                    y: x * x - 4 * x + 4
+                })
+            }
+
+            const ctx = this.$refs.oneOffsetXInterceptChart
+            new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'y = x² - 4x + 4',
+                        data: points,
+                        showLine: true,
+                        borderColor: '#2196F3',
+                        backgroundColor: '#2196F3',
+                        pointRadius: 0,
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: {
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
+                            },
+                            border: {
+                                display: false
+                            },
+                            title: {
+                                display: false
+                            },
+                            ticks: {
+                                display: true,
+                                font: {
+                                    size: 8
+                                },
+                                stepSize: 1
+                            },
+                            min: -1,
+                            max: 5
+                        },
+                        y: {
+                            grid: {
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
+                            },
+                            border: {
+                                display: false
+                            },
+                            title: {
+                                display: false
+                            },
+                            ticks: {
+                                display: true,
+                                font: {
+                                    size: 8
+                                },
+                                stepSize: 1,
+                               
+                            },
+                            min: -1,
+                            max: 4
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true
+                        }
+                    }
+                }
+            })
+        },
+        createTwoSolutionsChart() {
+            // Generate points for y = x² - 4x + 2
+            const points = []
+            for (let x = -1; x <= 5; x += 0.1) {
+                points.push({
+                    x: x,
+                    y: Math.pow(x, 2) - 4 * x + 2
+                })
+            }
+
+            const ctx = this.$refs.twoSolutionsChart
+            new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'y = x² - 4x + 2',
+                        data: points,
+                        showLine: true,
+                        borderColor: '#2196F3',
+                        backgroundColor: '#2196F3',
+                        pointRadius: 0,
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: {
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
+                            },
+                            border: {
+                                display: false
+                            },
+                            title: {
+                                display: false
+                            },
+                            ticks: {
+                                display: true,
+                                font: {
+                                    size: 8
+                                },
+                                stepSize: 1,
+                                callback: function(value) {
+                                    if (Number.isInteger(value)) {
+                                        return value;
+                                    }
+                                }
+                            },
+                            min: -1,
+                            max: 5
+                        },
+                        y: {
+                            grid: {
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                color: (context) => context.tick.value === 0 ? '#000' : 'transparent'
+                            },
+                            border: {
+                                display: false
+                            },
+                            title: {
+                                display: false
+                            },
+                            ticks: {
+                                display: true,
+                                font: {
+                                    size: 8
+                                },
+                                stepSize: 1
+                            },
+                            min: -3,
+                            max: 3
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true
+                        }
+                    }
+                }
+            })
+        },
+        createAxisOfSymmetryChart() {
+            // Generate points for y = x² - 2x - 3
+            const points = []
+            for (let x = -2; x <= 4; x += 0.1) {
+                points.push({
+                    x: x,
+                    y: Math.pow(x, 2) - 2 * x - 3
+                })
+            }
+
+            // Create points for the vertical dashed line at x = 1 (axis of symmetry)
+            const symmetryLine = []
+            for (let y = -5; y <= 5; y += 0.1) {
+                symmetryLine.push({
+                    x: 1,
+                    y: y
+                })
+            }
+
+            const ctx = this.$refs.axisOfSymmetryChart
+            new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'y = x² - 2x - 3',
+                        data: points,
+                        showLine: true,
+                        borderColor: '#2196F3',
+                        backgroundColor: '#2196F3',
+                        pointRadius: 0,
+                    },
+                    {
+                        data: symmetryLine,
+                        showLine: true,
+                        borderColor: '#FF5722',
+                        backgroundColor: '#FF5722',
+                        pointRadius: 0,
+                        borderDash: [5, 5],
+                        display: false
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: {
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                color: (context) => context.tick.value === 0 ? '#000' : 'transparent',
+                                z: 1
+                            },
+                            border: {
+                                display: false
+                            },
+                            title: {
+                                display: false
+                            },
+                            ticks: {
+                                display: true,
+                                font: {
+                                    size: 8
+                                },
+                                stepSize: 1,
+                                autoSkip: false,
+                            },
+                            min: -2,
+                            max: 4
+                        },
+                        y: {
+                            grid: {
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                color: (context) => context.tick.value === 0 ? '#000' : 'transparent',
+                                z: 1
+                            },
+                            border: {
+                                display: false
+                            },
+                            title: {
+                                display: false
+                            },
+                            ticks: {
+                                display: true,
+                                font: {
+                                    size: 8
+                                },
+                                stepSize: 1,
+                                autoSkip: false,
+                            },
+                            min: -5,
+                            max: 2
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                filter: function(legendItem, data) {
+                                    return legendItem.text === 'y = x² - 2x - 3';
+                                }
+                            }
                         }
                     }
                 }
