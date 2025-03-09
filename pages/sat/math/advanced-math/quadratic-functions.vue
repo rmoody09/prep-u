@@ -1889,6 +1889,106 @@
                 </h3>
                 <div class="sat-guide-subsection-content">
                     When we are given certain points on a parabola, knowledge of its symmetry can sometimes help us infer the coordinates of other points on the parabola. Often on the SAT, we are given two points with the same y-coordinate (like the two x-intercepts). Because a parabola is symmetric, the two x-intercepts are equidistant from the axis of symmetry, and therefore the x-coordinate of the vertex will fall halfway between them. Or, in other words, the x-coordinate of the vertex is the average of the x-coordinates of the two x-intercepts.
+                    <div>
+                        Looking at the graph above, we can see that the two x-intercepts are -1 and 3. The average of these two numbers (aka half way between them) is 1. We can calculate this by adding the two x-coordinates and dividing by 2:
+                        <div>
+                            <math>
+                                <mfrac>
+                                    <mrow>
+                                        <mn>-1</mn>
+                                        <mo>+</mo>
+                                        <mn>3</mn>
+                                    </mrow>
+                                    <mn>2</mn>
+                                </mfrac>
+                                <mo>=</mo>
+                                <mn>1</mn>
+                            </math>
+                        </div>
+                        <div>
+                            Therefore, the x-coordinate of the vertex is 1.
+                        </div>
+                        <div>
+                            Without needing to know the actual equation of the parabola, we were able to find the x-coordinate of the vertex just by knowing the two x-intercepts. 
+                        </div>
+                        <div>
+                            But since we do have the equation for this parabola, we can double check our answer by using the equation from earlier for getting the x-coordinate of the vertex from standard form:
+                            <math>
+                                <mi>x</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mrow>
+                                        <mo>-</mo>
+                                        <mi>b</mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mn>2</mn>
+                                        <mi>a</mi>
+                                    </mrow>
+                                </mfrac>
+                            </math>
+                        </div>
+                        <div>
+                            <math>
+                                <mi>x</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mrow>
+                                        <mo>-</mo>
+                                        <mo>(</mo>
+                                        <mn>-2</mn>
+                                        <mo>)</mo>
+                                    </mrow>
+                                    <mrow>
+                                        <mn>2</mn>
+                                        <mn>(1)</mn>
+                                    </mrow>
+                                </mfrac>
+                                <mo>=</mo>
+                                <mn>1</mn>
+                            </math>
+                        </div>
+                        <div>
+                            We get the same answer both ways, demonstrating the validity of both approaches.
+                        </div>
+                        <div>
+                            Note that this approach isn't only limited to when we know the two x-intercepts. If we know any two points on the parabola with the same y-coordinate, we can infer that the x-coordinate of the vertex must fall halfway between them.
+                        </div>
+                        <div>
+                            For example, let's look at the graph below.
+                        </div>
+                        <div>
+                            <canvas style="height: 150px; width: 200px;" ref="vertexFromTwoPointsChart"></canvas>
+                        </div>
+                        <div>
+                            If we were told that f(-1) = f(3), this means that the y-coordinate when x = -1 is the same as the y-coordinate when x = 3. This is depicted by the red dots in the graph above. Since the parabola is symmetric, the x-coordinate of the vertex must fall halfway between -1 and 3.
+                        </div>
+                        <div>
+                            Taking the average of -1 and 3, we again get:
+                            <math>
+                                <mfrac>
+                                    <mrow>
+                                        <mn>-1</mn>
+                                        <mo>+</mo>
+                                        <mn>3</mn>
+                                    </mrow>
+                                    <mn>2</mn>
+                                </mfrac>
+                                <mo>=</mo>
+                                <mn>1</mn>
+                            </math>
+                        </div>
+                        <div>
+                            Therefore, just by knowing that f(-1) = f(3), we were able to infer that the x-coordinate of the vertex is 1, without knowing anything else about the parabola or its equation.
+                        </div>
+                        <div>
+                            One other way we could apply this principle of symmetry, although this comes up less often on the SAT, is if we know the x-coordinate of the vertex and one other point on the parabola. From this, we can infer that there is another point on the parabola that has the same y-coordinate as the given point, and has an x-coordinate that is the same distance from the axis of symmetry as the given point.
+                        </div>
+                        <div>
+                            For example, using the same graph above, if we were told that f(-1) = 2, and that the vertex was at (1, -2) (or even just knowing that the vertex x-coordinate is 1), we can infer that there is also a point on the parabola at (3, 2). This is because 3 and -1 are equidistant from the axis of symmetry, which is x = 1.
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
         </div>
@@ -1910,6 +2010,7 @@ export default {
         this.createOneOffsetXInterceptChart()
         this.createTwoSolutionsChart()
         this.createAxisOfSymmetryChart()
+        this.createVertexFromTwoPointsChart()
     },
     methods: {
         createParabolaChart(ctx) {
@@ -2636,6 +2737,27 @@ export default {
                         pointRadius: 0,
                         borderDash: [5, 5],
                         display: false
+                    },
+                    {
+                        label: 'X-intercepts',
+                        data: [
+                            { x: -1, y: 0 },
+                            { x: 3, y: 0 }
+                        ],
+                        showLine: false,
+                        borderColor: '#F44336',
+                        backgroundColor: '#F44336',
+                        pointRadius: 4,
+                    },
+                    {
+                        label: 'Vertex',
+                        data: [
+                            { x: 1, y: -4 }
+                        ],
+                        showLine: false,
+                        borderColor: '#4CAF50',
+                        backgroundColor: '#4CAF50',
+                        pointRadius: 4,
                     }]
                 },
                 options: {
@@ -2699,6 +2821,162 @@ export default {
                             labels: {
                                 filter: function(legendItem, data) {
                                     return legendItem.text === 'y = x² - 2x - 3';
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    if (context.datasetIndex === 2) { // X-intercepts dataset
+                                        return `(${context.parsed.x}, ${context.parsed.y})`;
+                                    }
+                                    if (context.datasetIndex === 3) { // Vertex dataset
+                                        return `Vertex: (${context.parsed.x}, ${context.parsed.y})`;
+                                    }
+                                    return '';
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+        },
+        createVertexFromTwoPointsChart() {
+            // Generate points for y = x² - 2x - 1
+            const points = []
+            for (let x = -2; x <= 4; x += 0.1) {
+                points.push({
+                    x: x,
+                    y: Math.pow(x, 2) - 2 * x - 1
+                })
+            }
+
+            // Create points for the vertical dashed line at x = 1 (axis of symmetry)
+            const symmetryLine = []
+            for (let y = -3; y <= 3; y += 0.1) {
+                symmetryLine.push({
+                    x: 1,
+                    y: y
+                })
+            }
+
+            const ctx = this.$refs.vertexFromTwoPointsChart
+            new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'y = x² - 2x - 1',
+                        data: points,
+                        showLine: true,
+                        borderColor: '#2196F3',
+                        backgroundColor: '#2196F3',
+                        pointRadius: 0,
+                    },
+                    {
+                        data: symmetryLine,
+                        showLine: true,
+                        borderColor: '#FF5722',
+                        backgroundColor: '#FF5722',
+                        pointRadius: 0,
+                        borderDash: [5, 5],
+                        display: false
+                    },
+                    {
+                        label: 'Points where y = 2',
+                        data: [
+                            { x: -1, y: 2 },
+                            { x: 3, y: 2 }
+                        ],
+                        showLine: false,
+                        borderColor: '#F44336',
+                        backgroundColor: '#F44336',
+                        pointRadius: 4,
+                    },
+                    {
+                        label: 'Vertex',
+                        data: [
+                            { x: 1, y: -2 }
+                        ],
+                        showLine: false,
+                        borderColor: '#4CAF50',
+                        backgroundColor: '#4CAF50',
+                        pointRadius: 4,
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: {
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                color: (context) => context.tick.value === 0 ? '#000' : 'transparent',
+                                z: 1
+                            },
+                            border: {
+                                display: false
+                            },
+                            title: {
+                                display: false
+                            },
+                            ticks: {
+                                display: true,
+                                font: {
+                                    size: 8
+                                },
+                                stepSize: 1,
+                                autoSkip: false,
+                            },
+                            min: -2,
+                            max: 4
+                        },
+                        y: {
+                            grid: {
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                color: (context) => context.tick.value === 0 ? '#000' : 'transparent',
+                                z: 1
+                            },
+                            border: {
+                                display: false
+                            },
+                            title: {
+                                display: false
+                            },
+                            ticks: {
+                                display: true,
+                                font: {
+                                    size: 8
+                                },
+                                stepSize: 1,
+                                autoSkip: false,
+                            },
+                            min: -3,
+                            max: 3
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                filter: function(legendItem, data) {
+                                    return legendItem.text === 'y = x² - 2x - 1';
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    if (context.datasetIndex === 2) { // Points dataset
+                                        return `(${context.parsed.x}, ${context.parsed.y})`;
+                                    }
+                                    if (context.datasetIndex === 3) { // Vertex dataset
+                                        return `Vertex: (${context.parsed.x}, ${context.parsed.y})`;
+                                    }
+                                    return '';
                                 }
                             }
                         }
