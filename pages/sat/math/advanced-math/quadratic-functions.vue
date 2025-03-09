@@ -197,7 +197,7 @@
                         Once we have the x-coordinate, we can find the y-coordinate by plugging the x-coordinate back into the original equation.
                     </div>
                     <div class="pt-4">
-                        For example, take the quadradict equation below:
+                        For example, take the quadratic equation below:
                         <div>
                             <math>
                                 <mi>y</mi>
@@ -309,7 +309,16 @@
                     Finding the x-intercepts
                 </h3>
                 <div class="sat-guide-subsection-content">
-                    In any function, not just quadratics, the x-intercepts occur wherever y=0. This is because, as can be easily seen by looking at the x and y axis, any point on the x-axis has a y-coordinate of 0. So, to find the x-intercepts of a quadratic equation, we set y=0 and solve for x. There are two main ways to do this: factoring and using the quadratic formula. When possible, factoring is usually faster and easier, so it's always a good idea to try that first. But not all quadratics can be factored, so in those cases we can use the quadratic formula.
+                    In any function, not just quadratics, the x-intercepts occur wherever y=0. This is because, as can be easily seen by looking at the x and y axis, any point on the x-axis has a y-coordinate of 0. So, to find the x-intercepts of a quadratic equation, we set y=0 and solve for x. Thus, finding the x-intercepts of a quadratic function is equivalent to solving a quadratic equation that is set equal to 0. 
+                    <div>
+                        There are two main ways to solve a quadratic equation in standard form: factoring and using the quadratic formula. When possible, factoring is usually faster and easier, so it's always a good idea to try that first. But not all quadratics can be factored, so in those cases we can use the quadratic formula.
+                    </div>
+                    <div>
+                        Let's look at an example:
+                    </div>
+                    <div>
+                        
+                    </div>
 
                 </div>
             </div>
@@ -319,7 +328,7 @@
                 </h3>
                 <div class="sat-guide-subsection-content">
                     <div class="pb-4">
-                        Factoring a quadratic means you are maniuplating the equation so that you end up with two expressions that are multiplied together. For example, the quadratic equation <math>
+                        Factoring a quadratic means you are manipulating the equation so that you end up with two expressions that are multiplied together. For example, the quadratic equation <math>
                             <mi>y</mi>
                             <mo>=</mo>
                             <msup><mi>x</mi><mn>2</mn></msup>
@@ -502,6 +511,104 @@
                             </math>
                         </div>
                     </div>
+                    <div class="sat-guide-subsection-concept">
+                        <div class="sat-guide-subsection-concept-header">
+                            Special cases
+                        </div>
+                        <div>
+                            While the above approaches will cover all quadratic equations that are factorable, there are two special patterns worth recognizing that might help you factor them more quickly. These two special cases are:
+                            <ol>
+                                <li>
+                                    A difference of squares
+                                </li>
+                                <li>
+                                    A perfect square trinomial
+                                </li>
+                            </ol>
+                        </div>
+                        <div>
+                            Difference of squares:
+                        </div>
+                        <div>
+                            A difference of squares refers to any time you have a quadratic with two terms, where you are subtracting a term that is a perfect square from another perfect square. 
+                            <p>
+                                The general formula for factoring a difference of squares is:
+                            </p>
+                            <p>
+                                <math>
+                                    <mi>a</mi><mo>²</mo>
+                                    <mo>-</mo>
+                                    <mi>b</mi><mo>²</mo>
+                                    <mo>=</mo>
+                                    <mo>(</mo>
+                                    <mi>a</mi>
+                                    <mo>+</mo>
+                                    <mi>b</mi>
+                                    <mo>)</mo>
+                                    <mo>(</mo>
+                                    <mi>a</mi>
+                                    <mo>-</mo>
+                                    <mi>b</mi>
+                                    <mo>)</mo>
+                                </math>
+                            </p>
+                            <p>
+                                For example, take the expression below:
+                            </p>
+                            <div>
+                                <math>
+                                    <mn>4</mn>
+                                    <msup>
+                                        <mi>x</mi>
+                                        <mn>2</mn>
+                                    </msup>
+                                    <mo>-</mo>
+                                    <mn>9</mn>
+                                </math>
+                            </div>
+                            <div>
+                                This is a difference of squares because we are subtracting a perfect square (9) from another perfect square (<math><mn>4</mn>
+                                    <msup><mi>x</mi><mn>2</mn></msup>
+                                </math>).
+                            </div>
+                            <div>
+                                To write this as a product of two binomials (aka factor it), our first binomial is the square root of the first term plus the square root of the second term, and our second binomial is the square root of the first term minus the square root of the second term.
+                            </div>
+                            <p>
+                                In our example, the square root of the first term (<math><mn>4</mn>
+                                    <msup><mi>x</mi><mn>2</mn></msup>
+                                </math>) is 2x, and the square root of the second term (<math><mn>9</mn></math>) is 3. So our two binomials are <math>
+                                    <mi>2</mi><mi>x</mi>
+                                    <mo>+</mo>
+                                    <mi>3</mi>
+                                </math> and <math>
+                                    <mi>2</mi><mi>x</mi>
+                                    <mo>-</mo>
+                                    <mi>3</mi>
+                                </math>.
+                            </p>
+                            <p>
+                                So, we can factor the expression as:
+                            </p>
+                            <p>
+                                <math>
+                                    <mi>y</mi>
+                                    <mo>=</mo>
+                                    <mo>(</mo>
+                                    <mi>2</mi><mi>x</mi>
+                                    <mo>+</mo>
+                                    <mi>3</mi>
+                                    <mo>)</mo>
+                                    <mo>(</mo>
+                                    <mi>2</mi><mi>x</mi>
+                                    <mo>-</mo>
+                                    <mi>3</mi>
+                                    <mo>)</mo>
+                                </math>
+                            </p>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="sat-guide-subsection">
@@ -661,6 +768,89 @@
                     
                 </div>
             </div>
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">
+                    Sum of Solutions from Standard Form
+                </h3>
+                <div class="sat-guide-subsection-content">
+                    When we solve a quadratic equation, as we'll explore further below, sometimes we end up with two solutions, sometimes one, and sometimes no solutions. Whenever there are two solutions, we can easily find the sum of those solutions using the formula:
+                    <div>
+                        <math>
+                            <mfrac>
+                                <mrow><mo>-</mo><mi>b</mi></mrow>
+                                <mrow><mi>a</mi></mrow>
+                            </mfrac>
+                        </math>
+                    </div>
+                    <div>
+                        Or, if there is a single solution, the above formula will give us the result of adding that solution to itself (we can think of the "two" solutions as being the same solution twice).
+                    </div>
+                    <div>
+                        Occasionally, on the SAT, the question will actually ask you what the sum of the solutions (or x-intercepts) is. Of course, you could always find the two solutions by factoring or using the quadratic formula, then add them together. But if you remember the handy formula above, you can jump to the answer much more quickly!
+                    </div>
+                    <div>
+                        Let's look at an example:
+                    </div>
+                    <div>
+                        <math>
+                            <mi>x</mi>
+                            <mo>²</mo>
+                            <mo>+</mo>
+                            <mn>7</mn>
+                            <mi>x</mi>
+                            <mo>+</mo>
+                            <mn>12</mn>
+                            <mo>=</mo>
+                            <mn>0</mn>
+                        </math>
+                    </div>
+                    <div>
+                        We found earlier, in the "Factoring when a = 1" section, that the solutions to this equation are x = -3 and x = -4. Adding these together, we get -7.
+                    </div>
+                    <div>
+                        Now, let's show that we get the same result using the "sum of solutions" formula. Linking this back to standard form (ax<sup>2</sup> + bx + c = 0), we have:
+                    </div>
+                    <div>
+                        a = 1, b = 7, c = 12
+                    </div>
+                    <div>
+                        Plugging these values into the "sum of solutions" formula, we get:
+                    </div>
+                    <div>
+                        <math>
+                            <mfrac>
+                                <mrow><mo>-</mo><mi>(7)</mi></mrow>
+                                <mrow><mi>(1)</mi></mrow>
+                            </mfrac>
+                            <mo>=</mo>
+                            <mn>-7</mn>
+                        </math>
+                    </div>
+                    <div>
+                        And there we have it! The sum of the solutions is -7, just as we found earlier.
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">
+                    Relating the equations for the vertex and the sum of solutions
+                </h3>
+                <div class="sat-guide-subsection-content">
+                    <p>
+                        You might have noticed that our equation for getting the x-coordinate of the vertex <math><mo>(</mo><mfrac><mrow><mo>-</mo><mi>b</mi></mrow><mrow><mi>a</mi></mrow></mfrac><mo>)</mo></math> is very similar to the formula for the sum of the solutions <math><mo>(</mo><mfrac><mrow><mo>-</mo><mi>b</mi></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac><mo>)</mo></math>.
+                    </p>
+                    <p>
+                        There is a good reason for this. Remember that our solutions are the same as the x-intercepts of the quadratic function. 
+                    </p>
+                    <p>
+                        As we'll get explore in more detail below, the x-coordinate of the vertex of a parabola falls halfway between the x-intercepts. In other words, it is the average of the x-intercepts. To take the average of two numbers, we add them together and divide by 2.
+                    </p>
+                    <p>
+                        So it makes sense that when we take the sum of the solutions <math><mo>(</mo><mfrac><mrow><mo>-</mo><mi>b</mi></mrow><mrow><mi>a</mi></mrow></mfrac><mo>)</mo></math> and then divide by 2, we end up with <math><mfrac><mrow><mo>-</mo><mi>b</mi></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></math>, which is our formula for the x-coordinate of the vertex.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -670,7 +860,7 @@
         </h2>
         <div class="sat-guide-section-content">
             <div class="section-description">
-                Vertex form is a different format that can be used to represent a quadratic function. While less commonly used than standard form, it can be useful for finding the vertex of a quadratic function. A quadratic function in vertex form is given look like this:
+                Vertex form is a different format that can be used to represent a quadratic function. While less commonly used than standard form, it can be useful for finding the vertex of a quadratic function. A quadratic function in vertex form looks like this:
                 <div>
                     <math>
                         <mi>y</mi>
@@ -687,7 +877,7 @@
                     </math>
                 </div>
                 <div>
-                    In this format, (h, k) is the vertex of the parabola. Similarly to standard form, the sign of a tells you whether the parabola opens up or down. If a is positive, the parabola opens up, and if a is negative, the parabola opens down. It's important to note that the default form is <b>x - h</b>, not h + x, meaning the x-coordinate of the vertex has the opposite sign of what you see in the parentheses.
+                    In this format, (h, k) is the vertex of the parabola. Similarly to standard form, the sign of "a" tells you whether the parabola opens up or down. If "a" is positive, the parabola opens up, and if "a" is negative, the parabola opens down. It's important to note that the default form has <b>x - h</b>, not h + x, meaning the x-coordinate of the vertex has the opposite sign of what you see in the parentheses.
                 </div>
                 <div>
                     For example, if we have the following quadratic function:
@@ -1985,7 +2175,7 @@
                             One other way we could apply this principle of symmetry, although this comes up less often on the SAT, is if we know the x-coordinate of the vertex and one other point on the parabola. From this, we can infer that there is another point on the parabola that has the same y-coordinate as the given point, and has an x-coordinate that is the same distance from the axis of symmetry as the given point.
                         </div>
                         <div>
-                            For example, using the same graph above, if we were told that f(-1) = 2, and that the vertex was at (1, -2) (or even just knowing that the vertex x-coordinate is 1), we can infer that there is also a point on the parabola at (3, 2). This is because 3 and -1 are equidistant from the axis of symmetry, which is x = 1.
+                            For example, using the same graph above, if we were told that f(-1) = 2, and that the vertex had an x-coordinate of 1, we can infer that there is also a point on the parabola at (3, 2). This is because 3 and -1 are equidistant from the axis of symmetry (x = 1), and therefore have the same y-coordinate.
                         </div>
                         
                     </div>
