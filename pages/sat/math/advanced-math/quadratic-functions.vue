@@ -520,94 +520,130 @@
                             <ol>
                                 <li>
                                     A difference of squares
+                                    <div>
+                                        A difference of squares refers to any time you have a quadratic with two terms, where you are subtracting a term that is a perfect square from another perfect square. 
+                                        <p>
+                                            The general formula for factoring a difference of squares is:
+                                        </p>
+                                        <p>
+                                            <math>
+                                                <mi>a</mi><mo>²</mo>
+                                                <mo>-</mo>
+                                                <mi>b</mi><mo>²</mo>
+                                                <mo>=</mo>
+                                                <mo>(</mo>
+                                                <mi>a</mi>
+                                                <mo>+</mo>
+                                                <mi>b</mi>
+                                                <mo>)</mo>
+                                                <mo>(</mo>
+                                                <mi>a</mi>
+                                                <mo>-</mo>
+                                                <mi>b</mi>
+                                                <mo>)</mo>
+                                            </math>
+                                        </p>
+                                        <p>
+                                            For example, take the expression below:
+                                        </p>
+                                        <div>
+                                            <math>
+                                                <mn>4</mn>
+                                                <msup>
+                                                    <mi>x</mi>
+                                                    <mn>2</mn>
+                                                </msup>
+                                                <mo>-</mo>
+                                                <mn>9</mn>
+                                            </math>
+                                        </div>
+                                        <div>
+                                            This is a difference of squares because we are subtracting a perfect square (9) from another perfect square (<math><mn>4</mn>
+                                                <msup><mi>x</mi><mn>2</mn></msup>
+                                            </math>).
+                                        </div>
+                                        <div>
+                                            To write this as a product of two binomials (aka factor it), our first binomial is the square root of the first term plus the square root of the second term, and our second binomial is the square root of the first term minus the square root of the second term.
+                                        </div>
+                                        <p>
+                                            In our example, the square root of the first term (<math><mn>4</mn>
+                                                <msup><mi>x</mi><mn>2</mn></msup>
+                                            </math>) is 2x, and the square root of the second term (<math><mn>9</mn></math>) is 3. So our two binomials are <math>
+                                                <mi>2</mi><mi>x</mi>
+                                                <mo>+</mo>
+                                                <mi>3</mi>
+                                            </math> and <math>
+                                                <mi>2</mi><mi>x</mi>
+                                                <mo>-</mo>
+                                                <mi>3</mi>
+                                            </math>.
+                                        </p>
+                                        <p>
+                                            So, we can factor the expression as:
+                                        </p>
+                                        <p>
+                                            <math>
+                                                <mi>y</mi>
+                                                <mo>=</mo>
+                                                <mo>(</mo>
+                                                <mi>2</mi><mi>x</mi>
+                                                <mo>+</mo>
+                                                <mi>3</mi>
+                                                <mo>)</mo>
+                                                <mo>(</mo>
+                                                <mi>2</mi><mi>x</mi>
+                                                <mo>-</mo>
+                                                <mi>3</mi>
+                                                <mo>)</mo>
+                                            </math>
+                                        </p>
+                                    </div>
                                 </li>
                                 <li>
                                     A perfect square trinomial
+                                    <div>
+                                        A perfect square trinomial is a quadratic that is the square of a binomial. For example, the expression <math><mi>x</mi><mo>²</mo><mo>+</mo><mn>6</mn><mi>x</mi><mo>+</mo><mn>9</mn></math> is a perfect square trinomial because it is the equivalent of a binomial squared: <math><mo>(</mo><mi>x</mi><mo>+</mo><mn>3</mn><mo>)</mo><mo>²</mo></math>.
+                                        <p>
+                                            It's a bit more difficult to spot a perfect square trinomial than to spot a difference of squares, but there is a pattern to it, and if you spot that pattern, you can factor it much more quickly.
+                                        </p>
+                                        <p>
+                                            The pattern is that the first and last terms are perfect squares, and the middle term is twice the product of the square roots of the first and last terms.
+                                        </p>
+                                        <p>
+                                            For example, take the expression below:
+                                        </p>
+                                        <div>
+                                            <math>
+                                                <mn>4</mn><mi>x</mi><mo>²</mo>
+                                                <mo>+</mo>
+                                                <mn>12</mn><mi>x</mi>
+                                                <mo>+</mo>
+                                                <mn>9</mn>
+                                            </math>
+                                        </div>
+                                        <p>
+                                            We can see that the first and last terms are perfect squares: the square root of the first term is 2x, and the square root of the last term is 3. When we multiply these together and the multiply by two, we get <math><mo>(</mo><mn>2</mn><mi>x</mi><mo>)</mo><mo>(</mo><mn>3</mn><mo>)</mo><mo>(</mo><mn>2</mn><mo>)</mo><mo>=</mo><mn>12</mn><mi>x</mi></math>, which is indeed the middle term.
+                                        </p>
+                                        <p>
+                                            Therefore, we can factor this expression as:
+                                        </p>
+                                        <p>
+                                            <math>
+                                                <mo>(</mo>
+                                                <mi>2</mi><mi>x</mi>
+                                                <mo>+</mo>
+                                                <mi>3</mi>
+                                                <mo>)</mo>
+                                                <mo>²</mo>
+                                                <mo>=</mo>
+                                                <mn>0</mn>
+                                            </math>
+                                        </p>
+                                    </div>
                                 </li>
                             </ol>
                         </div>
-                        <div>
-                            Difference of squares:
-                        </div>
-                        <div>
-                            A difference of squares refers to any time you have a quadratic with two terms, where you are subtracting a term that is a perfect square from another perfect square. 
-                            <p>
-                                The general formula for factoring a difference of squares is:
-                            </p>
-                            <p>
-                                <math>
-                                    <mi>a</mi><mo>²</mo>
-                                    <mo>-</mo>
-                                    <mi>b</mi><mo>²</mo>
-                                    <mo>=</mo>
-                                    <mo>(</mo>
-                                    <mi>a</mi>
-                                    <mo>+</mo>
-                                    <mi>b</mi>
-                                    <mo>)</mo>
-                                    <mo>(</mo>
-                                    <mi>a</mi>
-                                    <mo>-</mo>
-                                    <mi>b</mi>
-                                    <mo>)</mo>
-                                </math>
-                            </p>
-                            <p>
-                                For example, take the expression below:
-                            </p>
-                            <div>
-                                <math>
-                                    <mn>4</mn>
-                                    <msup>
-                                        <mi>x</mi>
-                                        <mn>2</mn>
-                                    </msup>
-                                    <mo>-</mo>
-                                    <mn>9</mn>
-                                </math>
-                            </div>
-                            <div>
-                                This is a difference of squares because we are subtracting a perfect square (9) from another perfect square (<math><mn>4</mn>
-                                    <msup><mi>x</mi><mn>2</mn></msup>
-                                </math>).
-                            </div>
-                            <div>
-                                To write this as a product of two binomials (aka factor it), our first binomial is the square root of the first term plus the square root of the second term, and our second binomial is the square root of the first term minus the square root of the second term.
-                            </div>
-                            <p>
-                                In our example, the square root of the first term (<math><mn>4</mn>
-                                    <msup><mi>x</mi><mn>2</mn></msup>
-                                </math>) is 2x, and the square root of the second term (<math><mn>9</mn></math>) is 3. So our two binomials are <math>
-                                    <mi>2</mi><mi>x</mi>
-                                    <mo>+</mo>
-                                    <mi>3</mi>
-                                </math> and <math>
-                                    <mi>2</mi><mi>x</mi>
-                                    <mo>-</mo>
-                                    <mi>3</mi>
-                                </math>.
-                            </p>
-                            <p>
-                                So, we can factor the expression as:
-                            </p>
-                            <p>
-                                <math>
-                                    <mi>y</mi>
-                                    <mo>=</mo>
-                                    <mo>(</mo>
-                                    <mi>2</mi><mi>x</mi>
-                                    <mo>+</mo>
-                                    <mi>3</mi>
-                                    <mo>)</mo>
-                                    <mo>(</mo>
-                                    <mi>2</mi><mi>x</mi>
-                                    <mo>-</mo>
-                                    <mi>3</mi>
-                                    <mo>)</mo>
-                                </math>
-                            </p>
-                            
-                        </div>
+                        
                     </div>
                 </div>
             </div>
