@@ -39,5 +39,6 @@
             <div class="sat-guide-subsection-content">
                 The value of "a" is the initial value of the function. It is the value of the function when x = 0.
             </div>
+        </div>
     </div>
 </template> 
