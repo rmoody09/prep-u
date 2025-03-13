@@ -461,10 +461,14 @@
             title: 'Advanced Math',
             subsections: [
                 'advanced-math-overview',
-                'quadratic-functions',
                 'function-transformations',
+                'quadratic-functions',
+                'polynomial-functions', 
+                'exponent-rules',
                 'exponential-functions',
-                'rational-expressions'
+                'graphing-circles', 
+                'completing-the-square',
+                'equation-solving',
             ],
             top_level: false,
             parent: 'math'
@@ -490,6 +494,20 @@
             top_level: false,
             parent: 'advanced-math'
         },
+        'polynomial-functions': {
+            slug: 'polynomial-functions',
+            title: 'Higher Order Polynomials',
+            subsections: [],
+            top_level: false,
+            parent: 'advanced-math'
+        },
+        'exponent-rules': {
+            slug: 'exponent-rules',
+            title: 'Exponent Rules',
+            subsections: [],
+            top_level: false,
+            parent: 'advanced-math'
+        },
         'exponential-functions': {
             slug: 'exponential',
             title: 'Exponential Functions',
@@ -497,9 +515,23 @@
             top_level: false,
             parent: 'advanced-math'
         },
-        'rational-expressions': {
-            slug: 'rational',
-            title: 'Rational Expressions',
+        'graphing-circles': {
+            slug: 'graphing-circles',
+            title: 'Graphing Circles',
+            subsections: [],
+            top_level: false,
+            parent: 'advanced-math'
+        },
+        'completing-the-square': {
+            slug: 'completing-the-square',
+            title: 'Completing the Square',
+            subsections: [],
+            top_level: false,
+            parent: 'advanced-math'
+        },
+        'equation-solving': {
+            slug: 'equation-solving',
+            title: 'Equation Solving Tips',
             subsections: [],
             top_level: false,
             parent: 'advanced-math'
@@ -511,7 +543,8 @@
                 'data-analysis-overview',
                 'statistics',
                 'probability',
-                'data-interpretation'
+                'data-interpretation',
+                'rational-expressions'
             ],
             top_level: false,
             parent: 'math'
@@ -533,6 +566,13 @@
         'probability': {
             slug: 'probability',
             title: 'Probability',
+            subsections: [],
+            top_level: false,
+            parent: 'data-analysis'
+        },
+        'rational-expressions': {
+            slug: 'rational',
+            title: 'Rational Expressions',
             subsections: [],
             top_level: false,
             parent: 'data-analysis'
