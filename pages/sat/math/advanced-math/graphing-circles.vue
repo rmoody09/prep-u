@@ -304,226 +304,201 @@
                 </ul>
             </p>
             <p>
-                To convert from general form to standard form:
+                Since general form doesn't directly give us much useful information, we will often want to convert it to standard form in order to find the center and radius of the circle.
             </p>
+            <p>
+                To convert from general form to standard form, we will need to use a method called <span class="font-bold">completing the square</span>.
+            </p>
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">
+                    Converting from General Form to Standard Form
+                </h3>
+                <div class="sat-guide-subsection-content">
+                    <p>
+                        Let's use the equation below as an example, and walk step by step through the process of converting it to standard form:
+                    </p>
+                    <p>
+                        <math>
+                            <msup><mi>x</mi><mn>2</mn></msup>
+                            <mo>+</mo>
+                            <msup><mi>y</mi><mn>2</mn></msup>
+                            <mo>+</mo>
+                            <mn>6</mn><mi>x</mi>
+                            <mo>-</mo>
+                            <mn>8</mn><mi>y</mi>
+                            <mo>+</mo>
+                            <mn>9</mn>
+                            <mo>=</mo>
+                            <mn>0</mn>
+                        </math>
+                    </p>
+                    
+                        
+                </div>
+            </div>
             <ol>
-                <li>Group the x terms and y terms together</li>
-                <li>Complete the square for both the x and y terms</li>
-                <li>Rearrange to match the standard form</li>
+                <li>
+                    <div class='ol-item-title'>
+                        Group the x terms and y terms together
+                    </div>
+                    <p>
+                        First, we want to get the x terms next to each other, and the y terms next to each other. And we might as well bring the constant term to the other side of the equation while we're at it.
+                    </p>
+                    <p>
+                        In doing so, we get:
+                    </p>
+                    <p>
+                        <math>
+                            <msup><mi>x</mi><mn>2</mn></msup>
+                            <mo>+</mo>
+                            <mn>6</mn><mi>x</mi>
+                            <mo>+</mo>
+                            <msup><mi>y</mi><mn>2</mn></msup>
+                            <mo>-</mo>
+                            <mn>8</mn><mi>y</mi>
+                            <mo>=</mo>
+                            <mo>-</mo>
+                            <mn>9</mn>
+                        </math>
+                    </p>
+                </li>
+                <li>
+                    <div class='ol-item-title'>
+                        Complete the square for the x terms
+                    </div>
+                    <p>
+                        Ultimately, we want to make the x terms look like something like (x - h)², so we want to find a binomial that, when squared, gives us x² + 6x.
+                    </p>
+                    <p>
+                        So, we want to find a binomial (x + c) such that when we square it, we end up with x² + 6x as part of the result. There will be some additional constant term, but we'll deal with that later.
+                    </p>
+                    <p>
+                        The constant that accomplishes this is always half the coefficient of x, which in this case is 3. So, we want to replace the x² + 6x term with (x + 3)².
+                    </p>
+                    <p>
+                         But, these two expressions are not equal
+                    </p>
+                    <p>
+                        (x + 3)² = x² + 6x + 9, so our new expression is actually 9 greater than the original one.
+                    </p>
+                    <p>
+                        In order to keep the equation balanced, we can either subtract 9 from the left side, or add 9 to the right side. We'll do the latter because it will result in fewer steps overall.
+                    </p>
+                    <p>
+                        So, we get:
+                    </p>
+                    <p>
+                        <math>
+                            <msup>
+                                <mrow>
+                                    <mo>(</mo>
+                                    <mi>x</mi>
+                                    <mo>+</mo>
+                                    <mn>3</mn>
+                                    <mo>)</mo>
+                                </mrow>
+                                <mn>2</mn>
+                            </msup>
+                            <mo>+</mo>
+                            <msup><mi>y</mi><mn>2</mn></msup>
+                            <mo>-</mo>
+                            <mn>8</mn><mi>y</mi>
+                            <mo>=</mo>
+                            <mo>-</mo>
+                            <mn>9</mn>
+                            <mo>+</mo>
+                            <mn>9</mn>
+                        </math>
+                    </p>
+                    
+
+                </li>
+                <li>
+                    <div class='ol-item-title'>
+                        Complete the square for the y terms
+                    </div>
+                    <p>
+                        Now we'll want to complete the square for the y terms as well.
+                    </p>
+                    <p>
+                        Using half the coefficient of y, we get the expression (y - 4)².
+                    </p>
+                    <p>
+                        When we FOIL this out, we get y² - 8y + 16, meaning that we have to add 16 to the right side of the equation to keep it balanced.
+                    </p>
+                    <p>
+                        So, we get:
+                    </p>
+                    <p>
+                        <math>
+                            <msup>
+                                <mrow>
+                                    <mo>(</mo>
+                                    <mi>x</mi>
+                                    <mo>+</mo>
+                                    <mn>3</mn>
+                                    <mo>)</mo>
+                                </mrow>
+                                <mn>2</mn>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mo>(</mo>
+                                    <mi>y</mi>
+                                    <mo>-</mo>
+                                    <mn>4</mn>
+                                    <mo>)</mo>
+                                </mrow>
+                                <mn>2</mn>
+                            </msup>
+                            <mo>=</mo>
+                            <mo>-</mo>
+                            <mn>9</mn>
+                            <mo>+</mo>
+                            <mn>9</mn>
+                            <mo>+</mo>
+                            <mn>16</mn>
+                        </math>
+                    </p>
+                    <p>
+                        Now we just carry out the simple addition on the right side of the equation to get:
+                    </p>
+                    <p>
+                        <math>
+                            <msup>
+                                <mrow>
+                                    <mo>(</mo>
+                                    <mi>x</mi>
+                                    <mo>+</mo>
+                                    <mn>3</mn>
+                                    <mo>)</mo>
+                                </mrow>
+                                <mn>2</mn>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mo>(</mo>
+                                    <mi>y</mi>
+                                    <mo>-</mo>
+                                    <mn>4</mn>
+                                    <mo>)</mo>
+                                </mrow>
+                                <mn>2</mn>
+                            </msup>
+                            <mo>=</mo>
+                            <mn>16</mn>
+                        </math>
+                    </p>
+                </li>
             </ol>
             <p>
-                For example, let's convert x² + y² + 6x - 8y + 9 = 0 to standard form:
-            </p>
-            <p>
-                <math>
-                    <msup><mi>x</mi><mn>2</mn></msup>
-                    <mo>+</mo>
-                    <mn>6</mn><mi>x</mi>
-                    <mo>+</mo>
-                    <msup><mi>y</mi><mn>2</mn></msup>
-                    <mo>-</mo>
-                    <mn>8</mn><mi>y</mi>
-                    <mo>+</mo>
-                    <mn>9</mn>
-                    <mo>=</mo>
-                    <mn>0</mn>
-                </math>
-            </p>
-            <p>
-                Complete the square for x terms:
-            </p>
-            <p>
-                <math>
-                    <msup><mi>x</mi><mn>2</mn></msup>
-                    <mo>+</mo>
-                    <mn>6</mn><mi>x</mi>
-                    <mo>+</mo>
-                    <mn>9</mn>
-                    <mo>-</mo>
-                    <mn>9</mn>
-                    <mo>+</mo>
-                    <msup><mi>y</mi><mn>2</mn></msup>
-                    <mo>-</mo>
-                    <mn>8</mn><mi>y</mi>
-                    <mo>+</mo>
-                    <mn>9</mn>
-                    <mo>=</mo>
-                    <mn>0</mn>
-                </math>
-            </p>
-            <p>
-                <math>
-                    <msup>
-                        <mrow>
-                            <mo>(</mo>
-                            <mi>x</mi>
-                            <mo>+</mo>
-                            <mn>3</mn>
-                            <mo>)</mo>
-                        </mrow>
-                        <mn>2</mn>
-                    </msup>
-                    <mo>-</mo>
-                    <mn>9</mn>
-                    <mo>+</mo>
-                    <msup><mi>y</mi><mn>2</mn></msup>
-                    <mo>-</mo>
-                    <mn>8</mn><mi>y</mi>
-                    <mo>+</mo>
-                    <mn>9</mn>
-                    <mo>=</mo>
-                    <mn>0</mn>
-                </math>
-            </p>
-            <p>
-                Complete the square for y terms:
-            </p>
-            <p>
-                <math>
-                    <msup>
-                        <mrow>
-                            <mo>(</mo>
-                            <mi>x</mi>
-                            <mo>+</mo>
-                            <mn>3</mn>
-                            <mo>)</mo>
-                        </mrow>
-                        <mn>2</mn>
-                    </msup>
-                    <mo>+</mo>
-                    <msup>
-                        <mrow>
-                            <mo>(</mo>
-                            <mi>y</mi>
-                            <mo>-</mo>
-                            <mn>4</mn>
-                            <mo>)</mo>
-                        </mrow>
-                        <mn>2</mn>
-                    </msup>
-                    <mo>-</mo>
-                    <mn>9</mn>
-                    <mo>+</mo>
-                    <mn>16</mn>
-                    <mo>+</mo>
-                    <mn>9</mn>
-                    <mo>=</mo>
-                    <mn>0</mn>
-                </math>
-            </p>
-            <p>
-                <math>
-                    <msup>
-                        <mrow>
-                            <mo>(</mo>
-                            <mi>x</mi>
-                            <mo>+</mo>
-                            <mn>3</mn>
-                            <mo>)</mo>
-                        </mrow>
-                        <mn>2</mn>
-                    </msup>
-                    <mo>+</mo>
-                    <msup>
-                        <mrow>
-                            <mo>(</mo>
-                            <mi>y</mi>
-                            <mo>-</mo>
-                            <mn>4</mn>
-                            <mo>)</mo>
-                        </mrow>
-                        <mn>2</mn>
-                    </msup>
-                    <mo>=</mo>
-                    <mn>16</mn>
-                </math>
-            </p>
-            <p>
-                This is a circle with center (-3, 4) and radius 4.
+                And we're done! Now that we have it in standard form, we can easily see that the center is (-3, 4) and the radius is 4.
             </p>
         </div>
     </div>
     
-    <div class="sat-guide-section">
-        <h2 class="sat-guide-section-header">
-            Finding Key Information from a Circle Equation
-        </h2>
-        <div class="sat-guide-section-content">
-            <p>
-                Given the equation of a circle, you can identify:
-            </p>
-            <ul>
-                <li>
-                    <strong>Center:</strong> If the equation is in standard form (x - h)² + (y - k)² = r², the center is at (h, k).
-                </li>
-                <li>
-                    <strong>Radius:</strong> If the equation is in standard form (x - h)² + (y - k)² = r², the radius is r.
-                </li>
-            </ul>
-            <p>
-                Let's practice with an example:
-            </p>
-            <p>
-                Given the equation (x + 5)² + (y - 2)² = 36, find the center and radius.
-            </p>
-            <p>
-                Rewriting as (x - (-5))² + (y - 2)² = 36:
-            </p>
-            <ul>
-                <li>Center: (-5, 2)</li>
-                <li>Radius: 6 (since 6² = 36)</li>
-            </ul>
-        </div>
-    </div>
-    <div class="sat-guide-section">
-        <h2 class="sat-guide-section-header">
-            Graphing Circles
-        </h2>
-        <div class="sat-guide-section-content">
-            <p>
-                To graph a circle:
-            </p>
-            <ol>
-                <li>Identify the center (h, k) and radius r from the equation</li>
-                <li>Plot the center point</li>
-                <li>From the center, measure r units in all directions to draw the circle</li>
-            </ol>
-            <p>
-                For example, to graph (x - 3)² + (y + 2)² = 16:
-            </p>
-            <ul>
-                <li>The center is at (3, -2)</li>
-                <li>The radius is 4 (since 4² = 16)</li>
-                <li>Plot the center at (3, -2) and draw a circle with radius 4 around it</li>
-            </ul>
-        </div>
-    </div>
-    <div class="sat-guide-section">
-        <h2 class="sat-guide-section-header">
-            Common SAT Questions About Circles
-        </h2>
-        <div class="sat-guide-section-content">
-            <p>
-                On the SAT, you might be asked to:
-            </p>
-            <ul>
-                <li>Find the equation of a circle given its center and radius</li>
-                <li>Find the center and radius of a circle from its equation</li>
-                <li>Convert between standard and general forms</li>
-                <li>Find points of intersection between a circle and a line</li>
-                <li>Determine if a point lies inside, on, or outside a circle</li>
-            </ul>
-            <p>
-                To determine if a point (p, q) lies on a circle with equation (x - h)² + (y - k)² = r²:
-            </p>
-            <ul>
-                <li>Substitute x = p and y = q into the equation</li>
-                <li>If (p - h)² + (q - k)² = r², the point lies on the circle</li>
-                <li>If (p - h)² + (q - k)² < r², the point lies inside the circle</li>
-                <li>If (p - h)² + (q - k)² > r², the point lies outside the circle</li>
-            </ul>
-        </div>
-    </div>
 </template>
 
 <script setup>
@@ -677,5 +652,14 @@ onMounted(() => {
 <style scoped>
 .chart-container {
     text-align: left;
+}
+.ol-item-title {
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+/* Make ordered list numbers bold - simpler approach */
+ol li::marker {
+    font-weight: bold;
 }
 </style>
