@@ -463,11 +463,10 @@
                 'advanced-math-overview',
                 'function-transformations',
                 'quadratic-functions',
-                'polynomial-functions', 
+                'higher-order-polynomials',
                 'exponent-rules',
                 'exponential-functions',
                 'graphing-circles', 
-                'completing-the-square',
                 'equation-solving',
             ],
             top_level: false,
@@ -494,8 +493,8 @@
             top_level: false,
             parent: 'advanced-math'
         },
-        'polynomial-functions': {
-            slug: 'polynomial-functions',
+        'higher-order-polynomials': {
+            slug: 'higher-order-polynomials',
             title: 'Higher Order Polynomials',
             subsections: [],
             top_level: false,
@@ -518,13 +517,6 @@
         'graphing-circles': {
             slug: 'graphing-circles',
             title: 'Graphing Circles',
-            subsections: [],
-            top_level: false,
-            parent: 'advanced-math'
-        },
-        'completing-the-square': {
-            slug: 'completing-the-square',
-            title: 'Completing the Square',
             subsections: [],
             top_level: false,
             parent: 'advanced-math'
