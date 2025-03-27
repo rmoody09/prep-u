@@ -343,7 +343,7 @@
         math: {
             slug: 'math',
             title: 'Math',
-            subsections: ['math-overview', 'algebra', 'advanced-math', 'data-analysis', 'geometry-trigonometry', 'math-cheat-sheet'],
+            subsections: ['math-overview', 'algebra', 'advanced-math', 'problem-solving-data-analysis', 'geometry-trigonometry', 'math-cheat-sheet'],
             top_level: true,
             parent: null
         }, 
@@ -528,53 +528,61 @@
             top_level: false,
             parent: 'advanced-math'
         },
-        'data-analysis': {
-            slug: 'data-analysis',
-            title: 'Data Analysis',
+        'problem-solving-data-analysis': {
+            slug: 'problem-solving-data-analysis',
+            title: 'Problem Solving & Data Analysis',
             subsections: [
-                'data-analysis-overview',
-                'statistics',
+                'problem-solving-data-analysis-overview',
+                'rates-proportions',
+                'single-variable-data',
+                'line-charts-scatterplots',
                 'probability',
-                'data-interpretation',
-                'rational-expressions'
+                'surveys-sampling'
             ],
             top_level: false,
             parent: 'math'
         },
-        'data-analysis-overview': {
+        'problem-solving-data-analysis-overview': {
             slug: 'overview',
             title: 'Overview',
             subsections: [],
             top_level: false,
-            parent: 'data-analysis'
+            parent: 'problem-solving-data-analysis'
         },
-        'statistics': {
-            slug: 'statistics',
-            title: 'Statistics',
+        'rates-proportions': {
+            slug: 'rates-proportions',
+            title: 'Rates & Proportions',
             subsections: [],
             top_level: false,
-            parent: 'data-analysis'
+            parent: 'problem-solving-data-analysis'
+        },
+        'single-variable-data': {
+            slug: 'single-variable-data',
+            title: 'Single Variable Data',
+            subsections: [],
+            top_level: false,
+            parent: 'problem-solving-data-analysis'
+        },
+        'line-charts-scatterplots': {
+            slug: 'line-charts-scatterplots',
+            title: 'Line Charts & Scatterplots',
+            subsections: [],
+            top_level: false,
+            parent: 'problem-solving-data-analysis'
         },
         'probability': {
             slug: 'probability',
             title: 'Probability',
             subsections: [],
             top_level: false,
-            parent: 'data-analysis'
+            parent: 'problem-solving-data-analysis'
         },
-        'rational-expressions': {
-            slug: 'rational',
-            title: 'Rational Expressions',
+        'surveys-sampling': {
+            slug: 'surveys-sampling',
+            title: 'Surveys & Sampling',
             subsections: [],
             top_level: false,
-            parent: 'data-analysis'
-        },
-        'data-interpretation': {
-            slug: 'data-interpretation',
-            title: 'Data Interpretation',
-            subsections: [],
-            top_level: false,
-            parent: 'data-analysis'
+            parent: 'problem-solving-data-analysis'
         },
         'geometry-trigonometry': {
             slug: 'geometry-trig',
