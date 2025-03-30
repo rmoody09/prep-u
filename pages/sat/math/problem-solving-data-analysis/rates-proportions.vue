@@ -18,7 +18,8 @@
             <ul>
                 <li>Speed (distance per time)</li>
                 <li>Price (cost per item)</li>
-                <li>Density (mass per volume)</li>                
+                <li>Density (mass per volume)</li>
+                <li>Concentration (amount of substance per total mixed substance)</li>                
             </ul>
             <p>
                 Some indicators that you are dealing with a rate are words/phrases like "per", "for every", or "for each", etc.
@@ -94,6 +95,382 @@
                     <p>
                         For example, if each apple costs $2, and someone spent $10 on apples, then they bought <math><mfrac><mn>$10</mn><mrow><mn>$2/apple</mn></mrow></mfrac> <mo>=</mo> <mi>  5 apples</mi></math>.
                     </p>
+                </div>
+            </div>
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">Density</h3>
+                <div class="sat-guide-subsection-content">
+                    <p>
+                        Density is a rate that expresses the mass of an object per unit volume. Common units for density include kilograms per cubic meter (kg/m³) and pounds per cubic foot (lb/ft³), but you may see others such as grams per cubic centimeter (g/cm³).
+                    </p>
+                    <p>
+                        Again, we can infer the formula from its units. Since kilograms and pounds are units of mass, and cubic meters and cubic feet are units of volume, we see that density can be expressed as mass per volume (mass/volume). Thus:
+                    </p>
+                    <p>
+                        <math>
+                            <mi>density</mi><mo>=</mo><mfrac><mi>mass</mi><mi>volume</mi></mfrac>
+                        </math>
+                    </p>
+                    <p>
+                        For example, if a block of metal has a mass of 10 kilograms (kg) and a volume of 2 cubic meters (m³), then its density is <math><mfrac><mn>10 kg</mn><mi>2 m³</mi></mfrac> <mo>=</mo> <mi>5 kg/m³</mi></math>.
+                    </p>
+                    <p>
+                        We can rearrange the formula to give us a formula for mass:
+                    </p>
+                    <p>
+                        <math>
+                            <mi>mass</mi><mo>=</mo><mi>density</mi><mo>×</mo><mi>volume</mi>
+                        </math>
+                    </p>
+                    <p>
+                        For example, if a block of metal has a density of 5 kg/m³ and a volume of 2 m³, then its mass is <math><mfrac><mn>5 kg/m³</mn><mi>2 m³</mi></mfrac> <mo>×</mo> <mi>2 m³</mi> <mo>=</mo> <mi>10 kg</mi></math>.
+                    </p>
+                    <p>
+                        We can also rearrange the formula to give us a formula for volume:
+                    </p>
+                    <p>
+                        <math>
+                            <mi>volume</mi><mo>=</mo><mfrac><mi>mass</mi><mi>density</mi></mfrac>
+                        </math>
+                    </p>
+                    <p>
+                        For example, if a block of metal has a mass of 10 kilograms (kg) and a density of 5 kg/m³, then its volume is <math><mfrac><mn>10 kg</mn><mi>5 kg/m³</mi></mfrac> <mo>=</mo> <mi>2 m³</mi></math>.
+                    </p>
+                </div>
+            </div>
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">Concentration</h3>
+                <div class="sat-guide-subsection-content">
+                  Concentration problems will involve substances that are a combination of multiple substances. These may be solutions (like salt mixed in water), alloys (metals mixed together), or other mixtures.
+                    <p>
+                        Concentration can be expressed in multiple ways. Here are some of the ways it might be expressed:
+                    </p>
+                    <ul>
+                    <li>
+                        mass per volume (grams per liter, for example)
+                        <ul>
+                            <li>
+                                For example, if a saline solution has 10 grams of salt per liter of solution, then the concentration is <math><mfrac><mn>10 grams</mn><mi>1 liter</mi></mfrac> <mo>=</mo> <mi>10 g/L</mi></math>.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        mass of substance per mass of total mixture (grams copper per gram of brass, for example)
+                        <ul>
+                            <li>
+                                Since the numerator and denominator are both in grams, this concentration is expressed as a unitless ratio, or a percentage.
+                            </li>
+                            <li>
+                                For example, if a brass alloy has 10 grams of copper per 100 grams of brass, then the concentration is <math><mfrac><mn>10 grams</mn><mi>100 grams</mi></mfrac> <mo>=</mo> <mi>0.1</mi></math>, or 10%.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Volume of substance per volume of total mixture (liters of alcohol per liter of wine, for example)
+                        <ul>
+                            <li>
+                                Since the numerator and denominator are both in liters, this concentration is expressed as a unitless ratio, or a percentage.
+                            </li>
+                            <li>
+                                For example, if a wine has 10 liters of alcohol per 100 liters of wine, then the concentration is <math><mfrac><mn>10 liters</mn><mi>100 liters</mi></mfrac> <mo>=</mo> <mi>0.1</mi></math>, or 10%.
+                            </li>
+                        </ul>
+                    </li>
+                    </ul>
+                    <p>
+                    One formula that can apply to concentration problems is, which can be inferred from its units is:
+                    </p>
+                    <p>
+                    <math>
+                        <mi>concentration</mi><mo>=</mo><mfrac><mi>quantity of substance</mi><mi>quantity of total mixture</mi></mfrac>
+                    </math>
+                    </p>
+                    <p>
+                    The term "quantity" might refer to "mass" or "volume" depending on the problem.
+                    </p>
+                    <p>
+                    Another formula, that relates the concentrations and quantities of both substances in a mixture to the total quantity of the mixture, is:
+                    </p>
+                    <p>
+                    <math>
+                        <msub>
+                            <mi>C</mi>
+                            <mn>1</mn>
+                        </msub>
+                        <mo>·</mo>
+                        <msub>
+                            <mi>Q</mi>
+                            <mi>m</mi>
+                        </msub>
+                        <mo>+</mo>
+                        <msub>
+                            <mi>C</mi>
+                            <mn>2</mn>
+                        </msub>
+                        <mo>·</mo>
+                        <msub>
+                            <mi>Q</mi>
+                            <mi>m</mi>
+                        </msub>
+                        <mo>=</mo>
+                        <msub>
+                            <mi>S</mi>
+                            <mn>1</mn>
+                        </msub>
+                        <mo>+</mo>
+                        <msub>
+                            <mi>S</mi>
+                            <mn>2</mn>
+                        </msub>
+                    </math>
+                    </p>
+                    <p>
+                    In the above formula:   
+                    </p>
+                    <ul>
+                    <li>
+                        <math>
+                            <msub>
+                                <mi>C</mi>
+                                <mi>1</mi>
+                            </msub>
+                            <mo>=</mo>
+                            <mi>concentration of substance 1</mi>
+                        </math>
+                    </li>
+                    <li>
+                        <math>
+                            <msub>
+                                <mi>Q</mi>
+                                <mi>m</mi>
+                            </msub>
+                            <mo>=</mo>
+                            <mi>quantity of total mixture</mi>
+                        </math>
+                    </li>
+                    <li>
+                        <math>
+                            <msub>
+                                <mi>C</mi>
+                                <mi>2</mi>
+                            </msub>
+                            <mo>=</mo>
+                            <mi>concentration of substance 2</mi>
+                        </math>
+                    </li>
+                    <li>
+                        <math>
+                            <msub>
+                                <mi>Q</mi>
+                                <mi>m</mi>
+                            </msub>
+                            <mo>=</mo>
+                            <mi>quantity of total mixture</mi>
+                        </math>
+                    </li>
+                    <li>
+                        <math>
+                            <msub>
+                                <mi>S</mi>
+                                <mn>1</mn>
+                            </msub>
+                            <mo>=</mo>
+                            <mi>quantity of substance 1</mi>
+                        </math>
+                    </li>
+                    <li>
+                        <math>
+                            <msub>
+                                <mi>S</mi>
+                                <mn>2</mn>
+                            </msub>
+                            <mo>=</mo>
+                            <mi>quantity of substance 2</mi>
+                        </math>
+                    </li>
+                    </ul>
+                    <div class="sat-guide-subsection-concept">
+                        <h4 class="sat-guide-subsection-concept-header">
+                            Mixed Mixtures
+                        </h4>
+                        <div class="sat-guide-subsection-concept-content">
+                            <p>
+                                Sometimes, you may encounter a problem that involves mixing together two different mixtures. 
+                            </p>
+                            <p>
+                                For example, combining 1 liter of a 10% saline solution with 2 liters of a 20% saline solution.
+                            </p>
+                            <p>
+                                The formula that would apply here is:
+                            </p>
+                            <p>
+                                <math>
+                                    <mfrac>
+                                        <mrow>
+                                            <msub>
+                                                <mi>C</mi>
+                                                <mi>1</mi>
+                                            </msub>
+                                            <mo>·</mo>
+                                            <msub>
+                                                <mi>Q</mi>
+                                                <mrow><mi>m</mi><mi>1</mi></mrow>  
+                                            </msub>
+                                            <mo>+</mo>
+                                            <msub>
+                                                <mi>C</mi>
+                                                <mi>2</mi>
+                                            </msub> 
+                                            <mo>·</mo>
+                                            <msub>
+                                                <mi>Q</mi>
+                                                <mrow><mi>m</mi><mi>2</mi></mrow>
+                                            </msub>
+                                        </mrow>
+                                        <mrow>
+                                            <msub>
+                                                <mi>Q</mi>
+                                                <mrow><mi>m</mi><mi>1</mi></mrow>  
+                                            </msub>
+                                            <mo>+</mo>
+                                            <msub>
+                                                <mi>Q</mi>
+                                                <mrow><mi>m</mi><mi>2</mi></mrow>
+                                            </msub>
+                                        </mrow>
+                                    </mfrac>
+                                    <mo>=</mo>  
+                                    <msub>
+                                        <mi>C</mi>
+                                        <mi>t</mi>
+                                    </msub>
+                                </math>
+                            </p>
+                            <p>
+                                In the above formula:
+                            </p>
+                            <ul>
+                                <li>
+                                    <math>
+                                        <msub>
+                                            <mi>C</mi>
+                                            <mn>1</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mi>concentration of mixture 1</mi>
+                                    </math>
+                                    <ul>
+                                        <li>
+                                            In the example above, this would be the 10% concentration of the first saline solution (which would be written as 0.1).
+                                        </li>
+                                    </ul>
+                                </li>   
+                                <li>
+                                    <math>
+                                        <msub>
+                                            <mi>C</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mi>concentration of mixture 2</mi>
+                                    </math>
+                                    <ul>
+                                        <li>
+                                            In the example above, this would be the 20% concentration of the second saline solution (which would be written as 0.2).
+                                        </li>
+                                    </ul>
+                                </li> 
+                                
+                                <li>
+                                    <math>
+                                        <msub>
+                                            <mi>Q</mi>
+                                            <mrow><mi>m</mi><mi>1</mi></mrow>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mi>quantity of mixture 1</mi>
+                                    </math>
+                                    <ul>
+                                        <li>
+                                            In the example above, this would be the 1 liter of the first saline solution.
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <math>
+                                        <msub>
+                                            <mi>Q</mi>
+                                            <mrow><mi>m</mi><mi>2</mi></mrow>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mi>quantity of mixture 2</mi>
+                                    </math>
+                                    <ul>
+                                        <li>
+                                            In the example above, this would be the 2 liters of the second saline solution.
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <math>
+                                        <msub>
+                                            <mi>C</mi>
+                                            <mi>t</mi>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mi>concentration of the total mixture</mi>
+                                    </math>
+                                    <ul>
+                                        <li>
+                                            In the example above, this would be the concentration of the total mixture of the two saline solutions.
+                                        </li>
+                                    </ul>
+                                </li>   
+                                
+                            </ul>
+                            <p>
+                                To find the concentration of the total mixture in the example above, we can substitute the values into the formula and solve for <math><mi>C</mi><mi>t</mi></math>:
+                            </p>
+                            <p>
+                                <math>
+                                    <mfrac>
+                                        <mrow>
+                                            <mrow>
+                                                <mo>(</mo>
+                                                <mn>0.1</mn>
+                                                <mo>)</mo>
+                                                <mo>(</mo>
+                                                <mn>1</mn>
+                                                <mi>L</mi>
+                                                <mo>)</mo>
+                                                <mo>+</mo>
+                                                <mo>(</mo>
+                                                <mn>0.2</mn>
+                                                <mo>)</mo>
+                                                <mo>(</mo>
+                                                <mn>2</mn>
+                                                <mi>L</mi>
+                                                <mo>)</mo>
+                                            </mrow>
+                                        </mrow>
+                                        <mrow>
+                                            <mn>1</mn>
+                                            <mi>L</mi>
+                                            <mo>+</mo>
+                                            <mn>2</mn>
+                                            <mi>L</mi>
+                                        </mrow>
+                                    </mfrac>
+                                    <mo>=</mo>
+                                    <mn>0.167</mn>
+                                </math>
+                            </p>
+                            <p>
+                                Therefore, the concentration of the total mixture, expressed as a percentage, is 16.7%.
+                            </p>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
