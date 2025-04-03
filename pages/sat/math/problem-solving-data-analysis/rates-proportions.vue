@@ -136,6 +136,65 @@
                     <p>
                         For example, if a block of metal has a mass of 10 kilograms (kg) and a density of 5 kg/m³, then its volume is <math><mfrac><mn>10 kg</mn><mi>5 kg/m³</mi></mfrac> <mo>=</mo> <mi>2 m³</mi></math>.
                     </p>
+                    <div class="sat-guide-subsection-concept">
+                        <h4 class="sat-guide-subsection-concept-header">
+                            Density with Geometry
+                        </h4>
+                        <div class="sat-guide-subsection-concept-content">
+                            <p>
+                                Sometimes, you may encounter problems involving density that also require some geometry knowledge. Since density is mass per volume, we occasionally will need to be able to calculate the volume of an object.
+                            </p>
+                            <p>
+                                The formulas for finding the volume of various 3D shapes can be found in the reference sheet provided in the test. Any shape they expect you to find calculate the volume of will be in the reference sheet. The most common one for this type of problem is a cube, which is a special case of a rectangular prism.
+                            </p>
+                            <p>
+                                The formula for the volume of a rectangular prism is:
+                            </p>
+                            <p>
+                                <math>
+                                    <mi>V</mi><mo>=</mo><mi>l</mi><mo>·</mo><mi>w</mi><mo>·</mo><mi>h</mi>
+                                </math>
+                            </p>
+                            <p>
+                                Where <math><mi>l</mi></math> is the length, <math><mi>w</mi></math> is the width, and <math><mi>h</mi></math> is the height.
+                            </p>
+                            <p>
+                                In the case of a cube, the length, width, and height are all the same, so the formula simplifies to:
+                            </p>
+                            <p>
+                                <math>
+                                    <mi>V</mi><mo>=</mo><mi>l</mi><mo>·</mo><mi>l</mi><mo>·</mo><mi>l</mi><mo>=</mo><msup><mi>l</mi><mn>3</mn></msup>
+                                </math>
+                            </p>
+                            <p>
+                                Where <math><mi>l</mi></math> is the length of one side of the cube.
+                            </p>
+                            <p>
+                                An example of a problem involving density and calculating volume might, for example, tell you that the density of a cube is 10 g/cm³, and that it has a side length of 2 cm, and ask you to find the mass of the cube.
+                            </p>
+                            <p>
+                                To find the volume of the cube, we can rearrange the formula for density to solve for volume:
+                            </p>
+                            <p>
+                                As we saw above, our formula for calculating the mass of an object is <math><mi>mass</mi><mo>=</mo><mi>density</mi><mo>·</mo><mi>volume</mi></math>.
+                            </p>
+                            <p>
+                                However, we aren't directly given the volume of the cube, so we'll first need to calculate it in order to find the mass.
+                            </p>
+                            <p>
+                                Using the formula for the volume of a cube (<math><mi>V</mi><mo>=</mo><msup><mi>l</mi><mn>3</mn></msup></math>), we can plug in the side length of the cube to find the volume, giving us <math><mi>V</mi><mo>=</mo><msup><mrow><mo>(</mo><mi>2 cm</mi><mo>)</mo></mrow><mn>3</mn></msup><mo>=</mo><mi>8 cm³</mi></math>.
+                            </p>
+                            <p>
+                                Now that we have the volume of the cube, we can plug it in to find the mass:
+                            </p>
+                            <p>
+                                <math>
+                                    <mi>mass</mi><mo>=</mo><mi>density</mi><mo>·</mo><mi>volume</mi><mo>=</mo><mi>10 g/cm³</mi><mo>·</mo><mi>8 cm³</mi><mo>=</mo><mi>80 g</mi>
+                                </math>
+                            </p>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="sat-guide-subsection">
@@ -476,6 +535,41 @@
         </div>
     </div>
 
+    <div class="sat-guide-section">
+        <h2 class="sat-guide-section-header">
+            Unit Conversion Problems
+        </h2>
+        <div class="sat-guide-section-content">
+            <p>
+                Unit conversion problems require you to convert between different units of measurement. For example, converting from inches to feet, or seconds to minutes. These questions typically are not testing your knowledge of conversion factors, but rather your ability to apply them correctly. 
+            </p>
+            <p>
+                For example, they won't expect you to know that there are 1609 meters in a mile, or 2.54 centimeters in an inch; they would provide these factors for you if they are needed on a problem. However, they might expect you to know some basic ones, like the following:
+            </p>
+            <ul>
+                <li>
+                    1 foot = 12 inches
+                </li>
+                <li>
+                    1 hour = 60 minutes
+                </li>
+                <li>
+                    1 minute = 60 seconds
+                </li>
+                <li>
+                    360 degrees = 2π radians
+                    <ul>
+                        <li>
+                            This one is less "basic", but it's part of the geometric knowledge they want you to know for the test
+                        </li>
+                    </ul>
+                </li>
+
+                
+            </ul>
+            
+        </div>
+    </div>
     <div class="sat-guide-section">
         <h2 class="sat-guide-section-header">
             Ratio and Proportion Problems
