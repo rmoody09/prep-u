@@ -535,7 +535,8 @@
                 'problem-solving-data-analysis-overview',
                 'rates-proportions',
                 'single-variable-data',
-                'line-charts-scatterplots',
+                'line-charts-scatterplots', 
+                'percentages',
                 'probability',
                 'surveys-sampling'
             ],
@@ -570,6 +571,13 @@
             top_level: false,
             parent: 'problem-solving-data-analysis'
         },
+        'percentages': {
+            slug: 'percentages',
+            title: 'Percentages',
+            subsections: [],
+            top_level: false,
+            parent: 'problem-solving-data-analysis'
+        },
         'probability': {
             slug: 'probability',
             title: 'Probability',
@@ -589,11 +597,11 @@
             title: 'Geometry & Trigonometry',
             subsections: [
                 'geometry-trig-overview',
-                'circles',
-                'triangles',
-                'quadrilaterals',
-                'polygons',
-                'trigonometry'
+                'lines-angles-polygons',
+                'triangles-trigonometry',
+                'circle-geometry',
+                'geometry-graphing-circles',
+                'area-volume'
             ],
             top_level: false,
             parent: 'math'
@@ -605,30 +613,23 @@
             top_level: false,
             parent: 'geometry-trigonometry'
         },
-        'circles': {
-            slug: 'circles',
-            title: 'Circles',
+        'geometry-graphing-circles': {
+            slug: 'graphing-circles',
+            title: 'Graphing Circles',
             subsections: [],
             top_level: false,
             parent: 'geometry-trigonometry'
         },
-        'triangles': {
-            slug: 'triangles',
-            title: 'Triangles',
+        'circle-geometry': {
+            slug: 'circle-geometry',
+            title: 'Circle Geometry',
             subsections: [],
             top_level: false,
             parent: 'geometry-trigonometry'
         },
-        'quadrilaterals': {
-            slug: 'quadrilaterals',
-            title: 'Quadrilaterals',
-            subsections: [],
-            top_level: false,
-            parent: 'geometry-trigonometry'
-        },
-        'polygons': {
-            slug: 'polygons',
-            title: 'Polygons',
+        'triangles-trigonometry': {
+            slug: 'triangles-trigonometry',
+            title: 'Triangles & Trigonometry',
             subsections: [],
             top_level: false,
             parent: 'geometry-trigonometry'
@@ -636,6 +637,20 @@
         'trigonometry': {
             slug: 'trigonometry',
             title: 'Trigonometry',
+            subsections: [],
+            top_level: false,
+            parent: 'geometry-trigonometry'
+        },
+        'area-volume': {
+            slug: 'area-volume',
+            title: 'Area & Volume',
+            subsections: [],
+            top_level: false,
+            parent: 'geometry-trigonometry'
+        },
+        'lines-angles-polygons': {
+            slug: 'lines-angles-polygons',
+            title: 'Lines, Angles, & Polygons',
             subsections: [],
             top_level: false,
             parent: 'geometry-trigonometry'

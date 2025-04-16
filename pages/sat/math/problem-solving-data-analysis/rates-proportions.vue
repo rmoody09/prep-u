@@ -567,7 +567,191 @@
 
                 
             </ul>
-            
+
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">
+                    Simple (One-Step) Conversions
+                </h3>
+                <div class="sat-guide-subsection-content">
+                    <p>
+                        Simple conversion problems are pretty simple. You're given a quantity in one unit, told the conversion factor from that unit to another, and asked to find the quantity in the other unit. 
+                    </p>
+                    <p>
+                        Normally, you can solve these fairly intuitively. To get the quantity in the new unit, you will either multiply or divide the original quantity by the conversion factor. Based on the conversion factor, you'll have an idea of if resulting quantity should be bigger or smaller, which will determine if you should multiply or divide.
+                    </p>
+                    <p>
+                        For example, if you need to convert 2 feet to inches, you would use the conversion factor that 1 foot = 12 inches. Since there are 12 inches in every foot, you know that there will be more inches than feet, so you will multiply.
+                    </p>
+                    <p>
+                        <math>
+                            <mn>2</mn><mi>ft</mi><mo>·</mo><mn>12</mn><mfrac><mi>in</mi><mi>ft</mi></mfrac><mo>=</mo><mn>24</mn><mi>in</mi>
+                        </math>
+                    </p>
+                    
+                </div>
+            </div>
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">
+                    Converting Nonlinear Units
+                </h3>
+                <div class="sat-guide-subsection-content">
+                    <p>
+                        Let's start off by clarifying what we mean by nonlinear units. Nonlinear units are units that are not linear, like area (often given in square feet [ft<sup>2</sup>], square meters [m<sup>2</sup>], etc.) or volume (often given in cubic feet [ft<sup>3</sup>], cubic meters [m<sup>3</sup>], etc.).
+                    </p>
+                    <p>
+                        <div class="font-bold">
+                            The conversion factors between nonlinear units are not the same as their linear counterparts.
+                        </div>
+                    </p>
+                    <p>
+                        For example, if we have the conversion factor 1 foot = 12 inches, this doesn't mean that 1 square foot = 12 square inches. So if we're looking to convert between square units, we can't just multiply or divide by the linear conversion factor.
+                    </p>
+                    <p>
+                        To convert a linear conversion factor to a square conversion factor, imagine that you have a square where each side is 1 unit of the bigger unit. For example, if we want to find the conversion factor between square feet and square inches, we can imagine a square foot that is 1 foot by 1 foot. Since there are 12 inches in a foot, this is the same as a square that is 12 inches by 12 inches. The area in square feet would be 1 (<math><mn>1</mn><mi>ft</mi><mo>·</mo><mn>1</mn><mi>ft</mi><mo>=</mo><mn>1</mn><mi>ft</mi><sup>2</sup></math>), and the area in square inches would be 144 (<math><mn>12</mn><mi>in</mi><mo>·</mo><mn>12</mn><mi>in</mi><mo>=</mo><mn>144</mn><mi>in</mi><sup>2</sup></math>). Thus, the conversion factor between square feet and square inches is 1 square foot = 144 square inches.
+                    </p>
+                    <p>
+                        Now, if we are asked to convert 2 square feet to square inches, we can use the conversion factor we just found to convert:
+                    </p>
+                    <p>
+                        <math>
+                            <mn>2</mn><msup><mi>ft</mi><mn>2</mn></msup><mo>·</mo><mn>144</mn><mfrac><mrow><msup><mi>in</mi><mn>2</mn></msup></mrow><mrow><msup><mi>ft</mi><mn>2</mn></msup></mrow></mfrac><mo>=</mo><mn>288</mn><msup><mi>in</mi><mn>2</mn></msup>
+                        </math>
+                    </p>
+                    <p>
+                        We can use this same logic to convert between cubic units. For example, if we want to find the conversion factor between cubic feet and cubic inches, we can imagine a cube with an edge length of 1 foot. Since there are 12 inches in a foot, this is the same as a cube with an edge length of 12 inches. The volume in cubic feet would be (<math><mn>1</mn><mi>ft</mi><mo>·</mo><mn>1</mn><mi>ft</mi><mo>·</mo><mn>1</mn><mi>ft</mi><mo>=</mo><mn>1</mn><mi>ft</mi><sup>3</sup></math>), and the volume in cubic inches would be (<math><mn>12</mn><mi>in</mi><mo>·</mo><mn>12</mn><mi>in</mi><mo>·</mo><mn>12</mn><mi>in</mi><mo>=</mo><mn>1728</mn><mi>in</mi><sup>3</sup></math>). Thus, the conversion factor between cubic feet and cubic inches is 1 cubic foot = 1728 cubic inches.
+                    </p>
+                    <p>
+                        Now, if we are asked to convert 2 cubic feet to cubic inches, we can use the conversion factor we just found to convert:
+                    </p>
+                    <p>
+                        <math>
+                            <mn>2</mn><msup><mi>ft</mi><mn>3</mn></msup><mo>·</mo><mn>1728</mn><mfrac><mrow><msup><mi>in</mi><mn>3</mn></msup></mrow><mrow><msup><mi>ft</mi><mn>3</mn></msup></mrow></mfrac><mo>=</mo><mn>3456</mn><msup><mi>in</mi><mn>3</mn></msup>
+                        </math>
+                    </p>
+                    
+                </div>
+            </div>
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">
+                    Using Unit Analysis to Solve Conversion Problems
+                </h3>
+                <div class="sat-guide-subsection-content">
+                    <p>
+                        The above "intuitive" approach can work for simple conversions, but more complex problems can often be difficult to solve by intuition. An approach that can work for all conversion problems, simple or complex, is unit analysis.
+                    </p>
+                    <p>
+                        Unit analysis involves taking conversion factors, and turning them into fractions that are equal to 1. 
+                    </p>
+                    <p>
+                        For example, if we have the conversion factor 1 foot = 12 inches, we can think of this as an equation and divide both sides by 1 foot to get:
+                    </p>
+                    <p>
+                        <math>
+                            <mn>1</mn><mo>=</mo><mfrac><mrow><mn>12</mn><mi>in</mi></mrow><mrow><mn>1</mn><mi>ft</mi></mrow></mfrac>
+                        </math>
+                    </p>
+                    <p>
+                        Or, alternatively, we could have divided both sides by 12 inches to get:
+                    </p>
+                    <p>
+                        <math>
+                            <mfrac><mrow><mn>1</mn><mi>ft</mi></mrow><mrow><mn>12</mn><mi>in</mi></mrow></mfrac><mo>=</mo><mn>1</mn>
+                        </math>
+                    </p>
+                    <p>
+                        Another way of looking at both these conversion fractions is that the numerator and denominator are equivalent of each other, so the resulting fraction is equal to 1 (whenever you divide a number by itself, you get 1).
+                    </p>
+                    <p>
+                       Since you can multiply any value by 1 without changing the value, we can multiply any quantity by one of these fractions to aid in our conversions.
+                    </p>
+                    <p>
+                        Going back to our earlier example, if we need to convert 2 feet to inches, we can multiply 2 feet by the conversion fraction <math><mfrac><mrow><mn>12</mn><mi>in</mi></mrow><mrow><mn>1</mn><mi>ft</mi></mrow></mfrac></math> to get:
+                    </p>
+                    <p>
+                        <math>
+                            <mn>2</mn><mi>ft</mi><mo>·</mo><mfrac><mrow><mn>12</mn><mi>in</mi></mrow><mrow><mn>1</mn><mi>ft</mi></mrow></mfrac><mo>=</mo><mn>24</mn><mi>in</mi>
+                        </math>
+                    </p>
+                    <p>
+                        But how did we know whether to multiply by <math><mfrac><mrow><mn>12</mn><mi>in</mi></mrow><mrow><mn>1</mn><mi>ft</mi></mrow></mfrac></math> or <math><mfrac><mrow><mn>1</mn><mi>ft</mi></mrow><mrow><mn>12</mn><mi>in</mi></mrow></mfrac></math>? We know that we want to end up with inches as our units, so we choose the option that will cancel out the feet unit, and leave us with inches. Since feet is already in the numerator of the quantity we're given (2 feet), we need to multiply by the conversion fraction that has feet in the denominator (so that the feet unit cancels out).
+                    </p>
+                    <p>
+                        If we had instead multiplied by the conversion fraction that had inches in the denominator, we would have ended up with:
+                    </p>
+                    <p>
+                        <math>
+                            <mn>2</mn><mi>ft</mi><mo>·</mo><mfrac><mrow><mn>1</mn><mi>ft</mi></mrow><mrow><mn>12</mn><mi>in</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>2</mn><msup><mi>ft</mi><mn>2</mn></msup></mrow><mrow><mn>12</mn><mi>in</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn><msup><mi>ft</mi><mn>2</mn></msup></mrow><mrow><mn>6</mn><mi>in</mi></mrow></mfrac>
+                        </math>
+                    </p>
+                    <p>
+                        These are not the units we want to end up with, which is why we choose the conversion fraction that had feet in the denominator.
+                    </p>
+                    <p>
+                        Let's look at a more complex example, that will better demonstrate the usefulness of unit analysis.
+                    </p>
+                    <p>
+                        Let's say we want to convert 10 meters per second squared (m/s<sup>2</sup>) to miles per hour squared (miles/hr<sup>2</sup>).
+                    </p>
+                    <p>
+                        This problem is more complex because we have more than one unit that needs to be converted: we need to convert meters to miles, and s<sup>2</sup> to hr<sup>2</sup>.
+                    </p>
+                    <p>
+                        On the SAT they would provide the meters to miles conversion, which is 1 mile = 1609 meters.
+                    </p>
+                    <p>
+                        Let's start by writing 10 m/s<sup>2</sup> as a fraction:
+                    </p>
+                    <p>
+                        <math>
+                            <mfrac><mrow><mn>10</mn><mi>m</mi></mrow><mrow><msup><mi>s</mi><mn>2</mn></msup></mrow></mfrac>
+                        </math>
+                    </p>
+                    <p>
+                        A square unit can be rewritten as the unit times itself, so we can rewrite this as:
+                    </p>
+                    <p>
+                        <math>
+                            <mfrac><mrow><mn>10</mn><mi>m</mi></mrow><mrow><mi>s</mi><mo>·</mo><mi>s</mi></mrow></mfrac>
+                        </math>
+                    </p>
+                    <p>
+                        Now, our meters to miles conversion can be written as either of two fractions: <math><mfrac><mrow><mn>1</mn><mi>mi</mi></mrow><mrow><mn>1609</mn><mi>m</mi></mrow></mfrac> <mo>=</mo><mfrac><mrow><mn>1609</mn><mi>m</mi></mrow><mrow><mn>1</mn><mi>mi</mi></mrow></mfrac> <mo>=</mo><mn>1</mn></math>.
+                    </p>
+                    <p>
+                        Since we currently have meters in the numerator of our fraction, and we want to end up with miles instead of meters, we need to multiply by the conversion fraction that will result in the meters unit canceling out and miles remaining in the numerator:
+                    </p>
+                    <p>
+                        <math>
+                            <mfrac><mrow><mn>10</mn><mi>m</mi></mrow><mrow><mi>s</mi><mo>·</mo><mi>s</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mn>1</mn><mi>mi</mi></mrow><mrow><mn>1609</mn><mi>m</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>10</mn><mi>mi</mi></mrow><mrow><mn>1609</mn><mi>s</mi><mo>·</mo><mi>s</mi></mrow></mfrac>
+                        </math>
+                    </p>
+                    <p>
+                        Now we're closer to what we want (we have miles instead of meters), but we still need to convert from s<sup>2</sup> to hr<sup>2</sup>. You might not immediately know the conversion from seconds to hours, but you should know that there are 60 seconds in a minute and 60 minutes in an hour, so we can use minutes as an intermediate unit to get there.
+                    </p>
+                    <p>
+                        Since we currently have seconds in the denominator of our fraction, we need to multiply by the conversion fraction that will result in the seconds unit canceling out and minutes remaining in the denominator: <math><mfrac><mrow><mn>60</mn><mi>s</mi></mrow><mrow><mn>1</mn><mi>min</mi></mrow></mfrac></math>
+                    </p>
+                    <p>
+                        But since seconds are being multiplied twice in the denominator of our fraction, we need to multiply by the conversion fraction twice in order to cancel out both seconds:
+                    </p>
+                    <p>
+                        <math>
+                            <mfrac><mrow><mn>10</mn><mi>mi</mi></mrow><mrow><mn>1609</mn><mi>s</mi><mo>·</mo><mi>s</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mn>60</mn><mi>s</mi></mrow><mrow><mn>1</mn><mi>min</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mn>60</mn><mi>s</mi></mrow><mrow><mn>1</mn><mi>min</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>36000</mn><mi>mi</mi></mrow><mrow><mn>1609</mn><mi>min</mi><mo>·</mo><mi>min</mi></mrow></mfrac>
+                        </math>
+                    </p>
+                    <p>
+                        Now we do the same thing to go from minutes<sup>2</sup> to hours<sup>2</sup>:
+                    </p>
+                    <p>
+                        <math>
+                            <mfrac><mrow><mn>36000</mn><mi>mi</mi></mrow><mrow><mn>1609</mn><mi>min</mi><mo>·</mo><mi>min</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mn>60</mn><mi>min</mi></mrow><mrow><mn>1</mn><mi>hr</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mn>60</mn><mi>min</mi></mrow><mrow><mn>1</mn><mi>hr</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>129600000</mn><mi>mi</mi></mrow><mrow><mn>1609</mn><mi>hr</mi><mo>·</mo><mi>hr</mi></mrow></mfrac><mo>=</mo><mn>80,547</mn><mfrac><mrow><mi>mi</mi></mrow><mrow><msup><mi>hr</mi><mn>2</mn></msup></mrow></mfrac>
+                        </math>
+                    </p>
+                    
+                    
+                    
+                </div>
+            </div>
         </div>
     </div>
     <div class="sat-guide-section">
@@ -575,143 +759,124 @@
             Ratio and Proportion Problems
         </h2>
         <div class="sat-guide-section-content">
-            <p>
-                A ratio compares two quantities, while a proportion states that two ratios are equal. On the SAT, you'll often need to:
-            </p>
-            <ul>
-                <li>
-                    <div class="font-bold">Setting Up Proportions</div>
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">
+                    Ratios
+                </h3>
+                <div class="sat-guide-subsection-content">
                     <p>
-                        If a/b = c/d, then ad = bc (cross-multiplication)
+                        A ratio tells you how many of one thing there are compared to another. For example, if you have a fruit basket that contains 3 apples for every 2 bananas, then the ratio of apples to bananas is 3 to 2. Ratios are sometimes expressed using a colon, but can also be written as a fraction. For example, our 3 to 2 ratios of apples to bananas can also be written as 3:2 or <math><mfrac><mn>3</mn><mn>2</mn></mfrac></math>.
+                    </p>
+                </div>
+            </div>
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">
+                    Proportions
+                </h3>
+                <div class="sat-guide-subsection-content">
+                    <p>
+                        A proportion is an equation that states that two ratios are equal. For example, when we have two similar triangles, the ratio of the corresponding sides are equal. So if we are told that triangle ABC is similar to triangle DEF, then we know that <math><mfrac><mi>AB</mi><mi>DE</mi></mfrac><mo>=</mo><mfrac><mi>BC</mi><mi>EF</mi></mfrac></math>
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+        <div class="sat-guide-section-content">
+            <div class="sat-guide-subsection">
+                <h3 class="sat-guide-subsection-header">
+                    Solving Proportion Problems
+                </h3>
+                <div class="sat-guide-subsection-content">
+                    <p>
+                        Often on SAT problems, you will encounter a proportion that contains an unknown variable or constant.
                     </p>
                     <p>
-                        For example, if 3 apples cost $2, how much do 9 apples cost?
+                        For example, if a fruit basket contains 3 apples for every 2 bananas, and we know that the basket contains 12 apples, we can figure out how many bananas are in the basket by setting up the following proportion:
                     </p>
                     <p>
-                        <math>
-                            <mfrac><mn>3</mn><mn>2</mn></mfrac><mo>=</mo><mfrac><mn>9</mn><mi>x</mi></mfrac>
-                        </math>
+                        <math><mfrac><mi>3</mi><mi>2</mi></mfrac><mo>=</mo><mfrac><mi>12</mi><mi>b</mi></mfrac></math>
                     </p>
                     <p>
-                        Cross-multiplying: 3x = 18, so x = 6
+                        In this case, b represents the number of bananas in the basket. To solve for b, we can cross-multiply. Cross-multiplying means that we multiply the numerator of the first fraction by the denominator of the second fraction, and set it equal to the numerator of the second fraction times the denominator of the first fraction. This is really just a shortcut for multiplying both sides of the equation by the denominators  one fraction and then the other.
                     </p>
-                </li>
-                <li>
-                    <div class="font-bold">Direct and Inverse Variation</div>
-                    <ul>
-                        <li>Direct variation: y = kx (where k is a constant)</li>
-                        <li>Inverse variation: y = k/x</li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="font-bold">Scale Factors</div>
                     <p>
-                        Used in similar figures and maps. If a map scale is 1 inch = 5 miles, then 3 inches = 15 miles.
+                        So, cross-multiplying the above equation gives us:
                     </p>
-                </li>
-            </ul>
+                    <p>
+                        <math><mi>3</mi><mi>b</mi><mo>=</mo><mi>12</mi><mi>·</mi><mi>2</mi><mo>=</mo><mi>24</mi></math>
+                    </p>
+                    <p>
+                        Now, we can solve for b by dividing both sides of the equation by 3:
+                    </p>
+                    <p>
+                        <math><mi>b</mi><mo>=</mo><mfrac><mi>24</mi><mi>3</mi></mfrac><mo>=</mo><mi>8</mi></math>
+                    </p>
+                    <p>
+                        Thus, if the fruit basket contains 12 apples, it must contain 8 bananas in order to maintain the 3:2 ratio of apples to bananas.
+                    </p>
+                    <p>
+                        Let's look at a more complex example.
+                    </p>
+                    <p>
+                        Let's say an alloy contains a 5:2 ratio of copper to zinc by mass. If a cube of this alloy has a mass of 140 grams, how much copper is in the cube?
+                    </p>
+                    <p>
+                        To solve this problem, we can set up the following proportion:
+                    </p>
+                    <p>
+                        <math><mfrac><mi>5</mi><mi>2</mi></mfrac><mo>=</mo><mfrac><mi>z</mi><mi>c</mi></mfrac></math>
+                    </p>
+                    <p>
+                        Here, we have two unknowns: z (zinc) and c (copper). We can't solve for two unknowns with one equation, so we need to set up another equation.
+                    </p>
+                    <p>
+                        We know that the total mass of the cube is 140 grams, so we can use that to set up another equation:
+                    </p>
+                    <p>
+                        <math><mi>z</mi><mo>+</mo><mi>c</mi><mo>=</mo><mi>140</mi></math>
+                    </p>
+                    <p>
+                        Now, we have a system of two equations with two unknowns. We can solve for z and c by solving the system of equations. We can start by solving for z in terms of c in the second equation:
+                    </p>
+                    <p>
+                        <math><mi>z</mi><mo>=</mo><mi>140</mi><mo>-</mo><mi>c</mi></math>
+                    </p>
+                    <p>
+                        Now, we can substitute this expression for z into the first equation:
+                    </p>
+                    <p>
+                        <math><mfrac><mi>5</mi><mi>2</mi></mfrac><mo>=</mo><mfrac><mrow><mi>140</mi><mo>-</mo><mi>c</mi></mrow><mi>c</mi></mfrac></math>
+                    </p>
+                    <p>
+                        After cross-multiplying, we get:
+                    </p>
+                    <p>
+                        <math><mi>5</mi><mi>c</mi><mo>=</mo><mn>2</mn><mo>(</mo><mi>140</mi><mo>-</mo><mi>c</mi><mo>)</mo><mo>=</mo><mi>280</mi><mo>-</mo><mi>2</mi><mi>c</mi></math>
+                    </p>
+                    <p>
+                        Adding 2c to both sides of the equation, we get:
+                    </p>
+                    <p>
+                        <math><mi>7</mi><mi>c</mi><mo>=</mo><mi>280</mi></math>
+                    </p>
+                    <p>
+                        Now, we can solve for c by dividing both sides of the equation by 7:
+                    </p>
+                    <p>
+                        <math><mi>c</mi><mo>=</mo><mfrac><mi>280</mi><mi>7</mi></mfrac><mo>=</mo><mi>40</mi></math>
+                    </p>
+                    <p>
+                        So, the cube contains 40 grams of copper. If we needed to, we could easily find the amount of zinc in the cube by substituting c = 40 back into either equation, to give us z = 100 grams.
+                    </p>
+                    
+                    
+                    
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="sat-guide-section">
-        <h2 class="sat-guide-section-header">
-            Unit Conversion Problems
-        </h2>
-        <div class="sat-guide-section-content">
-            <p>
-                Unit conversion problems require you to convert between different units of measurement. The key is to use conversion factors as ratios.
-            </p>
-            <p>
-                Common conversion factors to know:
-            </p>
-            <ul>
-                <li>
-                    <div class="font-bold">Length</div>
-                    <ul>
-                        <li>1 foot = 12 inches</li>
-                        <li>1 yard = 3 feet</li>
-                        <li>1 mile = 5,280 feet</li>
-                        <li>1 kilometer = 1,000 meters</li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="font-bold">Time</div>
-                    <ul>
-                        <li>1 minute = 60 seconds</li>
-                        <li>1 hour = 60 minutes</li>
-                        <li>1 day = 24 hours</li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="font-bold">Volume</div>
-                    <ul>
-                        <li>1 gallon = 4 quarts</li>
-                        <li>1 quart = 2 pints</li>
-                        <li>1 pint = 2 cups</li>
-                        <li>1 cup = 8 fluid ounces</li>
-                    </ul>
-                </li>
-            </ul>
-            <p>
-                Example: Convert 2.5 hours to minutes
-            </p>
-            <p>
-                <math>
-                    <mn>2.5</mn><mtext> hours</mtext><mo>×</mo><mfrac><mn>60</mn><mn>1</mn></mfrac><mtext> minutes/hour</mtext><mo>=</mo><mn>150</mn><mtext> minutes</mtext>
-                </math>
-            </p>
-        </div>
-    </div>
-
-    <div class="sat-guide-section">
-        <h2 class="sat-guide-section-header">
-            Density and Volume Problems
-        </h2>
-        <div class="sat-guide-section-content">
-            <p>
-                Density is a special type of rate that relates mass to volume. The formula is:
-            </p>
-            <p>
-                <math>
-                    <mi>density</mi><mo>=</mo><mfrac><mi>mass</mi><mi>volume</mi></mfrac>
-                </math>
-            </p>
-            <p>
-                Common applications include:
-            </p>
-            <ul>
-                <li>
-                    <div class="font-bold">Finding Volume from Mass and Density</div>
-                    <p>
-                        If you know the mass and density of an object, you can find its volume:
-                    </p>
-                    <p>
-                        <math>
-                            <mi>volume</mi><mo>=</mo><mfrac><mi>mass</mi><mi>density</mi></mfrac>
-                        </math>
-                    </p>
-                </li>
-                <li>
-                    <div class="font-bold">Geometric Applications</div>
-                    <p>
-                        For regular shapes like cubes, you can use this to find edge lengths:
-                    </p>
-                    <p>
-                        Example: A cube has a mass of 1000 grams and a density of 2.5 g/cm³. Find its edge length.
-                    </p>
-                    <p>
-                        Solution:
-                    </p>
-                    <ol>
-                        <li>Find volume: V = 1000/2.5 = 400 cm³</li>
-                        <li>For a cube, V = s³ where s is edge length</li>
-                        <li>400 = s³</li>
-                        <li>s = ∛400 ≈ 7.37 cm</li>
-                    </ol>
-                </li>
-            </ul>
-        </div>
-    </div>
+    
 </template>
 
 <style scoped>

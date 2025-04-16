@@ -208,8 +208,12 @@ const hideSolution = () => {
                         <span class="font-bold text-lg">Solution</span>
                         <UButton @click="hideSolution" variant="ghost">Hide Solution</UButton>
                     </div>
+                    
                     <div class="pt-4">
                         <TiptapReader :init_content="currentProblem.source_solution.html" />
+                    </div>
+                    <div v-if="currentProblem.difficulty" class="text-sm text-gray-600 mt-1">
+                        Difficulty: <span class="font-medium">{{ ['Easy', 'Medium', 'Hard'][currentProblem.difficulty] }}</span>
                     </div>
                 </div>
             </div>
