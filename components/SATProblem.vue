@@ -212,8 +212,8 @@ const hideSolution = () => {
                     <div class="pt-4">
                         <TiptapReader :init_content="currentProblem.source_solution.html" />
                     </div>
-                    <div v-if="currentProblem.difficulty" class="text-sm text-gray-600 mt-1">
-                        Difficulty: <span class="font-medium">{{ ['Easy', 'Medium', 'Hard'][currentProblem.difficulty] }}</span>
+                    <div v-if="currentProblem.difficulty && currentProblem.difficulty > 0" class="text-sm text-gray-600 mt-1">
+                        Difficulty: <span class="font-medium">{{ ['Easy', 'Medium', 'Hard'][currentProblem.difficulty-1] }}</span>
                     </div>
                 </div>
             </div>
