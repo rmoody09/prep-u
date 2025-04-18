@@ -48,7 +48,7 @@
             ></UButton>
             <UButton 
                 icon="i-lucide-square-radical"
-                @click="addMath"
+                @click="addMathClick"
                 variant="outline"
                 size="2xs"
             ></UButton>
@@ -59,6 +59,10 @@
         <UModal v-model="addTableOpen">
             <AddTableModal @addTable="addTable" />
         </UModal>
+        <MathEditorModal
+            v-model="addMathOpen"
+            @save="addMath"
+        />
     </div>
 </template>
 
@@ -79,11 +83,13 @@
     import TableRow from '@tiptap/extension-table-row'
     import mathExtension from '~/assets/modules/tiptap-extensions/math/math-extension.js';
     import AddTableModal from '~/components/AddTableModal.vue';
+    import MathEditorModal from '~/components/MathEditorModal.vue';
 
 
     const { init_content } = defineProps(['init_content'])
 
     const addTableOpen = ref(false);
+    const addMathOpen = ref(false);
 
 
   
@@ -103,11 +109,12 @@
       }
     }
 
-    const addMath = () => {
-      const math = window.prompt('Enter the latex math:')
-      if (math) {
-        editor.value.chain().focus().addMathComponent({ latex: math }).run()
-      }
+    const addMathClick = () => {
+      addMathOpen.value = true;
+    }
+
+    const addMath = (latex) => {
+      editor.value.chain().focus().addMathComponent({ latex }).run()
     }
 
     const addTableClick = () => {

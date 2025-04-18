@@ -8,26 +8,35 @@
         }"
         @click="latexClick">
     </node-view-wrapper>
+
+    <MathEditorModal
+        v-model="showModal"
+        :initial-value="props.node.attrs.latex"
+        @save="saveMath"
+    />
 </template>
   
 <script setup>
 import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-3'
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
+import MathEditorModal from '~/components/MathEditorModal.vue';
+
 const props = defineProps(nodeViewProps)
 console.log('math component');
 console.log(props.editor.view.editable);
 console.log(props.editor);
 
 const latex_el = ref(null);
+const showModal = ref(false);
 
 const latexClick = () => {
     if (!props.editor.view.editable) {return;}
-    const math = window.prompt('Enter the latex math:');
-    if (math) {
-        props.node.attrs.latex = math;
-        //katex.render(math, latex_el.value.element);
-    }
+    showModal.value = true;
+}
+
+const saveMath = (latex) => {
+    props.node.attrs.latex = latex;
 }
 
 const renderMath = computed(() => {

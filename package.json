@@ -30,6 +30,7 @@
     "chart.js": "^4.4.7",
     "desmos": "^1.5.4",
     "katex": "^0.16.11",
+    "mathlive": "^0.105.2",
     "nuxt": "^3.13.0",
     "nuxt-security": "^2.0.0",
     "tiptap-extension-resize-image": "^1.1.8",
