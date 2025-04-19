@@ -11,7 +11,7 @@
 
     <MathEditorModal
         v-model="showModal"
-        :initial-value="props.node.attrs.latex"
+        :initial-value="props.node.attrs.latex.toString()"
         @save="saveMath"
     />
 </template>
@@ -42,7 +42,7 @@ const saveMath = (latex) => {
 const renderMath = computed(() => {
     console.log('render math');
     console.log(props.node.attrs.latex);
-    let html = katex.renderToString(props.node.attrs.latex);
+    let html = katex.renderToString(props.node.attrs.latex.toString());
     console.log(html);
     return html;
     //return katex.render(props.node.attrs.latex);

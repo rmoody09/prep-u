@@ -61,6 +61,7 @@
         </UModal>
         <MathEditorModal
             v-model="addMathOpen"
+            :initial-value="selectedAddMathText"
             @save="addMath"
         />
     </div>
@@ -90,6 +91,7 @@
 
     const addTableOpen = ref(false);
     const addMathOpen = ref(false);
+    const selectedAddMathText = ref('');
 
 
   
@@ -110,6 +112,16 @@
     }
 
     const addMathClick = () => {
+      // Get the selected text from the editor
+      const { from, to } = editor.value.state.selection;
+      if (from !== to) {
+          selectedAddMathText.value = editor.value.state.doc.textBetween(from, to)
+              .replace(/\$latex_start/g, '')
+              .replace(/\$latex_end/g, '')
+              .trim();
+      } else {
+          selectedAddMathText.value = '';
+      }
       addMathOpen.value = true;
     }
 

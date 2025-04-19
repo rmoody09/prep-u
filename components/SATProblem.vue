@@ -9,7 +9,7 @@ const { data: fetchedProblem } = await useFetch(
   () => !currentProblem.value && props.problem_id ? `/api/get/sat-problem/${props.problem_id}` : null,
   {
     immediate: true,
-    watch: [props.problem_id],
+    watch: [() => props.problem_id],
   }
 );
 
