@@ -168,8 +168,14 @@
     ]);
     if (props.problem && props.problem.answer_choices) {
         let choices = [];
+        console.log('answer_choices');
+        console.log(JSON.stringify(props.problem.answer_choices));
         for (let choice of props.problem.answer_choices) {
-            choices.push({content: choice.json})
+            if (choice.json) {
+                choices.push({content: choice.json})
+            } else if (choice.html) {
+                choices.push({content: choice.html})
+            }
         }
         answer_choices.value = [...choices];
     }

@@ -82,6 +82,8 @@ const error_msg = ref('');
 const success_summary = ref('');
 const identified_problem_ids = ref([]);
 const processed_question_ids = ref([]);
+const pre_approved_question_ids = ref([]);
+const added_question_ids = ref([]);
 const failed_question_ids = ref([]);
 const unparsed_question_ids = ref([]);
 
@@ -125,6 +127,8 @@ function subscribeToTaskStatus(id) {
           success_summary.value = JSON.stringify(data.data.summary)
           identified_problem_ids.value = data.data.identified_problem_ids
           processed_question_ids.value = data.data.processed_question_ids
+          pre_approved_question_ids.value = data.data.pre_approved_question_ids
+          added_question_ids.value = data.data.added_question_ids
           failed_question_ids.value = data.data.failed_question_ids
           unparsed_question_ids.value = data.data.unparsed_question_ids
           is_success.value = true
@@ -138,7 +142,10 @@ function subscribeToTaskStatus(id) {
           error_msg.value = error.value
           identified_problem_ids.value = []
           processed_question_ids.value = []
+          pre_approved_question_ids.value = []
+          added_question_ids.value = []
           failed_question_ids.value = []
+          unparsed_question_ids.value = []
         } else {
             progress_status_msg.value = data.message
             progress_status_data.value = JSON.stringify(data.data)
@@ -163,6 +170,8 @@ const addProblems = async () => {
     success_summary.value = '';
     identified_problem_ids.value = [];
     processed_question_ids.value = [];
+    pre_approved_question_ids.value = [];
+    added_question_ids.value = [];
     failed_question_ids.value = [];
     unparsed_question_ids.value = [];
     let fetch_url = '/api/admin/add/sat-problems-from-pdf';
@@ -187,6 +196,8 @@ const addProblems = async () => {
         error_msg.value = resp.message;
         identified_problem_ids.value = resp.identified_problem_ids;
         processed_question_ids.value = resp.processed_question_ids;
+        pre_approved_question_ids.value = resp.pre_approved_question_ids;
+        added_question_ids.value = resp.added_question_ids;
         failed_question_ids.value = resp.failed_question_ids;
         unparsed_question_ids.value = resp.unparsed_question_ids;
         return;
@@ -291,8 +302,16 @@ onUnmounted(() => {
                         <div>{{ processed_question_ids.join(', ') }}</div>
                     </div>
                     <div>
+                        <div>Pre-Approved Question IDs:</div>
+                        <div>{{ pre_approved_question_ids.join(', ') }}</div>
+                    </div>
+                    <div>
                         <div>Failed Question IDs:</div>
                         <div>{{ failed_question_ids.join(', ') }}</div>
+                    </div>
+                    <div>
+                        <div>Added/Modified Question IDs:</div>
+                        <div>{{ added_question_ids.join(', ') }}</div>
                     </div>
                     <div>
                         <div>Unparsed Question IDs:</div>

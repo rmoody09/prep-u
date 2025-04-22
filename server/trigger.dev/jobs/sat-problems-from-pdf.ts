@@ -6,10 +6,6 @@ import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.SUPABASE_URL
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_KEY
-console.log('supabaseUrl:')
-console.log(supabaseUrl);
-console.log('supabaseServiceRoleKey:')
-console.log(supabaseServiceRoleKey);
 
 const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -55,6 +51,12 @@ const getSystemPrompt = (options) => {
           If the test_section is reading_writing, the skill should take one of the following values: ${getCbSectionSkillIDs('reading_writing').join(', ')}.
       `;
   }
+  let solution_extra_instructions = '';
+  if (section == 'math') {
+      solution_extra_instructions = `
+          Make sure that any latex expressions are surrounded by the div tag with the class "tiptap-latex" structured similarly to the examples provided.
+      `;
+  }
   const system_prompt_1 = `
       Your role is to take a pdf file of SAT practice problems and perform various actions to extract information from the document in JSON format.
       You should not return any additional text. Your response should consist only of the JSON string.
@@ -98,7 +100,6 @@ const getSystemPrompt = (options) => {
           question_id: should be a string that depicts the college board question id
           domain: a snake-style string that indicates the domain of the question
           skill: a snake-style string that indicates the skill tested by the question
-          question_text: the content of the question depicted in plain text. Do not use html tags in this field. For mathematical expressions, use latex to represent them, but indicate where latex is being used by inserting $latex_start immediately before the latex expression and $latex_end immediately after it. Use the examples provided as a guide. In some cases, you might not be able to depict the question perfectly with plain text graphics and other factors, but that is ok, just do the best you can to depict it as plain text. Make sure to iclude only the question content, and not the answer choices here. Please do not make any edits or additions of your own to the questions - just return the questions as they are in the document as accurately as possible.
           question_html: the question content formatted as html that can be fed into the tiptap editor. Please use the examples provided below as a guide for how to format the question in html. For mathematical expressions, use latex to express those in the html, using the examples provided as guidance. If there are any tables of data, see the examples provided below as reference for how to depict them. Please do not make any edits or additions of your own to the questions - just return the questions as they are in the document as accurately as possible. If there is an image in the question (excluding a table that an be represented as discussed previously), such as a graph or diagram, make sure to include it here. Make sure it is positioned correctly. If it is positioned above the text in the pdf, then it should come before the text in your response. If it's between two blocks of text, then it should be between those blocks of text in your response. Do not try to anticipate the source of the image. Always use this url as a placeholder for the source of any image: https://hxosbmzvobqvyncpnxqt.supabase.co/storage/v1/object/public/Problem%20Graphics/CollegeBoard%20Question%20Bank%20Graphics/generic-graphic.png?t=2024-11-03T16%3A47%3A58.869Z
           answer_type: should be either 'multiple_choice' or 'numeric_input'
           answer_choices: an array listing the answer choices. each choice should be given in html form, using the examples as a guide, formatted similarly to how you formatted the question_html field. There should always be 4 answer choices for multiple choice questions. If the question is not a multiple choice question, this should be null. Please do not make any edits or additions of your own to the answer choices - just return the answer choices as they are in the document as accurately as possible.
@@ -127,19 +128,23 @@ const trimRespText = (resp_text) => {
 const getProblemsFromGeminiMsg = async (resp_text) => {
   console.log('getProblemsFromGeminiMsg')
   resp_text = trimRespText(resp_text);
+  /*
   console.log('trimmed resp text start:');
   console.log(resp_text.slice(0, 500));
   console.log('trimmed resp text end:');
   console.log(resp_text.slice(-500));
+  */
   let problems = [];
   try {
       //data = JSON.parse(resp_json);
       problems = JSON.parse(resp_text);
+      /*    
       console.log('parsed problems')
       console.log(problems.length);
       for (let problem of problems) {
           console.log(problem.question_id);
       }
+      */
   } catch(err) {
       try {
           console.log('failed to parse original json, will try to reformat')
@@ -263,8 +268,9 @@ const getProblemsFromGemini = async (all_problems = true, problem_ids = []) => {
                   maxOutputTokens: 8192,
               }
           });
-          console.log('got result from gemini 2');
+          //console.log('got result from gemini 2');
           resp_text = result.response.text();
+          /*
           try {
               console.log('resp start:')
               console.log(resp_text.slice(0, 500));
@@ -277,6 +283,7 @@ const getProblemsFromGemini = async (all_problems = true, problem_ids = []) => {
               console.log(resp_text);
           }
           console.log('got resp text');
+          */
           problems = getProblemsFromGeminiMsg(resp_text);
           if (problems.length == 0) {
               console.log('failed to get problems from gemini');
@@ -298,6 +305,8 @@ const getProblemsFromGemini = async (all_problems = true, problem_ids = []) => {
   return problems;
 }
 
+import { removeTags } from '@/assets/composables/prepareSATProblemForDB';
+
 function prepareProblemForDB(problem, options = {}) {
   console.log('prepareProblemForDB')
   let difficulties = {easy: 1, medium: 2, hard: 3};
@@ -312,8 +321,13 @@ function prepareProblemForDB(problem, options = {}) {
           return {html: choice};
       });
   }
-  console.log('answer choices:')
-  console.log(answer_choices);
+  //console.log('answer choices:')
+  //console.log(answer_choices);
+  const question_text = removeTags(problem.question_html);
+  console.log('problem html:')
+  console.log(problem.question_html);
+  console.log('question text:')
+  console.log(question_text);
   let db_problem = {
       source: 'collegeboard', 
       in_cb_question_bank: true,
@@ -323,7 +337,7 @@ function prepareProblemForDB(problem, options = {}) {
       source_question_id: problem.question_id,
       cb_domain: cb_domain || problem.domain,
       cb_skill: cb_skill || problem.skill,
-      question_text: problem.question_text,
+      question_text: question_text,
       question_html: problem.question_html,
       answer_type: problem.answer_type,
       answer_choices: answer_choices,
@@ -341,31 +355,73 @@ async function saveProblemsToDB(client, problems, options = {}, user_id) {
   let db_problems = [];
   let question_ids = [];
   let failed_question_ids = [];
+  let pre_approved_question_ids = [];
+  let added_question_ids = [];
   let from_test = options.from_test || false;
   for (let problem of problems) {
+      console.log('problem:')
+      console.log(problem.question_id);
       let db_problem = prepareProblemForDB(problem, {is_practice_test: from_test});
       db_problem.added_by_user = user_id;
       console.log('prepared for db');
-      //console.log(db_problem);
-      const { data, error } = await client.from('sat_problems').insert(db_problem);
-      console.log('tried to add to db');
+      console.log('check if exists');
+      question_ids.push(problem.question_id);
+      // First check if problem exists and is expert approved
+      const { data: existingProblem, error: fetchError } = await client
+          .from('sat_problems')
+          .select('expert_approved')
+          .eq('source', 'collegeboard')
+          .eq('source_question_id', problem.question_id)
+          .single();
+
+      if (fetchError && fetchError.code !== 'PGRST116') { // PGRST116 is "not found" error
+          console.log('error checking existing problem ' + problem.question_id);
+          console.log(fetchError);
+          failed_question_ids.push(problem.question_id);
+          continue;
+      }
+      if (existingProblem) {
+        console.log('exists in db');
+      } else {
+        console.log('does not exist in db');
+      }
+      // If problem exists and is expert approved, skip it
+      if (existingProblem?.expert_approved) {
+          console.log('already expert approved:')
+          console.log(problem.question_id);
+          pre_approved_question_ids.push(problem.question_id);
+          console.log('skipping expert approved problem ' + problem.question_id);
+          continue;
+      }
+      console.log('not expert approved');
+
+      // Otherwise, upsert the problem
+      const { data, error } = await client
+          .from('sat_problems')
+          .upsert(db_problem, {
+              onConflict: 'source,source_question_id',
+              returning: true
+          });
+
       if (error) {
-          console.log('error inserting problem ' + problem.question_id);
+          console.log('error upserting problem ' + problem.question_id);
           console.log(error);
           failed_question_ids.push(problem.question_id);
+          continue;
       }
-      console.log(data);
-      console.log('added question id ' + problem.question_id);
+      console.log('added/updated question id ' + problem.question_id);
       console.log(problem.skill);
-      question_ids.push(problem.question_id);
-      db_problems.push(db_problem);
+      added_question_ids.push(problem.question_id);
+    db_problems.push(db_problem);
+      
   }
-  return {db_problems, question_ids, failed_question_ids};
+  return {db_problems, question_ids, added_question_ids, failed_question_ids, pre_approved_question_ids};
 }
 
 // Add a new function to update task status
 async function updateTaskStatus(taskId: string, status: string, data: any = null, message: string = '') {
   console.log('updateTaskStatus')
+  console.log('v2025-4-20');
   console.log('taskId:')
   console.log(taskId);
   console.log('status:')
@@ -405,6 +461,8 @@ export const processSATProblems = task({
     let identified_problem_ids = [];
     let processed_question_ids = [];
     let failed_question_ids = [];
+    let pre_approved_question_ids = [];
+    let added_question_ids = [];
     let remaining_problem_ids = [];
     ({ test_section, cb_domain, cb_skill, expected_problem_count, user_id, file_url, from_test } = payload);
 
@@ -450,12 +508,26 @@ export const processSATProblems = task({
         sample_problems = sample_problems.map(problem => {
             problem.solution_html = problem.solution.html;
             delete problem.solution;
+            delete problem.question_text;
             problem.answer_choices = problem.answer_choices.map(choice => {
                 return choice.html;
             });
             return problem;
         });
         sample_json = JSON.stringify(sample_problems);
+        console.log('sample problems:');
+        for (let problem of sample_problems) {
+            console.log('problem text:');
+            console.log(problem.question_text);
+            console.log('problem html:');
+            console.log(problem.question_html);
+            console.log('answer choices:');
+            console.log(problem.answer_choices);
+            console.log('mult choice answer:');
+            console.log(problem.mult_choice_answer);
+            console.log('solution:');
+            console.log(problem.solution_html);
+        }
         //console.log('sample json:')
         //console.log(sample_json);
 
@@ -530,8 +602,10 @@ export const processSATProblems = task({
         console.log(processed_question_ids);
 
         const format_options = {from_test: from_test, test_section: test_section, cb_domain: cb_domain, cb_skill: cb_skill};
-        let { db_problems, question_ids, just_failed_question_ids } = await saveProblemsToDB(supabaseAdmin, problems, format_options, user_id);
+        let { db_problems, question_ids, added_question_ids: just_added_question_ids, failed_question_ids: just_failed_question_ids, pre_approved_question_ids: just_pre_approved_question_ids } = await saveProblemsToDB(supabaseAdmin, problems, format_options, user_id);
+        added_question_ids = added_question_ids.concat(just_added_question_ids);
         failed_question_ids = failed_question_ids.concat(just_failed_question_ids);
+        pre_approved_question_ids = pre_approved_question_ids.concat(just_pre_approved_question_ids);
         console.log('saved problems');
         console.log(db_problems.length);
         
@@ -555,11 +629,17 @@ export const processSATProblems = task({
             
             let more_question_ids = more_problems.filter(problem => !!problem.question_id).map(problem => problem.question_id);
             processed_question_ids = processed_question_ids.concat(more_question_ids);
-            let { db_problems: new_db_problems, question_ids: new_question_ids, failed_question_ids: just_failed_question_ids } = await saveProblemsToDB(supabaseAdmin, more_problems, format_options, user_id);
+            let { db_problems: new_db_problems, question_ids: new_question_ids, added_question_ids: just_added_question_ids, failed_question_ids: just_failed_question_ids, pre_approved_question_ids: just_pre_approved_question_ids } = await saveProblemsToDB(supabaseAdmin, more_problems, format_options, user_id);
             db_problems = db_problems.concat(new_db_problems);
+            added_question_ids = added_question_ids.concat(just_added_question_ids);
             for (let failed_question_id of just_failed_question_ids) {
                 if (!failed_question_ids.includes(failed_question_id)) {
                     failed_question_ids.push(failed_question_id);
+                }
+            }
+            for (let pre_approved_question_id of just_pre_approved_question_ids) {
+                if (!pre_approved_question_ids.includes(pre_approved_question_id)) {
+                    pre_approved_question_ids.push(pre_approved_question_id);
                 }
             }
             remaining_problem_ids = remaining_problem_ids.filter(problem_id => !processed_question_ids.includes(problem_id));
@@ -569,8 +649,10 @@ export const processSATProblems = task({
         response.status = 'OK';
         response.summary = resp_data_to_show;
         response.processed_question_ids = processed_question_ids;
+        response.added_question_ids = added_question_ids;
         response.failed_question_ids = failed_question_ids;
         response.unparsed_question_ids = remaining_problem_ids;
+        response.pre_approved_question_ids = pre_approved_question_ids;
         await updateTaskStatus(taskId, 'completed', response, 'SAT problems added to database');
         return response;
 

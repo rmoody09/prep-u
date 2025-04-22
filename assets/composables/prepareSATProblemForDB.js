@@ -40,6 +40,39 @@ function getNodeText(doc_node, options = {}) {
     return text;
 }
 
+export function removeTags(html) {
+    if (!html) return '';
+    
+    // First handle math-component tags
+    html = html.replace(/<math-component[^>]*latex="([^"]*)"[^>]*>[^<]*<\/math-component>/g, 
+        (match, latex) => `$latex_start${latex}$latex_end`
+    );
+    
+    // Replace img tags with [img]
+    html = html.replace(/<img[^>]*>/g, '[img]');
+    
+    // Replace block-level elements with their content plus newline
+    const blockElements = ['div', 'p', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'tr'];
+    blockElements.forEach(tag => {
+        const openTag = new RegExp(`<${tag}[^>]*>`, 'gi');
+        const closeTag = new RegExp(`</${tag}>`, 'gi');
+        html = html
+            .replace(openTag, '')
+            .replace(closeTag, '\n');
+    });
+    
+    // Remove any remaining HTML tags
+    html = html.replace(/<[^>]+>/g, '');
+    
+    // Clean up extra whitespace and newlines
+    html = html
+        .replace(/\n\s*\n/g, '\n') // Replace multiple newlines with single newline
+        .replace(/^\s+|\s+$/g, '') // Trim start and end
+        .replace(/[ \t]+/g, ' '); // Replace multiple spaces with single space
+    
+    return html;
+}
+
 export const prepareSATProblemForDB = (problem) => {
     const { problem_source, subsource, is_practice_test, in_cb_question_bank, collegeboard_question_id, practice_test, test_section, module, cb_domain, cb_skill, answer_type, input_answers, mult_choice_correct_answer_index, difficulty, custom_skills, question, answer_choices } = problem;
     console.log('prepareSATProblemForDB4');
@@ -69,7 +102,12 @@ export const prepareSATProblemForDB = (problem) => {
     }
     const {html: question_html, json: question_json} = question;
     //const question_text = removeTags(question_html);
-    const question_text = getNodeText(question_json);
+    let question_text = '';
+    if (question_json) {
+        question_text = getNodeText(question_json);
+    } else {
+        question_text = removeTags(question_html);
+    }
     const contains_graphic = question_text.includes('[img]');
     let db_input_answers = answer_type == 'numeric_input' ? input_answers : null;
     let db_mult_choice_answer = answer_type == 'multiple_choice' ? mult_choice_correct_answer_index : null;

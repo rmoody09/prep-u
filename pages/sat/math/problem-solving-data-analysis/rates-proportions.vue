@@ -201,10 +201,10 @@
                 <h3 class="sat-guide-subsection-header">Concentration</h3>
                 <div class="sat-guide-subsection-content">
                   Concentration problems will involve substances that are a combination of multiple substances. These may be solutions (like salt mixed in water), alloys (metals mixed together), or other mixtures.
-                    <p>
-                        Concentration can be expressed in multiple ways. Here are some of the ways it might be expressed:
-                    </p>
-                    <ul>
+                  <p>
+                    Concentration can be expressed in multiple ways. Here are some of the ways it might be expressed:
+                  </p>
+                  <ul>
                     <li>
                         mass per volume (grams per liter, for example)
                         <ul>
@@ -235,22 +235,22 @@
                             </li>
                         </ul>
                     </li>
-                    </ul>
-                    <p>
+                  </ul>
+                  <p>
                     One formula that can apply to concentration problems is, which can be inferred from its units is:
-                    </p>
-                    <p>
+                  </p>
+                  <p>
                     <math>
                         <mi>concentration</mi><mo>=</mo><mfrac><mi>quantity of substance</mi><mi>quantity of total mixture</mi></mfrac>
                     </math>
-                    </p>
-                    <p>
+                  </p>
+                  <p>
                     The term "quantity" might refer to "mass" or "volume" depending on the problem.
-                    </p>
-                    <p>
+                  </p>
+                  <p>
                     Another formula, that relates the concentrations and quantities of both substances in a mixture to the total quantity of the mixture, is:
-                    </p>
-                    <p>
+                  </p>
+                  <p>
                     <math>
                         <msub>
                             <mi>C</mi>
@@ -403,9 +403,9 @@
                                         <mi>C</mi>
                                         <mi>t</mi>
                                     </msub>
-                                </math>
-                            </p>
-                            <p>
+                        </math>
+                    </p>
+                    <p>
                                 In the above formula:
                             </p>
                             <ul>
@@ -454,8 +454,8 @@
                                             In the example above, this would be the 1 liter of the first saline solution.
                                         </li>
                                     </ul>
-                                </li>
-                                <li>
+                </li>
+                <li>
                                     <math>
                                         <msub>
                                             <mi>Q</mi>
@@ -468,9 +468,9 @@
                                         <li>
                                             In the example above, this would be the 2 liters of the second saline solution.
                                         </li>
-                                    </ul>
-                                </li>
-                                <li>
+                    </ul>
+                </li>
+                <li>
                                     <math>
                                         <msub>
                                             <mi>C</mi>
@@ -482,8 +482,8 @@
                                     <ul>
                                         <li>
                                             In the example above, this would be the concentration of the total mixture of the two saline solutions.
-                                        </li>
-                                    </ul>
+                </li>
+            </ul>
                                 </li>   
                                 
                             </ul>
@@ -741,12 +741,12 @@
                     </p>
                     <p>
                         Now we do the same thing to go from minutes<sup>2</sup> to hours<sup>2</sup>:
-                    </p>
-                    <p>
-                        <math>
+            </p>
+            <p>
+                <math>
                             <mfrac><mrow><mn>36000</mn><mi>mi</mi></mrow><mrow><mn>1609</mn><mi>min</mi><mo>·</mo><mi>min</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mn>60</mn><mi>min</mi></mrow><mrow><mn>1</mn><mi>hr</mi></mrow></mfrac><mo>·</mo><mfrac><mrow><mn>60</mn><mi>min</mi></mrow><mrow><mn>1</mn><mi>hr</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>129600000</mn><mi>mi</mi></mrow><mrow><mn>1609</mn><mi>hr</mi><mo>·</mo><mi>hr</mi></mrow></mfrac><mo>=</mo><mn>80,547</mn><mfrac><mrow><mi>mi</mi></mrow><mrow><msup><mi>hr</mi><mn>2</mn></msup></mrow></mfrac>
-                        </math>
-                    </p>
+                </math>
+            </p>
                     
                     
                     
@@ -846,13 +846,13 @@
                     </p>
                     <p>
                         <math><mfrac><mi>5</mi><mi>2</mi></mfrac><mo>=</mo><mfrac><mrow><mi>140</mi><mo>-</mo><mi>c</mi></mrow><mi>c</mi></mfrac></math>
-                    </p>
-                    <p>
+            </p>
+            <p>
                         After cross-multiplying, we get:
-                    </p>
-                    <p>
+            </p>
+            <p>
                         <math><mi>5</mi><mi>c</mi><mo>=</mo><mn>2</mn><mo>(</mo><mi>140</mi><mo>-</mo><mi>c</mi><mo>)</mo><mo>=</mo><mi>280</mi><mo>-</mo><mi>2</mi><mi>c</mi></math>
-                    </p>
+            </p>
                     <p>
                         Adding 2c to both sides of the equation, we get:
                     </p>
