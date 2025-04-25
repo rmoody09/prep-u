@@ -22,13 +22,13 @@ const adminCards = [
         ]
     },
     {
-        title: 'SAT Skills',
-        description: 'Manage skill categories and their relationships.',
+        title: 'SAT Concepts',
+        description: 'Manage SAT concepts and their relationships.',
         icon: 'i-lucide-list-tree',
-        to: '/admin/sat-skills',
+        to: '/admin/sat-concepts',
         actions: [
-            { label: 'View All', to: '/admin/sat-skills' },
-            { label: 'Add New', to: '/add/sat-skill' }
+            { label: 'View All', to: '/admin/sat-concepts' },
+            { label: 'Add New', to: '/add/concept' }
         ]
     },
     {

@@ -204,6 +204,12 @@
         init_custom_skills = props.drill.custom_skills;
     }
 
+    const selected_concepts = ref([]);
+    let init_concepts = [];
+    if (props.drill && props.drill.concepts) {
+        init_concepts = props.drill.concepts;
+    }
+
     const is_text_answer_label = ref(false);
     const text_answer_label = ref('');
     const addTextAnswerLabel = () => {
@@ -393,6 +399,10 @@
                 <div>
                     <div :class='select_option_header_classes'>Custom Skills</div>
                     <SATSkillsSelector v-model="selected_custom_skills" :init_skills="init_custom_skills" />
+                </div>
+                <div>
+                    <div :class='select_option_header_classes'>Concepts</div>
+                    <ConceptTagsSelector v-model="selected_concepts" :init_concepts="init_concepts" />
                 </div>
                 <div>
                     <UButton @click="saveDrillClicked">Save</UButton>

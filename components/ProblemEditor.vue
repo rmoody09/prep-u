@@ -334,6 +334,11 @@
         init_custom_skills = props.problem.skills;
     }
 
+    const selected_concepts = ref([]);
+    let init_concepts = [];
+    if (props.problem && props.problem.concepts) {
+        init_concepts = props.problem.concepts;
+    }
 
     const modules = [
         {id: '1', 'label': 'Module 1'},
@@ -524,6 +529,11 @@
                 <div>
                     <div :class='section_header_classes'>Custom Skills</div>
                     <SATSkillsSelector v-model="selected_custom_skills" :init_skills="init_custom_skills" />
+                </div>
+
+                <div>
+                    <div :class='section_header_classes'>Concepts</div>
+                    <ConceptTagEditor v-model="selected_concepts" :init_concepts="init_concepts" />
                 </div>
 
                 <div v-if="selected_problem_source != 'own'">
