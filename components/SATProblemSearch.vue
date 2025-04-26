@@ -419,6 +419,10 @@ const renderKaTeX = () => {
         console.error('Error in KaTeX rendering:', error);
     }
 };
+
+defineExpose({
+    selected_problems
+});
 </script>
 
 <template>

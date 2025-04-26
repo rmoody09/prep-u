@@ -3,6 +3,11 @@ export const test_sections = [
     { id: 'math', label: 'Math' }
 ]
 
+export const section_names = {
+    'reading_writing': 'Reading and Writing',
+    'math': 'Math'
+}
+
 const test_section_lookup = {};
 test_sections.forEach(section => {
     test_section_lookup[section.id] = section;

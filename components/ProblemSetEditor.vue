@@ -40,7 +40,7 @@
         problem_set_tag.value = props.problemSet.tag;
     }
 
-    import { cb_domains, cb_skills, getCbDomainLookup, getCbSkillLookup, getCbSkillsByDomain } from '~/assets/composables/SATProblemTypes';
+    import { cb_domains, cb_skills, getCbDomainLookup, getCbSkillLookup, getCbSkillsByDomain, section_names } from '~/assets/composables/SATProblemTypes';
 
     const cb_domain_lookup = getCbDomainLookup();
     const cb_skill_lookup = getCbSkillLookup();
@@ -116,10 +116,9 @@
         init_concepts = props.problemSet.concepts;
     }
 
-    const problem_ids = ref([]);
-    if (props.problemSet && props.problemSet.problem_ids) {
-        problem_ids.value = props.problemSet.problem_ids;
-    }
+    
+
+    const problems = ref([]);
 
     const justAddedProblemSetId = ref(null);
 
@@ -136,7 +135,7 @@
             cb_skill: cb_skill.value,
             concepts: concepts,
             type: selected_type.value,
-            problem_ids: problem_ids.value
+            problems: problems.value
         }
         
         if (props.problemSet) {
@@ -195,10 +194,41 @@
         cb_domain.value = null;
         cb_skill.value = null;
         selected_concepts.value = [];
-        problem_ids.value = [];
+        problems.value = [];
     }
 
     const section_header_classes = "font-semibold pb-2 text-base"
+
+    const problemSelectorOpen = ref(false);
+    const problemSearchRef = ref(null);
+    const problemModalOpen = ref(false);
+    const selectedProblem = ref(null);
+
+    const openProblemSelector = () => {
+        problemSelectorOpen.value = true;
+    }
+
+    const viewProblem = (problem) => {
+        selectedProblem.value = problem;
+        problemModalOpen.value = true;
+    }
+
+    const closeProblemSelector = () => {
+        if (problemSearchRef.value?.selected_problems) {
+            problemSearchRef.value.selected_problems.forEach(problem => {
+                if (!problems.value.some(p => p.id === problem.id)) {
+                    problems.value.push(problem);
+                }
+            });
+        }
+        problemSelectorOpen.value = false;
+    }
+
+    const addProblemToSet = (problem) => {
+        if (!problems.value.some(p => p.id === problem.id)) {
+            problems.value.push(problem);
+        }
+    }
 </script>
 
 <template>
@@ -260,8 +290,44 @@
                     <ConceptTagsSelector v-model="selected_concepts" :init_concepts="init_concepts" />
                 </div>
                 <div>
-                    <div :class='section_header_classes'>Problem IDs</div>
-                    <TagsInput v-model="problem_ids" placeholder="Enter problem IDs and press Enter" />
+                    <div :class='section_header_classes'>Problems</div>
+                    <div class="flex flex-col gap-2">
+                        <div class="flex flex-row gap-2 items-start">
+                            <UButton
+                                variant="outline"
+                                icon="i-heroicons-plus"
+                                @click="openProblemSelector"
+                            >
+                                Select Problems
+                            </UButton>
+                        </div>
+                        <div v-if="problems.length > 0" class="mt-2">
+                            <div v-for="problem in problems" :key="problem.id" class="flex flex-row items-center gap-2 p-2 bg-gray-50 rounded-md mb-1">
+                                <div class="flex-grow">
+                                    <div class="font-medium">{{ problem.question_text.substring(0, 100) }}...</div>
+                                    <div class="text-sm text-gray-500">
+                                        {{ section_names[problem.test_section] }} - {{ cb_domain_lookup[problem.cb_domain].label }}
+                                    </div>
+                                </div>
+                                <UButton
+                                    variant="ghost"
+                                    icon="i-heroicons-eye"
+                                    @click="viewProblem(problem)"
+                                    size="xs"
+                                />
+                                <UButton
+                                    variant="ghost"
+                                    icon="i-heroicons-trash"
+                                    @click="problems = problems.filter(p => p.id !== problem.id)"
+                                    size="xs"
+                                    color="red"
+                                />
+                            </div>
+                        </div>
+                        <div v-else class="text-sm text-gray-500 italic">
+                            No problems selected
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="flex flex-row gap-4">
@@ -270,5 +336,62 @@
                 </div>
             </div>
         </div>
+
+        
     </div>
+    <UModal v-model="problemSelectorOpen" fullscreen>
+        <UCard>
+            <template #header>
+                <div class="flex justify-between items-center w-full">
+                    <h3 class="text-lg font-semibold">Select Problems</h3>
+                    <UButton
+                        color="gray"
+                        variant="ghost"
+                        icon="i-heroicons-x-mark"
+                        @click="closeProblemSelector"
+                    />
+                </div>
+            </template>
+            <div class="p-4">
+                <SATProblemSearch
+                    ref="problemSearchRef"
+                    :showAddButton="false"
+                    :showDeleteButton="false"
+                    :showEditButton="false"
+                    :showViewButton="false"
+                    :showFilterButton="true"
+                    :showSearchInput="true"
+                    :showPagination="true"
+                    :showApprovalStatus="true"
+                    :showProblemSource="true"
+                    :showProblemType="true"
+                    :showProblemQuestion="true"
+                    :showProblemOptions="true"
+                    :showTitle="false"
+                    :allowProblemSelection="true"
+                />
+            </div>
+        </UCard>
+    </UModal>
+
+    <UModal v-model="problemModalOpen" :ui="{ width: 'md:max-w-[90vw]'}">
+        <UCard>
+            <template #header>
+                <div class="flex justify-between items-center w-full">
+                    <h3 class="text-lg font-semibold">Problem Details</h3>
+                    <UButton
+                        color="gray"
+                        variant="ghost"
+                        icon="i-heroicons-x-mark"
+                        @click="problemModalOpen = false"
+                    />
+                </div>
+            </template>
+            <div class="p-4" v-if="selectedProblem">
+                <ClientOnly>
+                    <SATProblem :problem_id="selectedProblem.id" />
+                </ClientOnly>
+            </div>
+        </UCard>
+    </UModal>
 </template>
