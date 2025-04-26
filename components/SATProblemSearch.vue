@@ -89,6 +89,11 @@ const props = defineProps({
   initialSearchText: {
     type: String,
     default: ''
+  },
+  // Whether to allow them to select problems
+  allowProblemSelection: {
+    type: Boolean,
+    default: true
   }
 });
 
@@ -328,12 +333,39 @@ const getFilterChips = () => {
 }
 
 const removeFilter = (filter_category, value) => {
-    filter_options.value[filter_category] = filter_options.value[filter_category].filter(filter => filter.id != value);
+    console.log('removing filter', filter_category, value);
+    console.log('filter_options', JSON.stringify(filter_options.value));
+    if (filter_category == 'test_section') {
+        filter_options.value.test_section = null;
+    } else {
+        filter_options.value[filter_category] = filter_options.value[filter_category].filter(filter => filter.id != value);
+    }
+    
     fetchProblems();
 }
 
+const selected_problems = ref([]);
+
 const selectProblem = (problem) => {
+    selected_problems.value.push(problem);
     emit('problem-selected', problem);
+}
+
+const unselectProblem = (problem) => {
+    selected_problems.value = selected_problems.value.filter(p => p.id !== problem.id);
+    emit('problem-unselected', problem);
+}
+
+const isProblemSelected = (problem) => {
+    return selected_problems.value.some(p => p.id === problem.id);
+}
+
+const toggleProblemSelection = (problem, checked) => {
+    if (checked) {
+        selectProblem(problem);
+    } else {
+        unselectProblem(problem);
+    }
 }
 
 const editProblem = (id) => {
@@ -400,6 +432,20 @@ const renderKaTeX = () => {
             </span>
         </div>
         
+        <div v-if="selected_problems.length > 0" class="flex flex-row items-center gap-2 pb-4">
+            <span class="text-sm font-medium text-gray-700">
+                {{ selected_problems.length }} problem{{ selected_problems.length === 1 ? '' : 's' }} selected
+            </span>
+            <UButton
+                variant="ghost"
+                size="xs"
+                icon="i-heroicons-x-mark"
+                @click="selected_problems = []"
+            >
+                Clear selection
+            </UButton>
+        </div>
+        
         <div class="flex flex-row justify-between pb-4 items-start">
             <span v-if="props.showFilterButton" class="flex flex-row gap-1 items-start">
                 <UButton @click="openProblemsFilter" variant="outline" icon="i-lucide-filter" size="xs" />
@@ -458,22 +504,42 @@ const renderKaTeX = () => {
                     <div 
                         v-if="props.showProblemQuestion"
                         class="problem-question problem-cell whitespace-pre-wrap"
-                        @click="selectProblem(problem)"
+                        
                     >
                         <span>{{ getTruncatedQuestionText(problem.question_text) }}</span>
                     </div>
                     <div v-if="props.showProblemOptions" class="problem-options problem-cell relative">
-                        <span v-if="props.showApprovalStatus" class="absolute top-1 right-1 flex flex-row gap-1">
-                            <span class="rounded-full py-[1px] px-2 flex items-center justify-center" :class="problem.manually_approved ? 'bg-green-100 text-green-500' : 'bg-gray-100 text-gray-500'">
-                                <UIcon name="i-lucide-check" />
-                            </span>
-                            <span class="rounded-full py-[1px] px-2 flex items-center justify-center" :class="problem.expert_approved ? 'bg-green-100 text-green-500' : 'bg-gray-100 text-gray-500'">
-                                <UIcon name="i-lucide-check-check" />
-                            </span>
-                        </span> 
-                        <UButton v-if="props.showViewButton" variant="outline" :to="`/sat-problem/${problem.id}`" icon="i-heroicons-eye" square size="2xs" @click="viewProblem(problem.id)" />
-                        <UButton v-if="props.showEditButton" variant="outline" :to="`/edit-problem/${problem.id}`" icon="i-heroicons-pencil-square" square size="2xs" @click="editProblem(problem.id)" />
-                        <UButton v-if="props.showDeleteButton" variant="outline" @click="deleteProblem(problem.id)" icon="i-heroicons-trash" square size="2xs" />
+                        <div class="flex flex-col justify-between h-full w-full">
+                            <div>
+                                <div v-if="props.showApprovalStatus" class=" pt-2 flex flex-row gap-1 justify-end">
+                                    <span class="rounded-full py-[1px] px-2 flex items-center justify-center" :class="problem.manually_approved ? 'bg-green-100 text-green-500' : 'bg-gray-100 text-gray-500'">
+                                        <UIcon name="i-lucide-check" />
+                                    </span>
+                                    <span class="rounded-full py-[1px] px-2 flex items-center justify-center" :class="problem.expert_approved ? 'bg-green-100 text-green-500' : 'bg-gray-100 text-gray-500'">
+                                        <UIcon name="i-lucide-check-check" />
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="flex flex-row gap-1 justify-center">
+                                <UButton v-if="props.showViewButton" variant="outline" :to="`/sat-problem/${problem.id}`" icon="i-heroicons-eye" square size="2xs" @click="viewProblem(problem.id)" />
+                                <UButton v-if="props.showEditButton" variant="outline" :to="`/edit-problem/${problem.id}`" icon="i-heroicons-pencil-square" square size="2xs" @click="editProblem(problem.id)" />
+                                <UButton v-if="props.showDeleteButton" variant="outline" @click="deleteProblem(problem.id)" icon="i-heroicons-trash" square size="2xs" />
+                            </div>
+                            <div class="flex flex-row gap-1 justify-center">
+                                <div v-if="props.allowProblemSelection" class="flex items-center gap-2">
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <UCheckbox
+                                          :model-value="isProblemSelected(problem)"
+                                          @update:model-value="(checked) => toggleProblemSelection(problem, checked)"
+                                          size="sm"
+                                        />
+                                        <span class="text-sm text-gray-600">
+                                          {{ isProblemSelected(problem) ? 'Selected' : 'Select' }}
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
