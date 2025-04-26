@@ -242,7 +242,7 @@
         }
 
         const custom_skills = selected_custom_skills.value.map(skill => skill.id);
-
+        const concepts = selected_concepts.value.map(concept => concept.id);
         let db_answer_choices = [];
         let mult_choice_correct_answer_index = null;
         if (selected_answer_type.value == 'multiple_choice') {
@@ -269,6 +269,7 @@
             answer_type: selected_answer_type.value,
             input_answers: db_numeric_answers,
             custom_skills: custom_skills,
+            concepts: concepts,
             question: {
                 html: questionEditorRef.value.editor.getHTML(),
                 json: questionEditorRef.value.editor.getJSON()
@@ -533,7 +534,7 @@
 
                 <div>
                     <div :class='section_header_classes'>Concepts</div>
-                    <ConceptTagEditor v-model="selected_concepts" :init_concepts="init_concepts" />
+                    <ConceptTagsSelector v-model="selected_concepts" :init_concepts="init_concepts" />
                 </div>
 
                 <div v-if="selected_problem_source != 'own'">

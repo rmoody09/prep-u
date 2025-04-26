@@ -224,6 +224,7 @@
     const saveDrillClicked = async () => {
         submitting.value = true;
         const custom_skills = selected_custom_skills.value.map(skill => skill.id);
+        const concepts = selected_concepts.value.map(concept => concept.id);
         let db_answer_choices = [];
         let mult_choice_section_label = null;
         let mult_choice_correct_answer_index = null;
@@ -258,6 +259,7 @@
             text_answer_html: textAnswerEditorRef.value?.editor?.getHTML(),
             text_answer_json: textAnswerEditorRef.value?.editor?.getJSON(),
             custom_skills: custom_skills, 
+            concepts: concepts,
             test_section: selected_section.value, 
             cb_domain: cb_domain.value, 
             cb_skill: cb_skill.value,
