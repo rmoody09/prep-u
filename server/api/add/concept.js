@@ -14,7 +14,7 @@ export default eventHandler(async (event) => {
     console.log('sb_data', JSON.stringify(sb_data));
     const sb_resp = await client.from('concept_tags').insert(sb_data).select();
 
-    await updateConceptParentsAndChildren(client, sb_resp.data[0];
+    await updateConceptParentsAndChildren(client, sb_resp.data[0]);
 
     return { data: sb_resp.data, error: sb_resp.error };
 
