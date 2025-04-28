@@ -113,7 +113,7 @@ export const prepareSATProblemForDB = (problem) => {
     let db_mult_choice_answer = answer_type == 'multiple_choice' ? mult_choice_correct_answer_index : null;
     let db_difficulty = difficulty ? difficulty : null;
     const sb_data = {
-        source: problem_source, subsource: subsource, test_section, source_question_id: source_question_id, is_practice_test: is_practice_test, in_cb_question_bank: in_cb_question_bank, practice_test_id: practice_test_id, test_module: test_module, problem_number: problem_number, cb_domain: cb_domain, cb_skill: cb_skill, difficulty: db_difficulty, answer_type: answer_type, input_answers: db_input_answers, skills: custom_skills, concepts, question_text: question_text, question_html: question_html, question_json: question_json, answer_choices, mult_choice_answer: db_mult_choice_answer, source_solution: source_solution, manually_edited: true, contains_graphic: contains_graphic
+        source: problem_source, subsource: subsource, test_section, source_question_id: source_question_id, is_practice_test: is_practice_test, in_cb_question_bank: in_cb_question_bank, practice_test_id: practice_test_id, test_module: test_module, problem_number: problem_number, cb_domain: cb_domain, cb_skill: cb_skill, difficulty: db_difficulty, answer_type: answer_type, input_answers: db_input_answers, skills: custom_skills, concepts, question_text: question_text, question_html: question_html, question_json: question_json, answer_choices, mult_choice_answer: db_mult_choice_answer, source_solution: source_solution, manually_edited: true, contains_graphic: contains_graphic, discipline: 'SAT', problem_type: 'practice_problem', allow_multiple_selection: false
     }
     return sb_data;
 }

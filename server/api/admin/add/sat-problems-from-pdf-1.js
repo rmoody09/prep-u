@@ -308,7 +308,10 @@ function prepareProblemForDB(problem, options = {}) {
         mult_choice_answer: problem.mult_choice_answer,
         difficulty: difficulty, 
         source_solution: {html: problem.solution_html}, 
-        contains_graphic: problem.contains_graphic,
+        contains_graphic: problem.contains_graphic, 
+        discipline: 'SAT', 
+        problem_type: 'practice_problem', 
+        allow_multiple_selection: false
     }
     return db_problem;
 }

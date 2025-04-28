@@ -81,6 +81,9 @@ function prepareProblemForDB(problem, options = {}) {
         difficulty: difficulties[problem.difficulty], 
         source_solution: problem.solution, 
         contains_graphic: problem.contains_graphic,
+        discipline: 'SAT', 
+        problem_type: 'practice_problem', 
+        allow_multiple_selection: false
     }
     return db_problem;
 }

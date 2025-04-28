@@ -151,7 +151,7 @@ const fetchProblems = async (options = {}) => {
         params.match_filters = {test_section: filter_options.value.test_section.id};
         search_filters.test_section = filter_options.value.test_section;
     }
-    let match_filters = {};
+    let match_filters = {discipline: 'SAT'};
     let any_match_filters = false;
     let in_filters = [];
     if (filter_options.value.cb_domains && filter_options.value.cb_domains.length > 0) {
