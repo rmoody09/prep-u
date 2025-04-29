@@ -4,7 +4,11 @@ import Desmos from 'desmos';
 const props = defineProps(['drill', 'drill_id', 'options']);
 if (!props.drill) {
     console.log('no drill');
-    props.drill = await useFetch(`/api/get/sat-drill/${props.drill_id}`);
+    console.log('drill_id', props.drill_id);
+    let resp = await useFetch(`/api/get/sat-drill/${props.drill_id}`);
+    console.log('resp', JSON.stringify(resp));
+    props.drill = resp.data.value.data;
+    console.log('drill', JSON.stringify(props.drill));
 } else {
     props.drill_id = props.drill.id;
 }

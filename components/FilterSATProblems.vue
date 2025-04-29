@@ -2,10 +2,18 @@
     import { test_sections, cb_domains, cb_skills, getTestSectionLookup, getCbDomainLookup, getCbSkillLookup, getCbSkillsByDomain } from '~/assets/composables/SATProblemTypes';
     const props = defineProps(['includeCloseButton', 'test_section', 'cb_domains', 'cb_skills']);
     
+    const problem_types = ref([
+        {label: 'Drill', value: 'drill'},
+        {label: 'Practice Problem', value: 'practice_problem'}
+    ]);
+
+    const selected_problem_type = ref(null);
+    
     const emit = defineEmits(['filterProblems', 'closeFilter']);
 
     const applyFilter = () => {
         let filter = {
+            problem_type: selected_problem_type.value,
             test_section: selected_test_section.value,
             cb_domains: selected_cb_domains.value,
             cb_skills: selected_cb_skills.value,
@@ -129,6 +137,14 @@
         <UButton v-if="props.includeCloseButton" variant="ghost" size="md" @click="closeFilter" icon="i-heroicons-x-mark" />
     </div>
     <div class="filter-sections flex flex-col gap-4">
+        <div class="filter-section">
+            <div class="filter-section-label">
+                <span>Problem Type</span> 
+            </div>
+            <div>
+                <USelectMenu v-model="selected_problem_type" :options="problem_types" :option-attribute="'label'" :value-attribute="'value'" placeholder="Select Problem Type" />
+            </div>
+        </div>
         <div class="filter-section">
             <div class="filter-section-label">
                 <span>Test Section</span> 

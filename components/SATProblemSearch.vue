@@ -154,6 +154,11 @@ const fetchProblems = async (options = {}) => {
     let match_filters = {discipline: 'SAT'};
     let any_match_filters = false;
     let in_filters = [];
+    if (filter_options.value.problem_type) {
+        match_filters.problem_type = filter_options.value.problem_type;
+        search_filters.problem_type = filter_options.value.problem_type;
+        any_match_filters = true;
+    }
     if (filter_options.value.cb_domains && filter_options.value.cb_domains.length > 0) {
         in_filters.push({column: 'cb_domain', values: filter_options.value.cb_domains.map(domain => domain.id)});
         search_filters.cb_domains = filter_options.value.cb_domains;
@@ -372,8 +377,18 @@ const editProblem = (id) => {
     emit('problem-edited', id);
 }
 
+// Add modal state and selected problem
+const problemModalOpen = ref(false);
+const selectedProblem = ref(null);
+
 const viewProblem = (id) => {
-    emit('problem-viewed', id);
+    // Find the problem in the current list
+    const problem = problems.value.find(p => p.id === id);
+    if (problem) {
+        selectedProblem.value = problem;
+        problemModalOpen.value = true;
+        emit('problem-viewed', id);
+    }
 }
 
 onMounted(async () => {
@@ -480,6 +495,7 @@ defineExpose({
                 </div>
                 <div v-for="problem in problems" :key="problem.id" class="problem-row flex flex-row">
                     <div v-if="props.showProblemSource" class="problem-source problem-cell">
+                        <div>{{ {drill: 'Drill', practice_problem: 'Practice Problem'}[problem.problem_type] }}</div>
                         <div>{{ problem_sources[problem.source] }}</div>
                         <div v-if="problem.source_question_id">
                             {{ problem.source_question_id }}
@@ -525,7 +541,7 @@ defineExpose({
                                 </div>
                             </div>
                             <div class="flex flex-row gap-1 justify-center">
-                                <UButton v-if="props.showViewButton" variant="outline" :to="`/sat-problem/${problem.id}`" icon="i-heroicons-eye" square size="2xs" @click="viewProblem(problem.id)" />
+                                <UButton v-if="props.showViewButton" variant="outline" icon="i-heroicons-eye" square size="2xs" @click="viewProblem(problem.id)" />
                                 <UButton v-if="props.showEditButton" variant="outline" :to="`/edit-problem/${problem.id}`" icon="i-heroicons-pencil-square" square size="2xs" @click="editProblem(problem.id)" />
                                 <UButton v-if="props.showDeleteButton" variant="outline" @click="deleteProblem(problem.id)" icon="i-heroicons-trash" square size="2xs" />
                             </div>
@@ -564,6 +580,31 @@ defineExpose({
                 <FilterSATProblems @filterProblems="applyFilter" @closeFilter="closeFilter" :includeCloseButton="true" :test_section="filter_options.test_section" :cb_domains="filter_options.cb_domains ? filter_options.cb_domains : null" :cb_skills="filter_options.cb_skills ? filter_options.cb_skills : null" />
             </div>
         </UModal>
+        
+        <!-- Problem View Modal -->
+        <ClientOnly>
+            <UModal v-model="problemModalOpen" :ui="{ width: 'md:max-w-[90vw]'}">
+                <UCard>
+                    <template #header>
+                        <div class="flex justify-between items-center w-full">
+                            <h3 class="text-lg font-semibold">Problem Details</h3>
+                            <UButton
+                                color="gray"
+                                variant="ghost"
+                                icon="i-heroicons-x-mark"
+                                @click="problemModalOpen = false"
+                            />
+                        </div>
+                    </template>
+                    <div class="p-4" v-if="selectedProblem">
+                        
+                            <SATProblem v-if="selectedProblem.problem_type === 'practice_problem'" :problem_id="selectedProblem.id" />
+                            <SATDrill v-else-if="selectedProblem.problem_type === 'drill'" :drill_id="selectedProblem.id" />
+                        
+                    </div>
+                </UCard>
+            </UModal>
+        </ClientOnly>
     </div>
 </template>
 
