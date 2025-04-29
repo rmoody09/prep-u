@@ -542,7 +542,7 @@ defineExpose({
                             </div>
                             <div class="flex flex-row gap-1 justify-center">
                                 <UButton v-if="props.showViewButton" variant="outline" icon="i-heroicons-eye" square size="2xs" @click="viewProblem(problem.id)" />
-                                <UButton v-if="props.showEditButton" variant="outline" :to="`/edit-problem/${problem.id}`" icon="i-heroicons-pencil-square" square size="2xs" @click="editProblem(problem.id)" />
+                                <UButton v-if="props.showEditButton" variant="outline" :to="problem.problem_type === 'drill' ? `/admin/edit/sat-drill/${problem.id}` : `/admin/edit/sat-problem/${problem.id}`" icon="i-heroicons-pencil-square" square size="2xs" @click="editProblem(problem.id)" />
                                 <UButton v-if="props.showDeleteButton" variant="outline" @click="deleteProblem(problem.id)" icon="i-heroicons-trash" square size="2xs" />
                             </div>
                             <div class="flex flex-row gap-1 justify-center">

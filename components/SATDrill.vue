@@ -2,18 +2,25 @@
 import TiptapReader from './TiptapReader.vue';
 import Desmos from 'desmos';
 const props = defineProps(['drill', 'drill_id', 'options']);
-if (!props.drill) {
-    console.log('no drill');
-    console.log('drill_id', props.drill_id);
-    let resp = await useFetch(`/api/get/sat-drill/${props.drill_id}`);
-    console.log('resp', JSON.stringify(resp));
-    props.drill = resp.data.value.data;
-    console.log('drill', JSON.stringify(props.drill));
-} else {
-    props.drill_id = props.drill.id;
-}
 
-const drill = props.drill;
+// Create a reactive reference for the drill data
+const currentDrill = ref(props.drill);
+
+// Only fetch if we don't have the drill and have an ID
+const { data: fetchedDrill } = await useFetch(
+  () => !currentDrill.value && props.drill_id ? `/api/get/sat-drill/${props.drill_id}` : null,
+  {
+    immediate: true,
+    watch: [() => props.drill_id],
+  }
+);
+
+// Update currentDrill when fetched data becomes available
+watchEffect(() => {
+  if (!currentDrill.value && fetchedDrill.value?.data) {
+    currentDrill.value = fetchedDrill.value.data;
+  }
+});
 
 let options = props.options;
 if (!options) {
@@ -24,7 +31,7 @@ const multipleChoiceSelector = ref(null);
 const numericInput = ref(null);
 
 let allow_multiple_selection = false;
-if (props.drill.allow_multiple_selection) {
+if (currentDrill.value?.allow_multiple_selection) {
     allow_multiple_selection = true;
 }
 const allow_strike = ref(true);
@@ -78,10 +85,10 @@ const text_input = ref('');
 
 const checkToShowToolbar = () => {
     let show = false;
-    if (drill.test_section == 'math') {
+    if (currentDrill.value?.test_section == 'math') {
         show = true;
     }
-    if (drill.has_multiple_choice && allow_strike.value) {
+    if (currentDrill.value?.has_multiple_choice && allow_strike.value) {
         show = true;
     }
     return show;
@@ -114,19 +121,19 @@ const hideSolution = () => {
 <template>
     <div class="relative w-full border border-solid border-slate-300 rounded-md">
         <div v-if="checkToShowToolbar()" class="flex flex-row items-center gap-1 bg-slate-100 p-1">
-            <UButton v-if="drill.test_section == 'math'"
+            <UButton v-if="currentDrill?.test_section == 'math'"
                 icon="i-lucide-calculator"
                 @click="openDesmos"
                 variant="outline"
                 size="2xs"
             ></UButton>
-            <UButton v-if="drill.test_section == 'math'"
+            <UButton v-if="currentDrill?.test_section == 'math'"
                 icon="i-lucide-superscript"
                 @click="openMathReference"
                 variant="outline"
                 size="2xs"
             ></UButton>
-            <UButton v-if="drill.has_multiple_choice"
+            <UButton v-if="currentDrill?.has_multiple_choice"
                 @click="toggleStrikability"
                 :variant="striking_on ? 'solid' : 'outline'"
                 size="2xs"
@@ -193,26 +200,26 @@ const hideSolution = () => {
             </div>
         </span>
         <div class='p-2 pt-6'>
-            <div v-if="drill.instructions_html" class="drill-instructions pb-8 font-bold text-lg">
-                <TiptapReader :init_content="drill.instructions_html" />
+            <div v-if="currentDrill?.instructions_html" class="drill-instructions pb-8 font-bold text-lg">
+                <TiptapReader :init_content="currentDrill.instructions_html" />
             </div>
-            <div class='drill-question pb-6'><TiptapReader :init_content="drill.question_html" /></div>
+            <div class='drill-question pb-6'><TiptapReader :init_content="currentDrill?.question_html" /></div>
             <div class="flex flex-col gap-6">
-                <div v-if="drill.has_multiple_choice" class='drill-answer-choices flex flex-col gap-4 pt-4'>
-                    <div v-if="drill.mult_choice_label" class="section-instructions">
-                        {{ drill.mult_choice_label }}
+                <div v-if="currentDrill?.has_multiple_choice" class='drill-answer-choices flex flex-col gap-4 pt-4'>
+                    <div v-if="currentDrill?.mult_choice_label" class="section-instructions">
+                        {{ currentDrill.mult_choice_label }}
                     </div>
-                    <MultipleChoiceSelector ref="multipleChoiceSelector" :answer_choices="drill.answer_choices" :correct_answers="drill.mult_choice_answers" :allow_multiple_selection="allow_multiple_selection" />
+                    <MultipleChoiceSelector ref="multipleChoiceSelector" :answer_choices="currentDrill?.answer_choices" :correct_answers="currentDrill?.mult_choice_answers" :allow_multiple_selection="allow_multiple_selection" />
                 </div>
-                <div v-if="props.drill.has_numeric_input">
-                    <div v-if="props.drill.numeric_answers_label"  class="section-instructions">
-                        {{ props.drill.numeric_answers_label }} 
+                <div v-if="currentDrill?.has_numeric_input">
+                    <div v-if="currentDrill?.numeric_answers_label"  class="section-instructions">
+                        {{ currentDrill.numeric_answers_label }} 
                     </div>
-                    <NumericAnswersInput ref="numericInput" :answers="drill.numeric_answers" :require_all="drill.require_all_numeric_answers" />
+                    <NumericAnswersInput ref="numericInput" :answers="currentDrill?.numeric_answers" :require_all="currentDrill?.require_all_numeric_answers" />
                 </div>
-                <div v-if="props.drill.has_text_input">
-                    <div v-if="props.drill.text_answer_label"  class="section-instructions">
-                        {{ props.drill.text_answer_label }} 
+                <div v-if="currentDrill?.has_text_input">
+                    <div v-if="currentDrill?.text_answer_label"  class="section-instructions">
+                        {{ currentDrill.text_answer_label }} 
                     </div>
                     <UInput v-model="text_input" />
                 </div>
@@ -227,7 +234,7 @@ const hideSolution = () => {
                         <UButton @click="hideSolution" variant="ghost">Hide Solution</UButton>
                     </div>
                     <div class="pt-4">
-                        <TiptapReader :init_content="drill.explanation_html" />
+                        <TiptapReader :init_content="currentDrill?.explanation_html" />
                     </div>
                 </div>
                 <!-- <UAccordion :items="solution_accordion_items">
