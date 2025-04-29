@@ -43,7 +43,7 @@ export default eventHandler(async (event) => {
     let db_problems = [];
     for (let problem of problems) {
         let db_problem = prepareProblemForDB(problem);
-        const sb_resp = await client.from('sat_problems').insert(db_problem);
+        const sb_resp = await client.from('problems').insert(db_problem);
         console.log('done')
         db_problems.push(db_problem);
     }

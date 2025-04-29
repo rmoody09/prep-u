@@ -11,7 +11,7 @@ export default eventHandler(async (event) => {
     const body = await readBody(event);
     const sb_data = prepareSATProblemForDB(body);
     console.log('add sat problem');
-    const sb_resp = await client.from('sat_problems').insert(sb_data).select();
+    const sb_resp = await client.from('problems').insert(sb_data).select();
     return { data: sb_resp.data, error: sb_resp.error };
 
 

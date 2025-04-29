@@ -9,7 +9,7 @@ export default eventHandler(async (event) => {
     assertMethod(event, "DELETE");
     console.log('deleting sat problem');
     const client = serverSupabaseServiceRole(event)
-    const resp = await client.from('sat_problems').delete().eq('id', problem_id)
+    const resp = await client.from('problems').delete().eq('id', problem_id)
     console.log('resp status', resp.status);
     return resp;
 

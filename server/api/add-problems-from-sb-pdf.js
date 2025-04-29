@@ -132,7 +132,7 @@ async function saveProblemsToDB(client, problems, options = {}) {
     for (let problem of problems) {
         let db_problem = prepareProblemForDB(problem, {is_practice_test: from_test});
         console.log('prepared for db');
-        const { data, error } = await client.from('sat_problems').insert(db_problem);
+        const { data, error } = await client.from('problems').insert(db_problem);
         console.log('tried to add to db');
         if (error) {
             console.log('error inserting problem ' + problem.question_id);
@@ -246,7 +246,7 @@ export default eventHandler(async (event) => {
     let question_ids = [];
     for (let problem of problems) {
         let db_problem = prepareProblemForDB(problem, {is_practice_test: from_test});
-        const { data, error } = await client.from('sat_problems').insert(db_problem);
+        const { data, error } = await client.from('problems').insert(db_problem);
         if (error) {
             console.log('error inserting problem ' + problem.question_id);
             console.log(error);

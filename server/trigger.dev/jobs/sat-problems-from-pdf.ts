@@ -371,7 +371,7 @@ async function saveProblemsToDB(client, problems, options = {}, user_id) {
       question_ids.push(problem.question_id);
       // First check if problem exists and is expert approved
       const { data: existingProblem, error: fetchError } = await client
-          .from('sat_problems')
+          .from('problems')
           .select('expert_approved')
           .eq('source', 'collegeboard')
           .eq('source_question_id', problem.question_id)
@@ -400,7 +400,7 @@ async function saveProblemsToDB(client, problems, options = {}, user_id) {
 
       // Otherwise, upsert the problem
       const { data, error } = await client
-          .from('sat_problems')
+          .from('problems')
           .upsert(db_problem, {
               onConflict: 'source,source_question_id',
               returning: true
@@ -496,7 +496,7 @@ export const processSATProblems = task({
         }
         console.log('sample problem ids:')
         console.log(sample_problem_ids);
-        let { data: sample_problems, error: sample_error } = await supabaseAdmin.from('sat_problems').select('test_section, question_id:source_question_id, domain:cb_domain, skill:cb_skill, question_text, question_html, answer_type, answer_choices, mult_choice_answer, input_answers, difficulty, contains_graphic, solution:source_solution').in('id', sample_problem_ids);
+        let { data: sample_problems, error: sample_error } = await supabaseAdmin.from('problems').select('test_section, question_id:source_question_id, domain:cb_domain, skill:cb_skill, question_text, question_html, answer_type, answer_choices, mult_choice_answer, input_answers, difficulty, contains_graphic, solution:source_solution').in('id', sample_problem_ids);
         
         if (sample_error) {
             console.log('error:')

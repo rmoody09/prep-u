@@ -25,8 +25,8 @@ function getNodeText(doc_node) {
 }
 
 export const prepareSATDrillForDB = (drill) => {
-    
-    const { test_section, cb_domain, cb_skill, instructions_html, instructions_json, question_html, question_json, has_numeric_input, has_text_input, has_multiple_choice, numeric_answers, numeric_answers_label, require_all_numeric_answers, answer_is_exact, text_answer_html, text_answer_json, text_answer_label, explanation_html, explanation_json, answer_choices, mult_choice_correct_answer_index, mult_choice_correct_answer_indices, mult_choice_label, allow_multiple_selection, custom_skills, concepts } = drill;
+    console.log('prepareSATDrillForDB v2');
+    const { test_section, cb_domain, cb_skill, instructions_html, instructions_json, question_html, question_json, has_numeric_input, has_text_input, has_multiple_choice, numeric_answers, numeric_answers_label, require_all_numeric_answers, answer_is_exact, text_answer_html, text_answer_json, text_answer_label, explanation_html, explanation_json, answer_choices, mult_choice_correct_answer_index, mult_choice_correct_answer_indices, mult_choice_label, allow_multiple_selection, concepts } = drill;
     
     let text_answer_text = null;
     let answer_type = 'text';
@@ -45,7 +45,7 @@ export const prepareSATDrillForDB = (drill) => {
     const explanation_text = getNodeText(explanation_json);
     const instructions_text = getNodeText(instructions_json);
     const sb_data = {
-        test_section: test_section, cb_domain, cb_skill, instructions_html, instructions_json, instructions_text, question_html, question_json, question_text, answer_type, has_numeric_input, has_text_input, has_multiple_choice, numeric_answers, numeric_answers_label, require_all_numeric_answers, text_answer_html, text_answer_json, text_answer_text, text_answer_label, answer_is_exact, explanation_html, explanation_json, explanation_text, answer_choices, mult_choice_answer: mult_choice_correct_answer_index, mult_choice_answers: mult_choice_correct_answer_indices, mult_choice_label, allow_multiple_selection, custom_skills, concepts
+        test_section: test_section, cb_domain, cb_skill, instructions_html, instructions_json, instructions_text, question_html, question_json, question_text, answer_type, has_numeric_input, has_text_input, has_multiple_choice, numeric_answers, numeric_answers_label, require_all_numeric_answers, text_answer_html, text_answer_json, text_answer_text, text_answer_label, answer_is_exact, explanation_html, explanation_json, explanation_text, answer_choices, mult_choice_answer: mult_choice_correct_answer_index, mult_choice_answers: mult_choice_correct_answer_indices, mult_choice_label, allow_multiple_selection, concepts, discipline: 'SAT', problem_type: 'drill', source: 'own'
     }
     console.log('sb_data', sb_data);
     return sb_data;

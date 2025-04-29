@@ -3,15 +3,6 @@
 export default function prepareSATProblemForDB(problem) {
     console.log('prepareSATProblemForDB');
     const { problem_source, cb_subsource, collegeboard_question_id, practice_test, section, module, math_section, reading_writing_section, math_skill, reading_writing_skill, answer_type, input_answer, mult_choice_correct_answer_index, cb_difficulty, custom_skills, question, answer_choices, source_solution } = problem;
-    
-    
-    /*
-    const db_resp = await client.from('sat_problems').select()
-    console.log('got sb resp');
-    console.log(db_resp);
-    return db_resp;
-    */
-    //todo: add more validation with zod
     if (problem_source == 'own') {
         source_solution = null;
     }

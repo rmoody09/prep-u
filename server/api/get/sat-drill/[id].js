@@ -9,7 +9,7 @@ export default eventHandler(async (event) => {
     assertMethod(event, "GET");
     console.log('getting sat drills');
     const client = serverSupabaseServiceRole(event)
-    const resp = await client.from('sat_drills').select().eq('id', drill_id).single()
+    const resp = await client.from('problems').select().eq('id', drill_id).single()
     console.log('data', resp.data);
     console.log('got data');
     return resp;

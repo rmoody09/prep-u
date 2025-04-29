@@ -327,7 +327,7 @@ async function saveProblemsToDB(client, problems, options = {}, user_id) {
         db_problem.added_by_user = user_id;
         console.log('prepared for db');
         //console.log(db_problem);
-        const { data, error } = await client.from('sat_problems').insert(db_problem);
+        const { data, error } = await client.from('problems').insert(db_problem);
         console.log('tried to add to db');
         if (error) {
             console.log('error inserting problem ' + problem.question_id);
@@ -394,7 +394,7 @@ export default eventHandler(async (event) => {
         console.log('sample problem ids:')
         console.log(sample_problem_ids);
         
-        let { data: sample_problems, error: sample_error } = await client.from('sat_problems').select('test_section, question_id:source_question_id, domain:cb_domain, skill:cb_skill, question_text, question_html, answer_type, answer_choices, mult_choice_answer, input_answers, difficulty, contains_graphic, solution:source_solution').in('id', sample_problem_ids);
+        let { data: sample_problems, error: sample_error } = await client.from('problems').select('test_section, question_id:source_question_id, domain:cb_domain, skill:cb_skill, question_text, question_html, answer_type, answer_choices, mult_choice_answer, input_answers, difficulty, contains_graphic, solution:source_solution').in('id', sample_problem_ids);
         if (sample_error) {
             console.log('error:')
             console.log(sample_error);

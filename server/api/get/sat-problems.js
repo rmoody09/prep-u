@@ -2,7 +2,7 @@ import { serverSupabaseServiceRole } from '#supabase/server'
 
 export default eventHandler(async (event) => {
     //assertMethod(event, "GET");
-    console.log('getting sat problems');
+    console.log('getting sat problems v 4-28');
     let query = {};
     if (isMethod(event, "GET")) {
         query = getQuery(event);
@@ -19,7 +19,7 @@ export default eventHandler(async (event) => {
     if (get_count) {
         select_params.count = 'exact';
     }
-    let db_query = client.from('sat_problems').select(select_cols, select_params);
+    let db_query = client.from('problems').select(select_cols, select_params);
     if (query.hasOwnProperty('start') && query.hasOwnProperty('end')) {
         db_query = db_query.range(query.start, query.end);
     }

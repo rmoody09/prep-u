@@ -23,7 +23,7 @@ export default eventHandler(async (event) => {
     const body = await readBody(event);
     console.log('body', body);
     const sb_data = prepareSATProblemForDB(body);
-    const sb_resp = await client.from('sat_problems').update(sb_data).eq('id', problem_id);
+    const sb_resp = await client.from('problems').update(sb_data).eq('id', problem_id);
     console.log('sb_resp', sb_resp);
     return { data: sb_resp.data, error: sb_resp.error };
 

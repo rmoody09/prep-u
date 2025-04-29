@@ -77,15 +77,6 @@ export const prepareSATProblemForDB = (problem) => {
     const { problem_source, subsource, is_practice_test, in_cb_question_bank, collegeboard_question_id, practice_test, test_section, module, cb_domain, cb_skill, answer_type, input_answers, mult_choice_correct_answer_index, difficulty, custom_skills, concepts, question, answer_choices } = problem;
     console.log('prepareSATProblemForDB4');
     
-    
-    /*
-    const db_resp = await client.from('sat_problems').select()
-    console.log('got sb resp');
-    console.log(db_resp);
-    return db_resp;
-    */
-    //todo: add more validation with zod
-    
     let source_solution = null;
     if (problem_source != 'own' && problem.source_solution) {
         source_solution = problem.source_solution;
