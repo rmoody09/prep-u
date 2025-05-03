@@ -57,7 +57,7 @@ const approveProblem = async () => {
                     <UIcon variant="outline" name="i-lucide-check" /> <span>Super Admin approved</span>
                 </div>
                 <div class="pt-4">
-                    <UButton variant="outline" :to="`/edit-problem/${problem_id}`">Edit</UButton>
+                    <UButton variant="outline" :to="`/admin/edit/sat-problem/${problem_id}`">Edit</UButton>
                 </div>
                 <div class="pt-4" v-if="problem.manually_approved || problem.expert_approved">
                     <UButton variant="outline" @click="unapproveProblem">Unapprove</UButton>
