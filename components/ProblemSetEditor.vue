@@ -119,8 +119,10 @@
     
 
     const problems = ref([]);
-
     const justAddedProblemSetId = ref(null);
+    const problemToMove = ref(null);
+    const showPlacementIndicator = ref(false);
+    const placementIndex = ref(-1);
 
     const saveProblemSetClicked = async () => {
         submitting.value = true;
@@ -148,7 +150,6 @@
                 }
             });
             justAddedProblemSetId.value = props.problemSet.id;
-            console.log(resp);
         } else {
             const resp = await fetch("/api/add/problem-set", {
                 method: "POST",
@@ -157,12 +158,10 @@
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(resp);
             const resp_json = await resp.json();
             if (resp_json.data) {
                 justAddedProblemSetId.value = resp_json.data[0].id;
             }
-            console.log(resp_json);
         }
         
         submitting.value = false;
@@ -170,7 +169,6 @@
     }
 
     const deleteProblemSetClicked = async () => {
-        console.log('deleteProblemSetClicked');
         let data = {
             id: props.problemSet.id
         }
@@ -229,6 +227,48 @@
             problems.value.push(problem);
         }
     }
+
+    const logProblemIDs = () => {
+        console.log('logProblemIDs');
+        console.log(problems.value.map(p => p.id));
+    }
+
+    const selectProblemToMove = (problem) => {
+        problemToMove.value = problem;
+    };
+
+    const placeProblem = (index) => {
+        if (problemToMove.value) {
+            const currentIndex = problems.value.findIndex(p => p.id === problemToMove.value.id);
+            if (currentIndex !== -1) {
+                const problem = problems.value.splice(currentIndex, 1)[0];
+                problems.value.splice(index, 0, problem);
+            }
+            problemToMove.value = null;
+            showPlacementIndicator.value = false;
+            placementIndex.value = -1;
+        }
+    };
+
+    const handleProblemHover = (index) => {
+        if (problemToMove.value) {
+            showPlacementIndicator.value = true;
+            placementIndex.value = index;
+        }
+    };
+
+    const handleProblemLeave = () => {
+        if (problemToMove.value) {
+            showPlacementIndicator.value = false;
+            placementIndex.value = -1;
+        }
+    };
+
+    const cancelMove = () => {
+        problemToMove.value = null;
+        showPlacementIndicator.value = false;
+        placementIndex.value = -1;
+    };
 </script>
 
 <template>
@@ -305,26 +345,60 @@
                             <div class="mb-2 text-sm text-gray-600">
                                 <span class="font-medium">Total Problems:</span> {{ problems.length }}
                             </div>
-                            <div v-for="problem in problems" :key="problem.id" class="flex flex-row items-center gap-2 p-2 bg-gray-50 rounded-md mb-1">
-                                <div class="flex-grow">
-                                    <div class="font-medium">{{ problem.question_text.substring(0, 100) }}...</div>
-                                    <div class="text-sm text-gray-500">
-                                        {{ section_names[problem.test_section] }} - {{ cb_domain_lookup[problem.cb_domain].label }}
-                                    </div>
+                            <div v-if="problemToMove" class="mb-2 p-2 bg-blue-50 rounded-md">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-blue-600">Moving: {{ problemToMove.question_text.substring(0, 50) }}...</span>
+                                    <UButton
+                                        variant="ghost"
+                                        icon="i-heroicons-x-mark"
+                                        @click="cancelMove"
+                                        size="xs"
+                                        color="blue"
+                                    />
                                 </div>
-                                <UButton
-                                    variant="ghost"
-                                    icon="i-heroicons-eye"
-                                    @click="viewProblem(problem)"
-                                    size="xs"
-                                />
-                                <UButton
-                                    variant="ghost"
-                                    icon="i-heroicons-trash"
-                                    @click="problems = problems.filter(p => p.id !== problem.id)"
-                                    size="xs"
-                                    color="red"
-                                />
+                            </div>
+                            <div v-for="(problem, index) in problems" :key="problem.id" 
+                                class="relative"
+                                @mouseenter="handleProblemHover(index)"
+                                @mouseleave="handleProblemLeave"
+                                @click="problemToMove ? placeProblem(index) : null"
+                            >
+                                <div v-if="showPlacementIndicator && placementIndex === index" 
+                                    class="absolute inset-0 border-2 border-dashed border-blue-400 bg-blue-50/50 rounded-md pointer-events-none"
+                                ></div>
+                                <div class="flex flex-row items-center gap-2 p-2 bg-gray-50 rounded-md mb-1"
+                                    :class="{ 'ring-2 ring-blue-400': problemToMove?.id === problem.id }"
+                                >
+                                    <UButton
+                                        v-if="!problemToMove"
+                                        variant="ghost"
+                                        icon="i-heroicons-arrows-up-down"
+                                        @click.stop="selectProblemToMove(problem)"
+                                        size="xs"
+                                        :color="problemToMove?.id === problem.id ? 'blue' : 'gray'"
+                                    />
+                                    <div class="flex-grow">
+                                        <div class="font-medium">{{ problem.question_text.substring(0, 100) }}...</div>
+                                        <div class="text-sm text-gray-500">
+                                            {{ section_names[problem.test_section] }} - {{ cb_domain_lookup[problem.cb_domain].label }}
+                                        </div>
+                                    </div>
+                                    <UButton
+                                        v-if="!problemToMove"
+                                        variant="ghost"
+                                        icon="i-heroicons-eye"
+                                        @click="viewProblem(problem)"
+                                        size="xs"
+                                    />
+                                    <UButton
+                                        v-if="!problemToMove"
+                                        variant="ghost"
+                                        icon="i-heroicons-trash"
+                                        @click="problems = problems.filter(p => p.id !== problem.id)"
+                                        size="xs"
+                                        color="red"
+                                    />
+                                </div>
                             </div>
                         </div>
                         <div v-else class="text-sm text-gray-500 italic">
