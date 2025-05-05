@@ -12,6 +12,16 @@ const adminCards = [
         ]
     },
     {
+        title: 'Problem Sets',
+        description: 'Create and manage collections of problems for targeted practice.',
+        icon: 'i-lucide-layers',
+        to: '/admin/problem-sets',
+        actions: [
+            { label: 'View All', to: '/admin/problem-sets' },
+            { label: 'Create New', to: 'admin/add/problem-set' }
+        ]
+    },
+    {
         title: 'SAT Drills',
         description: 'Create and manage practice drills combining multiple problems.',
         icon: 'i-lucide-dumbbell',

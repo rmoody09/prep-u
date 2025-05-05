@@ -302,6 +302,9 @@
                             </UButton>
                         </div>
                         <div v-if="problems.length > 0" class="mt-2">
+                            <div class="mb-2 text-sm text-gray-600">
+                                <span class="font-medium">Total Problems:</span> {{ problems.length }}
+                            </div>
                             <div v-for="problem in problems" :key="problem.id" class="flex flex-row items-center gap-2 p-2 bg-gray-50 rounded-md mb-1">
                                 <div class="flex-grow">
                                     <div class="font-medium">{{ problem.question_text.substring(0, 100) }}...</div>
