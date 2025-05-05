@@ -39,47 +39,7 @@
         </div>
       </section>
   
-      <!-- Testimonials Section -->
-      <section id="testimonials" class="bg-blue-50 py-16">
-        <div class="container mx-auto px-6">
-          <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">What Our Students Say</h2>
-          <div class="grid md:grid-cols-2 gap-8">
-            <div v-for="testimonial in testimonials" :key="testimonial.name" class="bg-white p-6 rounded-lg shadow-md">
-              <p class="text-gray-600 mb-4">"{{ testimonial.quote }}"</p>
-              <div class="flex items-center gap-2">
-                <UAvatar :alt="testimonial.name" size="lg" />
-                <div>
-                  <h4 class="font-semibold text-gray-800">{{ testimonial.name }}</h4>
-                  <p class="text-gray-600">{{ testimonial.score }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-  
       <!-- Pricing Section -->
-      <!--
-      <section id="pricing" class="container mx-auto px-6 py-16">
-        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Choose Your Prep Plan</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-          <div v-for="plan in pricingPlans" :key="plan.title" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
-            <h3 class="text-2xl font-semibold mb-4 text-gray-800">{{ plan.title }}</h3>
-            <p class="text-4xl font-bold mb-6 text-blue-600">${{ plan.price }}<span class="text-sm text-gray-600">/month</span></p>
-            <ul class="mb-6">
-              <li v-for="feature in plan.features" :key="feature" class="flex items-center mb-2">
-                <CheckIcon class="w-5 h-5 text-green-500 mr-2" />
-                <span class="text-gray-600">{{ feature }}</span>
-              </li>
-            </ul>
-            <button class="w-full bg-blue-600 text-white py-2 rounded-full hover:bg-blue-700 transition duration-300">
-              Get Started
-            </button>
-          </div>
-        </div>
-      </section>
-      -->
-
       <section id="pricing" class="container px-6 py-16 bg-blue-50">
         <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Pricing</h2>
         <div class="flex flex-col gap-4">
@@ -118,7 +78,6 @@
               <h5 class="text-xl font-semibold mb-4">Quick Links</h5>
               <ul class="space-y-2">
                 <li><a href="#features" class="text-gray-400 hover:text-white transition duration-300">Features</a></li>
-                <li><a href="#testimonials" class="text-gray-400 hover:text-white transition duration-300">Testimonials</a></li>
                 <li><a href="#pricing" class="text-gray-400 hover:text-white transition duration-300">Pricing</a></li>
                 <li><a href="#faq" class="text-gray-400 hover:text-white transition duration-300">FAQ</a></li>
               </ul>
@@ -164,7 +123,7 @@
     {
       //icon: BookOpenIcon,
       title: 'Comprehensive Strategy Guides',
-      description: 'Access in-depth guides covering all SAT sections, with expert tips and tricks.'
+      description: 'Access in-depth guides covering all SAT sections, with expert tips and tricks. No need to purchase any prep books - PrepU\'s unparalleled content is 100% free.'
     },
     {
       //icon: PuzzlePieceIcon,
@@ -175,21 +134,6 @@
       //icon: ChartBarIcon,
       title: 'Dynamic Practice Problems',
       description: 'Practice with dynamic problems that adapt to your skill level and learning pace.'
-    }
-  ])
-  
-  const testimonials = ref([
-    {
-      quote: 'PrepU helped me boost my SAT score by 200 points! The strategy guides and practice problems were invaluable.',
-      name: 'Emily Chen',
-      score: 'SAT Score: 1520',
-      avatar: '/placeholder.svg?height=48&width=48'
-    },
-    {
-      quote: 'PrepU really helped me focus on my weak areas. I saw improvement within weeks!',
-      name: 'Michael Johnson',
-      score: 'SAT Score: 1480',
-      avatar: '/placeholder.svg?height=48&width=48'
     }
   ])
   
@@ -213,12 +157,24 @@
   
   const faqs = ref([
     {
-      question: 'How long does it take to see improvement in SAT scores?',
-      answer: 'While individual results may vary, many students see significant improvement within 4-6 weeks of consistent practice with PrepU.'
+      question: 'What makes PrepU different from other SAT prep resources?',
+      answer: 'PrepU combines comprehensive strategy guides with interactive, adaptive learning. Unlike static prep books, PrepU provides personalized practice problems and targeted drills that adapt to your skill level. Our platform is designed by an experienced SAT tutor who understands both test preparation and software development.'
     },
     {
-      question: 'Can I access PrepU on mobile devices?',
-      answer: 'Yes, PrepU is fully responsive and can be accessed on smartphones, tablets, and desktop computers.'
+      question: 'How should I prepare for the SAT?',
+      answer: 'Start by familiarizing yourself with the SAT structure and content through our comprehensive guides. Then, use our interactive drills to master specific skills and practice problems to apply what you\'ve learned. We recommend starting preparation at least 12 weeks before your test date for optimal results.'
+    },
+    {
+      question: 'When is the best time to take the SAT?',
+      answer: 'While timing depends on individual circumstances, taking the SAT earlier has several advantages: it reduces test anxiety by allowing retakes if needed, increases chances of a better superscore through multiple attempts, and frees up time for other college application tasks. Recruited athletes and scholarship seekers may need to take it earlier.'
+    },
+    {
+      question: 'Does PrepU help with ACT preparation?',
+      answer: 'While there is significant overlap in the skills tested by both exams, PrepU currently focuses exclusively on SAT preparation. Once we have fully optimized our SAT prep process and the new ACT format is established, we plan to develop a similar interactive experience for the ACT.'
+    },
+    {
+      question: 'How does PrepU help with test-taking strategies?',
+      answer: 'PrepU provides comprehensive guidance on various aspects of test-taking, including pacing, intelligent guessing, identifying wrong answers, and test-day preparation. Our strategies are designed to help you maximize your score by optimizing how you approach the test, in addition to mastering the content.'
     }
   ])
   </script>
