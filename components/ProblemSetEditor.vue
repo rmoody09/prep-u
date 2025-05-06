@@ -35,9 +35,9 @@
         problem_set_name.value = props.problemSet.name;
     }
 
-    const problem_set_tag = ref('');
-    if (props.problemSet && props.problemSet.tag) {
-        problem_set_tag.value = props.problemSet.tag;
+    const problem_set_text_id = ref('');
+    if (props.problemSet && props.problemSet.text_id) {
+        problem_set_text_id.value = props.problemSet.text_id;
     }
 
     import { cb_domains, cb_skills, getCbDomainLookup, getCbSkillLookup, getCbSkillsByDomain, section_names } from '~/assets/composables/SATProblemTypes';
@@ -131,13 +131,13 @@
         
         let data = {
             name: problem_set_name.value,
-            tag: problem_set_tag.value,
+            text_id: problem_set_text_id.value,
             test_section: selected_section.value,
-            cb_domain: cb_domain.value,
-            cb_skill: cb_skill.value,
+            domain: cb_domain.value,
+            skill: cb_skill.value,
             concepts: concepts,
             type: selected_type.value,
-            problems: problems.value
+            problems: problems.value.map(p => p.id)
         }
         
         if (props.problemSet) {
@@ -186,7 +186,7 @@
     const clearForm = () => {
         problem_set_id.value = null;
         problem_set_name.value = '';
-        problem_set_tag.value = '';
+        problem_set_text_id.value = '';
         selected_section.value = null;
         selected_type.value = null;
         cb_domain.value = null;
@@ -298,8 +298,8 @@
                     <UInput v-model="problem_set_name" type="text" placeholder="Problem Set Name" />
                 </div>
                 <div>
-                    <div :class='section_header_classes'>Problem Set Tag</div>
-                    <UInput v-model="problem_set_tag" type="text" placeholder="Problem Set Tag" />
+                    <div :class='section_header_classes'>Problem Set ID (optional)</div>
+                    <UInput v-model="problem_set_text_id" type="text" placeholder="Problem Set ID" />
                 </div>
                 <div>
                     <div :class='section_header_classes'>Test Section</div>
