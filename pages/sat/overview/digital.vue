@@ -146,14 +146,14 @@
                     <li>More time per question</li>
                     <li>
                         Calculator allowed on all math
-                        <ul class="pt-2 list-[revert] list-outside space-y-2 pl-4 text-sm">
+                        <ul class="space-y-2 text-sm">
                             <li>Desmos built in</li>
                             <li>Can also bring your own calculator</li>
                         </ul>
                     </li>
                     <li>
                         Shorter reading & writing passages
-                        <ul class="pt-2 list-[revert] list-outside space-y-2 pl-4 text-sm">
+                        <ul class="space-y-2 pl-4 text-sm">
                             <li>Struggling with one passage only affects a single question</li>
                             <li>Less time poring through passage for relevant info</li>
                         </ul>
