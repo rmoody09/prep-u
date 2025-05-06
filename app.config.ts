@@ -2,7 +2,8 @@
 export default defineAppConfig({
     ui: {
       primary: 'green',
-      safelistColors: ['green']
+      safelistColors: ['green'],
+      font: 'Lexend',
     }
   })
   

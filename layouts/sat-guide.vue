@@ -1044,9 +1044,7 @@
 </template>
 
 <style scoped>
-    .sat-guide-layout {
-        font-family: 'Noto Sans', sans-serif;
-    }
+    
     
 </style>
 

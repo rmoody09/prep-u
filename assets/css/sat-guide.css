@@ -1,6 +1,13 @@
 .sat-guide-page {
-    padding: 1rem;
-    font-family: 'Noto Sans', sans-serif;
+    max-width: 800px;
+    margin-top: 60px;
+    margin-left: 5%;
+    padding: 2rem 1rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 16px 0 rgba(0,0,0,0.04);
     & .sat-guide-section {
         padding-bottom: 2rem;
     }
@@ -20,15 +27,19 @@
     }
 }
 h1.sat-guide-page-header {
-   font-size: 2.5rem;
-   font-weight: 800;
-   padding-bottom: 1rem;
+    font-size: 2.5rem;
+    font-weight: 800;
+    @apply text-blue-900;
+    letter-spacing: -1px;
+    margin-bottom: 1.5rem;
 }
 
 h2.sat-guide-section-header {
     font-size: 1.5rem;
     font-weight: 700;
-    padding-bottom: .5rem;
+    @apply text-blue-800;
+    margin-top: 2.5rem;
+    margin-bottom: .75rem;
 }
 
 .sat-guide-subsection {
@@ -41,8 +52,34 @@ h3.sat-guide-subsection-header {
 }
 
 .section-description {
-    margin-bottom: 3rem;
+    background: #f8fafc;
+    @apply border-l-4 border-blue-300;
+    padding: 1.25rem 1.5rem;
+    border-radius: .75rem;
+    margin-bottom: 2.5rem;
+    font-size: 1.05rem;
 }
+
+
+
+.callout {
+    background: #e0f2fe;
+    border-left: 4px solid #0ea5e9;
+    padding: 1rem 1.25rem;
+    border-radius: .5rem;
+    margin: 1.5rem 0;
+    color: #0369a1;
+    font-weight: 500;
+}
+
 .sat-guide-bottom-nav {
     padding-bottom: 4rem;
+    margin-top: 2rem;
+    text-align: right;
+}
+.sat-guide-bottom-nav-item UButton {
+    transition: box-shadow 0.2s;
+}
+.sat-guide-bottom-nav-item UButton:hover {
+    box-shadow: 0 2px 8px 0 rgba(37,99,235,0.15);
 }

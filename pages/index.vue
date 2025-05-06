@@ -180,9 +180,7 @@
   </script>
 
 <style>
-    html,body {
-        font-family: 'Noto Sans', sans-serif;
-    }
+    
 </style>
 
 

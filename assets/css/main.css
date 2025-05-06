@@ -1,7 +1,8 @@
 html, body {
-    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Lexend', sans-serif;
     background-color: #ffffff;
     color: #000000;
+    font-weight: 300;
 }
 ul {
     @apply list-disc list-outside pl-4;
