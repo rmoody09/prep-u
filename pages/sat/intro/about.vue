@@ -15,15 +15,7 @@ definePageMeta({
             <ul class="space-y-2">
                 <li>Familiarize you with the overall structure and content of the SAT</li>
                 <li>Teach you effective strategies that will help you excel across the test</li>
-                <li>
-                    Teach you how to identify all the different types of problems you will encounter on the SAT
-                    <ul>
-                        <li>Another thing</li>
-                        <ul>
-                            <li>And another thing</li>
-                        </ul>
-                    </ul>
-                </li>
+                <li>Teach you how to identify all the different types of problems you will encounter on the SAT</li>
                 <li>Teach you specific approaches and strategies to apply to each problem type</li>
                 <li>Intuitively teach you the all skills you need to solve any problem on the SAT</li>
                 <li>Provide you with interactive drills to hone each of these skills</li>
