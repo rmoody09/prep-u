@@ -21,15 +21,10 @@ const subConcepts = ref([])
 const searchResults = ref([])
 const isSearching = ref(false)
 
-// Computed property for the model value that includes full concept information
-const modelValueWithConcepts = computed({
-  get: () => selectedConcepts.value,
-  set: (newValue) => {
-    selectedConcepts.value = newValue
-    // Emit the full concept objects
-    emit('update:modelValue', newValue)
-  }
-})
+// Watch for changes in selectedConcepts and emit updates
+watch(selectedConcepts, (newValue) => {
+  emit('update:modelValue', newValue)
+}, { deep: true })
 
 // Load initial concept (sat-test) and selected concepts
 onMounted(async () => {

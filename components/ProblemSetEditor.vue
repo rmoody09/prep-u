@@ -116,7 +116,22 @@
         init_concepts = props.problemSet.concepts;
     }
 
-    
+    // Initialize selected concepts from init_concepts
+    onMounted(async () => {
+        if (init_concepts.length > 0) {
+            const client = useSupabaseClient()
+            const { data, error } = await client.from('concept_tags')
+                .select()
+                .in('id', init_concepts)
+            
+            if (error) {
+                console.error('Error loading initial concepts:', error)
+                return
+            }
+            
+            selected_concepts.value = data
+        }
+    })
 
     const problems = ref([]);
     const justAddedProblemSetId = ref(null);
@@ -139,7 +154,7 @@
             type: selected_type.value,
             problems: problems.value.map(p => p.id)
         }
-        
+
         if (props.problemSet) {
             data.id = props.problemSet.id;
             const resp = await $fetch("/api/edit/problem-set/" + props.problemSet.id, {
@@ -269,6 +284,15 @@
         showPlacementIndicator.value = false;
         placementIndex.value = -1;
     };
+
+    const showConceptsModal = ref(false)
+
+    function removeConcept(concept) {
+        const index = selected_concepts.value.findIndex(c => c.id === concept.id)
+        if (index !== -1) {
+            selected_concepts.value.splice(index, 1)
+        }
+    }
 </script>
 
 <template>
@@ -327,9 +351,59 @@
                 </div>
                 <div>
                     <div :class='section_header_classes'>Concepts</div>
-                    <!-- <ConceptTagsSelector v-model="selected_concepts" :init_concepts="init_concepts" /> -->
-                    <ConceptsSelector v-model="selected_concepts"  />
+                    <div class="flex flex-wrap gap-2 mb-2">
+                        <div
+                            v-for="concept in selected_concepts"
+                            :key="concept.id"
+                            class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full flex items-center"
+                        >
+                            <span>{{ concept.name }}</span>
+                            <button
+                                @click="removeConcept(concept)"
+                                class="ml-2 text-blue-600 hover:text-blue-800"
+                            >
+                                ×
+                            </button>
+                        </div>
+                        <button
+                            @click="showConceptsModal = true"
+                            class="inline-flex items-center px-3 py-1 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors"
+                        >
+                            <span class="mr-1">+</span>
+                            Add Concepts
+                        </button>
+                    </div>
                 </div>
+
+                <!-- Concepts Selection Modal -->
+                <UModal v-model="showConceptsModal" :ui="{ width: 'md:max-w-[90vw]' }">
+                    <UCard>
+                        <template #header>
+                            <div class="flex justify-between items-center w-full">
+                                <h3 class="text-lg font-semibold">Select Concepts</h3>
+                                <UButton
+                                    color="gray"
+                                    variant="ghost"
+                                    icon="i-heroicons-x-mark"
+                                    @click="showConceptsModal = false"
+                                />
+                            </div>
+                        </template>
+                        <div class="p-4">
+                            <ConceptsSelector v-model="selected_concepts" />
+                        </div>
+                        <template #footer>
+                            <div class="flex justify-end">
+                                <UButton
+                                    color="primary"
+                                    @click="showConceptsModal = false"
+                                >
+                                    Done
+                                </UButton>
+                            </div>
+                        </template>
+                    </UCard>
+                </UModal>
                 <div>
                     <div :class='section_header_classes'>Problems</div>
                     <div class="flex flex-col gap-2">
