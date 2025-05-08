@@ -9,17 +9,18 @@ export default defineNuxtConfig({
   ],
   css: ['~/assets/css/main.css'], 
   supabase: {
-    redirect: false, 
+    redirect: true, 
     url: process.env.SUPABASE_URL,
     key: process.env.SUPABASE_KEY,
     serviceKey: process.env.SUPABASE_SERVICE_KEY, 
     redirectOptions: {
-      login: '/login',
+      login: '/dashboard',
       callback: '/confirm',
       include: undefined,
-      exclude: [],
+      exclude: ['/', '/login', '/signup', '/sat', '/sat/*'],
       cookieRedirect: true,
     }
+    //supabase note: in order to do redirects, need redirect set to true, but then it will univerally require users be logged in unless the url is on the exclude list
   }, 
   build: {
     transpile: ['katex']

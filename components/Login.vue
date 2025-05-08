@@ -42,12 +42,12 @@ const signInWithEmailPassword = async () => {
 }
 
 const signInWithGoogle = async () => {
-    const { error } = await supabase.auth.signInWithOAuth(
-        {provider: 'google'},
-        {
-            redirectTo: `${base_url}`,
+    const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+            redirectTo: `${base_url}/confirm`,
         }
-)
+    })
 }
 
 const signInWithFacebook = async () => {
