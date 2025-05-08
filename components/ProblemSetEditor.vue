@@ -327,7 +327,8 @@
                 </div>
                 <div>
                     <div :class='section_header_classes'>Concepts</div>
-                    <ConceptTagsSelector v-model="selected_concepts" :init_concepts="init_concepts" />
+                    <!-- <ConceptTagsSelector v-model="selected_concepts" :init_concepts="init_concepts" /> -->
+                    <ConceptsSelector v-model="selected_concepts"  />
                 </div>
                 <div>
                     <div :class='section_header_classes'>Problems</div>
