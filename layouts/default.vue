@@ -15,7 +15,7 @@
     const user_menu_items = ref([]);
     if (userState.value) {
         user_menu_items.value = [
-            [{ label: 'Profile', icon: 'i-lucide-user', to: '/dashboard' }],
+            [{ label: 'Dashboard', icon: 'i-lucide-layout-dashboard', to: '/dashboard' }],
             [{ label: 'Logout', icon: 'i-lucide-log-out', click: signOut }]
         ];
     }
@@ -28,7 +28,7 @@
         if (data[0].admin_role) {
             is_admin = true;
             user_menu_items.value = [
-                [{ label: 'Profile', icon: 'i-lucide-user', to: '/dashboard' }],
+                [{ label: 'Dashboard', icon: 'i-lucide-layout-dashboard', to: '/dashboard' }],
                 [{ label: 'Admin Dashboard', icon: 'i-lucide-user', to: '/admin' }],
                 [{ label: 'Logout', icon: 'i-lucide-log-out', click: signOut }]
             ];
