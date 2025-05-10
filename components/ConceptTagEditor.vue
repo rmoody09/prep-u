@@ -163,6 +163,52 @@
         init_sub_concepts = props.concept.sub_concepts;
     }
 
+    const showParentConceptsModal = ref(false)
+    const showSubConceptsModal = ref(false)
+
+    function removeParentConcept(concept) {
+        const index = selected_parent_tags.value.findIndex(c => c.id === concept.id)
+        if (index !== -1) {
+            selected_parent_tags.value.splice(index, 1)
+        }
+    }
+
+    function removeSubConcept(concept) {
+        const index = selected_sub_concepts.value.findIndex(c => c.id === concept.id)
+        if (index !== -1) {
+            selected_sub_concepts.value.splice(index, 1)
+        }
+    }
+
+    onMounted(async () => {
+        if (init_parent_tags.length > 0) {
+            const client = useSupabaseClient()
+            const { data, error } = await client.from('concept_tags')
+                .select()
+                .in('id', init_parent_tags)
+            
+            if (error) {
+                console.error('Error loading initial parent concepts:', error)
+                return
+            }
+            
+            selected_parent_tags.value = data
+        }
+
+        if (init_sub_concepts.length > 0) {
+            const client = useSupabaseClient()
+            const { data, error } = await client.from('concept_tags')
+                .select()
+                .in('id', init_sub_concepts)
+            
+            if (error) {
+                console.error('Error loading initial sub concepts:', error)
+                return
+            }
+            
+            selected_sub_concepts.value = data
+        }
+    })
 
     const select_option_header_classes = "font-semibold pb-2 text-base";
 
@@ -227,7 +273,7 @@
                 <div class="pb-3">Concept saved successfully</div>
                 <div class="flex flex-row gap-3">
                     <UButton @click="addAnotherConceptClicked">Add another concept</UButton>
-                    <UButton variant="outline" to="/sat-concepts/sat-test" >All concepts</UButton>
+                    <UButton variant="outline" to="/admin/sat-concepts" >All concepts</UButton>
                 </div>
             </div>
             <div class="flex flex-col gap-6" v-if="!submitting && !submitted">
@@ -276,13 +322,115 @@
 
                 <div>
                     <div :class='select_option_header_classes'>Parent Concepts</div>
-                    <ConceptTagsSelector v-model="selected_parent_tags" :init_concepts="init_parent_tags" />
+                    <div class="flex flex-wrap gap-2 mb-2">
+                        <div
+                            v-for="concept in selected_parent_tags"
+                            :key="concept.id"
+                            class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full flex items-center"
+                        >
+                            <span>{{ concept.name }}</span>
+                            <button
+                                @click="removeParentConcept(concept)"
+                                class="ml-2 text-blue-600 hover:text-blue-800"
+                            >
+                                ×
+                            </button>
+                        </div>
+                        <button
+                            @click="showParentConceptsModal = true"
+                            class="inline-flex items-center px-3 py-1 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors"
+                        >
+                            <span class="mr-1">+</span>
+                            Add Parent Concepts
+                        </button>
+                    </div>
                 </div>
 
                 <div>
                     <div :class='select_option_header_classes'>Sub Concepts</div>
-                    <ConceptTagsSelector v-model="selected_sub_concepts" :init_concepts="init_sub_concepts" />
+                    <div class="flex flex-wrap gap-2 mb-2">
+                        <div
+                            v-for="concept in selected_sub_concepts"
+                            :key="concept.id"
+                            class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full flex items-center"
+                        >
+                            <span>{{ concept.name }}</span>
+                            <button
+                                @click="removeSubConcept(concept)"
+                                class="ml-2 text-blue-600 hover:text-blue-800"
+                            >
+                                ×
+                            </button>
+                        </div>
+                        <button
+                            @click="showSubConceptsModal = true"
+                            class="inline-flex items-center px-3 py-1 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors"
+                        >
+                            <span class="mr-1">+</span>
+                            Add Sub Concepts
+                        </button>
+                    </div>
                 </div>
+
+                <!-- Parent Concepts Selection Modal -->
+                <UModal v-model="showParentConceptsModal" :ui="{ width: 'md:max-w-[90vw]' }">
+                    <UCard>
+                        <template #header>
+                            <div class="flex justify-between items-center w-full">
+                                <h3 class="text-lg font-semibold">Select Parent Concepts</h3>
+                                <UButton
+                                    color="gray"
+                                    variant="ghost"
+                                    icon="i-heroicons-x-mark"
+                                    @click="showParentConceptsModal = false"
+                                />
+                            </div>
+                        </template>
+                        <div class="p-4">
+                            <ConceptsSelector v-model="selected_parent_tags" />
+                        </div>
+                        <template #footer>
+                            <div class="flex justify-end">
+                                <UButton
+                                    color="primary"
+                                    @click="showParentConceptsModal = false"
+                                >
+                                    Done
+                                </UButton>
+                            </div>
+                        </template>
+                    </UCard>
+                </UModal>
+
+                <!-- Sub Concepts Selection Modal -->
+                <UModal v-model="showSubConceptsModal" :ui="{ width: 'md:max-w-[90vw]' }">
+                    <UCard>
+                        <template #header>
+                            <div class="flex justify-between items-center w-full">
+                                <h3 class="text-lg font-semibold">Select Sub Concepts</h3>
+                                <UButton
+                                    color="gray"
+                                    variant="ghost"
+                                    icon="i-heroicons-x-mark"
+                                    @click="showSubConceptsModal = false"
+                                />
+                            </div>
+                        </template>
+                        <div class="p-4">
+                            <ConceptsSelector v-model="selected_sub_concepts" />
+                        </div>
+                        <template #footer>
+                            <div class="flex justify-end">
+                                <UButton
+                                    color="primary"
+                                    @click="showSubConceptsModal = false"
+                                >
+                                    Done
+                                </UButton>
+                            </div>
+                        </template>
+                    </UCard>
+                </UModal>
 
                 <div class="pt-4">
                     <UButton @click="saveConceptClicked">Save Concept</UButton>
