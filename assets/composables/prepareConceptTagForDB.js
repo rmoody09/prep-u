@@ -25,8 +25,8 @@ function getNodeText(doc_node) {
 }
 
 export const prepareConceptTagForDB = (concept) => {
-    const { tag, name, description_html, description_json, detailed_description_html, detailed_description_json, test_section, cb_domain, cb_skill, parent_concepts, sub_concepts } = concept;
-    console.log('prepareConceptTagForDB4');
+    const { tag, name, description_html, description_json, detailed_description_html, detailed_description_json, test_section, cb_domain, cb_skill, parent_concepts, sub_concepts, concept_type } = concept;
+    console.log('prepareConceptTagForDB5');
     console.log(JSON.stringify(concept));
     
     //todo: add more validation with zod
@@ -47,6 +47,7 @@ export const prepareConceptTagForDB = (concept) => {
         section: test_section, 
         domain: cb_domain,
         skill: cb_skill, 
+        concept_type: concept_type,
         parent_concepts: parent_concepts,
         sub_concepts: sub_concepts,
     }

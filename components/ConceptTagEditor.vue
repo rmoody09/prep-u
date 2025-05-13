@@ -16,6 +16,10 @@
     ];
     const concept_type = ref('concept_type');
 
+    if (props.concept && props.concept.concept_type) {
+        concept_type.value = props.concept.concept_type;
+    }
+
     const test_sections = [
         {id: 'math', 'label': 'Math'},  
         {id: 'reading_writing', 'label': 'Reading and Writing'}
@@ -65,8 +69,8 @@
     }
     
     const cb_domain = ref('');
-    if (props.concept && props.concept.cb_domain) {
-        cb_domain.value = props.concept.cb_domain;
+    if (props.concept && props.concept.domain) {
+        cb_domain.value = props.concept.domain;
     }
 
     const select_cb_domain_options = ref([]);
@@ -80,8 +84,8 @@
     updateSelectCbDomainOptions();
 
     const cb_skill = ref('');
-    if (props.concept && props.concept.cb_skill) {
-        cb_skill.value = props.concept.cb_skill;
+    if (props.concept && props.concept.skill) {
+        cb_skill.value = props.concept.skill;
     }
 
     const select_cb_skill_options = ref([...cb_skills]);

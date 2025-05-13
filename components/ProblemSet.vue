@@ -24,7 +24,6 @@ const fetchProblemSet = async (id) => {
             .select('*')
             .eq('id', id)
             .single();
-
         if (fetchError) throw fetchError;
         return data;
     } catch (err) {

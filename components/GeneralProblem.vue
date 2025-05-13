@@ -61,7 +61,7 @@ watch(() => props.problem_id, initialize)
       />
       <SATDrill
         v-else-if="loadedProblem.problem_type === 'drill'"
-        :problem_id="loadedProblem.id"
+        :drill_id="loadedProblem.id"
       />
       <div v-else class="text-gray-500">Unknown problem type</div>
     </template>

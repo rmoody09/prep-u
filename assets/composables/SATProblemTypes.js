@@ -115,6 +115,12 @@ export const cb_skills = [
       section: 'math',
       domain: 'problem_solving_and_data_analysis'
     },
+    {
+      id: 'evaluating_statistical_claims_observational_studies_and_experiments',
+      label: 'Evaluating statistical claims: Observational studies and experiments',
+      section: 'math',
+      domain: 'problem_solving_and_data_analysis',
+    },
     { id: 'lines_angles_and_triangles', 
       label: 'Lines, angles, and triangles',
       section: 'math',
