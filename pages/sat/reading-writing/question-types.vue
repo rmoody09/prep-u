@@ -152,6 +152,7 @@
                                 <li>Misplaced modifiers</li>
                                 <li>Pronoun-antecedent agreement</li>
                                 <li>Apostrophe usage</li>
+                                <li>Questions vs. statements</li>
                             </ul>
                         </li>
                         <li>

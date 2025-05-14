@@ -1,7 +1,6 @@
 <script setup>
     const props = defineProps(['problemSet']);
     import TagsInput from '~/components/TagsInput.vue'
-
     const submitting = ref(false);
     const submitted = ref(false);
 
