@@ -130,6 +130,27 @@
             
             selected_concepts.value = data
         }
+
+        // Initialize problems if they exist in props
+        if (props.problemSet?.problems?.length > 0) {
+            const client = useSupabaseClient()
+            const { data, error } = await client.from('problems')
+                .select()
+                .in('id', props.problemSet.problems)
+            
+            if (error) {
+                console.error('Error loading initial problems:', error)
+                return
+            }
+            
+            // Create a map of problems by ID for quick lookup
+            const problemMap = new Map(data.map(problem => [problem.id, problem]))
+            
+            // Map the problems in the original order
+            problems.value = props.problemSet.problems
+                .map(id => problemMap.get(id))
+                .filter(problem => problem !== undefined) // Filter out any problems that weren't found
+        }
     })
 
     const problems = ref([]);
