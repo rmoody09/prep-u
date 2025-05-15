@@ -25,8 +25,8 @@
     }
 
     const selected_type = ref(null);
-    if (props.problemSet && props.problemSet.type) {
-        selected_type.value = props.problemSet.type;
+    if (props.problemSet && props.problemSet.problem_set_type) {
+        selected_type.value = props.problemSet.problem_set_type;
     }
 
     const problem_set_name = ref('');
@@ -46,8 +46,8 @@
     const cb_skills_by_domain = getCbSkillsByDomain();
 
     const cb_domain = ref('');
-    if (props.problemSet && props.problemSet.cb_domain) {
-        cb_domain.value = props.problemSet.cb_domain;
+    if (props.problemSet && props.problemSet.domain) {
+        cb_domain.value = props.problemSet.domain;
     }
 
     const select_cb_domain_options = ref([]);
@@ -61,8 +61,8 @@
     updateSelectCbDomainOptions();
 
     const cb_skill = ref('');
-    if (props.problemSet && props.problemSet.cb_skill) {
-        cb_skill.value = props.problemSet.cb_skill;
+    if (props.problemSet && props.problemSet.skill) {
+        cb_skill.value = props.problemSet.skill;
     }
 
     const select_cb_skill_options = ref([...cb_skills]);
