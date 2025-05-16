@@ -12,7 +12,7 @@
     <div class="section-description">
         <div class="question-container">
             <ClientOnly>
-                <SATProblem problem_id="356353c6-1b9a-4059-8a10-3e0b75555f92" />
+                <SATProblem problem_id="bbfb30bc-2e6a-4a49-82cb-4be969f1b182" />
             </ClientOnly>
         </div>
     </div>
