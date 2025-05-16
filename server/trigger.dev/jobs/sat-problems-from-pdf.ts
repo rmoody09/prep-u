@@ -20,7 +20,7 @@ let user_id = '';
 let file_url = '';
 let from_test = false;
 const math_sample_problem_ids = ['031faa14-08d6-4b0a-9374-4b1e2c773a8a', '4d161ef6-e6cd-4c4a-91fe-2b6482bfad0c', '6ab93f4b-7fb3-4965-bed1-5ef343d78cce', '9cceef1c-af85-4c22-88b1-1b20df7d4c99', 'ebf01828-7654-4070-90af-313ce104735b', 'fc31b9da-5b0d-4540-bde7-b2b9c12dc67c', 'ef406769-09f6-46f2-b909-995b941dbcda'];
-const reading_writing_sample_problem_ids = [];
+const reading_writing_sample_problem_ids = ['ee017113-4883-4aa9-9fe4-91025944167d', '7452c1a1-41ad-4f94-904c-5e23390d8f53', 'c360b121-260d-46b1-91a6-1ba643bd615d', 'a5c5f7d7-b6ed-4e49-8efc-907efec82003', '356353c6-1b9a-4059-8a10-3e0b75555f92', 'bbfb30bc-2e6a-4a49-82cb-4be969f1b182', 'e829a681-98d1-420b-a0e6-79c9ad90b37b', '94500242-a998-407a-b22c-85676fa70255', 'bfa9b4fb-33f1-4680-afa3-fcd3d4f08762', '7027747a-a1a3-4267-b54d-bb873faf1ae1', '220a770e-68e2-4b00-ab41-2c266e0d4fc8', '56ef2d14-eae7-4421-beda-6a5f959b52cb']; // TODO: add reading writing sample problem ids - add samples with graphics - maybe integrate chartjs tiptap plugin to actually generate the charts rather than using images
 
 const supabaseAdmin = createClient(
   supabaseUrl,

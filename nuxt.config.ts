@@ -8,6 +8,20 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase'
   ],
   css: ['~/assets/css/main.css'], 
+  fonts: {
+    families: [
+      {
+        name: 'Lexend',
+        provider: 'google',
+        type: 'variable'
+      },
+      {
+        name: 'Inter',
+        provider: 'google',
+        type: 'variable'
+      }
+    ]
+  },
   supabase: {
     redirect: true, 
     url: process.env.SUPABASE_URL,

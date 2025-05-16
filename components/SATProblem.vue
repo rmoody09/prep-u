@@ -103,7 +103,7 @@ const hideSolution = () => {
 </script>
 
 <template>
-    <div class="relative w-full border border-solid border-slate-300 rounded-md">
+    <div class="relative w-full border border-solid border-slate-300 rounded-md sat-problem">
         <div class="flex flex-row items-center gap-1 bg-slate-100 p-1">
             <UButton 
                 icon="i-lucide-calculator"
@@ -220,3 +220,10 @@ const hideSolution = () => {
         </div>
     </div>
 </template>
+
+<style scoped>
+.sat-problem {
+    font-family: 'Inter', sans-serif;
+}
+
+</style>

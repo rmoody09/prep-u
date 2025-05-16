@@ -37,7 +37,11 @@
         return is_admin;
     }
 
-    useAsyncData('checkIfAdmin', () => checkIfAdmin());
+    onMounted(async () => {
+        await checkIfAdmin();
+    });
+
+    
 
 </script>
 

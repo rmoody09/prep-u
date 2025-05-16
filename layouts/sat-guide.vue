@@ -31,12 +31,13 @@
                 [{ label: 'Admin Dashboard', icon: 'i-lucide-user', to: '/admin' }],
                 [{ label: 'Logout', icon: 'i-lucide-log-out', click: signOut }]
             ];
-            menu_key.value += 1;
         }
         return is_admin;
     }
 
-    useAsyncData('checkIfAdmin', () => checkIfAdmin());
+    onMounted(async () => {
+        await checkIfAdmin();
+    });
 
     
 

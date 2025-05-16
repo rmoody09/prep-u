@@ -68,3 +68,10 @@ watch(() => props.problem_id, initialize)
     <div v-else class="text-gray-500">No problem found</div>
   </div>
 </template>
+
+<style scoped>
+html, body {
+    font-family: 'Inter', sans-serif;
+}
+
+</style>
