@@ -138,6 +138,12 @@
         }
     });
 
+    const problem_category = ref(null);
+    const init_category_id = ref(null);
+    if (props.problem && props.problem.category) {
+        init_category_id.value = props.problem.category.id;
+    }
+
     const answer_types = [
         {id: 'multiple_choice', 'label': 'Multiple Choice'},
         {id: 'numeric_input', 'label': 'Numeric Input'}
@@ -515,6 +521,13 @@
                         <USelectMenu v-model="cb_skill" :options="select_cb_skill_options" placeholder="College Board Skill" value-attribute="id" option-attribute="label" />
                     </span>
                     
+                </div>
+
+                <div>
+                    <div :class='section_header_classes'>Categoory</div>
+                    <span>
+                        <SATCategorySelector v-model="problem_category" :init_category_id="init_category_id" />
+                    </span>
                 </div>
                 <div>
                     <div :class='section_header_classes'>Answer Type</div>

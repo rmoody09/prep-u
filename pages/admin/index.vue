@@ -42,6 +42,16 @@ const adminCards = [
         ]
     },
     {
+        title: 'SAT Categories',
+        description: 'Manage our categories of SAT concepts.',
+        icon: 'i-lucide-list-tree',
+        to: '/admin/sat-categories',
+        actions: [
+            { label: 'View All', to: '/admin/sat-categories' },
+            { label: 'Add New', to: '/admin/add/sat-category' }
+        ]
+    },
+    {
         title: 'Users',
         description: 'Manage user accounts, roles, and permissions.',
         icon: 'i-lucide-users',
