@@ -31,7 +31,7 @@ export default defineNuxtConfig({
       login: '/dashboard',
       callback: '/confirm',
       include: undefined,
-      exclude: ['/', '/login', '/signup', '/sat', '/sat/*'],
+      exclude: ['/', '/login', '/signup', '/sat', '/sat/*', '/problem-set/*', '/problem/*', '/sat-problem/*'],
       cookieRedirect: true,
     }
     //supabase note: in order to do redirects, need redirect set to true, but then it will univerally require users be logged in unless the url is on the exclude list

@@ -141,7 +141,7 @@
     const problem_category = ref(null);
     const init_category_id = ref(null);
     if (props.problem && props.problem.category) {
-        init_category_id.value = props.problem.category.id;
+        init_category_id.value = props.problem.category;
     }
 
     const answer_types = [
@@ -261,6 +261,10 @@
         if (selected_answer_type.value == 'numeric_input') {
             db_numeric_answers = numeric_answers.value.answers.map(answer => answer.value);
         }
+        let category_id = null;
+        if (problem_category.value) {
+            category_id = problem_category.value.id;
+        }
 
         let data = {
             problem_source: selected_problem_source.value,
@@ -272,6 +276,7 @@
             test_section: selected_section.value,
             cb_domain: cb_domain.value,
             cb_skill: cb_skill.value,
+            category: category_id,
             answer_type: selected_answer_type.value,
             input_answers: db_numeric_answers,
             custom_skills: custom_skills,
@@ -428,9 +433,25 @@
             
             selected_concepts.value = data
         }
+
+        if (init_category_id.value) {
+            const client = useSupabaseClient()
+            const { data, error } = await client.from('problem_categories')
+                .select()
+                .eq('id', init_category_id.value)
+                .single()
+            
+            if (error) {
+                console.error('Error loading initial category:', error)
+                return
+            }
+            
+            problem_category.value = data
+        }
     })
 
     const showConceptsModal = ref(false)
+    const showCategoryModal = ref(false)
 
     function removeConcept(concept) {
         const index = selected_concepts.value.findIndex(c => c.id === concept.id)
@@ -524,11 +545,69 @@
                 </div>
 
                 <div>
-                    <div :class='section_header_classes'>Categoory</div>
-                    <span>
-                        <SATCategorySelector v-model="problem_category" :init_category_id="init_category_id" />
-                    </span>
+                    <div :class='section_header_classes'>Category</div>
+                    <div class="flex items-center gap-2">
+                        <div v-if="problem_category" class="flex items-center gap-2">
+                            <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full flex items-center">
+                                <span>{{ problem_category.name }}</span>
+                                <button
+                                    @click="problem_category = null"
+                                    class="ml-2 text-blue-600 hover:text-blue-800"
+                                >
+                                    ×
+                                </button>
+                            </div>
+                            <UButton
+                                variant="ghost"
+                                size="xs"
+                                @click="showCategoryModal = true"
+                                class="text-gray-600 hover:text-gray-800"
+                            >
+                                Change
+                            </UButton>
+                        </div>
+                        <UButton
+                            v-else
+                            variant="outline"
+                            size="sm"
+                            @click="showCategoryModal = true"
+                            class="text-gray-600 hover:text-gray-800"
+                        >
+                            Add Category
+                        </UButton>
+                    </div>
                 </div>
+
+                <!-- Category Selection Modal -->
+                <UModal v-model="showCategoryModal" :ui="{ width: 'md:max-w-[90vw]' }">
+                    <UCard>
+                        <template #header>
+                            <div class="flex justify-between items-center w-full">
+                                <h3 class="text-lg font-semibold">Select Category</h3>
+                                <UButton
+                                    color="gray"
+                                    variant="ghost"
+                                    icon="i-heroicons-x-mark"
+                                    @click="showCategoryModal = false"
+                                />
+                            </div>
+                        </template>
+                        <div class="p-4">
+                            <SATCategorySelector v-model="problem_category" :init_category="problem_category" />
+                        </div>
+                        <template #footer>
+                            <div class="flex justify-end">
+                                <UButton
+                                    color="primary"
+                                    @click="showCategoryModal = false"
+                                >
+                                    Done
+                                </UButton>
+                            </div>
+                        </template>
+                    </UCard>
+                </UModal>
+
                 <div>
                     <div :class='section_header_classes'>Answer Type</div>
                     <span>
