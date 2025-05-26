@@ -2,6 +2,24 @@
     <div class='tiptap-container'>
         <div v-if="editor">
             <UButton 
+                icon="i-lucide-heading-1"
+                @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
+                :variant="editor.isActive('heading', { level: 1 }) ? 'solid' : 'outline'"
+                size="2xs"
+            ></UButton>
+            <UButton 
+                icon="i-lucide-heading-2"
+                @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
+                :variant="editor.isActive('heading', { level: 2 }) ? 'solid' : 'outline'"
+                size="2xs"
+            ></UButton>
+            <UButton 
+                icon="i-lucide-heading-3"
+                @click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
+                :variant="editor.isActive('heading', { level: 3 }) ? 'solid' : 'outline'"
+                size="2xs"
+            ></UButton>
+            <UButton 
                 icon="i-lucide-bold"
                 @click="editor.chain().focus().toggleBold().run()"
                 :variant="editor.isActive('bold') ? 'solid' : 'outline'"
@@ -245,6 +263,27 @@
   &.resize-cursor {
     cursor: ew-resize;
     cursor: col-resize;
+  }
+
+  h1 {
+    font-size: 2em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-size: 1.17em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
   }
 
 }

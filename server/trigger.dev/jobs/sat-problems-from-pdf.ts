@@ -24,7 +24,7 @@ const reading_writing_sample_problem_ids = ['ee017113-4883-4aa9-9fe4-91025944167
 
 const cb_skill_sample_problem_ids = {
     'boundaries': ['66e2f360-68fd-43e3-bcd5-17e806b568b5', '94cb1330-2eda-4c1d-9625-858688b3c531','104c6fb3-4ef3-4bb6-9454-4c7c329127ac', '32406b5c-7471-4e69-bad4-8b885e4d4fb4', 'ee017113-4883-4aa9-9fe4-91025944167d', '106a7727-c536-44ec-a429-cf8386d8d7da', '94994e60-1aa9-4972-96ec-1646f6b7a526', '2a27e76f-c357-44f6-a01e-36056d609d89'],
-    'form_structure_and_sense': ['de4e278d-17c9-4097-8c03-22e191985115', '1ecdfaff-915c-4ef3-a2f2-0437f9043013', 'e9331432-fb8b-4ac9-bbd1-730bad1cc657', 'aa0b7d51-c1d8-4986-bbde-2e7bf8684423', '69a9802a-2827-4771-bd58-7a606351e383', '0b567218-d476-49df-8cae-468a4b3f97a5', '64d7b5b6-975b-4a30-af22-f6fac9d58271', '24bfba40-464a-4512-8962-cafea1d014ff', 'c98da9eb-92b4-4a1b-817d-6bfbc06dfb79']
+    'form_structure_and_sense': ['de4e278d-17c9-4097-8c03-22e191985115', '1ecdfaff-915c-4ef3-a2f2-0437f9043013', 'e9331432-fb8b-4ac9-bbd1-730bad1cc657', 'aa0b7d51-c1d8-4986-bbde-2e7bf8684423', '69a9802a-2827-4771-bd58-7a606351e383', '0b567218-d476-49df-8cae-468a4b3f97a5', '64d7b5b6-975b-4a30-af22-f6fac9d58271', '24bfba40-464a-4512-8962-cafea1d014ff', 'c98da9eb-92b4-4a1b-817d-6bfbc06dfb79', '0aeab4a2-f35d-4f0a-961e-b8e14d505994']
 }
 
 let category_tag_to_id = {};
@@ -46,6 +46,12 @@ const supabaseAdmin = createClient(
   }
 )
 
+const section_specific_instructions = {
+  'reading_writing': `
+    When you return the question_html and the solution_html, please reflect any whitespace in the original document. For example, if there is a blank line in between paragraphs, or in between the passage and the question, please include that extra blank line in the html you return.
+  `
+}
+
 const domain_specific_instructions = {
   'standard_english_conventions': `
     Be careful to replicate the question content exactly as it appears in the document. Particularly around the blank, do not add any punctuation or words that are not present in that position in the document. These passages may be intentionally grammatically incorrect, which is why there is a blank to be filled in by the student, so you should not make any changes in an attempt to fix perceived errors in the sentence.
@@ -63,6 +69,7 @@ const getSystemPrompt = async (options) => {
   let section = options.section || 'mixed;';
   let skills_instructions = '';
   let domain_section_specific_instructions_text = '';
+  let section_specific_instructions_text = '';
   if (section == 'math') {
       skills_instructions = `
           The skill should take one of the following values: ${getCbSectionSkillIDs('math').join(', ')}.
@@ -79,6 +86,9 @@ const getSystemPrompt = async (options) => {
   }
   if (cb_domain && domain_specific_instructions[cb_domain]) {
       domain_section_specific_instructions_text = domain_specific_instructions[cb_domain];
+  }
+  if (section && section_specific_instructions[section]) {
+      section_specific_instructions_text = section_specific_instructions[section];
   }
   
   let solution_extra_instructions = '';
@@ -150,6 +160,8 @@ const getSystemPrompt = async (options) => {
           ${category_instructions}
 
       ${category_additional_instructions}
+
+      ${section_specific_instructions_text}
 
       ${domain_section_specific_instructions_text}
       
@@ -569,7 +581,7 @@ export const processSATProblems = task({
 
         if (cb_skill) {
             console.log('get skill categories');
-            let categories_resp = await supabaseAdmin.from('problem_categories').select('id, name, tag, description_text').eq('discipline', 'sat').eq('skill', cb_skill);
+            let categories_resp = await supabaseAdmin.from('problem_categories').select('id, name, tag, description_text').eq('discipline', 'SAT').eq('skill', cb_skill);
             console.log('categories_resp:')
             console.log(JSON.stringify(categories_resp));
             if (categories_resp.data) {
