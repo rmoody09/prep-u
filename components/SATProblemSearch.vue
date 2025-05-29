@@ -517,7 +517,7 @@ defineExpose({
                         <div>
                             {{ cb_domain_lookup[problem.cb_domain].label }}
                         </div>
-                        <div>
+                        <div v-if="problem.cb_skill">
                             {{ cb_skill_lookup[problem.cb_skill].label }}
                         </div>
                     </div>

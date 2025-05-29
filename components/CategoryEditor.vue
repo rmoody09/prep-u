@@ -14,7 +14,7 @@
         console.log(JSON.stringify(props.category));
     }
 
-    const discipline = ref('sat');
+    const discipline = ref('SAT');
     if (props.category && props.category.discipline) {
         discipline.value = props.category.discipline;
     }
@@ -40,10 +40,13 @@
     if (props.category && props.category.tag) {   
         category_tag.value = props.category.tag;
     }
-    const category_name = ref('');
-    
+    const category_full_name = ref('');
     if (props.category && props.category.name) {
-        category_name.value = props.category.name;
+        category_full_name.value = props.category.name;
+    }
+    const category_short_name = ref('');
+    if (props.category && props.category.short_name) {
+        category_short_name.value = props.category.short_name;
     }
     
     const cb_domain = ref('');
@@ -82,7 +85,8 @@
         selected_section.value = '';
         descriptionEditorRef.value.editor.commands.setContent('');
         category_tag.value = '';
-        category_name.value = '';
+        category_full_name.value = '';
+        category_short_name.value = '';
         cb_domain.value = '';
         cb_skill.value = '';
         updateSelectCbDomainOptions();
@@ -135,7 +139,8 @@
         let data = {
             discipline: discipline.value,
             tag: category_tag.value,
-            name: category_name.value,
+            name: category_full_name.value,
+            short_name: category_short_name.value,
             description_html: descriptionEditorRef.value.editor.getHTML(),
             description_json: descriptionEditorRef.value.editor.getJSON(),
             section: selected_section.value, 
@@ -189,8 +194,12 @@
             </div>
             <div class="flex flex-col gap-6" v-if="!submitting && !submitted">
                 <div>
-                    <div :class="select_option_header_classes">Category Name</div>
-                    <UInput v-model="category_name" type="text" placeholder="Category Name" />
+                    <div :class="select_option_header_classes">Full Name</div>
+                    <UInput v-model="category_full_name" type="text" placeholder="Full Category Name" />
+                </div>
+                <div>
+                    <div :class="select_option_header_classes">Short Name</div>
+                    <UInput v-model="category_short_name" type="text" placeholder="Short Category Name" />
                 </div>
                 <div>
                     <div :class="select_option_header_classes">Category Tag</div>

@@ -59,6 +59,15 @@ const adminCards = [
         actions: [
             { label: 'View All', to: '/admin/users' }
         ]
+    }, 
+    {
+        title: 'TipTap Editor',
+        description: 'Used TipTap editor and get output.',
+        icon: 'i-lucide-edit',
+        to: '/admin/tip-tap-editor',
+        actions: [
+            { label: 'Open Editor', to: '/admin/tip-tap-editor', variant: 'solid' }
+        ]
     }
 ];
 
@@ -93,7 +102,7 @@ definePageMeta({
                             :key="action.label"
                             :to="action.to"
                             size="sm"
-                            :variant="action.label === 'View All' ? 'solid' : 'outline'"
+                            :variant="action.variant ? action.variant : action.label === 'View All' ? 'solid' : 'outline'"
                         >
                             {{ action.label }}
                         </UButton>

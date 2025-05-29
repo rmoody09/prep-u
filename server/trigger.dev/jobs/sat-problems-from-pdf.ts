@@ -24,7 +24,20 @@ const reading_writing_sample_problem_ids = ['ee017113-4883-4aa9-9fe4-91025944167
 
 const cb_skill_sample_problem_ids = {
     'boundaries': ['66e2f360-68fd-43e3-bcd5-17e806b568b5', '94cb1330-2eda-4c1d-9625-858688b3c531','104c6fb3-4ef3-4bb6-9454-4c7c329127ac', '32406b5c-7471-4e69-bad4-8b885e4d4fb4', 'ee017113-4883-4aa9-9fe4-91025944167d', '106a7727-c536-44ec-a429-cf8386d8d7da', '94994e60-1aa9-4972-96ec-1646f6b7a526', '2a27e76f-c357-44f6-a01e-36056d609d89'],
-    'form_structure_and_sense': ['de4e278d-17c9-4097-8c03-22e191985115', '1ecdfaff-915c-4ef3-a2f2-0437f9043013', 'e9331432-fb8b-4ac9-bbd1-730bad1cc657', 'aa0b7d51-c1d8-4986-bbde-2e7bf8684423', '69a9802a-2827-4771-bd58-7a606351e383', '0b567218-d476-49df-8cae-468a4b3f97a5', '64d7b5b6-975b-4a30-af22-f6fac9d58271', '24bfba40-464a-4512-8962-cafea1d014ff', 'c98da9eb-92b4-4a1b-817d-6bfbc06dfb79', '0aeab4a2-f35d-4f0a-961e-b8e14d505994']
+    'form_structure_and_sense': ['de4e278d-17c9-4097-8c03-22e191985115', '1ecdfaff-915c-4ef3-a2f2-0437f9043013', 'e9331432-fb8b-4ac9-bbd1-730bad1cc657', 'aa0b7d51-c1d8-4986-bbde-2e7bf8684423', '69a9802a-2827-4771-bd58-7a606351e383', '0b567218-d476-49df-8cae-468a4b3f97a5', '64d7b5b6-975b-4a30-af22-f6fac9d58271', '24bfba40-464a-4512-8962-cafea1d014ff', 'c98da9eb-92b4-4a1b-817d-6bfbc06dfb79', '0aeab4a2-f35d-4f0a-961e-b8e14d505994'],
+    'words_in_context': [
+        '8b7e75c4-4855-47cd-a5c3-2d8230dbc24b', 
+        'cbf524ca-096f-4ebd-84d0-48380e74c20d', 
+        'cd8a0b34-24be-4fa6-b1ec-6f5bd3b80522', 
+        'dfcdb2a4-9172-4714-9ea2-4503e392096c',
+        'a332f5b5-f7cf-4c03-8f18-3876869ef860', 
+        '36179831-3a58-4985-9269-e9f3542fc679', 
+        '703afd6a-d4f3-4d9b-8b60-ff0f854491b5', 
+        'b19175d9-3081-4783-bd2b-f77eeba254ab', 
+        '7175eb5a-7f2c-4837-a49b-0e01b365b9ac', 
+        '2c0f1f40-3454-4734-a8a7-503e80c61e61', 
+        '08243fa7-30fd-4ad8-8182-d8f37c205eaf'
+    ],
 }
 
 let category_tag_to_id = {};
@@ -32,7 +45,10 @@ let category_id_to_tag = {};
 let categories = [];
 let skill_default_categories = {
     'boundaries': 'sat-punctuation', 
-    'form_structure_and_sense': 'sat-verb-form'
+    'form_structure_and_sense': 'sat-verb-form', 
+    'words_in_context': 'sat-fill-in-blank-word', 
+    'text_structure_and_purpose': 'sat-main-purpose', 
+    'cross_text_connections': 'sat-cross-text-connections'
 }
 
 const supabaseAdmin = createClient(
@@ -48,7 +64,7 @@ const supabaseAdmin = createClient(
 
 const section_specific_instructions = {
   'reading_writing': `
-    When you return the question_html and the solution_html, please reflect any whitespace in the original document. For example, if there is a blank line in between paragraphs, or in between the passage and the question, please include that extra blank line in the html you return.
+    When you return the question_html and the solution_html, please reflect any whitespace in the original document. For example, if there is a blank line in between paragraphs, or in between the passage and the question, please include that extra blank line in the html you return (with a <p></p> tag), as seen in the examples provided below. Also be careful to differentiate between em dashes and hyphens, and to recreate the appropriate character. If it is not being used to hyphenate a compound word, it is likely that it is an em dash.
   `
 }
 
@@ -60,7 +76,10 @@ const domain_specific_instructions = {
 }
 
 let skill_specific_instructions = {
-  'boundaries': ``
+  'boundaries': ``,
+  'words_in_context': `
+    If there is a blank in the passage, make sure to include the blank when recreating the passage in the question_html field. Also, if there is an underlined word (or an underlined multi-word phrase) in the passage, make sure to indicate it as underlined in the question_html field, using <u> tags similarly to the examples provided below. When questions contain something to the effect of "As used in the text, what does ...", there will be an underlined portion earlier in the passage, which you should tag as underlined in the question_html field.
+  `
 }
 
 const getSystemPrompt = async (options) => {
@@ -70,6 +89,7 @@ const getSystemPrompt = async (options) => {
   let skills_instructions = '';
   let domain_section_specific_instructions_text = '';
   let section_specific_instructions_text = '';
+  let skill_specific_instructions_text = '';
   if (section == 'math') {
       skills_instructions = `
           The skill should take one of the following values: ${getCbSectionSkillIDs('math').join(', ')}.
@@ -90,7 +110,9 @@ const getSystemPrompt = async (options) => {
   if (section && section_specific_instructions[section]) {
       section_specific_instructions_text = section_specific_instructions[section];
   }
-  
+  if (cb_skill && skill_specific_instructions[cb_skill]) {
+      skill_specific_instructions_text = skill_specific_instructions[cb_skill];
+  }
   let solution_extra_instructions = '';
   if (section == 'math') {
       solution_extra_instructions = `
@@ -164,6 +186,8 @@ const getSystemPrompt = async (options) => {
       ${section_specific_instructions_text}
 
       ${domain_section_specific_instructions_text}
+
+      ${skill_specific_instructions_text}
       
 
       Below is some sample data of how an array of problems should be formatted:
