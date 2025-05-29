@@ -110,7 +110,7 @@
         let query = client
             .from('problem_categories')
             .select('*')
-            .eq('discipline', 'sat');
+            .eq('discipline', 'SAT');
 
         if (searchQuery.value) {
             query = query.or(`name.ilike.%${searchQuery.value}%,tag.ilike.%${searchQuery.value}%`);
