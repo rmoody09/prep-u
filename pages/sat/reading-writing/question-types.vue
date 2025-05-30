@@ -201,7 +201,7 @@
         @apply list-disc list-outside pl-4;
     }
     ul ul {
-        @apply pl-6 pb-2;
+        @apply pl-6;
     }
     ul ul li {
         list-style-type: circle;

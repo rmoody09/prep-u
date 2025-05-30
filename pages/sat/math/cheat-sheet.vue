@@ -1835,6 +1835,105 @@ onMounted(() => {
                 </div>
                 <div class="cheat-sheet-concept">
                     <div class="cheat-sheet-concept-header">
+                        Box Plots (aka Box and Whisker Plots)
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            A box plot is a way to visualize the distribution of a dataset
+                        </div>
+                        <div>
+                            It shows the median, the first and third quartiles, and the minimum and maximum values
+                        </div>
+                        <div>
+                            Box plots look something like this:
+                        </div>
+                        <div>
+                            <div class="w-full max-w-[400px]">
+                                <svg width="100%" height="100" viewBox="0 0 300 100" preserveAspectRatio="xMinYMid meet" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Main horizontal line -->
+                                    <line x1="0" y1="50" x2="300" y2="50" stroke="black" stroke-width="2"/>
+                                    
+                                    <!-- Box -->
+                                    <rect x="50" y="30" width="100" height="40" fill="white" stroke="black" stroke-width="2"/>
+                                    
+                                    <!-- Median line -->
+                                    <line x1="100" y1="30" x2="100" y2="70" stroke="red" stroke-width="2"/>
+                                    
+                                    <!-- Vertical lines connecting box to whiskers -->
+                                    <line x1="50" y1="40" x2="50" y2="60" stroke="black" stroke-width="2"/>
+                                    <line x1="150" y1="40" x2="150" y2="60" stroke="black" stroke-width="2"/>
+                                    
+                                    <!-- Whiskers -->
+                                    <line x1="0" y1="45" x2="0" y2="55" stroke="black" stroke-width="2"/>
+                                    <line x1="300" y1="45" x2="300" y2="55" stroke="black" stroke-width="2"/>
+                                    
+                                    <!-- Labels -->
+                                    <text x="0" y="40" font-size="12">10</text>
+                                    <text x="95" y="20" font-size="12">40</text>
+                                    <text x="300" y="40" font-size="12">90</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="pt-2 pb-1">
+                            Here is what you actually need to know about box plots for the SAT:
+                        </div>
+                        <div>
+                            <ul>
+                                <li>
+                                    The minimum and maximum values of the dataset are reflected by lines at the far left and right (sometimes called the whiskers)
+                                    <ul>
+                                        <li>
+                                            In the example above, the minimum value is 10 and the maximum value is 90
+                                        </li>
+                                        <li>
+                                            The range can be calculated by subtracting the minimum value from the maximum value
+                                            <ul>
+                                                <li>
+                                                    In the example above, the range is 90 - 10 = 80
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    The line in the middle (the red line in the example above) is the median
+                                    <ul>
+                                        <li>
+                                            This might be different from the mean, as is the case in the example above:
+                                            <ul>
+                                                <li>
+                                                    The mean would be 50 (<math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><mn>90</mn><mo>+</mo><mn>10</mn></mrow><mn>2</mn></mfrac><mo>=</mo><mn>50</mn></math>), but the middle number in this dataset is 40
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="pt-4 pb-1">
+                           And here is a litte more information that you probably won't need to know for the SAT:
+                        </div>
+                        <div>
+                            <ul>
+                                <li>
+                                    The range between the left whisker and the start of the box is the first quartile (Q1)
+                                </li>
+                                <li>
+                                    The range between the start of the box and the median line is the second quartile (Q2)
+                                </li>
+                                <li>
+                                    The range between the median line and the end of the box is the third quartile (Q3)
+                                </li>
+                                <li>
+                                    The range between the end of the box and the right whisker is the fourth quartile (Q4)
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
                         Probability
                     </div>
                     <div class="cheat-sheet-concept-content">
@@ -2767,6 +2866,64 @@ onMounted(() => {
                         </div>
                     </div>
                 </div>
+                
+                <div class="cheat-sheet-concept">
+                    <div class="cheat-sheet-concept-header">
+                        Graphing Circles
+                    </div>
+                    <div class="cheat-sheet-concept-content">
+                        <div>
+                            The standard form of a circle equation is:
+                        </div>
+                        <div>
+                            <span class="latex-formula">$$(x - h)^2 + (y - k)^2 = r^2$$</span>
+                        </div>
+                        <div class="pt-1">
+                            Where:
+                        </div>
+                        <div>
+                            <ul>
+                                <li>(h, k) is the center of the circle</li>
+                                <li>r is the radius</li>
+                            </ul>
+                        </div>
+                        <div class="pt-2">
+                            For example, (x - 2)² + (y + 3)² = 16 represents a circle with:
+                        </div>
+                        <div>
+                            <ul>
+                                <li>Center at (2, -3)</li>
+                                <li>Radius of 4 (since 16 = 4²)</li>
+                                <li>
+                                    Note that the default form is <strong>minus</strong> h and <strong>minus</strong> k
+                                    <ul>
+                                        <li>
+                                          Hence, the center here has a positive x-coordinate and a negative y-coordinate
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pt-2">
+                            On more advanced problems, you may need to complete the square to get the equation into this form
+                        </div>
+                        <div>
+                            For example, if you have x² + y² + 4x - 6y = 3:
+                        </div>
+                        <div>
+                            <ul>
+                                <li>First group x and y terms: (x² + 4x) + (y² - 6y) = 3</li>
+                                <li>Complete the square for x: (x² + 4x + 4) - 4</li>
+                                <li>Complete the square for y: (y² - 6y + 9) - 9</li>
+                                <li>So: (x² + 4x + 4) + (y² - 6y + 9) = 3 + 4 + 9</li>
+                                <li>Which becomes: (x + 2)² + (y - 3)² = 16</li>
+                                <li>So, the center is at (-2, 3) and the radius is 4</li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+
                 <div class="cheat-sheet-concept">
                     <div class="cheat-sheet-concept-header">
                         Circle Arcs and Sectors
@@ -3011,6 +3168,7 @@ onMounted(() => {
             </div>
         </div>
     </div>
+    
 </template>
 
 <style scoped>
