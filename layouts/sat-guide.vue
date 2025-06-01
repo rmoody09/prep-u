@@ -37,9 +37,18 @@
 
     onMounted(async () => {
         await checkIfAdmin();
+        window.addEventListener('scroll', handleScroll)
     });
 
-    
+    onUnmounted(() => {
+        window.removeEventListener('scroll', handleScroll)
+    })
+
+    const handleScroll = () => {
+        const currentScrollY = window.scrollY
+        isScrolled.value = currentScrollY > 100
+        lastScrollY = currentScrollY
+    }
 
     const sections = ref([
         {id: 'intro', name: 'Introduction'}, 
@@ -996,15 +1005,27 @@
             is_third_gen_or_more.value = check_if_third_gen_or_more(current_section_id.value);
         }
     )
+
+    const isNavOpen = ref(false)
+
+    watch(() => route.path, () => {
+        isNavOpen.value = false
+    })
+
+    const isScrolled = ref(false)
+    let lastScrollY = 0
 </script>
 
 <template>
-    <div class='sat-guide-layout flex flex-col min-h-screen align-stretch'>  
-        <div class='flex bg-white backdrop-filter backdrop-blur-sm bg-opacity-70 z-10 sticky top-0 justify-between items-center h-12 border-b border-gray-200 px-5'>
-            <span>
-                <img src="/images/logos/PrepULogo.png" class="h-8" />
-            </span>
-            <span class="flex gap-5 items-center">
+    <div class="flex flex-col h-screen">
+        <!-- Top User Menu -->
+        <div class="w-full border-b border-b-slate-300 p-4 flex items-center justify-between bg-white sticky top-0 z-50 transition-transform duration-300" :class="{ '-translate-y-full': isScrolled }">
+            <div class="flex items-center gap-2">
+                <NuxtLink to="/">
+                    <img src="/images/logos/PrepULogo.png" class="h-8" />
+                </NuxtLink>
+            </div>
+            <div class="flex items-center gap-4">
                 <span v-if="userState">
                     <UDropdown :items="user_menu_items" :popper="{ placement: 'bottom-start' }">
                         <UAvatar :alt="userState.user_metadata.name" size="md" />
@@ -1013,16 +1034,43 @@
                 <span v-else>
                     <UButton to="/login">Login</UButton>
                 </span>
-            </span>
+            </div>
         </div>
 
         <div class="grow flex flex-row justify-start">
-            <div class="w-[12rem] shrink-0 border-r border-r-slate-300 p-2 flex flex-col gap-4">
+            <!-- Mobile Header -->
+            <div class="md:hidden w-full border-b border-b-slate-300 p-4 flex items-center justify-between bg-white fixed z-40 transition-all duration-300" :class="[isScrolled ? 'top-0' : 'top-[4.5rem]']">
+                <div class="flex items-center gap-2">
+                    <button @click="isNavOpen = !isNavOpen" class="p-2 hover:bg-slate-100 rounded">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                    <div class="font-semibold">
+                        {{ sections_info[current_section_id]?.title || sections_info[current_parent_id]?.title }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Menu -->
+            <div :class="[
+                'w-[12rem] shrink-0 border-r border-r-slate-300 p-2 flex flex-col gap-4',
+                'md:translate-x-0 transition-transform duration-300 ease-in-out',
+                isNavOpen ? 'translate-x-0' : '-translate-x-full',
+                'fixed md:relative top-[8.5rem] md:top-0 left-0 h-[calc(100vh-8.5rem)] md:h-full bg-white z-30 md:z-auto'
+            ]">
+                <div class="md:hidden flex justify-end p-2">
+                    <button @click="isNavOpen = false" class="p-2 hover:bg-slate-100 rounded">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
                 <div v-if="is_third_gen_or_more" class="flex flex-row gap-1 text-md font-bold border-b border-b-slate-400 pb-2 flex-wrap">
                     <span class="whitespace-nowrap"><ULink to="/sat/intro/about" class="text-indigo-500">SAT</ULink> <span class="text-zinc-300">...</span></span>
-                    <span ><ULink :to="get_section_path(grandparent_id)" class="text-indigo-500">{{ sections_info[grandparent_id].title }}</ULink></span>
+                    <span><ULink :to="get_section_path(grandparent_id)" class="text-indigo-500">{{ sections_info[grandparent_id].title }}</ULink></span>
                 </div>
-                <div v-for="section_id in parent_level_sections" :key="section_id" >
+                <div v-for="section_id in parent_level_sections" :key="section_id">
                     <NuxtLink :to="get_section_first_child_path(section_id)" :class="[{'text-primary': current_parent_id == section_id}, 'font-semibold', 'hover:text-primary-800']">
                         {{ sections_info[section_id].title }}
                     </NuxtLink>
@@ -1035,8 +1083,9 @@
                     </div>
                 </div>
                 <div class="h-10"></div>
-                
             </div>
+
+            <!-- Main Content -->
             <div class="sat-guide-page grow">
                 <slot />
             </div>
@@ -1045,7 +1094,10 @@
 </template>
 
 <style scoped>
-    
-    
+@media (max-width: 768px) {
+    .sat-guide-page {
+        padding-top: 1rem;
+    }
+}
 </style>
 
