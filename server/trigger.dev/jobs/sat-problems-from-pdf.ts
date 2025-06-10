@@ -38,6 +38,52 @@ const cb_skill_sample_problem_ids = {
         '2c0f1f40-3454-4734-a8a7-503e80c61e61', 
         '08243fa7-30fd-4ad8-8182-d8f37c205eaf'
     ],
+    'rhetorical_synthesis': [
+        '3b2826a4-11d8-4ce4-8e4f-3cd26929b5f8',
+        '8bca1419-e84b-476c-bdf5-b70b62348741', 
+        'df20abcb-1183-42c8-a0b0-2bf84373392e', 
+        'bfa9b4fb-33f1-4680-afa3-fcd3d4f08762', 
+        '79d5c9d7-20fa-4b40-b9f2-84d3492eda8e', 
+        '4ae4284f-6baa-4af5-b0fc-7b7ba848b64f', 
+        '378bcac9-04b7-4f73-8050-0f39a294635b', 
+        'd29c7151-2991-4bf6-ae88-2aa1943a34cc', 
+        'bbad3eb2-363d-47ad-82e8-cb44eadc002f', 
+        '33eca7bc-1510-4025-9cc8-d5bd8843acd4',
+        '7b1c5451-5760-4b44-9487-f7e915b6fc52', 
+        '2893590c-deea-44b4-925a-0fabfc806d1a'
+    ],
+    'central_ideas_and_details': [
+        '06a4c0d4-8754-4d54-aeb3-aa63da72c537', 
+        '720fae3f-53f0-4d2d-a549-1c4cf3ecf18a',
+        '0ce96787-b472-47bc-8a0b-8e1ca360579e',
+        'bf6c3880-3988-4790-82e4-966d66515b46', 
+        '94500242-a998-407a-b22c-85676fa70255',
+        '92157c5c-2e93-4b11-825e-09d510248445',
+        '0638d348-29f0-4746-a1c8-f8ab1b5d99c7',
+        '4851dcfe-696c-4630-8fb4-d34b70f68236',
+        'cafafb0f-f240-4d73-8531-4c5ba24e46e6',
+        '06c5efb3-184e-4a1b-a621-0b2cf6e0d186',
+        '312dbe85-b6e1-40b6-8981-d6b07b9c415d', 
+        '62b57c5c-bc6c-4f5d-bb17-7d853d217a69', 
+        '742ebdba-1da8-4086-b20f-027843675148', 
+        '65d05c05-5718-450d-be08-19abd0e831c9', 
+        '750ee0ed-37f4-4491-be36-50dfbca5fd25',
+        '2be5362d-08e0-48f5-8cb7-20ef30d19738'
+    ],
+    'inferences': [
+        '736dad8b-562b-41b4-b07d-ff7634af5dbd',
+        '0e4bf331-9d46-49d5-ac8e-44bb55843381', 
+        '7027747a-a1a3-4267-b54d-bb873faf1ae1', 
+        '53cccb23-31aa-4047-b6e2-a4e012c94359', 
+        '1159f69e-b2c1-4a4e-992a-46bb7de3ac98',
+        '939b2755-a385-4ae1-9e79-f0157d41ee91', 
+        'd5ffd6f8-22e1-4d55-9725-696a4c6f297d', 
+        '098d4659-db67-4638-b34f-2ad8053c46b8', 
+        'fdc1689f-655e-4c1e-acd5-1f340f49731d', 
+        '6a38f908-60e9-41ba-ac1f-9ab8a26e4d4a', 
+        '8878667c-af1f-4c56-b0e4-afef8ddd915d', 
+        '1c6cdc86-11f5-4668-9265-8c03d2ceccc8'
+    ]
 }
 
 let category_tag_to_id = {};
@@ -48,7 +94,9 @@ let skill_default_categories = {
     'form_structure_and_sense': 'sat-verb-form', 
     'words_in_context': 'sat-fill-in-blank-word', 
     'text_structure_and_purpose': 'sat-main-purpose', 
-    'cross_text_connections': 'sat-cross-text-connections'
+    'cross_text_connections': 'sat-cross-text-connections', 
+    'transitions': 'sat-transitions', 
+    'rhetorical_synthesis': 'sat-bullet-points' 
 }
 
 const supabaseAdmin = createClient(
@@ -79,11 +127,21 @@ let skill_specific_instructions = {
   'boundaries': ``,
   'words_in_context': `
     If there is a blank in the passage, make sure to include the blank when recreating the passage in the question_html field. Also, if there is an underlined word (or an underlined multi-word phrase) in the passage, make sure to indicate it as underlined in the question_html field, using <u> tags similarly to the examples provided below. When questions contain something to the effect of "As used in the text, what does ...", there will be an underlined portion earlier in the passage, which you should tag as underlined in the question_html field.
-  `
+  `, 
+  'transitions': `
+    Every passage will have a blank (______) in it. Be sure to include the blank when recreating the passage in the question_html field.
+    Be careful to check for any punctuation before or after the blank, and make sure to include this punctuation when recreating the passage in the question_html field. For example, if there is a comma before the blank (like in "These electrical currents, ______ create a barrier ...") then you should make sure this comma is reflected when you return the question_html field.
+  `, 
+  'rhetorical_synthesis': ``,
+  'inferences': `
+    Every passage will have a blank (______) at the end of the passage, before the question. Be sure to include this blank in the form of 6 consecutive underscore characters when recreating the passage in the question_html field.
+  `,
 }
 
 const getSystemPrompt = async (options) => {
   console.log('getSystemPrompt')
+  console.log('cb_skill:')
+  console.log(cb_skill);
   let sample_json = options.sample_json;
   let section = options.section || 'mixed;';
   let skills_instructions = '';
@@ -113,6 +171,8 @@ const getSystemPrompt = async (options) => {
   if (cb_skill && skill_specific_instructions[cb_skill]) {
       skill_specific_instructions_text = skill_specific_instructions[cb_skill];
   }
+  console.log('skill_specific_instructions_text:')
+  console.log(skill_specific_instructions_text);
   let solution_extra_instructions = '';
   if (section == 'math') {
       solution_extra_instructions = `
@@ -762,7 +822,7 @@ export const processSATProblems = task({
             console.log('remaining problem ids:')
             console.log(remaining_problem_ids);
             extra_attempts++;
-            if (extra_attempts > 3) {
+            if (extra_attempts > 5) {
                 console.log('Failed to add all problems - too many attempts');
                 break;
             }

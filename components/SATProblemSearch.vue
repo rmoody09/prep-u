@@ -500,6 +500,9 @@ defineExpose({
                         <div v-if="problem.source_question_id">
                             {{ problem.source_question_id }}
                         </div>
+                        <div>
+                            {{ problem.id }}
+                        </div>
                         <div v-if="problem.subsource == 'practice_test' && problem.practice_test_id">
                             Practice Test {{ problem.practice_test_id }}
                             <div>
