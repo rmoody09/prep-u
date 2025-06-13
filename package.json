@@ -33,6 +33,7 @@
     "mathlive": "^0.105.2",
     "nuxt": "^3.13.0",
     "nuxt-security": "^2.0.0",
+    "plotly.js-dist-min": "^3.0.1",
     "tiptap-extension-resize-image": "^1.1.8",
     "vue": "latest",
     "vue-chartjs": "^5.3.2",

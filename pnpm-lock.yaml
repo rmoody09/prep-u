@@ -77,6 +77,9 @@ importers:
       nuxt-security:
         specifier: ^2.0.0
         version: 2.0.0(magicast@0.3.5)(rollup@4.22.4)
+      plotly.js-dist-min:
+        specifier: ^3.0.1
+        version: 3.0.1
       tiptap-extension-resize-image:
         specifier: ^1.1.8
         version: 1.1.8(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))(@tiptap/extension-image@2.7.4(@tiptap/core@2.7.4(@tiptap/pm@2.7.4)))(@tiptap/pm@2.7.4)
@@ -3571,6 +3574,9 @@ packages:
 
   pkg-types@1.2.0:
     resolution: {integrity: sha512-+ifYuSSqOQ8CqP4MbZA5hDpb97n3E8SVWdJe+Wms9kj745lmd3b7EZJiqvmLwAlmRfjrI7Hi5z3kdBJ93lFNPA==}
+
+  plotly.js-dist-min@3.0.1:
+    resolution: {integrity: sha512-RReOqr6TfoHaTbVAoHR1UbTCOSRDsQ7Hbthd+3XAxOwaKmxCE3oejMhLG7urQSqWC65DAcSKV23kZd8e+7mG7w==}
 
   portfinder@1.0.32:
     resolution: {integrity: sha512-on2ZJVVDXRADWE6jnQaX0ioEylzgBpQk8r55NE4wjXW1ZxO+BgDlY6DXwj20i0V8eB4SenDQ00WEaxfiIQPcxg==}
@@ -8754,6 +8760,8 @@ snapshots:
       confbox: 0.1.7
       mlly: 1.7.1
       pathe: 1.1.2
+
+  plotly.js-dist-min@3.0.1: {}
 
   portfinder@1.0.32:
     dependencies:

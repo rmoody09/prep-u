@@ -70,6 +70,12 @@
                 variant="outline"
                 size="2xs"
             ></UButton>
+            <UButton 
+                icon="i-lucide-bar-chart-2"
+                @click="addPlot"
+                variant="outline"
+                size="2xs"
+            ></UButton>
             
             
         </div>
@@ -81,6 +87,10 @@
             v-model="addMathOpen"
             :initial-value="selectedAddMathText"
             @save="addMath"
+        />
+        <PlotlyModal
+            v-model="addPlotOpen"
+            @save="addPlotData"
         />
     </div>
 </template>
@@ -103,6 +113,8 @@
     import mathExtension from '~/assets/modules/tiptap-extensions/math/math-extension.js';
     import AddTableModal from '~/components/AddTableModal.vue';
     import MathEditorModal from '~/components/MathEditorModal.vue';
+    import PlotlyModal from './PlotlyModal.vue'
+    import { PlotlyExtension } from '~/assets/modules/tiptap-extensions/plotly/plotly-extension.js'
 
 
     const { init_content } = defineProps(['init_content'])
@@ -110,6 +122,7 @@
     const addTableOpen = ref(false);
     const addMathOpen = ref(false);
     const selectedAddMathText = ref('');
+    const addPlotOpen = ref(false)
 
 
   
@@ -119,7 +132,7 @@
         Image, ImageResize, Underline, Blockquote, 
         Table.configure({
           resizable: true
-        }), TableCell, TableHeader, TableRow, mathExtension],
+        }), TableCell, TableHeader, TableRow, mathExtension, PlotlyExtension],
     })
 
     const addImage = () => {
@@ -158,6 +171,23 @@
         withHeaderRow: table.includeHeader
       }).run()
       addTableOpen.value = false;
+    }
+    
+    const addPlot = () => {
+      addPlotOpen.value = true
+    }
+
+    const addPlotData = (plotData) => {
+      editor.value.chain().focus().insertContent({
+        type: 'plotly',
+        attrs: {
+          type: plotData.type,
+          data: plotData.data.data,
+          layout: plotData.data.layout,
+          width: plotData.width,
+          height: plotData.height
+        }
+      }).run()
     }
     
     onBeforeUnmount(() => {
