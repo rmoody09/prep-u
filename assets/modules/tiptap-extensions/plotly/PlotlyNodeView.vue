@@ -3,6 +3,7 @@
         <node-view-wrapper class="plotly-node">
             <div class="plotly-wrapper"
                 :style="wrapperStyle"
+                @click="handleClick"
             >
                 <div 
                     v-if="plotLayout?.title?.text"
@@ -26,13 +27,32 @@
   </template>
   
   <script setup>
-  import { ref, onMounted, watch, computed } from 'vue'
+  import { ref, onMounted, watch, computed, onBeforeUnmount } from 'vue'
   import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-3'
   
   const props = defineProps(nodeViewProps)
   const plotContainer = ref(null)
   const legendContainer = ref(null)
   let Plotly = null
+  let resizeObserver = null
+
+  const handleClick = () => {
+    if (!props.editor.view.editable) return
+    
+    // Dispatch a custom event that the parent can listen for
+    const event = new CustomEvent('plotly-edit', {
+      detail: {
+        type: props.node.attrs.type,
+        data: {
+          data: props.node.attrs.data,
+          layout: props.node.attrs.layout
+        },
+        width: props.node.attrs.width,
+        height: props.node.attrs.height
+      }
+    })
+    window.dispatchEvent(event)
+  }
   
   const plotData = computed(() => {
     return props.node.attrs.data
@@ -62,7 +82,7 @@
     const height = props.node.attrs.height || 300
     return {
       width: '100%',
-      minHeight: `${height}px`,
+      height: `${height}px`,
     }
   })
   
@@ -77,8 +97,27 @@
   const plotOptions = {
     responsive: true,
     displayModeBar: false,
-    staticPlot: false,
-    editable: false
+    staticPlot: true,
+    editable: false,
+    autosizable: true
+  }
+
+  const updatePlotSize = () => {
+    if (plotContainer.value && Plotly) {
+      Plotly.relayout(plotContainer.value, {
+        width: plotContainer.value.offsetWidth,
+        height: plotContainer.value.offsetHeight
+      })
+    }
+  }
+
+  const updateLegendSize = () => {
+    if (legendContainer.value && Plotly) {
+      Plotly.relayout(legendContainer.value, {
+        width: legendContainer.value.offsetWidth,
+        height: legendContainer.value.offsetHeight
+      })
+    }
   }
   
   // Initialize plot
@@ -170,6 +209,18 @@
                   staticPlot: true
               }
           )
+      }
+
+      // Set up resize observers
+      resizeObserver = new ResizeObserver(() => {
+        updatePlotSize()
+        if (hasLegend.value) {
+          updateLegendSize()
+        }
+      })
+      resizeObserver.observe(plotContainer.value)
+      if (legendContainer.value) {
+        resizeObserver.observe(legendContainer.value)
       }
     }
   })
@@ -267,6 +318,9 @@
   
   // Cleanup
   onBeforeUnmount(() => {
+    if (resizeObserver) {
+      resizeObserver.disconnect()
+    }
     if (plotContainer.value && Plotly) {
       Plotly.purge(plotContainer.value)
     }

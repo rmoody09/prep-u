@@ -56,3 +56,4 @@ export const PlotlyExtension = Node.create({
     return VueNodeViewRenderer(PlotlyNodeView)
   },
 })
+//export default PlotlyExtension;

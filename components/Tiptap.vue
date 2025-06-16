@@ -90,7 +90,8 @@
         />
         <PlotlyModal
             v-model="addPlotOpen"
-            @save="addPlotData"
+            :edit-data="editingPlotData"
+            @save="handlePlotSave"
         />
     </div>
 </template>
@@ -115,6 +116,8 @@
     import MathEditorModal from '~/components/MathEditorModal.vue';
     import PlotlyModal from './PlotlyModal.vue'
     import { PlotlyExtension } from '~/assets/modules/tiptap-extensions/plotly/plotly-extension.js'
+    import { VueNodeViewRenderer } from '@tiptap/vue-3'
+    import PlotlyNodeView from '~/assets/modules/tiptap-extensions/plotly/PlotlyNodeView.vue'
 
 
     const { init_content } = defineProps(['init_content'])
@@ -122,17 +125,44 @@
     const addTableOpen = ref(false);
     const addMathOpen = ref(false);
     const selectedAddMathText = ref('');
-    const addPlotOpen = ref(false)
+    const addPlotOpen = ref(false);
+    const editingPlotData = ref(null);
 
 
   
     const editor = useEditor({
       content: init_content,
-      extensions: [StarterKit, 
-        Image, ImageResize, Underline, Blockquote, 
+      extensions: [
+        StarterKit, 
+        Image, 
+        ImageResize, 
+        Underline, 
+        Blockquote, 
         Table.configure({
           resizable: true
-        }), TableCell, TableHeader, TableRow, mathExtension, PlotlyExtension],
+        }), 
+        TableCell, 
+        TableHeader, 
+        TableRow, 
+        mathExtension, 
+        PlotlyExtension
+      ],
+    })
+
+    // Listen for plotly edit events
+    onMounted(() => {
+      window.addEventListener('plotly-edit', (event) => {
+        editingPlotData.value = event.detail
+        addPlotOpen.value = true
+      })
+    })
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('plotly-edit', (event) => {
+        editingPlotData.value = event.detail
+        addPlotOpen.value = true
+      })
+      unref(editor).destroy()
     })
 
     const addImage = () => {
@@ -174,27 +204,36 @@
     }
     
     const addPlot = () => {
+      editingPlotData.value = null
       addPlotOpen.value = true
     }
 
-    const addPlotData = (plotData) => {
-      editor.value.chain().focus().insertContent({
-        type: 'plotly',
-        attrs: {
+    const handlePlotSave = (plotData) => {
+      if (editingPlotData.value) {
+        // Update existing plot
+        editor.value.chain().focus().updateAttributes('plotly', {
           type: plotData.type,
           data: plotData.data.data,
           layout: plotData.data.layout,
           width: plotData.width,
           height: plotData.height
-        }
-      }).run()
+        }).run()
+      } else {
+        // Insert new plot
+        editor.value.chain().focus().insertContent({
+          type: 'plotly',
+          attrs: {
+            type: plotData.type,
+            data: plotData.data.data,
+            layout: plotData.data.layout,
+            width: plotData.width,
+            height: plotData.height
+          }
+        }).run()
+      }
+      editingPlotData.value = null
     }
     
-    onBeforeUnmount(() => {
-        unref(editor).destroy();
-    });
-
-
     defineExpose({
         editor
     });

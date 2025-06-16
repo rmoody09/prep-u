@@ -110,6 +110,15 @@ const supabaseAdmin = createClient(
   }
 )
 
+let plotly_instructions = `
+    If there is a graph or chart in the question, please attempt to convert it to json representation that will allow the plot to be recreated with plotly.js plot. Refer to the plotly.js documentation for how to format the data and layout properties. In the tiptap html, this can be converted to an element with the "tt-plotly" tag, with the attribute "data-plotly" which will be a json object with the following fields:
+      - data: an array depciting the data in the plot in accordance with the data property in the plotly documentation.
+      - layout: an object with the layout of the plot in accordance with the layout property in the plotly documentation. This might include the title of the plot, the legend, and the xaxis, yaxis, etc.
+      - width: the width of the plot in pixels
+      - height: the height of the plot in pixels. Please exclude the title and the legend when estimating the height. Just include the heightof the plot itself, along with the x and y axis labels and titles.
+    Please refer to the examples provide and the plotly.js documentation for how to format
+  `;
+
 const section_specific_instructions = {
   'reading_writing': `
     When you return the question_html and the solution_html, please reflect any whitespace in the original document. For example, if there is a blank line in between paragraphs, or in between the passage and the question, please include that extra blank line in the html you return (with a <p></p> tag), as seen in the examples provided below. Also be careful to differentiate between em dashes and hyphens, and to recreate the appropriate character. If it is not being used to hyphenate a compound word, it is likely that it is an em dash.
@@ -135,7 +144,10 @@ let skill_specific_instructions = {
   'rhetorical_synthesis': ``,
   'inferences': `
     Every passage will have a blank (______) at the end of the passage, before the question. Be sure to include this blank in the form of 6 consecutive underscore characters when recreating the passage in the question_html field.
-  `,
+  `, 
+  'command_of_evidence': `
+    ${plotly_instructions}
+  `
 }
 
 const getSystemPrompt = async (options) => {
@@ -148,6 +160,9 @@ const getSystemPrompt = async (options) => {
   let domain_section_specific_instructions_text = '';
   let section_specific_instructions_text = '';
   let skill_specific_instructions_text = '';
+
+  
+
   if (section == 'math') {
       skills_instructions = `
           The skill should take one of the following values: ${getCbSectionSkillIDs('math').join(', ')}.

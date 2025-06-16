@@ -2,7 +2,7 @@
 <template>
     <UModal v-model="isOpen">
       <div class="p-4">
-        <h3 class="text-lg font-semibold mb-4">Add Plot</h3>
+        <h3 class="text-lg font-semibold mb-4">{{ isEditing ? 'Edit Plot' : 'Add Plot' }}</h3>
         
         <div class="grid grid-cols-2 gap-4 mb-4">
           <div>
@@ -45,14 +45,14 @@
         <div class="flex justify-end gap-2">
           <UButton
             variant="outline"
-            @click="isOpen = false"
+            @click="close"
           >
             Cancel
           </UButton>
           <UButton
             @click="savePlot"
           >
-            Add Plot
+            {{ isEditing ? 'Update Plot' : 'Add Plot' }}
           </UButton>
         </div>
       </div>
@@ -61,7 +61,11 @@
   
   <script setup>
   const props = defineProps({
-    modelValue: Boolean
+    modelValue: Boolean,
+    editData: {
+      type: Object,
+      default: null
+    }
   })
   
   const emit = defineEmits(['update:modelValue', 'save'])
@@ -70,10 +74,31 @@
     get: () => props.modelValue,
     set: (value) => emit('update:modelValue', value)
   })
+
+  const isEditing = computed(() => !!props.editData)
   
   const plotData = ref('')
   const width = ref('600')  // Default width
   const height = ref('400') // Default height
+
+  // Watch for editData changes to populate the form
+  watch(() => props.editData, (newData) => {
+    if (newData) {
+      plotData.value = JSON.stringify({
+        data: newData.data.data,
+        layout: newData.data.layout
+      }, null, 2)
+      width.value = newData.width.toString()
+      height.value = newData.height.toString()
+    }
+  }, { immediate: true })
+  
+  const close = () => {
+    plotData.value = ''
+    width.value = '600'
+    height.value = '400'
+    isOpen.value = false
+  }
   
   const savePlot = () => {
     try {
@@ -83,7 +108,7 @@
         width: parseInt(width.value) || 600,
         height: parseInt(height.value) || 400
       })
-      isOpen.value = false
+      close()
     } catch (e) {
       // Handle JSON parse error
       console.error('Invalid JSON:', e)
