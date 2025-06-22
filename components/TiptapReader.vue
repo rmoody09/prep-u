@@ -12,7 +12,7 @@
     import TableHeader from '@tiptap/extension-table-header'
     import TableRow from '@tiptap/extension-table-row'
     import mathExtension from '~/assets/modules/tiptap-extensions/math/math-extension.js';
-    import PlotlyExtension from '~/assets/modules/tiptap-extensions/plotly/plotly-extension.js';
+    import { PlotlyExtension } from '~/assets/modules/tiptap-extensions/plotly/plotly-extension.js';
 
     const { init_content } = defineProps(['init_content'])
 

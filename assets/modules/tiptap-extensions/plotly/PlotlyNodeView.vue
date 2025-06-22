@@ -11,11 +11,17 @@
                 >
                     {{ plotLayout.title.text }}
                 </div>
-                <div 
-                    class="plotly-container" 
-                    ref="plotContainer"
-                    :style="plotContainerStyle"
-                ></div>
+                <div class="plotly-container-outer">
+                  <div 
+                      class="plotly-aspect-container" 
+                      :style="plotAspectContainerStyle"
+                  >
+                      <div class="plotly-container"
+                          ref="plotContainer"
+                          :style="plotContainerStyle"
+                      ></div>
+                  </div>
+                </div>
                 <div 
                     v-if="hasLegend"
                     class="plotly-legend-container" 
@@ -77,6 +83,16 @@
     }
   })
 
+  const plotAspectContainerStyle = computed(() => {
+    const width = props.node.attrs.width || 400
+    const height = props.node.attrs.height || 300
+    const pb = (height / width) * 100 // Calculate padding-bottom as percentage to maintain aspect ratio
+    return {
+      paddingBottom: `${pb}%`,
+    }
+  })
+
+
   const plotContainerStyle = computed(() => {
     const width = props.node.attrs.width || 400
     const height = props.node.attrs.height || 300
@@ -136,13 +152,32 @@
       // Remove legend from main plot
       layoutWithoutTitle.showlegend = false
       
+      // Set automargin to true
+      layoutWithoutTitle.automargin = true
+
+      if (!layoutWithoutTitle.xaxis) {
+        layoutWithoutTitle.xaxis = {}
+      }
+      if (!layoutWithoutTitle.yaxis) {
+        layoutWithoutTitle.yaxis = {}
+      }
+      layoutWithoutTitle.xaxis.automargin = true
+      layoutWithoutTitle.yaxis.automargin = true
+
+      layoutWithoutTitle.autosize = true
+      
       // Adjust margins to remove extra top padding
       if (layoutWithoutTitle.margin) {
           layoutWithoutTitle.margin = {
-              ...layoutWithoutTitle.margin,
-              t: 20  // Reduced top margin since we handle title separately
+              //...layoutWithoutTitle.margin,
+              t: 0,  // Reduced top margin since we handle title separately
+              b: 0,
+              l: 0,
+              r: 0
           }
       }
+
+      
       
       console.log('Plotting with data:', plotData.value)
       console.log('Plotting with layout:', layoutWithoutTitle)
@@ -237,11 +272,28 @@
         // Remove legend from main plot
         layoutWithoutTitle.showlegend = false
         
+        // Set automargin to true
+        layoutWithoutTitle.automargin = true
+
+        if (!layoutWithoutTitle.xaxis) {
+          layoutWithoutTitle.xaxis = {}
+        }
+        if (!layoutWithoutTitle.yaxis) {
+          layoutWithoutTitle.yaxis = {}
+        }
+        layoutWithoutTitle.xaxis.automargin = true
+        layoutWithoutTitle.yaxis.automargin = true
+
+        layoutWithoutTitle.autosize = true
+        
         // Adjust margins to remove extra top padding
         if (layoutWithoutTitle.margin) {
             layoutWithoutTitle.margin = {
-                ...layoutWithoutTitle.margin,
-                t: 20  // Reduced top margin since we handle title separately
+                //...layoutWithoutTitle.margin,
+                t: 0,  // Reduced top margin since we handle title separately
+                b: 0,
+                l: 0,
+                r: 0
             }
         }
         
@@ -332,6 +384,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    position: relative;
   }
   
   .plotly-title {
@@ -345,14 +398,32 @@
     overflow-wrap: break-word;
   }
   
-  .plotly-container {
-    max-width: 100%;
+  .plotly-container-outer {
+    width: 100%;
     position: relative;
-    overflow: visible;
+    padding: 5px;
+    padding-bottom: 10px;
+  }
+  .plotly-aspect-container {
+    width: 100%;
+    height: 0;
+    position: relative;
+    box-sizing: border-box;
+    
+  }
+  .plotly-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    
   }
   
   .plotly-legend-container {
     max-width: 100%;
+    width: 100%;
     position: relative;
     margin-top: 10px;
   }
