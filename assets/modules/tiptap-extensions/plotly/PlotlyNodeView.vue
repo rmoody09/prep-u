@@ -30,34 +30,56 @@
                 ></div>
             </div>
         </node-view-wrapper>
+
+        <!-- Add the PlotlyModal for editing -->
+        <PlotlyModal
+            v-model="showModal"
+            :edit-data="editData"
+            @save="savePlot"
+        />
   </template>
   
   <script setup>
   import { ref, onMounted, watch, computed, onBeforeUnmount } from 'vue'
   import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-3'
+  import PlotlyModal from '~/components/PlotlyModal.vue'
   
   const props = defineProps(nodeViewProps)
   const plotContainer = ref(null)
   const legendContainer = ref(null)
+  const showModal = ref(false)
+  const editData = ref(null)
   let Plotly = null
   let resizeObserver = null
 
   const handleClick = () => {
     if (!props.editor.view.editable) return
     
-    // Dispatch a custom event that the parent can listen for
-    const event = new CustomEvent('plotly-edit', {
-      detail: {
-        type: props.node.attrs.type,
-        data: {
-          data: props.node.attrs.data,
-          layout: props.node.attrs.layout
-        },
-        width: props.node.attrs.width,
-        height: props.node.attrs.height
-      }
-    })
-    window.dispatchEvent(event)
+    // Set up the edit data
+    editData.value = {
+      type: props.node.attrs.type,
+      data: {
+        data: props.node.attrs.data,
+        layout: props.node.attrs.layout
+      },
+      width: props.node.attrs.width,
+      height: props.node.attrs.height
+    }
+    
+    // Show the modal
+    showModal.value = true
+  }
+  
+  const savePlot = (plotData) => {
+    // Update the node attributes
+    props.node.attrs.type = plotData.type
+    props.node.attrs.data = plotData.data.data
+    props.node.attrs.layout = plotData.data.layout
+    props.node.attrs.width = plotData.width
+    props.node.attrs.height = plotData.height
+    
+    // Close the modal
+    showModal.value = false
   }
   
   const plotData = computed(() => {
@@ -298,7 +320,7 @@
         }
         
         console.log('Updating plot with data:', plotData.value)
-        console.log('Updating plot with layout:', layoutWithoutTitle)
+        console.log('Updating plot with layout:', JSON.stringify(layoutWithoutTitle))
         
         Plotly.react(
           plotContainer.value,

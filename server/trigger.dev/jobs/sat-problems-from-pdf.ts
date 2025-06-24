@@ -111,12 +111,12 @@ const supabaseAdmin = createClient(
 )
 
 let plotly_instructions = `
-    If there is a graph or chart in the question, please attempt to convert it to json representation that will allow the plot to be recreated with plotly.js plot. Refer to the plotly.js documentation for how to format the data and layout properties. In the tiptap html, this can be converted to an element with the "tt-plotly" tag, with the attribute "data-plotly" which will be a json object with the following fields:
-      - data: an array depciting the data in the plot in accordance with the data property in the plotly documentation.
+    If there are graphs or charts in the question or answer choices, please use a "tt-plotly" element to represent them, passing a json string to the "data-plotly" attribute. The json string passed to "data-plotly" should contain inormation about the plot that will allow it to be recreated in plotly.js. It should contain the following fields:
+      - data: an array depicting the data in the plot in accordance with the data property in the plotly documentation.
       - layout: an object with the layout of the plot in accordance with the layout property in the plotly documentation. This might include the title of the plot, the legend, and the xaxis, yaxis, etc.
-      - width: the width of the plot in pixels
-      - height: the height of the plot in pixels. Please exclude the title and the legend when estimating the height. Just include the heightof the plot itself, along with the x and y axis labels and titles.
-    Please refer to the examples provide and the plotly.js documentation for how to format
+      - width: the width of the plot in pixels, including axis labels and titles. While this is often a property within the layout, I want it to be a separate field in order to create a responsive container in which to put the plot.
+      - height: the height of the plot in pixels. This should include any axis labels and axis titles, but should ignore the plot title and any legends. This is because I will reproduce the title and legend outside of the plotly plot, so I want to know the height to create a responsive container that can maintain the right aspect ratio, where I can place the plot itself, with the title and legend omitted.
+    Please refer to the examples provided and the plotly.js documentation to guide you in how to create the tt-plotly elements and their data-plotly attributes.
   `;
 
 const section_specific_instructions = {

@@ -116,8 +116,6 @@
     import MathEditorModal from '~/components/MathEditorModal.vue';
     import PlotlyModal from './PlotlyModal.vue'
     import { PlotlyExtension } from '~/assets/modules/tiptap-extensions/plotly/plotly-extension.js'
-    import { VueNodeViewRenderer } from '@tiptap/vue-3'
-    import PlotlyNodeView from '~/assets/modules/tiptap-extensions/plotly/PlotlyNodeView.vue'
 
 
     const { init_content } = defineProps(['init_content'])
@@ -147,22 +145,6 @@
         mathExtension, 
         PlotlyExtension
       ],
-    })
-
-    // Listen for plotly edit events
-    onMounted(() => {
-      window.addEventListener('plotly-edit', (event) => {
-        editingPlotData.value = event.detail
-        addPlotOpen.value = true
-      })
-    })
-
-    onBeforeUnmount(() => {
-      window.removeEventListener('plotly-edit', (event) => {
-        editingPlotData.value = event.detail
-        addPlotOpen.value = true
-      })
-      unref(editor).destroy()
     })
 
     const addImage = () => {
@@ -209,28 +191,17 @@
     }
 
     const handlePlotSave = (plotData) => {
-      if (editingPlotData.value) {
-        // Update existing plot
-        editor.value.chain().focus().updateAttributes('plotly', {
+      // Insert new plot (editing is now handled in PlotlyNodeView)
+      editor.value.chain().focus().insertContent({
+        type: 'plotly',
+        attrs: {
           type: plotData.type,
           data: plotData.data.data,
           layout: plotData.data.layout,
           width: plotData.width,
           height: plotData.height
-        }).run()
-      } else {
-        // Insert new plot
-        editor.value.chain().focus().insertContent({
-          type: 'plotly',
-          attrs: {
-            type: plotData.type,
-            data: plotData.data.data,
-            layout: plotData.data.layout,
-            width: plotData.width,
-            height: plotData.height
-          }
-        }).run()
-      }
+        }
+      }).run()
       editingPlotData.value = null
     }
     
