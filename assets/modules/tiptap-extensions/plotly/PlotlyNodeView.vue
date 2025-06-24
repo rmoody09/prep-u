@@ -18,7 +18,6 @@
                   >
                       <div class="plotly-container"
                           ref="plotContainer"
-                          :style="plotContainerStyle"
                       ></div>
                   </div>
                 </div>
@@ -26,7 +25,6 @@
                     v-if="hasLegend"
                     class="plotly-legend-container" 
                     ref="legendContainer"
-                    :style="legendContainerStyle"
                 ></div>
             </div>
         </node-view-wrapper>
@@ -114,7 +112,7 @@
     }
   })
 
-
+  /*
   const plotContainerStyle = computed(() => {
     const width = props.node.attrs.width || 400
     const height = props.node.attrs.height || 300
@@ -123,7 +121,8 @@
       height: `${height}px`,
     }
   })
-  
+  */
+
   const legendContainerStyle = computed(() => {
     const width = props.node.attrs.width || 400
     return {
@@ -157,6 +156,41 @@
       })
     }
   }
+
+  const modifyLayout = (layout) => {
+    const modifiedLayout = { ...layout }
+    delete modifiedLayout.title
+    modifiedLayout.showlegend = false
+    modifiedLayout.automargin = true
+    if (!modifiedLayout.xaxis) {
+      modifiedLayout.xaxis = {}
+    }
+    if (!modifiedLayout.yaxis) {
+      modifiedLayout.yaxis = {}
+    }
+    modifiedLayout.xaxis.automargin = true
+    modifiedLayout.yaxis.automargin = true
+    if (modifiedLayout.xaxis.title) {
+      modifiedLayout.xaxis.title.standoff = 20
+    }
+    if (modifiedLayout.yaxis.title) {
+      modifiedLayout.yaxis.title.standoff = 20
+    }
+
+    modifiedLayout.autosize = true
+    
+    // Adjust margins to remove extra top padding
+    if (modifiedLayout.margin) {
+        modifiedLayout.margin = {
+            //...modifiedLayout.margin,
+            t: 0,  // Reduced top margin since we handle title separately
+            b: 0,
+            l: 0,
+            r: 0
+        }
+    }
+    return modifiedLayout
+  }
   
   // Initialize plot
   onMounted(async () => {
@@ -168,46 +202,15 @@
       Plotly = (await import('plotly.js-dist-min')).default
       
       // Remove title from layout since we're handling it separately
-      const layoutWithoutTitle = { ...plotLayout.value }
-      delete layoutWithoutTitle.title
-      
-      // Remove legend from main plot
-      layoutWithoutTitle.showlegend = false
-      
-      // Set automargin to true
-      layoutWithoutTitle.automargin = true
+      const modifiedLayout = modifyLayout(plotLayout.value)
 
-      if (!layoutWithoutTitle.xaxis) {
-        layoutWithoutTitle.xaxis = {}
-      }
-      if (!layoutWithoutTitle.yaxis) {
-        layoutWithoutTitle.yaxis = {}
-      }
-      layoutWithoutTitle.xaxis.automargin = true
-      layoutWithoutTitle.yaxis.automargin = true
-
-      layoutWithoutTitle.autosize = true
-      
-      // Adjust margins to remove extra top padding
-      if (layoutWithoutTitle.margin) {
-          layoutWithoutTitle.margin = {
-              //...layoutWithoutTitle.margin,
-              t: 0,  // Reduced top margin since we handle title separately
-              b: 0,
-              l: 0,
-              r: 0
-          }
-      }
-
-      
-      
       console.log('Plotting with data:', plotData.value)
-      console.log('Plotting with layout:', layoutWithoutTitle)
+      console.log('Plotting with layout:', modifiedLayout)
       
       Plotly.newPlot(
         plotContainer.value,
         plotData.value,
-        layoutWithoutTitle,
+        modifiedLayout,
         plotOptions
       )
 
@@ -215,13 +218,7 @@
       if (hasLegend.value && legendContainer.value) {
           const legendLayout = {
               showlegend: true,
-              legend: {
-                  orientation: 'h',
-                  y: 0.5,
-                  x: 0.5,
-                  xanchor: 'center',
-                  yanchor: 'middle'
-              },
+              legend: plotLayout.value.legend,
               margin: {
                   t: 0,
                   b: 0,
@@ -288,44 +285,15 @@
     async () => {
       if (plotContainer.value && Plotly) {
         // Remove title from layout since we're handling it separately
-        const layoutWithoutTitle = { ...plotLayout.value }
-        delete layoutWithoutTitle.title
-        
-        // Remove legend from main plot
-        layoutWithoutTitle.showlegend = false
-        
-        // Set automargin to true
-        layoutWithoutTitle.automargin = true
-
-        if (!layoutWithoutTitle.xaxis) {
-          layoutWithoutTitle.xaxis = {}
-        }
-        if (!layoutWithoutTitle.yaxis) {
-          layoutWithoutTitle.yaxis = {}
-        }
-        layoutWithoutTitle.xaxis.automargin = true
-        layoutWithoutTitle.yaxis.automargin = true
-
-        layoutWithoutTitle.autosize = true
-        
-        // Adjust margins to remove extra top padding
-        if (layoutWithoutTitle.margin) {
-            layoutWithoutTitle.margin = {
-                //...layoutWithoutTitle.margin,
-                t: 0,  // Reduced top margin since we handle title separately
-                b: 0,
-                l: 0,
-                r: 0
-            }
-        }
+        const modifiedLayout = modifyLayout(plotLayout.value)
         
         console.log('Updating plot with data:', plotData.value)
-        console.log('Updating plot with layout:', JSON.stringify(layoutWithoutTitle))
+        console.log('Updating plot with layout:', JSON.stringify(modifiedLayout))
         
         Plotly.react(
           plotContainer.value,
           plotData.value,
-          layoutWithoutTitle,
+          modifiedLayout,
           plotOptions
         )
 
@@ -333,13 +301,7 @@
         if (hasLegend.value && legendContainer.value) {
             const legendLayout = {
                 showlegend: true,
-                legend: {
-                    orientation: 'h',
-                    y: 0.5,
-                    x: 0.5,
-                    xanchor: 'center',
-                    yanchor: 'middle'
-                },
+                legend: plotLayout.value.legend,
                 margin: {
                     t: 0,
                     b: 0,
@@ -448,6 +410,7 @@
     width: 100%;
     position: relative;
     margin-top: 10px;
+    min-height: 20px;
   }
   
   .plotly-node {
