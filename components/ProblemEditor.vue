@@ -138,6 +138,27 @@
         }
     });
 
+    // Add watcher for in_cb_question_bank checkbox
+    watch(in_cb_question_bank, (newValue) => {
+        if (newValue && !subsource.value) {
+            subsource.value = 'question_bank';
+        }
+    });
+
+    // Add watcher for subsource
+    watch(subsource, (newValue) => {
+        if (newValue === 'question_bank') {
+            in_cb_question_bank.value = true;
+        }
+    });
+
+    // Add watcher for test section
+    watch(selected_section, (newValue) => {
+        if (newValue === 'reading_writing' && !selected_answer_type.value) {
+            selected_answer_type.value = 'multiple_choice';
+        }
+    });
+
     const problem_category = ref(null);
     const init_category_id = ref(null);
     if (props.problem && props.problem.category) {

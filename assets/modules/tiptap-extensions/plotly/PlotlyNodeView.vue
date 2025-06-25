@@ -2,15 +2,8 @@
 <template>
         <node-view-wrapper class="plotly-node">
             <div class="plotly-wrapper"
-                :style="wrapperStyle"
                 @click="handleClick"
             >
-                <div 
-                    v-if="plotLayout?.title?.text"
-                    class="plotly-title"
-                >
-                    {{ plotLayout.title.text }}
-                </div>
                 <div class="plotly-container-outer">
                   <div 
                       class="plotly-aspect-container" 
@@ -21,11 +14,6 @@
                       ></div>
                   </div>
                 </div>
-                <div 
-                    v-if="hasLegend"
-                    class="plotly-legend-container" 
-                    ref="legendContainer"
-                ></div>
             </div>
         </node-view-wrapper>
 
@@ -78,6 +66,18 @@
     
     // Close the modal
     showModal.value = false
+
+    const modifiedLayout = modifyLayout(plotData.data.layout)
+        
+    console.log('Updating plot with data:', plotData.data.data)
+    console.log('Updating plot with layout:', JSON.stringify(modifiedLayout))
+    
+    Plotly.react(
+      plotContainer.value,
+      plotData.data.data,
+      modifiedLayout,
+      plotOptions
+    )
   }
   
   const plotData = computed(() => {
@@ -87,21 +87,13 @@
   const plotLayout = computed(() => {
     return props.node.attrs.layout
   })
-  
-  const hasLegend = computed(() => {
-    return plotData.value?.some(trace => trace.name)
-  })
-  
-  // Compute container style with max-width constraint
-  const wrapperStyle = computed(() => {
-    const width = props.node.attrs.width || 400
-    const height = props.node.attrs.height || 300
+
+  const plotWrapperStyle = computed(() => {
     return {
-      width: '100%',
-      maxWidth: `${width}px`,
-      minHeight: `${height}px`,
+      maxWidth: `${props.node.attrs.width}px`,
     }
   })
+
 
   const plotAspectContainerStyle = computed(() => {
     const width = props.node.attrs.width || 400
@@ -148,6 +140,7 @@
     }
   }
 
+  /*
   const updateLegendSize = () => {
     if (legendContainer.value && Plotly) {
       Plotly.relayout(legendContainer.value, {
@@ -156,11 +149,19 @@
       })
     }
   }
+  */
 
   const modifyLayout = (layout) => {
     const modifiedLayout = { ...layout }
-    delete modifiedLayout.title
-    modifiedLayout.showlegend = false
+  
+    if (modifiedLayout.title) {
+      modifiedLayout.title.yref = 'paper'
+      modifiedLayout.title.automargin = true
+      modifiedLayout.title.pad = {b: 20}
+    }
+    
+    //delete modifiedLayout.title
+    //modifiedLayout.showlegend = false
     modifiedLayout.automargin = true
     if (!modifiedLayout.xaxis) {
       modifiedLayout.xaxis = {}
@@ -170,10 +171,10 @@
     }
     modifiedLayout.xaxis.automargin = true
     modifiedLayout.yaxis.automargin = true
-    if (modifiedLayout.xaxis.title) {
+    if (modifiedLayout.xaxis.title && !modifiedLayout.xaxis.title.standoff) {
       modifiedLayout.xaxis.title.standoff = 20
     }
-    if (modifiedLayout.yaxis.title) {
+    if (modifiedLayout.yaxis.title && !modifiedLayout.yaxis.title.standoff) {
       modifiedLayout.yaxis.title.standoff = 20
     }
 
@@ -189,6 +190,7 @@
             r: 0
         }
     }
+    
     return modifiedLayout
   }
   
@@ -214,63 +216,12 @@
         plotOptions
       )
 
-      // Create legend-only plot if needed
-      if (hasLegend.value && legendContainer.value) {
-          const legendLayout = {
-              showlegend: true,
-              legend: plotLayout.value.legend,
-              margin: {
-                  t: 0,
-                  b: 0,
-                  l: 0,
-                  r: 0
-              },
-              xaxis: {
-                  showticklabels: false,
-                  showgrid: false,
-                  zeroline: false,
-                  showline: false
-              },
-              yaxis: {
-                  showticklabels: false,
-                  showgrid: false,
-                  zeroline: false,
-                  showline: false
-              }
-          }
-
-          // Create empty traces for legend
-          const emptyTraces = plotData.value.map(trace => ({
-              x: [0],
-              y: [0],
-              type: trace.type,
-              mode: trace.mode,
-              showlegend: true,
-              name: trace.name,
-              line: trace.line,
-              marker: trace.marker,
-              fill: trace.fill,
-              fillcolor: trace.fillcolor,
-              hoverinfo: 'none'
-          }))
-
-          Plotly.newPlot(
-              legendContainer.value,
-              emptyTraces,
-              legendLayout,
-              {
-                  ...plotOptions,
-                  staticPlot: true
-              }
-          )
-      }
+      
 
       // Set up resize observers
       resizeObserver = new ResizeObserver(() => {
         updatePlotSize()
-        if (hasLegend.value) {
-          updateLegendSize()
-        }
+        
       })
       resizeObserver.observe(plotContainer.value)
       if (legendContainer.value) {
@@ -280,6 +231,7 @@
   })
   
   // Update plot when data changes
+  /*
   watch(
     () => [plotData.value, plotLayout.value],
     async () => {
@@ -297,61 +249,12 @@
           plotOptions
         )
 
-        // Update legend plot if needed
-        if (hasLegend.value && legendContainer.value) {
-            const legendLayout = {
-                showlegend: true,
-                legend: plotLayout.value.legend,
-                margin: {
-                    t: 0,
-                    b: 0,
-                    l: 0,
-                    r: 0
-                },
-                xaxis: {
-                    showticklabels: false,
-                    showgrid: false,
-                    zeroline: false,
-                    showline: false
-                },
-                yaxis: {
-                    showticklabels: false,
-                    showgrid: false,
-                    zeroline: false,
-                    showline: false
-                }
-            }
-
-            // Create empty traces for legend
-            const emptyTraces = plotData.value.map(trace => ({
-                x: [0],
-                y: [0],
-                type: trace.type,
-                mode: trace.mode,
-                showlegend: true,
-                name: trace.name,
-                line: trace.line,
-                marker: trace.marker,
-                fill: trace.fill,
-                fillcolor: trace.fillcolor,
-                hoverinfo: 'none'
-            }))
-
-            Plotly.react(
-                legendContainer.value,
-                emptyTraces,
-                legendLayout,
-                {
-                    ...plotOptions,
-                    staticPlot: true
-                }
-            )
-        }
+        
       }
     },
     { deep: true }
   )
-  
+  */
   // Cleanup
   onBeforeUnmount(() => {
     if (resizeObserver) {
@@ -365,28 +268,16 @@
   
   <style scoped>
   .plotly-wrapper {
-    display: flex;
-    flex-direction: column;
     width: 100%;
+    max-width: 600px;
     position: relative;
-  }
-  
-  .plotly-title {
-    width: 100%;
-    text-align: center;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    padding: 0 20px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    padding-bottom: 20px;
   }
   
   .plotly-container-outer {
     width: 100%;
     position: relative;
     padding: 5px;
-    padding-bottom: 10px;
   }
   .plotly-aspect-container {
     width: 100%;
@@ -402,15 +293,6 @@
     top: 0;
     left: 0;
     box-sizing: border-box;
-    
-  }
-  
-  .plotly-legend-container {
-    max-width: 100%;
-    width: 100%;
-    position: relative;
-    margin-top: 10px;
-    min-height: 20px;
   }
   
   .plotly-node {

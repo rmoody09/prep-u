@@ -177,6 +177,14 @@
     }
 
     const addTable = (table) => {
+      console.log('addTable4');
+      console.log(table.title);
+      // If a title is provided, insert it as a centered heading first
+      if (table.title && table.title.trim()) {
+        editor.value.chain().focus().insertContent(`<p data-table-title="true">${table.title.trim()}</p>`).run()
+      }
+      
+      // Insert the table
       editor.value.chain().focus().insertTable({
         rows: table.rows,
         cols: table.columns,
@@ -324,6 +332,15 @@
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     font-weight: bold;
+  }
+
+  
+
+  /* Center table titles */
+  p[data-table-title="true"] {
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: normal;
   }
 
 }
