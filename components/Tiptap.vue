@@ -77,6 +77,24 @@
                 size="2xs"
             ></UButton>
             
+            <UButton 
+                icon="i-lucide-align-left"
+                @click="setAlignment('left')"
+                :variant="isCellAlignedLeft ? 'solid' : 'outline'"
+                size="2xs"
+            ></UButton>
+            <UButton 
+                icon="i-lucide-align-center"
+                @click="setAlignment('center')"
+                :variant="isCellAlignedCenter ? 'solid' : 'outline'"
+                size="2xs"
+            ></UButton>
+            <UButton 
+                icon="i-lucide-align-right"
+                @click="setAlignment('right')"
+                :variant="isCellAlignedRight ? 'solid' : 'outline'"
+                size="2xs"
+            ></UButton>
             
         </div>
         <editor-content :editor="editor" />
@@ -111,7 +129,10 @@
     import TableCell from '@tiptap/extension-table-cell'
     import TableHeader from '@tiptap/extension-table-header'
     import TableRow from '@tiptap/extension-table-row'
+    import TextAlign from '@tiptap/extension-text-align'
     import mathExtension from '~/assets/modules/tiptap-extensions/math/math-extension.js';
+    import { TableTitleExtension } from '~/assets/modules/tiptap-extensions/table-title/table-title-extension.js';
+    import { TableWithTitleExtension } from '~/assets/modules/tiptap-extensions/table-with-title/table-with-title-extension.js';
     import AddTableModal from '~/components/AddTableModal.vue';
     import MathEditorModal from '~/components/MathEditorModal.vue';
     import PlotlyModal from './PlotlyModal.vue'
@@ -139,11 +160,17 @@
         Table.configure({
           resizable: true
         }), 
-        TableCell, 
-        TableHeader, 
+        TableCell,
+        TableHeader,
+        TextAlign.configure({
+          types: ['paragraph', 'heading'], // Important: Specify which block nodes can be aligned
+                                          // 'paragraph' is essential for general text in cells.
+        }),
         TableRow, 
         mathExtension, 
-        PlotlyExtension
+        PlotlyExtension,
+        TableTitleExtension,
+        TableWithTitleExtension
       ],
     })
 
@@ -179,17 +206,15 @@
     const addTable = (table) => {
       console.log('addTable4');
       console.log(table.title);
-      // If a title is provided, insert it as a centered heading first
-      if (table.title && table.title.trim()) {
-        editor.value.chain().focus().insertContent(`<p data-table-title="true">${table.title.trim()}</p>`).run()
-      }
       
-      // Insert the table
-      editor.value.chain().focus().insertTable({
+      // Use the new combined command
+      editor.value.chain().focus().addTableWithTitle({
+        title: table.title,
         rows: table.rows,
         cols: table.columns,
         withHeaderRow: table.includeHeader
       }).run()
+      
       addTableOpen.value = false;
     }
     
@@ -216,6 +241,10 @@
     defineExpose({
         editor
     });
+
+    const setAlignment = (alignment) => {
+      editor.value.chain().focus().setTextAlign(alignment).run()
+    }
 
   </script>
 
@@ -335,14 +364,6 @@
   }
 
   
-
-  /* Center table titles */
-  p[data-table-title="true"] {
-    text-align: center;
-    font-size: 1.1em;
-    font-weight: normal;
-  }
-
 }
 
 

@@ -12,6 +12,8 @@
     import TableHeader from '@tiptap/extension-table-header'
     import TableRow from '@tiptap/extension-table-row'
     import mathExtension from '~/assets/modules/tiptap-extensions/math/math-extension.js';
+    import { TableTitleExtension } from '~/assets/modules/tiptap-extensions/table-title/table-title-extension.js';
+    import { TableWithTitleExtension } from '~/assets/modules/tiptap-extensions/table-with-title/table-with-title-extension.js';
     import { PlotlyExtension } from '~/assets/modules/tiptap-extensions/plotly/plotly-extension.js';
 
     const { init_content } = defineProps(['init_content'])
@@ -23,6 +25,8 @@
         Table, TableCell, TableHeader, TableRow, 
         Image, ImageResize, Underline, 
         mathExtension,
+        TableTitleExtension,
+        TableWithTitleExtension,
         PlotlyExtension],
     })
 

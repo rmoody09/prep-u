@@ -486,7 +486,7 @@
 
 <template>
     <div class="problem-editor">
-        <div class="max-w-md w-full">
+        <div class="max-w-3xl w-full">
             <div v-if="submitting">
                 <UProgress animation="carousel" />
             </div>

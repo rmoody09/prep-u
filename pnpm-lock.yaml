@@ -44,6 +44,9 @@ importers:
       '@tiptap/extension-table-row':
         specifier: ^2.9.1
         version: 2.9.1(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))
+      '@tiptap/extension-text-align':
+        specifier: ^2.22.3
+        version: 2.22.3(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))
       '@tiptap/extension-underline':
         specifier: ^2.7.4
         version: 2.7.4(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))
@@ -1651,6 +1654,11 @@ packages:
     peerDependencies:
       '@tiptap/core': ^2.7.0
       '@tiptap/pm': ^2.7.0
+
+  '@tiptap/extension-text-align@2.22.3':
+    resolution: {integrity: sha512-UZ8803BOrHLHSNFfooqgkm2AQsaK/7eE1deQGSazxft89KksAv1kZkEKFypOE8yw85Bg2NHH2Lp6n4tyz2n6/g==}
+    peerDependencies:
+      '@tiptap/core': ^2.7.0
 
   '@tiptap/extension-text@2.7.4':
     resolution: {integrity: sha512-1bF9LdfUumqXOz0A6xnOo7UHx+YLshxjMnjoMXjv7cOFOjdHbLmwKNTKGd2ltoCy3bSajoCPhPZL2Id89XDZfQ==}
@@ -6406,6 +6414,10 @@ snapshots:
     dependencies:
       '@tiptap/core': 2.7.4(@tiptap/pm@2.7.4)
       '@tiptap/pm': 2.7.4
+
+  '@tiptap/extension-text-align@2.22.3(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))':
+    dependencies:
+      '@tiptap/core': 2.7.4(@tiptap/pm@2.7.4)
 
   '@tiptap/extension-text@2.7.4(@tiptap/core@2.7.4(@tiptap/pm@2.7.4))':
     dependencies:
