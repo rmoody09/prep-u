@@ -26,14 +26,29 @@
           <div v-if="showControls" class="column-controls-panel">
             <div class="control-group">
               <label>Width:</label>
-              <USelect
-                v-model="localWidth"
-                :options="widthOptions"
-                size="xs"
-                @update:model-value="updateWidth"
-              />
+              <div class="flex gap-2 items-center">
+                <UInput
+                  v-model="localWidthValue"
+                  type="number"
+                  size="xs"
+                  min="0"
+                  style="width: 5rem;"
+                />
+                <USelect
+                  v-model="localWidthUnit"
+                  :options="widthUnitOptions"
+                  size="xs"
+                  style="width: 4rem;"
+                />
+              </div>
             </div>
-            
+            <div class="control-group flex gap-4 items-center">
+              <UCheckbox v-model="localGrow" label="Grow" size="xs" />
+              <UCheckbox v-model="localShrink" label="Shrink" size="xs" />
+            </div>
+            <div class="flex justify-end mt-2">
+              <UButton size="xs" color="primary" @click="applyColumnSettings">Apply</UButton>
+            </div>
           </div>
         </div>
       </div>
@@ -48,24 +63,49 @@ import { nodeViewProps, NodeViewWrapper, NodeViewContent } from '@tiptap/vue-3'
 const props = defineProps(nodeViewProps)
 
 const showControls = ref(false)
-const localWidth = ref(props.node.attrs.width)
 
-const widthOptions = [
-  { label: '25%', value: '25%' },
-  { label: '33%', value: '33.33%' },
-  { label: '50%', value: '50%' },
-  { label: '66%', value: '66.66%' },
-  { label: '75%', value: '75%' },
-  { label: '100%', value: '100%' },
+// Width value and unit
+const widthUnitOptions = [
+  { label: '%', value: '%' },
+  { label: 'px', value: 'px' },
 ]
+const parseWidth = (width) => {
+  if (!width) return { value: '', unit: '%' }
+  if (width.endsWith('px')) return { value: parseInt(width), unit: 'px' }
+  if (width.endsWith('%')) return { value: parseFloat(width), unit: '%' }
+  return { value: width, unit: '%' }
+}
+const initialWidth = parseWidth(props.node.attrs.width)
+const localWidthValue = ref(initialWidth.value)
+const localWidthUnit = ref(initialWidth.unit)
+
+const localGrow = ref(props.node.attrs.grow !== undefined ? props.node.attrs.grow : true)
+const localShrink = ref(props.node.attrs.shrink !== undefined ? props.node.attrs.shrink : true)
+
+const applyColumnSettings = () => {
+  let width = localWidthValue.value ? localWidthValue.value + localWidthUnit.value : ''
+  props.editor
+    .chain()
+    .setNodeSelection(props.getPos())
+    .setColumnWidth(width)
+    .setColumnFlex({
+      grow: localGrow.value,
+      shrink: localShrink.value
+    })
+    .run()
+  showControls.value = false
+}
 
 const columnStyle = computed(() => {
-  console.log('updating columnStyle');
-  const style =  {
-    flex: `1 1 ${props.node.attrs.width || '0%'}`,
-    flexBasis: props.node.attrs.width || '0%',
+  const grow = props.node.attrs.grow !== undefined ? (props.node.attrs.grow ? 1 : 0) : 1
+  const shrink = props.node.attrs.shrink !== undefined ? (props.node.attrs.shrink ? 1 : 0) : 1
+  const basis = props.node.attrs.width || '0%'
+  const style = {
+    flex: `${grow} ${shrink} ${basis}`,
+    flexBasis: basis,
     minWidth: 0,
     boxSizing: 'border-box',
+    border: props.editor.view.editable ? '1px dashed #d1d5db' : undefined,
   }
   if (props.editor.view.editable) {
     style.border = '1px dashed #d1d5db';
@@ -73,16 +113,18 @@ const columnStyle = computed(() => {
   return style;
 })
 
-const updateWidth = (width) => {
-  props.editor.chain().focus().setColumnWidth(width).run()
-}
-
 // Watch for external changes to sync local state
 watch(() => props.node.attrs.width, (newWidth) => {
-  localWidth.value = newWidth
+  const parsed = parseWidth(newWidth)
+  localWidthValue.value = parsed.value
+  localWidthUnit.value = parsed.unit
 })
-
-
+watch(() => props.node.attrs.grow, (newGrow) => {
+  localGrow.value = newGrow !== undefined ? newGrow : true
+})
+watch(() => props.node.attrs.shrink, (newShrink) => {
+  localShrink.value = newShrink !== undefined ? newShrink : true
+})
 </script>
 
 <style scoped>

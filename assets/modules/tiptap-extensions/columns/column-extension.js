@@ -19,7 +19,27 @@ export const ColumnExtension = Node.create({
             'data-width': attributes.width,
           }
         },
-      }
+      },
+      grow: {
+        default: true,
+        parseHTML: element => {
+          const val = element.getAttribute('data-grow')
+          return val === null ? true : val === 'true' || val === '1'
+        },
+        renderHTML: attributes => {
+          return attributes.grow !== undefined ? { 'data-grow': attributes.grow } : {}
+        },
+      },
+      shrink: {
+        default: true,
+        parseHTML: element => {
+          const val = element.getAttribute('data-shrink')
+          return val === null ? true : val === 'true' || val === '1'
+        },
+        renderHTML: attributes => {
+          return attributes.shrink !== undefined ? { 'data-shrink': attributes.shrink } : {}
+        },
+      },
     }
   },
 
@@ -39,6 +59,9 @@ export const ColumnExtension = Node.create({
     return {
       setColumnWidth: (width) => ({ commands }) => {
         return commands.updateAttributes(this.name, { width })
+      },
+      setColumnFlex: ({ grow, shrink }) => ({ commands }) => {
+        return commands.updateAttributes(this.name, { grow, shrink })
       },
     }
   },
