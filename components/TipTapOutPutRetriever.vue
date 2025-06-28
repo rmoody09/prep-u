@@ -1,10 +1,12 @@
 <script setup>
 import Tiptap from '~/components/Tiptap.vue'
+import TiptapReader from '~/components/TiptapReader.vue'
 
-const outputFormat = ref('html') // 'html' or 'json'
+const outputFormat = ref('html') // 'html', 'json', or 'visualize'
 const output = ref('')
 const showOutput = ref(false)
 const editorRef = useTemplateRef('editor');
+const readerContent = ref('');
 
 const getOutput = () => {
     console.log('getOutput:')
@@ -14,10 +16,16 @@ const getOutput = () => {
   if (outputFormat.value === 'html') {
     console.log(editorRef.value.editor.getHTML());
     output.value = editorRef.value.editor.getHTML()
-  } else {
+    showOutput.value = true
+  } else if (outputFormat.value === 'json') {
     output.value = JSON.stringify(editorRef.value.editor.getJSON(), null, 2)
+    showOutput.value = true
+  } else if (outputFormat.value === 'visualize') {
+    showOutput.value = true
+    console.log('html:')
+    console.log(editorRef.value.editor.getHTML());
+    readerContent.value = editorRef.value.editor.getHTML()
   }
-  showOutput.value = true
 }
 
 const copyToClipboard = async () => {
@@ -46,7 +54,8 @@ const copyToClipboard = async () => {
         v-model="outputFormat"
         :options="[
           { label: 'HTML', value: 'html' },
-          { label: 'JSON', value: 'json' }
+          { label: 'JSON', value: 'json' },
+          { label: 'Visualize', value: 'visualize' }
         ]"
         size="sm"
       />
@@ -59,8 +68,16 @@ const copyToClipboard = async () => {
       </UButton>
     </div>
 
+    <!-- Visualize Output -->
+    <div v-if="showOutput && outputFormat === 'visualize'" class="visualize-section">
+      <div class="output-header">
+        <h3 class="text-lg font-bold pb-2">Visualized Output</h3>
+      </div>
+      <TiptapReader :init_content="readerContent" :key="readerContent" />
+    </div>
+
     <!-- Output Display -->
-    <div v-if="showOutput" class="output-section">
+    <div v-if="showOutput && outputFormat !== 'visualize'" class="output-section">
       <div class="output-header">
         <h3>{{ outputFormat.toUpperCase() }} Output</h3>
         <UButton
@@ -99,6 +116,12 @@ const copyToClipboard = async () => {
 }
 
 .output-section {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  padding: 1rem;
+}
+
+.visualize-section {
   border: 1px solid #e2e8f0;
   border-radius: 0.25rem;
   padding: 1rem;

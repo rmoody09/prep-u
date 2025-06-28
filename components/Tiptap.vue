@@ -78,6 +78,13 @@
             ></UButton>
             
             <UButton 
+                icon="i-lucide-columns"
+                @click="addColumnsClick"
+                variant="outline"
+                size="2xs"
+            ></UButton>
+            
+            <UButton 
                 icon="i-lucide-align-left"
                 @click="setAlignment('left')"
                 :variant="isCellAlignedLeft ? 'solid' : 'outline'"
@@ -111,6 +118,9 @@
             :edit-data="editingPlotData"
             @save="handlePlotSave"
         />
+        <UModal v-model="addColumnsOpen">
+            <AddColumnsModal @addColumns="addColumns" @close="addColumnsOpen = false" />
+        </UModal>
     </div>
 </template>
 
@@ -133,10 +143,13 @@
     import mathExtension from '~/assets/modules/tiptap-extensions/math/math-extension.js';
     import { TableTitleExtension } from '~/assets/modules/tiptap-extensions/table-title/table-title-extension.js';
     import { TableWithTitleExtension } from '~/assets/modules/tiptap-extensions/table-with-title/table-with-title-extension.js';
+    import { ColumnsExtension } from '~/assets/modules/tiptap-extensions/columns/columns-extension.js';
+    import { ColumnExtension } from '~/assets/modules/tiptap-extensions/columns/column-extension.js';
     import AddTableModal from '~/components/AddTableModal.vue';
     import MathEditorModal from '~/components/MathEditorModal.vue';
     import PlotlyModal from './PlotlyModal.vue'
     import { PlotlyExtension } from '~/assets/modules/tiptap-extensions/plotly/plotly-extension.js'
+    import AddColumnsModal from '~/components/AddColumnsModal.vue'
 
 
     const { init_content } = defineProps(['init_content'])
@@ -146,6 +159,7 @@
     const selectedAddMathText = ref('');
     const addPlotOpen = ref(false);
     const editingPlotData = ref(null);
+    const addColumnsOpen = ref(false);
 
 
   
@@ -170,7 +184,9 @@
         mathExtension, 
         PlotlyExtension,
         TableTitleExtension,
-        TableWithTitleExtension
+        TableWithTitleExtension,
+        ColumnsExtension,
+        ColumnExtension
       ],
     })
 
@@ -244,6 +260,21 @@
 
     const setAlignment = (alignment) => {
       editor.value.chain().focus().setTextAlign(alignment).run()
+    }
+
+    const addColumnsClick = () => {
+      addColumnsOpen.value = true;
+    }
+
+    const addColumns = (columns) => {      
+      // Use the addColumns command with the specified options
+      editor.value.chain().focus().addColumns({
+        columnCount: columns.columnCount,
+        widths: columns.widths,
+        gap: columns.gap
+      }).run()
+      
+      addColumnsOpen.value = false;
     }
 
   </script>
@@ -362,7 +393,6 @@
     margin-bottom: 0.5em;
     font-weight: bold;
   }
-
   
 }
 

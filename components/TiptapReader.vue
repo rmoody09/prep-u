@@ -14,6 +14,8 @@
     import mathExtension from '~/assets/modules/tiptap-extensions/math/math-extension.js';
     import { TableTitleExtension } from '~/assets/modules/tiptap-extensions/table-title/table-title-extension.js';
     import { TableWithTitleExtension } from '~/assets/modules/tiptap-extensions/table-with-title/table-with-title-extension.js';
+    import { ColumnsExtension } from '~/assets/modules/tiptap-extensions/columns/columns-extension.js';
+    import { ColumnExtension } from '~/assets/modules/tiptap-extensions/columns/column-extension.js';
     import { PlotlyExtension } from '~/assets/modules/tiptap-extensions/plotly/plotly-extension.js';
 
     const { init_content } = defineProps(['init_content'])
@@ -27,6 +29,8 @@
         mathExtension,
         TableTitleExtension,
         TableWithTitleExtension,
+        ColumnsExtension,
+        ColumnExtension,
         PlotlyExtension],
     })
 
@@ -129,6 +133,7 @@
   }
 
   
+
 }
 
 
