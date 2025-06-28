@@ -271,7 +271,8 @@
       editor.value.chain().focus().addColumns({
         columnCount: columns.columnCount,
         widths: columns.widths,
-        gap: columns.gap
+        gap: columns.gap,
+        maxWidth: columns.maxWidth
       }).run()
       
       addColumnsOpen.value = false;

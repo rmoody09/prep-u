@@ -20,6 +20,16 @@ export const ColumnsExtension = Node.create({
           }
         },
       },
+      maxWidth: {
+        default: null,
+        parseHTML: element => {
+          const val = element.getAttribute('data-max-width')
+          return val ? parseInt(val) : null
+        },
+        renderHTML: attributes => {
+          return attributes.maxWidth ? { 'data-max-width': attributes.maxWidth } : {}
+        },
+      },
 	  alignItems: {
         default: 'stretch',
         parseHTML: element => element.getAttribute('data-align-items') || 'stretch',
@@ -47,15 +57,13 @@ export const ColumnsExtension = Node.create({
   addCommands() {
     return {
       addColumns: (options = {}) => ({ commands }) => {
-        const { columnCount = 2, widths = ['50%', '50%'] } = options
-        
+        const { columnCount = 2, widths = ['50%', '50%'], gap = '1rem', maxWidth = null } = options
         const columns = []
         for (let i = 0; i < columnCount; i++) {
           columns.push({
             type: 'column',
             attrs: {
-              width: widths[i] || '50%',
-              wrap: true,
+              width: widths[i] || '50%'
             },
             content: [{ type: 'paragraph' }]
           })
@@ -63,22 +71,29 @@ export const ColumnsExtension = Node.create({
         
         return commands.insertContent({
           type: this.name,
+          attrs: {
+            gap,
+            maxWidth,
+          },
           content: columns
         })
       },
       
       addColumn: (options = {}) => ({ commands, state }) => {
-        const { width = '50%', wrap = true } = options
+        const { width = '50%' } = options
         
         return commands.insertContent({
           type: 'column',
-          attrs: { width, wrap },
+          attrs: { width },
           content: [{ type: 'paragraph' }]
         })
       },
       
       setColumnsGap: (gap) => ({ commands }) => {
         return commands.updateAttributes(this.name, { gap })
+      },
+      setColumnsMaxWidth: (maxWidth) => ({ commands }) => {
+        return commands.updateAttributes(this.name, { maxWidth })
       },
 	  setColumnsAlignItems: (align) => ({ commands }) => {
         return commands.updateAttributes(this.name, { alignItems: align })

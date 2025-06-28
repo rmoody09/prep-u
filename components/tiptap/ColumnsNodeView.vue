@@ -2,10 +2,10 @@
   <node-view-wrapper class="columns-node" :class="{ 'is-editable': props.editor.view.editable }">
     <div 
       class="columns-container"
-      
+      :style="columnsContainerStyle"
     >
       <!-- Columns content -->
-      <node-view-content
+      <node-view-content class="columns-content"
         :style="columnsStyle"
       />
       
@@ -57,6 +57,17 @@
                 @update:model-value="updateAlignItems"
               />
             </div>
+            <div class="control-group">
+              <label>Max Width (px):</label>
+              <UInput
+                v-model="localMaxWidth"
+                type="number"
+                min="0"
+                size="xs"
+                placeholder="No max width"
+                @change="onMaxWidthChange"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -73,6 +84,7 @@ const props = defineProps(nodeViewProps)
 const showControls = ref(false)
 const localGap = ref(props.node.attrs.gap)
 const localAlignItems = ref(props.node.attrs.alignItems || 'stretch')
+const localMaxWidth = ref(props.node.attrs.maxWidth || '')
 
 const gapOptions = [
   { label: 'None', value: '0' },
@@ -89,26 +101,39 @@ const alignItemsOptions = [
   { label: 'Stretch', value: 'stretch' },
 ]
 
+const columnsContainerStyle = computed(() => {
+  const style = {
+  }
+  if (props.node.attrs.maxWidth) {
+    style.maxWidth = props.node.attrs.maxWidth + 'px'
+  } else {
+    style.maxWidth = '100%'
+  }
+  if (props.editor.view.editable) {
+    style.paddingTop = '1.8rem';
+    style.border = '2px dashed #e5e7eb';
+    style.borderRadius = '0.5rem';
+    style.backgroundColor = '#f8fafc';
+    
+  }
+  return style;
+})
+
 const columnsStyle = computed(() => {
   console.log('updating columnsStyle');
   console.log(props.node.attrs.alignItems);
+  console.log(props.node.attrs.maxWidth);
   const style = {
     gap: props.node.attrs.gap || '1rem',
     display: 'flex',
     minHeight: '10px',
     boxSizing: 'border-box',
     width: '100%',
-    maxWidth: '100%',
     position: 'relative',
     alignItems: props.node.attrs.alignItems || 'stretch',
   }
-  if (props.editor.view.editable) {
-    style.paddingTop = '1.7rem';
-    style.border = '2px dashed #e5e7eb';
-    style.borderRadius = '0.5rem';
-    style.backgroundColor = '#f8fafc';
-    
-  }
+  
+  
   console.log('columnsStyle:')
   console.log(style);
   return style;
@@ -126,6 +151,12 @@ const updateAlignItems = (align) => {
   props.editor.chain().focus().setNodeSelection(props.getPos()).setColumnsAlignItems(align).run()
 }
 
+const onMaxWidthChange = (e) => {
+  let val = parseInt(localMaxWidth.value)
+  if (isNaN(val) || val <= 0) val = null
+  props.editor.chain().focus().setColumnsMaxWidth(val).run()
+}
+
 // Watch for external changes to sync local state
 watch(() => props.node.attrs.gap, (newGap) => {
   localGap.value = newGap
@@ -133,6 +164,10 @@ watch(() => props.node.attrs.gap, (newGap) => {
 
 watch(() => props.node.attrs.alignItems, (newVal) => {
   localAlignItems.value = newVal || 'stretch'
+})
+
+watch(() => props.node.attrs.maxWidth, (newVal) => {
+  localMaxWidth.value = newVal || ''
 })
 </script>
 
@@ -142,9 +177,16 @@ watch(() => props.node.attrs.alignItems, (newVal) => {
   margin: 1rem 0;
 }
 
+.columns-content {
+  width: 100%;
+  position: relative;
+}
+
 .columns-container {
   /* Remove flex styles from here */
   width: 100%;
+  position: relative;
+  display: inline-block;
 }
 
 .columns-container > :deep([data-node-view-content]) {

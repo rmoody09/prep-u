@@ -55,6 +55,17 @@
           placeholder="Select gap size"
         />
       </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">
+          Max Width (px)
+        </label>
+        <UInput
+          v-model="maxWidth"
+          type="number"
+          min="0"
+          placeholder="No max width"
+        />
+      </div>
     </div>
     
     <template #footer>
@@ -84,6 +95,7 @@ const emit = defineEmits(['close', 'addColumns'])
 
 const columnCount = ref(2)
 const gap = ref('1rem')
+const maxWidth = ref('')
 
 const columnCountOptions = [
   { label: '2 Columns', value: 2 },
@@ -123,10 +135,14 @@ watch(columnCount, (newCount) => {
 })
 
 const addColumns = () => {
+  console.log('addColumns from modal');
+  console.log('maxWidth:');
+  console.log(maxWidth.value);
   emit('addColumns', {
     columnCount: columnCount.value,
     widths: columnWidths.value,
-    gap: gap.value
+    gap: gap.value,
+    maxWidth: maxWidth.value ? parseInt(maxWidth.value) : null
   })
   emit('close')
 }
