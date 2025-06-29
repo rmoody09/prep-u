@@ -68,6 +68,9 @@
                 @change="onMaxWidthChange"
               />
             </div>
+            <div class="control-group">
+              <UCheckbox v-model="localWrap" label="Allow wrap (columns will move to new line if needed)" @update:model-value="updateWrap" />
+            </div>
           </div>
         </div>
       </div>
@@ -85,6 +88,7 @@ const showControls = ref(false)
 const localGap = ref(props.node.attrs.gap)
 const localAlignItems = ref(props.node.attrs.alignItems || 'stretch')
 const localMaxWidth = ref(props.node.attrs.maxWidth || '')
+const localWrap = ref(props.node.attrs.wrap !== undefined ? props.node.attrs.wrap : true)
 
 const gapOptions = [
   { label: 'None', value: '0' },
@@ -120,9 +124,6 @@ const columnsContainerStyle = computed(() => {
 })
 
 const columnsStyle = computed(() => {
-  console.log('updating columnsStyle');
-  console.log(props.node.attrs.alignItems);
-  console.log(props.node.attrs.maxWidth);
   const style = {
     gap: props.node.attrs.gap || '1rem',
     display: 'flex',
@@ -131,11 +132,8 @@ const columnsStyle = computed(() => {
     width: '100%',
     position: 'relative',
     alignItems: props.node.attrs.alignItems || 'stretch',
+    flexWrap: props.node.attrs.wrap === false ? 'nowrap' : 'wrap',
   }
-  
-  
-  console.log('columnsStyle:')
-  console.log(style);
   return style;
 })
 
@@ -157,6 +155,10 @@ const onMaxWidthChange = (e) => {
   props.editor.chain().focus().setColumnsMaxWidth(val).run()
 }
 
+const updateWrap = (val) => {
+  props.editor.chain().focus().setColumnsWrap(val).run()
+}
+
 // Watch for external changes to sync local state
 watch(() => props.node.attrs.gap, (newGap) => {
   localGap.value = newGap
@@ -168,6 +170,10 @@ watch(() => props.node.attrs.alignItems, (newVal) => {
 
 watch(() => props.node.attrs.maxWidth, (newVal) => {
   localMaxWidth.value = newVal || ''
+})
+
+watch(() => props.node.attrs.wrap, (newVal) => {
+  localWrap.value = newVal !== undefined ? newVal : true
 })
 </script>
 

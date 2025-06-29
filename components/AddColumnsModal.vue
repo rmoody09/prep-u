@@ -66,6 +66,12 @@
           placeholder="No max width"
         />
       </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">
+          Allow Columns to Wrap
+        </label>
+        <UCheckbox v-model="wrap" label="Allow wrap (columns will move to new line if needed)" />
+      </div>
     </div>
     
     <template #footer>
@@ -96,6 +102,7 @@ const emit = defineEmits(['close', 'addColumns'])
 const columnCount = ref(2)
 const gap = ref('1rem')
 const maxWidth = ref('')
+const wrap = ref(true)
 
 const columnCountOptions = [
   { label: '2 Columns', value: 2 },
@@ -135,14 +142,12 @@ watch(columnCount, (newCount) => {
 })
 
 const addColumns = () => {
-  console.log('addColumns from modal');
-  console.log('maxWidth:');
-  console.log(maxWidth.value);
   emit('addColumns', {
     columnCount: columnCount.value,
     widths: columnWidths.value,
     gap: gap.value,
-    maxWidth: maxWidth.value ? parseInt(maxWidth.value) : null
+    maxWidth: maxWidth.value ? parseInt(maxWidth.value) : null,
+    wrap: wrap.value
   })
   emit('close')
 }

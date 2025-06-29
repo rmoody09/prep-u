@@ -38,7 +38,17 @@ export const ColumnsExtension = Node.create({
             'data-align-items': attributes.alignItems,
           }
         },
-      }
+      },
+      wrap: {
+        default: true,
+        parseHTML: element => {
+          const val = element.getAttribute('data-wrap')
+          return val === null ? true : val === 'true' || val === '1'
+        },
+        renderHTML: attributes => {
+          return attributes.wrap !== undefined ? { 'data-wrap': attributes.wrap } : {}
+        },
+      },
     }
   },
 
@@ -57,7 +67,7 @@ export const ColumnsExtension = Node.create({
   addCommands() {
     return {
       addColumns: (options = {}) => ({ commands }) => {
-        const { columnCount = 2, widths = ['50%', '50%'], gap = '1rem', maxWidth = null } = options
+        const { columnCount = 2, widths = ['50%', '50%'], gap = '1rem', maxWidth = null, wrap = true } = options
         const columns = []
         for (let i = 0; i < columnCount; i++) {
           columns.push({
@@ -74,6 +84,7 @@ export const ColumnsExtension = Node.create({
           attrs: {
             gap,
             maxWidth,
+            wrap,
           },
           content: columns
         })
@@ -97,6 +108,9 @@ export const ColumnsExtension = Node.create({
       },
 	  setColumnsAlignItems: (align) => ({ commands }) => {
         return commands.updateAttributes(this.name, { alignItems: align })
+      },
+      setColumnsWrap: (wrap) => ({ commands }) => {
+        return commands.updateAttributes(this.name, { wrap })
       },
     }
   },
