@@ -24,27 +24,6 @@
         />
       </div>
       
-      <div v-if="columnCount > 1">
-        <label class="block text-sm font-medium text-gray-700 mb-2">
-          Column Widths
-        </label>
-        <div class="space-y-2">
-          <div
-            v-for="(width, index) in columnWidths"
-            :key="index"
-            class="flex items-center gap-2"
-          >
-            <span class="text-sm text-gray-600 w-8">Column {{ index + 1 }}:</span>
-            <USelect
-              v-model="columnWidths[index]"
-              :options="widthOptions"
-              size="sm"
-              class="flex-1"
-            />
-          </div>
-        </div>
-      </div>
-      
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-2">
           Gap Between Columns
@@ -127,24 +106,9 @@ const gapOptions = [
   { label: 'Extra Large (2rem)', value: '2rem' },
 ]
 
-const columnWidths = ref(['50%', '50%'])
-
-// Update column widths when column count changes
-watch(columnCount, (newCount) => {
-  const newWidths = []
-  const equalWidth = `${100 / newCount}%`
-  
-  for (let i = 0; i < newCount; i++) {
-    newWidths.push(equalWidth)
-  }
-  
-  columnWidths.value = newWidths
-})
-
 const addColumns = () => {
   emit('addColumns', {
     columnCount: columnCount.value,
-    widths: columnWidths.value,
     gap: gap.value,
     maxWidth: maxWidth.value ? parseInt(maxWidth.value) : null,
     wrap: wrap.value

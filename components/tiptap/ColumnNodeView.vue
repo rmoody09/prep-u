@@ -75,7 +75,7 @@ const parseWidth = (width) => {
   if (width.endsWith('%')) return { value: parseFloat(width), unit: '%' }
   return { value: width, unit: '%' }
 }
-const initialWidth = parseWidth(props.node.attrs.width)
+const initialWidth = parseWidth(props.node.attrs.flexBasis)
 const localWidthValue = ref(initialWidth.value)
 const localWidthUnit = ref(initialWidth.unit)
 
@@ -87,7 +87,7 @@ const applyColumnSettings = () => {
   props.editor
     .chain()
     .setNodeSelection(props.getPos())
-    .setColumnWidth(width)
+    .setColumnFlexBasis(width)
     .setColumnFlex({
       grow: localGrow.value,
       shrink: localShrink.value
@@ -99,7 +99,7 @@ const applyColumnSettings = () => {
 const columnStyle = computed(() => {
   const grow = props.node.attrs.grow !== undefined ? (props.node.attrs.grow ? 1 : 0) : 1
   const shrink = props.node.attrs.shrink !== undefined ? (props.node.attrs.shrink ? 1 : 0) : 1
-  const basis = props.node.attrs.width || '0%'
+  const basis = props.node.attrs.flexBasis || '0%'
   const style = {
     flex: `${grow} ${shrink} ${basis}`,
     flexBasis: basis,
@@ -114,7 +114,7 @@ const columnStyle = computed(() => {
 })
 
 // Watch for external changes to sync local state
-watch(() => props.node.attrs.width, (newWidth) => {
+watch(() => props.node.attrs.flexBasis, (newWidth) => {
   const parsed = parseWidth(newWidth)
   localWidthValue.value = parsed.value
   localWidthUnit.value = parsed.unit

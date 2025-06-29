@@ -11,12 +11,12 @@ export const ColumnExtension = Node.create({
 
   addAttributes() {
     return {
-      width: {
+      flexBasis: {
         default: '50%',
-        parseHTML: element => element.getAttribute('data-width') || '50%',
+        parseHTML: element => element.getAttribute('data-flex-basis') || '50%',
         renderHTML: attributes => {
           return {
-            'data-width': attributes.width,
+            'data-flex-basis': attributes.flexBasis,
           }
         },
       },
@@ -57,8 +57,8 @@ export const ColumnExtension = Node.create({
 
   addCommands() {
     return {
-      setColumnWidth: (width) => ({ commands }) => {
-        return commands.updateAttributes(this.name, { width })
+      setColumnFlexBasis: (flexBasis) => ({ commands }) => {
+        return commands.updateAttributes(this.name, { flexBasis })
       },
       setColumnFlex: ({ grow, shrink }) => ({ commands }) => {
         return commands.updateAttributes(this.name, { grow, shrink })

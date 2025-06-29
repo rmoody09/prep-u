@@ -67,13 +67,13 @@ export const ColumnsExtension = Node.create({
   addCommands() {
     return {
       addColumns: (options = {}) => ({ commands }) => {
-        const { columnCount = 2, widths = ['50%', '50%'], gap = '1rem', maxWidth = null, wrap = true } = options
+        const { columnCount = 2, widths = ['10%', '10%'], gap = '1rem', maxWidth = null, wrap = true, alignItems = 'stretch' } = options
         const columns = []
         for (let i = 0; i < columnCount; i++) {
           columns.push({
             type: 'column',
             attrs: {
-              width: widths[i] || '50%'
+              flexBasis: widths[i] || '10%'
             },
             content: [{ type: 'paragraph' }]
           })
@@ -91,11 +91,11 @@ export const ColumnsExtension = Node.create({
       },
       
       addColumn: (options = {}) => ({ commands, state }) => {
-        const { width = '50%' } = options
+        const { width = '10%' } = options
         
         return commands.insertContent({
           type: 'column',
-          attrs: { width },
+          attrs: { flexBasis: width },
           content: [{ type: 'paragraph' }]
         })
       },
