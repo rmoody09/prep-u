@@ -33,7 +33,10 @@
                   size="xs"
                   min="0"
                   style="width: 5rem;"
+                  :disabled="localWidthUnit === 'content'"
+                  v-if="localWidthUnit !== 'content'"
                 />
+                <span v-else class="text-sm text-gray-500" style="width: 5rem;">content</span>
                 <USelect
                   v-model="localWidthUnit"
                   :options="widthUnitOptions"
@@ -68,9 +71,11 @@ const showControls = ref(false)
 const widthUnitOptions = [
   { label: '%', value: '%' },
   { label: 'px', value: 'px' },
+  { label: 'content', value: 'content' },
 ]
 const parseWidth = (width) => {
   if (!width) return { value: '', unit: '%' }
+  if (width === 'content') return { value: 'content', unit: 'content' }
   if (width.endsWith('px')) return { value: parseInt(width), unit: 'px' }
   if (width.endsWith('%')) return { value: parseFloat(width), unit: '%' }
   return { value: width, unit: '%' }
@@ -83,7 +88,12 @@ const localGrow = ref(props.node.attrs.grow !== undefined ? props.node.attrs.gro
 const localShrink = ref(props.node.attrs.shrink !== undefined ? props.node.attrs.shrink : true)
 
 const applyColumnSettings = () => {
-  let width = localWidthValue.value ? localWidthValue.value + localWidthUnit.value : ''
+  let width
+  if (localWidthUnit.value === 'content') {
+    width = 'content'
+  } else {
+    width = localWidthValue.value ? localWidthValue.value + localWidthUnit.value : ''
+  }
   props.editor
     .chain()
     .setNodeSelection(props.getPos())
@@ -146,7 +156,7 @@ watch(() => props.node.attrs.shrink, (newShrink) => {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  z-index: 20;
+  z-index: 9;
 }
 
 .column-controls {
@@ -192,7 +202,7 @@ watch(() => props.node.attrs.shrink, (newShrink) => {
   padding: 0.75rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   min-width: 200px;
-  z-index: 20;
+  z-index: 9;
 }
 
 .control-group {

@@ -12,8 +12,8 @@ export const ColumnExtension = Node.create({
   addAttributes() {
     return {
       flexBasis: {
-        default: '50%',
-        parseHTML: element => element.getAttribute('data-flex-basis') || '50%',
+        default: '10%',
+        parseHTML: element => element.getAttribute('data-flex-basis') || '10%',
         renderHTML: attributes => {
           return {
             'data-flex-basis': attributes.flexBasis,
